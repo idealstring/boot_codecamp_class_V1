@@ -43,15 +43,14 @@ export const WriterPwd = styled.div`
 
 export const Subtitle = styled.div`
   font-weight: 500;
-  margin-bottom: 16px;
 `;
 
 export const InputW486px = styled.input`
+  margin-top: 16px;
   padding: 16px;
   width: 486px;
   height: 52px;
   border: 1px solid #bdbdbd;
-  color: #c4c4c4;
 `;
 
 export const SubtitleWrapper = styled.div`
@@ -61,37 +60,26 @@ export const SubtitleWrapper = styled.div`
 `;
 
 export const InputW100per = styled.input`
-  //   margin-bottom: 16px;
+  margin-top: 16px;
   padding: 16px;
   width: 100%;
   height: 52px;
   border: 1px solid #bdbdbd;
-  color: #c4c4c4;
-`;
-
-export const InputW100perM16px = styled.input`
-  margin: 16px 0 16px 0;
-  padding: 16px;
-  width: 100%;
-  height: 52px;
-  border: 1px solid #bdbdbd;
-  color: #c4c4c4;
 `;
 
 export const TextareaW100perH480px = styled.textarea`
+  margin-top: 16px;
   padding: 16px;
   width: 100%;
   height: 480px;
   border: 1px solid #bdbdbd;
-  color: #c4c4c4;
-  text-top: top;
 `;
 export const InputW77pxH52px = styled.input`
+  margin-top: 16px;
   padding: 16px;
   width: 77px;
   height: 52px;
   border: 1px solid #bdbdbd;
-  color: #c4c4c4;
 `;
 
 export const PostButton = styled.button`
@@ -113,23 +101,23 @@ export const InputRadio = styled.input`
     width: 14px;
     height: 14px;
     border-radius: 15px;
-    top: 1px;
+    top: 4px;
     left: -5px;
     position: relative;
     background-color: #ffffff;
     content: "";
     display: inline-block;
     visibility: visible;
-    border: 1px solid #000000;
+    border: 1px solid #bdbdbd;
   }
   &:checked:after {
     width: 14px;
     height: 14px;
     border-radius: 15px;
-    top: 1px;
+    top: 4px;
     left: -5px;
     position: relative;
-    background-color: ##ffd600;
+    background-color: #ffd600;
     content: "";
     display: inline-block;
     visibility: visible;
@@ -159,6 +147,7 @@ export const SubmitButtonWrapper = styled.div`
 `;
 
 export const ImgUploadWrapper = styled.div`
+  margin-top: 16px;
   display: flex;
   flex-direction: row;
 `;
@@ -178,4 +167,14 @@ export const ImgUpload = styled.div`
     font-size: 12px;
     font-weight: 500;
   }
+`;
+
+export const InputRadioWrapper = styled.div`
+  margin-top: 16px;
+`;
+
+export const ErrorDiv = styled.div`
+  color: red;
+  font-size: 12px;
+  font-weight: 500;
 `;
