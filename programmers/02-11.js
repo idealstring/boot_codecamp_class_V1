@@ -18,4 +18,9 @@
 // **`예상 결과`**
 // console.log(student) // { name : "철수" }
 
-const student = { name: "철수" };
+const student = {};
+
+// student.name = "철수";
+student["name"] = "철수";
+
+console.log(student);

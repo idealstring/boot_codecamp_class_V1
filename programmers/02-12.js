@@ -31,4 +31,16 @@ const student = {
 };
 
 student.school = { name: "다람쥐초등학교", teacher: "다람이" };
+
+let key = "age";
+
 console.log(student);
+console.log(student.name);
+console.log(student.age);
+console.log(student.school);
+console.log(student.school.name);
+console.log(student["name"]);
+console.log(student["school"]["name"]);
+
+//접근 값이 변수일 경우 대괄호를 사용함.
+console.log(student[age]);

@@ -18,3 +18,4 @@ for (let i = 0; i < fruits.length; i++) {
 }
 
 console.log(fruits);
+console.log(fruits[1]);
