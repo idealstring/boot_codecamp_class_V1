@@ -20,87 +20,141 @@ import {
   ErrorDiv,
   InputRadioWrapper,
 } from "../../../styles/new";
+import { useMutation, useQuery, gql } from "@apollo/client";
+
+const CREATE_BOARD = gql`
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      _id
+      writer
+      title
+      contents
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
+      youtubeUrl
+      likeCount
+      dislikeCount
+      images
+      createdAt
+      updatedAt
+    }
+  }
+`;
 
 export default function WritePage() {
-  const [writer, setWriter] = useState("");
-  const [pwd, setPwd] = useState("");
-  const [contentTitle, setContentTitle] = useState("");
-  const [contentText, setContentText] = useState("");
-  const [zipcode, setZipcode] = useState("");
-  const [addressCity, setAddressCity] = useState("");
-  const [addressDetail, setAddressDetail] = useState("");
-  const [youtubeLink, setYoutubeLink] = useState("");
+  const [inputData, setInputData] = useState({
+    writer: "",
+    pwd: "",
+    contentTitle: "",
+    contentText: "",
+    zipcode: "",
+    addressCity: "",
+    addressDetail: "",
+    youtubeLink: "",
+  });
+
+  const [errorWriter, setErrorWriter] = useState("");
+  const [errorPwd, setErrorPwd] = useState("");
+  const [errorContentTitle, setErrorContentTitle] = useState("");
+  const [errorContent, setErrorContent] = useState("");
+
+  const [submitInputData] = useMutation(CREATE_BOARD);
 
   function onChangeWriter(e) {
-    setWriter(e.target.value);
+    setInputData((state) => {
+      return { ...state, writer: e.target.value };
+    });
+
+    if (e.target.value !== "") {
+      setErrorWriter("");
+    }
   }
   function onChangePwd(e) {
-    setPwd(e.target.value);
+    setInputData((state) => {
+      return { ...state, pwd: e.target.value };
+    });
+    if (e.target.value !== "") {
+      setErrorPwd("");
+    }
   }
   function onChangeContentTitle(e) {
-    setContentTitle(e.target.value);
+    setInputData((state) => {
+      return { ...state, contentTitle: e.target.value };
+    });
+    if (e.target.value !== "") {
+      setErrorContentTitle("");
+    }
   }
-  function onChangeContent(e) {
-    setContentText(e.target.value);
+  function onChangeContentText(e) {
+    setInputData((state) => {
+      return { ...state, contentText: e.target.value };
+    });
+    if (e.target.value !== "") {
+      setErrorContent("");
+    }
   }
   function onChangeZipcode(e) {
-    setZipcode(e.target.value);
+    setInputData((state) => {
+      return { ...state, zipcode: e.target.value };
+    });
   }
   function onChangeAddressCity(e) {
-    setAddressCity(e.target.value);
+    setInputData((state) => {
+      return { ...state, addressCity: e.target.value };
+    });
   }
   function onChangeAddressDetail(e) {
-    setAddressDetail(e.target.value);
+    setInputData((state) => {
+      return { ...state, addressDetail: e.target.value };
+    });
   }
   function onChangeYoutubeLink(e) {
-    setYoutubeLink(e.target.value);
+    setInputData((state) => {
+      return { ...state, youtubeLink: e.target.value };
+    });
   }
 
-  function SubmitButton() {
-    if (writer === "") {
-      document.getElementById("errorWriter").innerText = "이름을 입력하세요.";
-    } else {
-      document.getElementById("errorWriter").innerText = "";
+  async function SubmitButton() {
+    if (!inputData["writer"]) {
+      setErrorWriter("이름을 입력하세요.");
     }
-    if (pwd === "") {
-      document.getElementById("errorPwd").innerText = "비밀번호를 입력하세요.";
-    } else {
-      document.getElementById("errorPwd").innerText = "";
+    if (!inputData["pwd"]) {
+      setErrorPwd("비밀번호를 입력하세요.");
     }
-    if (contentTitle === "") {
-      document.getElementById("errorContentTitle").innerText =
-        "제목을 입력하세요.";
-    } else {
-      document.getElementById("errorContentTitle").innerText = "";
+    if (!inputData["contentTitle"]) {
+      setErrorContentTitle("제목을 입력하세요.");
     }
-    if (contentText === "") {
-      document.getElementById("errorContent").innerText = "내용을 입력하세요.";
-    } else {
-      document.getElementById("errorContent").innerText = "";
+    if (!inputData["contentText"]) {
+      setErrorContent("내용을 입력하세요.");
     }
-    if (zipcode === "") {
-      document.getElementById("errorZipcode").innerText =
-        "우편번호를 입력하세요.";
-    } else {
-      document.getElementById("errorZipcode").innerText = "";
-    }
-    if (addressCity === "") {
-      document.getElementById("errorAddressCity").innerText =
-        "주소를 입력하세요.";
-    } else {
-      document.getElementById("errorAddressCity").innerText = "";
-    }
-    if (addressDetail === "") {
-      document.getElementById("errorAddressDetail").innerText =
-        "상세 주소를 입력하세요.";
-    } else {
-      document.getElementById("errorAddressDetail").innerText = "";
-    }
-    if (youtubeLink === "") {
-      document.getElementById("errorYoutubeLink").innerText =
-        "유튜브 링크를 입력하세요.";
-    } else {
-      document.getElementById("errorYoutubeLink").innerText = "";
+    if (
+      inputData["writer"] &&
+      inputData["pwd"] &&
+      inputData["contentTitle"] &&
+      inputData["contentText"]
+    ) {
+      const result = await submitInputData({
+        variables: {
+          createBoardInput: {
+            writer: inputData.writer,
+            password: inputData.pwd,
+            title: inputData.contentTitle,
+            contents: inputData.contentText,
+            youtubeUrl: inputData.youtubeLink,
+            boardAddress: {
+              zipcode: inputData.zipcode,
+              address: inputData.addressCity,
+              addressDetail: inputData.addressDetail,
+            },
+            images: "",
+          },
+        },
+      });
+      console.log(result);
+      alert("회원가입을 축하합니다.");
     }
   }
 
@@ -116,7 +170,7 @@ export default function WritePage() {
               placeholder="이름을 적어주세요."
               onChange={onChangeWriter}
             />
-            <ErrorDiv id="errorWriter"></ErrorDiv>
+            <ErrorDiv>{errorWriter}</ErrorDiv>
           </WriterPwd>
           <WriterPwd>
             <Subtitle>비밀번호</Subtitle>
@@ -125,7 +179,7 @@ export default function WritePage() {
               placeholder="비밀번호를 입력해주세요."
               onChange={onChangePwd}
             />
-            <ErrorDiv id="errorPwd"></ErrorDiv>
+            <ErrorDiv>{errorPwd}</ErrorDiv>
           </WriterPwd>
         </WriterPwdWrapper>
         <SubtitleWrapper>
@@ -135,16 +189,16 @@ export default function WritePage() {
             placeholder="제목을 작성해주세요."
             onChange={onChangeContentTitle}
           />
-          <ErrorDiv id="errorContentTitle"></ErrorDiv>
+          <ErrorDiv>{errorContentTitle}</ErrorDiv>
         </SubtitleWrapper>
         <SubtitleWrapper>
           <Subtitle>내용</Subtitle>
           <TextareaW100perH480px
             type="text"
             placeholder="내용을 작성해주세요."
-            onChange={onChangeContent}
+            onChange={onChangeContentText}
           />
-          <ErrorDiv id="errorContent"></ErrorDiv>
+          <ErrorDiv>{errorContent}</ErrorDiv>
         </SubtitleWrapper>
         <SubtitleWrapper>
           <Subtitle>주소</Subtitle>
@@ -156,11 +210,10 @@ export default function WritePage() {
             />
             <PostButton>우편번호 검색</PostButton>
           </div>
-          <ErrorDiv id="errorZipcode"></ErrorDiv>
+
           <InputW100per type="text" onChange={onChangeAddressCity} />
-          <ErrorDiv id="errorAddressCity"></ErrorDiv>
+
           <InputW100per type="text" onChange={onChangeAddressDetail} />
-          <ErrorDiv id="errorAddressDetail"></ErrorDiv>
         </SubtitleWrapper>
         <SubtitleWrapper>
           <Subtitle>유튜브</Subtitle>
@@ -169,7 +222,6 @@ export default function WritePage() {
             placeholder="링크를 복사해주세요."
             onChange={onChangeYoutubeLink}
           />
-          <ErrorDiv id="errorYoutubeLink"></ErrorDiv>
         </SubtitleWrapper>
         <SubtitleWrapper>
           <Subtitle>사진 첨부</Subtitle>
@@ -189,9 +241,9 @@ export default function WritePage() {
           <Subtitle>메인 설정</Subtitle>
           <InputRadioWrapper>
             <InputRadio type="radio" name="select_main" id="youtube" />
-            <RadioLabel for="youtube">유튜브</RadioLabel>
+            <RadioLabel htmlFor="youtube">유튜브</RadioLabel>
             <InputRadio type="radio" name="select_main" id="picture" />
-            <RadioLabel for="picture">사진</RadioLabel>
+            <RadioLabel htmlFor="picture">사진</RadioLabel>
           </InputRadioWrapper>
         </SubtitleWrapper>
         <SubmitButtonWrapper>
