@@ -95,37 +95,48 @@ export const PostButton = styled.button`
 `;
 
 export const InputRadio = styled.input`
+  position: relative;
   appearance: none;
-  margin: 0 5px;
+  margin: 0 8px;
   &:after {
+    content: "";
     width: 14px;
     height: 14px;
-    border-radius: 15px;
-    top: 4px;
-    left: -5px;
-    position: relative;
-    background-color: #ffffff;
-    content: "";
-    display: inline-block;
-    visibility: visible;
     border: 1px solid #bdbdbd;
+    border-radius: 15px;
+    top: -13px;
+    left: -7px;
+    position: absolute;
+    background-color: #ffffff;
+    visibility: visible;
+  }
+  &:checked:before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    border: 1px solid #ffd600;
+    border-radius: 15px;
+    top: -13px;
+    left: -7px;
+    position: absolute;
+    background-color: #ffffff;
+    visibility: visible;
   }
   &:checked:after {
-    width: 14px;
-    height: 14px;
-    border-radius: 15px;
-    top: 4px;
-    left: -5px;
-    position: relative;
-    background-color: #ffd600;
     content: "";
-    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border: none;
+    top: -9px;
+    left: -3px;
+    position: absolute;
+    background-color: #ffd600;
     visibility: visible;
-    border: 1px solid #ffd600;
   }
 `;
 
 export const RadioLabel = styled.label`
+  margin-left: 8px;
   margin-right: 20px;
 `;
 

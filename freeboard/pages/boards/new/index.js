@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useMutation, gql } from "@apollo/client";
+import { useRouter } from "next/router";
 import {
   Wrapper,
   Title,
@@ -20,7 +22,6 @@ import {
   ErrorDiv,
   InputRadioWrapper,
 } from "../../../styles/new";
-import { useMutation, useQuery, gql } from "@apollo/client";
 
 const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
@@ -45,6 +46,8 @@ const CREATE_BOARD = gql`
 `;
 
 export default function WritePage() {
+  const router = useRouter();
+
   const [inputData, setInputData] = useState({
     writer: "",
     pwd: "",
@@ -136,25 +139,30 @@ export default function WritePage() {
       inputData["contentTitle"] &&
       inputData["contentText"]
     ) {
-      const result = await submitInputData({
-        variables: {
-          createBoardInput: {
-            writer: inputData.writer,
-            password: inputData.pwd,
-            title: inputData.contentTitle,
-            contents: inputData.contentText,
-            youtubeUrl: inputData.youtubeLink,
-            boardAddress: {
-              zipcode: inputData.zipcode,
-              address: inputData.addressCity,
-              addressDetail: inputData.addressDetail,
+      try {
+        const result = await submitInputData({
+          variables: {
+            createBoardInput: {
+              writer: inputData.writer,
+              password: inputData.pwd,
+              title: inputData.contentTitle,
+              contents: inputData.contentText,
+              youtubeUrl: inputData.youtubeLink,
+              boardAddress: {
+                zipcode: inputData.zipcode,
+                address: inputData.addressCity,
+                addressDetail: inputData.addressDetail,
+              },
+              images: "",
             },
-            images: "",
           },
-        },
-      });
-      console.log(result);
-      alert("회원가입을 축하합니다.");
+        });
+        console.log(result);
+        alert("회원가입을 축하합니다.");
+        router.push(`/boards/${result.data.createBoard._id}`);
+      } catch (error) {
+        alert(error.message);
+      }
     }
   }
 
