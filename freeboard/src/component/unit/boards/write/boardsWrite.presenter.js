@@ -2,12 +2,14 @@ import * as S from "./boardsWrite.styles";
 
 export default function BoardWritePresenter(P) {
   return (
-    <S.Wrapper>
-      <S.Title>게시물등록</S.Title>
-      <S.ContentWrapper>
+    <S.Container>
+      <S.Title>게시물 등록</S.Title>
+      <S.ContentContainer>
         <S.WriterPwdWrapper>
           <S.WriterPwd>
-            <S.Subtitle>작성자</S.Subtitle>
+            <S.Subtitle>
+              작성자 <S.CompulsoryStar>*</S.CompulsoryStar>
+            </S.Subtitle>
             <S.InputW486px
               type="text"
               placeholder="이름을 적어주세요."
@@ -16,7 +18,9 @@ export default function BoardWritePresenter(P) {
             <S.ErrorDiv>{P.errorWriter}</S.ErrorDiv>
           </S.WriterPwd>
           <S.WriterPwd>
-            <S.Subtitle>비밀번호</S.Subtitle>
+            <S.Subtitle>
+              비밀번호 <S.CompulsoryStar>*</S.CompulsoryStar>
+            </S.Subtitle>
             <S.InputW486px
               type="password"
               placeholder="비밀번호를 입력해주세요."
@@ -26,7 +30,9 @@ export default function BoardWritePresenter(P) {
           </S.WriterPwd>
         </S.WriterPwdWrapper>
         <S.SubtitleWrapper>
-          <S.Subtitle>제목</S.Subtitle>
+          <S.Subtitle>
+            제목 <S.CompulsoryStar>*</S.CompulsoryStar>
+          </S.Subtitle>
           <S.InputW100per
             type="text"
             placeholder="제목을 작성해주세요."
@@ -35,7 +41,9 @@ export default function BoardWritePresenter(P) {
           <S.ErrorDiv>{P.errorContentTitle}</S.ErrorDiv>
         </S.SubtitleWrapper>
         <S.SubtitleWrapper>
-          <S.Subtitle>내용</S.Subtitle>
+          <S.Subtitle>
+            내용 <S.CompulsoryStar>*</S.CompulsoryStar>
+          </S.Subtitle>
           <S.TextareaW100perH480px
             type="text"
             placeholder="내용을 작성해주세요."
@@ -90,9 +98,14 @@ export default function BoardWritePresenter(P) {
           </S.InputRadioWrapper>
         </S.SubtitleWrapper>
         <S.SubmitButtonWrapper>
-          <button onClick={P.SubmitButton}>등록하기</button>
+          <S.SubmitButton
+            onClick={P.SubmitButton}
+            completeColor={P.completeColor}
+          >
+            등록하기
+          </S.SubmitButton>
         </S.SubmitButtonWrapper>
-      </S.ContentWrapper>
-    </S.Wrapper>
+      </S.ContentContainer>
+    </S.Container>
   );
 }

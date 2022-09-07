@@ -2,7 +2,7 @@ import * as S from "./boardsDetail.styles";
 
 export default function BoardDetailPresenter(P) {
   return (
-    <S.Wrapper>
+    <S.Container>
       <S.TitleWrapper>
         <S.Title>{P.data ? P.data.fetchBoard.title : "Loading..."}</S.Title>
         <S.TitleInfoTop>
@@ -129,6 +129,6 @@ export default function BoardDetailPresenter(P) {
           </S.CommentViewInner>
         </S.CommentViewWrapper>
       </S.CommentWrapper>
-    </S.Wrapper>
+    </S.Container>
   );
 }

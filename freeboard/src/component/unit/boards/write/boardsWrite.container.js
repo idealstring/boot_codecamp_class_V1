@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useMutation, gql } from "@apollo/client";
 import { useRouter } from "next/router";
 import { CREATE_BOARD } from "./boardsWrite.queries";
+import { compact } from "@apollo/client/utilities";
 
 export default function BoardWriteContainer() {
   const router = useRouter();
@@ -17,6 +18,7 @@ export default function BoardWriteContainer() {
     addressDetail: "",
     youtubeLink: "",
   });
+  const [completeColor, setCompleteColor] = useState(false);
 
   const [errorWriter, setErrorWriter] = useState("");
   const [errorPwd, setErrorPwd] = useState("");
@@ -33,6 +35,14 @@ export default function BoardWriteContainer() {
     if (e.target.value !== "") {
       setErrorWriter("");
     }
+    if (
+      e.target.value &&
+      inputData.pwd &&
+      inputData.contentTitle &&
+      inputData.contentText
+    ) {
+      setCompleteColor(true);
+    }
   }
   function onChangePwd(e) {
     setInputData((state) => {
@@ -40,6 +50,15 @@ export default function BoardWriteContainer() {
     });
     if (e.target.value !== "") {
       setErrorPwd("");
+    }
+
+    if (
+      inputData.writer &&
+      e.target.value &&
+      inputData.contentTitle &&
+      inputData.contentText
+    ) {
+      setCompleteColor(true);
     }
   }
   function onChangeContentTitle(e) {
@@ -49,6 +68,15 @@ export default function BoardWriteContainer() {
     if (e.target.value !== "") {
       setErrorContentTitle("");
     }
+
+    if (
+      inputData.writer &&
+      inputData.pwd &&
+      e.target.value &&
+      inputData.contentText
+    ) {
+      setCompleteColor(true);
+    }
   }
   function onChangeContentText(e) {
     setInputData((state) => {
@@ -56,6 +84,15 @@ export default function BoardWriteContainer() {
     });
     if (e.target.value !== "") {
       setErrorContent("");
+    }
+
+    if (
+      inputData.writer &&
+      inputData.pwd &&
+      inputData.contentTitle &&
+      e.target.value
+    ) {
+      setCompleteColor(true);
     }
   }
   function onChangeZipcode(e) {
@@ -140,6 +177,7 @@ export default function BoardWriteContainer() {
       onChangeAddressDetail={onChangeAddressDetail}
       onChangeYoutubeLink={onChangeYoutubeLink}
       SubmitButton={SubmitButton}
+      completeColor={completeColor}
     />
   );
 }

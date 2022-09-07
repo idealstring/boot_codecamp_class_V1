@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const Wrapper = styled.div`
+export const Container = styled.div`
   box-sizing: border-box;
   margin: 0 auto;
   padding: 60px 100px 100px 100px;
@@ -19,7 +19,7 @@ export const Title = styled.div`
   font-weight: 700px;
 `;
 
-export const ContentWrapper = styled.div`
+export const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -27,7 +27,7 @@ export const ContentWrapper = styled.div`
 `;
 
 export const WriterPwdWrapper = styled.div`
-  margin-bottom: 40px;
+  margin-bottom: 28px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -45,6 +45,11 @@ export const Subtitle = styled.div`
   font-weight: 500;
 `;
 
+export const CompulsoryStar = styled.span`
+  font-weight: 400;
+  color: red;
+`;
+
 export const InputW486px = styled.input`
   margin-top: 16px;
   padding: 16px;
@@ -54,7 +59,7 @@ export const InputW486px = styled.input`
 `;
 
 export const SubtitleWrapper = styled.div`
-  margin-bottom: 40px;
+  margin-bottom: 28px;
   display: flex;
   flex-direction: column;
 `;
@@ -145,16 +150,18 @@ export const SubmitButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  button {
-    padding: 0 16px;
-    width: 179px;
-    height: 52px;
-    border: none;
-    font-weight: 500;
-    color: #000000;
-    background: #ffd600;
-    cursor: pointer;
-  }
+`;
+
+export const SubmitButton = styled.button`
+  padding: 0 16px;
+  width: 179px;
+  height: 52px;
+  border-radius: 52px;
+  border: none;
+  font-weight: 500;
+  color: #000000;
+  background-color: ${(P) => (P.completeColor ? "#ffd600" : "default")};
+  cursor: pointer;
 `;
 
 export const ImgUploadWrapper = styled.div`
@@ -185,6 +192,7 @@ export const InputRadioWrapper = styled.div`
 `;
 
 export const ErrorDiv = styled.div`
+  height: 12px;
   color: red;
   font-size: 12px;
   font-weight: 500;

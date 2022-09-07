@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const Wrapper = styled.div`
+export const Container = styled.div`
   box-sizing: border-box;
   margin: 0 auto;
   padding: 60px 100px 100px 100px;
