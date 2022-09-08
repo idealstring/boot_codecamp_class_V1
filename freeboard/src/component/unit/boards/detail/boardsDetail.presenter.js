@@ -56,8 +56,12 @@ export default function BoardDetailPresenter(P) {
         </S.LikeDislikeWrapper>
       </S.ContentWrapper>
       <S.ContentButtonWrapper>
-        <S.ContentButton>목록으로</S.ContentButton>
-        <S.ContentButton>수정하기</S.ContentButton>
+        <S.ContentButton onClick={P.onClickMoveToList}>
+          목록으로
+        </S.ContentButton>
+        <S.ContentButton onClick={P.onClickMoveToEdit}>
+          수정하기
+        </S.ContentButton>
         <S.ContentButton>삭제하기</S.ContentButton>
       </S.ContentButtonWrapper>
       <S.HrLine />

@@ -160,7 +160,7 @@ export const SubmitButton = styled.button`
   border: none;
   font-weight: 500;
   color: #000000;
-  background-color: ${(P) => (P.completeColor ? "#ffd600" : "default")};
+  background-color: ${(P) => (P.isCompleteColor ? "#ffd600" : "default")};
   cursor: pointer;
 `;
 

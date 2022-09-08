@@ -2,12 +2,9 @@ import BoardWritePresenter from "./boardsWrite.presenter";
 import { useState } from "react";
 import { useMutation, gql } from "@apollo/client";
 import { useRouter } from "next/router";
-import { CREATE_BOARD } from "./boardsWrite.queries";
-import { compact } from "@apollo/client/utilities";
+import { CREATE_BOARD, UPDATE_BOARD } from "./boardsWrite.queries";
 
-export default function BoardWriteContainer() {
-  const router = useRouter();
-
+export default function BoardWriteContainer(P) {
   const [inputData, setInputData] = useState({
     writer: "",
     pwd: "",
@@ -18,14 +15,18 @@ export default function BoardWriteContainer() {
     addressDetail: "",
     youtubeLink: "",
   });
-  const [completeColor, setCompleteColor] = useState(false);
 
   const [errorWriter, setErrorWriter] = useState("");
   const [errorPwd, setErrorPwd] = useState("");
   const [errorContentTitle, setErrorContentTitle] = useState("");
   const [errorContent, setErrorContent] = useState("");
 
-  const [submitInputData] = useMutation(CREATE_BOARD);
+  const [isCompleteColor, setIsCompleteColor] = useState(false);
+
+  const [SubmitInputData] = useMutation(CREATE_BOARD);
+  const [UpdateInputData] = useMutation(UPDATE_BOARD);
+
+  const router = useRouter();
 
   function onChangeWriter(e) {
     setInputData((state) => {
@@ -41,7 +42,9 @@ export default function BoardWriteContainer() {
       inputData.contentTitle &&
       inputData.contentText
     ) {
-      setCompleteColor(true);
+      setIsCompleteColor(true);
+    } else {
+      setIsCompleteColor(false);
     }
   }
   function onChangePwd(e) {
@@ -58,7 +61,9 @@ export default function BoardWriteContainer() {
       inputData.contentTitle &&
       inputData.contentText
     ) {
-      setCompleteColor(true);
+      setIsCompleteColor(true);
+    } else {
+      setIsCompleteColor(false);
     }
   }
   function onChangeContentTitle(e) {
@@ -75,7 +80,9 @@ export default function BoardWriteContainer() {
       e.target.value &&
       inputData.contentText
     ) {
-      setCompleteColor(true);
+      setIsCompleteColor(true);
+    } else {
+      setIsCompleteColor(false);
     }
   }
   function onChangeContentText(e) {
@@ -92,7 +99,9 @@ export default function BoardWriteContainer() {
       inputData.contentTitle &&
       e.target.value
     ) {
-      setCompleteColor(true);
+      setIsCompleteColor(true);
+    } else {
+      setIsCompleteColor(false);
     }
   }
   function onChangeZipcode(e) {
@@ -116,7 +125,7 @@ export default function BoardWriteContainer() {
     });
   }
 
-  async function SubmitButton() {
+  const SubmitButton = async () => {
     if (!inputData["writer"]) {
       setErrorWriter("이름을 입력하세요.");
     }
@@ -136,7 +145,7 @@ export default function BoardWriteContainer() {
       inputData["contentText"]
     ) {
       try {
-        const result = await submitInputData({
+        const result = await SubmitInputData({
           variables: {
             createBoardInput: {
               writer: inputData.writer,
@@ -153,13 +162,39 @@ export default function BoardWriteContainer() {
             },
           },
         });
-        alert("회원가입을 축하합니다.");
+        alert("게시물 등록이 완료되었습니다.");
         router.push(`/boards/${result.data.createBoard._id}`);
       } catch (error) {
         alert(error.message);
       }
     }
-  }
+  };
+  const UpdateButton = async () => {
+    console.log(router);
+    try {
+      const result = await UpdateInputData({
+        variables: {
+          updateBoardInput: {
+            title: inputData.contentTitle,
+            contents: inputData.contentText,
+            youtubeUrl: inputData.youtubeLink,
+            boardAddress: {
+              zipcode: inputData.zipcode,
+              address: inputData.addressCity,
+              addressDetail: inputData.addressDetail,
+            },
+            images: "",
+          },
+          password: inputData.pwd,
+          boardId: router.query.detail,
+        },
+      });
+      alert("게시물 수정이 완료되었습니다.");
+      router.push(`/boards/${result.data.updateBoard._id}`);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <BoardWritePresenter
@@ -177,7 +212,9 @@ export default function BoardWriteContainer() {
       onChangeAddressDetail={onChangeAddressDetail}
       onChangeYoutubeLink={onChangeYoutubeLink}
       SubmitButton={SubmitButton}
-      completeColor={completeColor}
+      UpdateButton={UpdateButton}
+      isCompleteColor={isCompleteColor}
+      isEdit={P.isEdit}
     />
   );
 }

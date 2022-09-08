@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
+// import tempimg from "../../../../../public/temp_bg.png";
 
-export const Container = styled.div`
+export const BoardContainer = styled.div`
   box-sizing: border-box;
   margin: 0 auto;
   padding: 60px 100px 100px 100px;
@@ -9,7 +10,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: space-between;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+  // box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 `;
 
 export const Title = styled.div`
@@ -19,29 +20,64 @@ export const Title = styled.div`
   font-weight: 700px;
 `;
 
-export const BestListWrapper = styled.div`
-  padding: 80px 0;
+export const BestListContainer = styled.div`
   width: 100%;
-  height: 400px;
-
   background-color: #eee;
+`;
+export const BestListWrapper = styled.div`
+  margin: 0 auto;
+  padding: 80px 100px;
+  width: 1200px;
+  height: 400px;
 
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
 `;
 
 export const BestBoard = styled.div`
-  padding: 32px;
-  width: 260px;
-  height: 240px;
+  margin: 0;
+  padding: 30px 40px;
+  width: 360px;
+  height: 203px;
 
-  background-color: #eee;
-
-  margin-bottom: 16px;
-  text-align: center;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   font-weight: 700px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  position: relative;
+`;
+
+export const BestTitle = styled.span`
+  margin-top: 10px;
+  font-size: 20px;
+  z-index: 10;
+`;
+export const BestImg = styled.img`
+  width: 360px;
+  height: 203px;
+  border-radius: 10px;
+
+  // background-image:
+  object-fit: cover;
+
+  z-index: 0;
+
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+`;
+export const BestDate = styled.span`
+  color: #aaa;
+
+  z-index: 10;
 `;
 
 export const SearchbarWrapper = styled.div`
@@ -115,22 +151,22 @@ export const ListTop = styled.li`
   algin-items: center;
 `;
 
-export const ListNumber = styled.div`
+export const ListNumber = styled.span`
   width: 50px;
   line-height: 44px;
   text-align: center;
 `;
-export const ListTitle = styled.div`
+export const ListTitle = styled.span`
   width: 65%;
   line-height: 44px;
   text-align: center;
 `;
-export const ListWriter = styled.div`
+export const ListWriter = styled.span`
   width: 110px;
   line-height: 44px;
   text-align: center;
 `;
-export const ListDate = styled.div`
+export const ListDate = styled.span`
   width: 110px;
   line-height: 44px;
   text-align: center;
@@ -146,24 +182,34 @@ export const ListContent = styled.li`
   flex-direction: row;
   justify-content: space-between;
   algin-items: center;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f9f9f9;
+  }
 `;
 
-export const ContentNumber = styled.div`
+export const ContentNumber = styled.span`
   width: 50px;
   line-height: 88px;
   text-align: center;
 `;
-export const ContentTitle = styled.div`
+export const ContentTitle = styled.span`
   width: 65%;
   line-height: 88px;
   text-align: center;
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 `;
-export const ContentWriter = styled.div`
+export const ContentWriter = styled.span`
   width: 110px;
   line-height: 88px;
   text-align: center;
 `;
-export const ContentDate = styled.div`
+export const ContentDate = styled.span`
   width: 110px;
   line-height: 88px;
   text-align: center;

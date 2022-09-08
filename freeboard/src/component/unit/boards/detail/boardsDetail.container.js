@@ -37,6 +37,14 @@ export default function BoardDetailContainer() {
         variables: {
           boardId: router.query.detail,
         },
+        refetchQueries: [
+          {
+            query: FETCH_BOARD,
+            variables: {
+              boardId: router.query.detail,
+            },
+          },
+        ],
       });
     } catch (error) {
       alert(error.message);
@@ -48,10 +56,22 @@ export default function BoardDetailContainer() {
         variables: {
           boardId: router.query.detail,
         },
+        // refetchQueries: [
+        //   { query: DISLIKE_BOARD }, // DocumentNode object parsed with gql
+        //   "dislikeBoard", // Query name
+        // ],
+        refetchQueries: ["ReallyImportantQuery"],
       });
     } catch (error) {
       alert(error.message);
     }
+  };
+
+  const onClickMoveToList = () => {
+    router.push("/boards");
+  };
+  const onClickMoveToEdit = () => {
+    router.push(`/boards/${router.query.detail}/edit`);
   };
 
   return (
@@ -62,6 +82,8 @@ export default function BoardDetailContainer() {
       modal={modal}
       onclickLikeButton={onclickLikeButton}
       onclickDislikeButton={onclickDislikeButton}
+      onClickMoveToList={onClickMoveToList}
+      onClickMoveToEdit={onClickMoveToEdit}
     />
   );
 }

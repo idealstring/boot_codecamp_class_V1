@@ -3,7 +3,7 @@ import * as S from "./boardsWrite.styles";
 export default function BoardWritePresenter(P) {
   return (
     <S.Container>
-      <S.Title>게시물 등록</S.Title>
+      <S.Title>게시물 {P.isEdit ? "수정" : "등록"}</S.Title>
       <S.ContentContainer>
         <S.WriterPwdWrapper>
           <S.WriterPwd>
@@ -99,10 +99,10 @@ export default function BoardWritePresenter(P) {
         </S.SubtitleWrapper>
         <S.SubmitButtonWrapper>
           <S.SubmitButton
-            onClick={P.SubmitButton}
-            completeColor={P.completeColor}
+            onClick={P.isEdit ? P.UpdateButton : P.SubmitButton}
+            isCompleteColor={P.isCompleteColor}
           >
-            등록하기
+            {P.isEdit ? "수정완료" : "등록하기"}
           </S.SubmitButton>
         </S.SubmitButtonWrapper>
       </S.ContentContainer>
