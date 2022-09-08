@@ -15,11 +15,6 @@ export default function BoardDetailContainer() {
       boardId: router.query.detail,
     },
   });
-  // console.log(data);
-  // console.log(data.fetchBoard.likeCount);
-  // useEffect(() => {
-
-  // }, [data]);
 
   const onRolloverLinkModal = () => {
     setModal((modal) => {
@@ -56,11 +51,14 @@ export default function BoardDetailContainer() {
         variables: {
           boardId: router.query.detail,
         },
-        // refetchQueries: [
-        //   { query: DISLIKE_BOARD }, // DocumentNode object parsed with gql
-        //   "dislikeBoard", // Query name
-        // ],
-        refetchQueries: ["ReallyImportantQuery"],
+        refetchQueries: [
+          {
+            query: FETCH_BOARD,
+            variables: {
+              boardId: router.query.detail,
+            },
+          },
+        ],
       });
     } catch (error) {
       alert(error.message);
