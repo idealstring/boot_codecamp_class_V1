@@ -50,18 +50,46 @@ export const CompulsoryStar = styled.span`
   color: red;
 `;
 
-export const InputW486px = styled.input`
+export const InputName = styled.input`
   margin-top: 16px;
   padding: 16px;
   width: 486px;
   height: 52px;
   border: 1px solid #bdbdbd;
+  background-color: ${(props) => (props.errorColor ? "red" : "default")};
+  ::placeholder {
+    color: ${(props) => (props.errorColor ? "white" : "default")};
+  }
+`;
+
+export const InputPwd = styled.input`
+  margin-top: 16px;
+  padding: 16px;
+  width: 486px;
+  height: 52px;
+  border: 1px solid #bdbdbd;
+  background-color: ${(props) => (props.errorColor ? "red" : "default")};
+  ::placeholder {
+    color: ${(props) => (props.errorColor ? "white" : "default")};
+  }
 `;
 
 export const SubtitleWrapper = styled.div`
   margin-bottom: 28px;
   display: flex;
   flex-direction: column;
+`;
+
+export const InputTitle = styled.input`
+  margin-top: 16px;
+  padding: 16px;
+  width: 100%;
+  height: 52px;
+  border: 1px solid #bdbdbd;
+  background-color: ${(props) => (props.errorColor ? "red" : "default")};
+  ::placeholder {
+    color: ${(props) => (props.errorColor ? "white" : "default")};
+  }
 `;
 
 export const InputW100per = styled.input`
@@ -72,13 +100,18 @@ export const InputW100per = styled.input`
   border: 1px solid #bdbdbd;
 `;
 
-export const TextareaW100perH480px = styled.textarea`
+export const TextareaContent = styled.textarea`
   margin-top: 16px;
   padding: 16px;
   width: 100%;
   height: 480px;
   border: 1px solid #bdbdbd;
+  background-color: ${(props) => (props.errorColor ? "red" : "default")};
+  ::placeholder {
+    color: ${(props) => (props.errorColor ? "white" : "default")};
+  }
 `;
+
 export const InputW77pxH52px = styled.input`
   margin-top: 16px;
   padding: 16px;

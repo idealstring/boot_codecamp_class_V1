@@ -6,7 +6,6 @@ import {
 } from "./commentWrite.queries";
 import { useRouter } from "next/router";
 import { useState } from "react";
-// import { FETCH_BOARD } from "../../boards/detail/boardsDetail.queries";
 import { FETCH_BOARD_COMMENTS } from "../commentList/commentList.queries";
 
 export default function CommentWriteContainer(P) {
@@ -17,58 +16,69 @@ export default function CommentWriteContainer(P) {
   const [updateComment] = useMutation(UPDATE_BOARD_COMMENT);
 
   const [writer, setWriter] = useState("");
-  const [password, setPassword] = useState("");
+  const [pwd, setPwd] = useState("");
   const [contents, setContents] = useState("");
   const [rating, setRating] = useState(1);
-  const [errorWord, setErrorWord] = useState("");
+  const [errorWriter, setErrorWriter] = useState(false);
+  const [errorPwd, setErrorPwd] = useState(false);
+  const [errorContents, setErrorContents] = useState(false);
+  const [errorRating, setErrorRating] = useState(false);
 
   const onChangeWriter = (e) => {
     setWriter(e.target.value);
-    if (e.target.value && password && contents && rating) {
-      setErrorWord("");
+    if (e.target.value) {
+      setErrorWriter(false);
     }
     if (isEdit && e.target.value) {
-      setErrorWord("");
+      setErrorWriter(false);
     }
   };
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
-    if (writer && e.target.value && contents && rating) {
-      setErrorWord("");
+  const onChangePwd = (e) => {
+    setPwd(e.target.value);
+    if (e.target.value) {
+      setErrorPwd(false);
     }
     if (isEdit && e.target.value) {
-      setErrorWord("");
+      setErrorPwd(false);
     }
   };
   const onChangeContents = (e) => {
     setContents(e.target.value);
-    if (writer && password && e.target.value && rating) {
-      setErrorWord("");
+    if (e.target.value) {
+      setErrorContents(false);
     }
     if (isEdit && e.target.value) {
-      setErrorWord("");
+      setErrorContents(false);
     }
   };
   const onChangeRating = (e) => {
-    if (writer && password && contents && e.target.value) {
-      setErrorWord("");
+    if (e.target.value) {
+      setErrorRating(false);
     }
     if (isEdit && e.target.value) {
-      setErrorWord("");
+      setErrorRating(false);
     }
   };
 
-  const onClickCreateCommentBtn = async () => {
-    if (!writer || !password || !contents || !rating) {
-      setErrorWord("댓글을 확인해 주세요.");
-    } else {
+  const onClickCreateBtn = async () => {
+    if (!writer) {
+      setErrorWriter(true);
+    }
+    if (!pwd) {
+      setErrorPwd(true);
+    }
+    if (!contents) {
+      setErrorContents(true);
+    }
+
+    if (writer && pwd && contents && rating) {
       try {
         const result = await createComment({
           variables: {
             boardId: router.query.detail,
             createBoardCommentInput: {
               writer,
-              password,
+              password: pwd,
               contents,
               rating,
             },
@@ -84,31 +94,35 @@ export default function CommentWriteContainer(P) {
         alert(error.message);
       }
       setWriter("");
-      setPassword("");
+      setPwd("");
       setContents("");
     }
   };
 
-  const onclickUpdateBtn = async () => {
-    if (!password || !contents || !rating) {
-      setErrorWord("댓글을 확인해 주세요.");
+  const onClickUpdateBtn = async () => {
+    const myVariables = {
+      boardCommentId: comment._id,
+      password: pwd,
+      updateBoardCommentInput: {
+        rating: 0,
+      },
+    };
+    if (contents) {
+      myVariables.updateBoardCommentInput.contents = contents;
+    }
+
+    if (!pwd) {
+      setErrorPwd(true);
     } else {
       try {
         const result = await updateComment({
-          variables: {
-            boardCommentId: comment._id,
-            password,
-            updateBoardCommentInput: {
-              contents,
-              rating: 0,
+          variables: myVariables,
+          refetchQueries: [
+            {
+              query: FETCH_BOARD_COMMENTS,
+              variables: { boardId: router.query.detail, page: 1 },
             },
-            refetchQueries: [
-              {
-                query: FETCH_BOARD_COMMENTS,
-                variables: { boardId: router.query.detail, page: 1 },
-              },
-            ],
-          },
+          ],
         });
         setIsEdit(false);
       } catch (error) {
@@ -117,13 +131,21 @@ export default function CommentWriteContainer(P) {
     }
   };
 
+  const onClickCancelBtn = () => {
+    setIsEdit(false);
+  };
+
   return (
     <CommentWritePresenter
-      errorWord={errorWord}
-      onClickCreateCommentBtn={onClickCreateCommentBtn}
-      onclickUpdateBtn={onclickUpdateBtn}
+      errorWriter={errorWriter}
+      errorPwd={errorPwd}
+      errorContents={errorContents}
+      errorRating={errorRating}
+      onClickCreateBtn={onClickCreateBtn}
+      onClickUpdateBtn={onClickUpdateBtn}
+      onClickCancelBtn={onClickCancelBtn}
       onChangeWriter={onChangeWriter}
-      onChangePassword={onChangePassword}
+      onChangePwd={onChangePwd}
       onChangeContents={onChangeContents}
       onChangeRating={onChangeRating}
       isEdit={isEdit}

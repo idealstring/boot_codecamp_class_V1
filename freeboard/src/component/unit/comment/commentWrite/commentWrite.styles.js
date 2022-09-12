@@ -18,7 +18,7 @@ export const CommentWrapper = styled.div`
 `;
 
 export const CommentTitle = styled.div`
-  margin-bottom: 35px;
+  margin-bottom: 15px;
 
   display: flex;
   flex-direction: row;
@@ -31,8 +31,6 @@ export const CommentTitleImg = styled.img`
 `;
 
 export const CommentNonmemberWrapper = styled.div`
-  margin-bottom: 35px;
-
   width: 100%;
 
   display: flex;
@@ -42,6 +40,7 @@ export const CommentNonmemberWrapper = styled.div`
 `;
 
 export const CommentNameInfo = styled.div`
+  margin-top: 20px;
   margin-bottom: 15px;
 
   display: flex;
@@ -50,12 +49,28 @@ export const CommentNameInfo = styled.div`
   align-items: center;
 `;
 
-export const InputW180H52 = styled.input`
+export const InputName = styled.input`
   margin-right: 24px;
   padding: 14px 24px;
   width: 180px;
   height: 52px;
   border: 1px solid #bdbdbd;
+  background-color: ${(props) => (props.errorColor ? "red" : "default")};
+  ::placeholder {
+    color: ${(props) => (props.errorColor ? "white" : "default")};
+  }
+`;
+
+export const InputPwd = styled.input`
+  margin-right: 24px;
+  padding: 14px 24px;
+  width: 180px;
+  height: 52px;
+  border: 1px solid #bdbdbd;
+  background-color: ${(props) => (props.errorColor ? "red" : "default")};
+  ::placeholder {
+    color: ${(props) => (props.errorColor ? "white" : "default")};
+  }
 `;
 
 export const CommentContentWrapper = styled.div`
@@ -77,6 +92,10 @@ export const TextareaW1200 = styled.textarea`
   border: none;
   border-bottom: 1px solid #f2f2f2;
   resize: none;
+  background-color: ${(props) => (props.errorColor ? "red" : "default")};
+  ::placeholder {
+    color: ${(props) => (props.errorColor ? "white" : "default")};
+  }
 `;
 
 export const CommentContentBottom = styled.div`
@@ -98,8 +117,11 @@ export const CommentBtn = styled.button`
   height: 52px;
   padding: 14px;
   border: none;
+  border-left: ${(props) =>
+    props.isEdit && props.isCancel ? "1px solid #f2f2f2" : "none"};
   cursor: pointer;
-  background-color: ${(props) => (props.isEdit ? "#ffd600" : "#000000")};
+  background-color: ${(props) =>
+    props.isEdit ? (props.isCancel ? "#ffffff" : "#ffd600") : "#000000"};
   color: ${(props) => (props.isEdit ? "#000000" : "#ffffff")};
 `;
 

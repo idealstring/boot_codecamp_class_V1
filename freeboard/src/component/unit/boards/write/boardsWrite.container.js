@@ -18,10 +18,10 @@ export default function BoardWriteContainer(P) {
     youtubeLink: "",
   });
 
-  const [errorWriter, setErrorWriter] = useState("");
-  const [errorPwd, setErrorPwd] = useState("");
-  const [errorContentTitle, setErrorContentTitle] = useState("");
-  const [errorContent, setErrorContent] = useState("");
+  const [errorWriter, setErrorWriter] = useState(false);
+  const [errorPwd, setErrorPwd] = useState(false);
+  const [errorContentTitle, setErrorContentTitle] = useState(false);
+  const [errorContent, setErrorContent] = useState(false);
 
   const [isCompleteColor, setIsCompleteColor] = useState(false);
 
@@ -36,7 +36,7 @@ export default function BoardWriteContainer(P) {
     });
 
     if (e.target.value !== "") {
-      setErrorWriter("");
+      setErrorWriter(false);
     }
     if (
       e.target.value &&
@@ -54,7 +54,7 @@ export default function BoardWriteContainer(P) {
       return { ...state, pwd: e.target.value };
     });
     if (e.target.value !== "") {
-      setErrorPwd("");
+      setErrorPwd(false);
     }
 
     if (
@@ -79,7 +79,7 @@ export default function BoardWriteContainer(P) {
       return { ...state, contentTitle: e.target.value };
     });
     if (e.target.value !== "") {
-      setErrorContentTitle("");
+      setErrorContentTitle(false);
     }
 
     if (
@@ -98,7 +98,7 @@ export default function BoardWriteContainer(P) {
       return { ...state, contentText: e.target.value };
     });
     if (e.target.value !== "") {
-      setErrorContent("");
+      setErrorContent(false);
     }
 
     if (
@@ -135,16 +135,16 @@ export default function BoardWriteContainer(P) {
 
   const CreateBtn = async () => {
     if (!inputData["writer"]) {
-      setErrorWriter("이름을 입력하세요.");
+      setErrorWriter(true);
     }
     if (!inputData["pwd"]) {
-      setErrorPwd("비밀번호를 입력하세요.");
+      setErrorPwd(true);
     }
     if (!inputData["contentTitle"]) {
-      setErrorContentTitle("제목을 입력하세요.");
+      setErrorContentTitle(true);
     }
     if (!inputData["contentText"]) {
-      setErrorContent("내용을 입력하세요.");
+      setErrorContent(true);
     }
     if (
       inputData["writer"] &&
@@ -178,11 +178,9 @@ export default function BoardWriteContainer(P) {
     }
   };
   const UpdateBtn = async () => {
-    // console.log(router.query.detail);
     const myVariables = {
       boardId: router.query.detail,
       password: inputData.pwd,
-      // updateBoardInput: { boardAddress: {} },
       updateBoardInput: {},
     };
 
@@ -222,14 +220,18 @@ export default function BoardWriteContainer(P) {
         inputData.addressDetail;
     }
 
-    try {
-      const result = await UpdateInputData({
-        variables: myVariables,
-      });
-      alert("게시물 수정이 완료되었습니다.");
-      router.push(`/boards/${result.data.updateBoard._id}`);
-    } catch (error) {
-      alert(error.message);
+    if (inputData["pwd"]) {
+      try {
+        const result = await UpdateInputData({
+          variables: myVariables,
+        });
+        alert("게시물 수정이 완료되었습니다.");
+        router.push(`/boards/${result.data.updateBoard._id}`);
+      } catch (error) {
+        alert(error.message);
+      }
+    } else {
+      setErrorPwd(true);
     }
   };
 

@@ -29,48 +29,49 @@ export default function BoardWritePresenter(P) {
             <S.Subtitle>
               작성자 <S.CompulsoryStar>*</S.CompulsoryStar>
             </S.Subtitle>
-            <S.InputW486px
+            <S.InputName
               type="text"
               placeholder="이름을 적어주세요."
               onChange={onChangeWriter}
               defaultValue={existingData?.fetchBoard.writer}
               disabled={isEdit ? true : false}
+              errorColor={errorWriter}
             />
-            <S.ErrorDiv>{errorWriter}</S.ErrorDiv>
           </S.WriterPwd>
           <S.WriterPwd>
             <S.Subtitle>
               비밀번호 <S.CompulsoryStar>*</S.CompulsoryStar>
             </S.Subtitle>
-            <S.InputW486px
+            <S.InputPwd
               type="password"
               placeholder="비밀번호를 입력해주세요."
               onChange={onChangePwd}
+              errorColor={errorPwd}
             />
-            <S.ErrorDiv>{errorPwd}</S.ErrorDiv>
           </S.WriterPwd>
         </S.WriterPwdWrapper>
         <S.SubtitleWrapper>
           <S.Subtitle>
             제목 <S.CompulsoryStar>*</S.CompulsoryStar>
           </S.Subtitle>
-          <S.InputW100per
+          <S.InputTitle
             type="text"
             placeholder="제목을 작성해주세요."
             onChange={onChangeContentTitle}
             defaultValue={existingData?.fetchBoard.title}
+            errorColor={errorContentTitle}
           />
-          <S.ErrorDiv>{errorContentTitle}</S.ErrorDiv>
         </S.SubtitleWrapper>
         <S.SubtitleWrapper>
           <S.Subtitle>
             내용 <S.CompulsoryStar>*</S.CompulsoryStar>
           </S.Subtitle>
-          <S.TextareaW100perH480px
+          <S.TextareaContent
             type="text"
             placeholder="내용을 작성해주세요."
             onChange={onChangeContentText}
             defaultValue={existingData?.fetchBoard.contents}
+            errorColor={errorContent}
           />
           <S.ErrorDiv>{errorContent}</S.ErrorDiv>
         </S.SubtitleWrapper>
