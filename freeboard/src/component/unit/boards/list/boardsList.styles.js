@@ -120,8 +120,6 @@ export const SearchBtn = styled.button`
   top: 14px;
 `;
 
-export const SearchIcon = styled.img``;
-
 export const SearchData = styled.div`
   width: 360px;
   height: 48px;

@@ -35,11 +35,10 @@ export const Title = styled.h2`
 export const TitleInfoTop = styled.div`
   margin: 5px 0;
   font-size: 0.9rem;
-  font-weight: 400;
+  font-weight: 300;
 
   width: 100%;
   color: #666666;
-  font-weight: 400;
 
   display: flex;
   flex-direction: row;
@@ -154,7 +153,7 @@ export const LikeDislikeWrapper = styled.div`
   justify-content: center;
 `;
 
-export const LikeDislikeInner = styled.div`
+export const LikeWrapper = styled.div`
   margin: 0 10px;
 
   display: flex;
@@ -162,7 +161,18 @@ export const LikeDislikeInner = styled.div`
   justify-content: space-between;
   algin-items: center;
   text-align: center;
-  color: gray;
+  color: #ffd600;
+  cursor: pointer;
+`;
+export const DislikeWrapper = styled.div`
+  margin: 0 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  algin-items: center;
+  text-align: center;
+  color: #828282;
   cursor: pointer;
 `;
 

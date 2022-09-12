@@ -178,11 +178,12 @@ export default function BoardWriteContainer(P) {
     }
   };
   const UpdateBtn = async () => {
-    console.log(router.query.detail);
+    // console.log(router.query.detail);
     const myVariables = {
       boardId: router.query.detail,
       password: inputData.pwd,
-      updateBoardInput: { boardAddress: {} },
+      // updateBoardInput: { boardAddress: {} },
+      updateBoardInput: {},
     };
 
     if (inputData.contentTitle) {
@@ -198,12 +199,25 @@ export default function BoardWriteContainer(P) {
       myVariables.updateBoardInput.images = inputData.images;
     }
     if (inputData.zipcode) {
-      myVariables.updateBoardInput.boardAddress.zipcode = inputData.zipcode;
+      if (myVariables.updateBoardInput.boardAddress === undefined) {
+        myVariables.updateBoardInput = { boardAddress: {} };
+      }
+      if (
+        (myVariables.updateBoardInput =
+          myVariables.updateBoardInput.boardAddress.zipcode =
+            inputData.zipcode)
+      );
     }
     if (inputData.addressCity) {
+      if (myVariables.updateBoardInput.boardAddress === undefined) {
+        myVariables.updateBoardInput = { boardAddress: {} };
+      }
       myVariables.updateBoardInput.boardAddress.address = inputData.addressCity;
     }
     if (inputData.addressDetail) {
+      if (myVariables.updateBoardInput.boardAddress === undefined) {
+        myVariables.updateBoardInput = { boardAddress: {} };
+      }
       myVariables.updateBoardInput.boardAddress.addressDetail =
         inputData.addressDetail;
     }

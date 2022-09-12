@@ -13,6 +13,5 @@ export default function CommentListContainer() {
     },
   });
 
-  // console.log(data);
   return <CommentListPresenter existingData={existingData} />;
 }

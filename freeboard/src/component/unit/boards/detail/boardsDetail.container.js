@@ -22,12 +22,12 @@ export default function BoardDetailContainer() {
     },
   });
 
-  const onRolloverLinkModal = () => {
+  const onClickLinkModal = () => {
     setModal((modal) => {
       return { ...modal, link: !modal.link };
     });
   };
-  const onRolloverMapModal = () => {
+  const onClickMapModal = () => {
     setModal((modal) => {
       return { ...modal, map: !modal.map };
     });
@@ -94,8 +94,8 @@ export default function BoardDetailContainer() {
   return (
     <BoardDetailPresenter
       data={data}
-      onRolloverLinkModal={onRolloverLinkModal}
-      onRolloverMapModal={onRolloverMapModal}
+      onClickLinkModal={onClickLinkModal}
+      onClickMapModal={onClickMapModal}
       modal={modal}
       onClickLikeBtn={onClickLikeBtn}
       onClickDislikeBtn={onClickDislikeBtn}

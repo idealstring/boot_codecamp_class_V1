@@ -99,8 +99,8 @@ export const CommentBtn = styled.button`
   padding: 14px;
   border: none;
   cursor: pointer;
-  background-color: ${(props) => (props.isEdit ? "#ffd600" : "#000000")}
-  color: ${(props) => (props.isEdit ? "#000000" : "#ffffff")}
+  background-color: ${(props) => (props.isEdit ? "#ffd600" : "#000000")};
+  color: ${(props) => (props.isEdit ? "#000000" : "#ffffff")};
 `;
 
 export const ErrorDiv = styled.div`
