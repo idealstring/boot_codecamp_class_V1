@@ -166,7 +166,7 @@ export const LikeDislikeInner = styled.div`
   cursor: pointer;
 `;
 
-export const ContentButtonWrapper = styled.div`
+export const ContentBtnWrapper = styled.div`
   margin: 0 270px;
 
   display: flex;
@@ -174,7 +174,7 @@ export const ContentButtonWrapper = styled.div`
   justify-content: space-around;
 `;
 
-export const ContentButton = styled.button`
+export const ContentBtn = styled.button`
   width: 122px;
   height: 46px;
   border: 1px solid #999999;

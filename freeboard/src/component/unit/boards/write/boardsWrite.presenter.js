@@ -1,9 +1,28 @@
 import * as S from "./boardsWrite.styles";
 
 export default function BoardWritePresenter(P) {
+  const {
+    errorPwd,
+    errorWriter,
+    errorContentTitle,
+    errorContent,
+    onChangeWriter,
+    onChangePwd,
+    onChangeContentTitle,
+    onChangeContentText,
+    onChangeZipcode,
+    onChangeAddressCity,
+    onChangeAddressDetail,
+    onChangeYoutubeLink,
+    CreateBtn,
+    UpdateBtn,
+    isCompleteColor,
+    isEdit,
+    existingData,
+  } = P;
   return (
     <S.Container>
-      <S.Title>게시물 {P.isEdit ? "수정" : "등록"}</S.Title>
+      <S.Title>게시물 {isEdit ? "수정" : "등록"}</S.Title>
       <S.ContentContainer>
         <S.WriterPwdWrapper>
           <S.WriterPwd>
@@ -13,9 +32,11 @@ export default function BoardWritePresenter(P) {
             <S.InputW486px
               type="text"
               placeholder="이름을 적어주세요."
-              onChange={P.onChangeWriter}
+              onChange={onChangeWriter}
+              defaultValue={existingData?.fetchBoard.writer}
+              disabled={isEdit ? true : false}
             />
-            <S.ErrorDiv>{P.errorWriter}</S.ErrorDiv>
+            <S.ErrorDiv>{errorWriter}</S.ErrorDiv>
           </S.WriterPwd>
           <S.WriterPwd>
             <S.Subtitle>
@@ -24,9 +45,9 @@ export default function BoardWritePresenter(P) {
             <S.InputW486px
               type="password"
               placeholder="비밀번호를 입력해주세요."
-              onChange={P.onChangePwd}
+              onChange={onChangePwd}
             />
-            <S.ErrorDiv>{P.errorPwd}</S.ErrorDiv>
+            <S.ErrorDiv>{errorPwd}</S.ErrorDiv>
           </S.WriterPwd>
         </S.WriterPwdWrapper>
         <S.SubtitleWrapper>
@@ -36,9 +57,10 @@ export default function BoardWritePresenter(P) {
           <S.InputW100per
             type="text"
             placeholder="제목을 작성해주세요."
-            onChange={P.onChangeContentTitle}
+            onChange={onChangeContentTitle}
+            defaultValue={existingData?.fetchBoard.title}
           />
-          <S.ErrorDiv>{P.errorContentTitle}</S.ErrorDiv>
+          <S.ErrorDiv>{errorContentTitle}</S.ErrorDiv>
         </S.SubtitleWrapper>
         <S.SubtitleWrapper>
           <S.Subtitle>
@@ -47,9 +69,10 @@ export default function BoardWritePresenter(P) {
           <S.TextareaW100perH480px
             type="text"
             placeholder="내용을 작성해주세요."
-            onChange={P.onChangeContentText}
+            onChange={onChangeContentText}
+            defaultValue={existingData?.fetchBoard.contents}
           />
-          <S.ErrorDiv>{P.errorContent}</S.ErrorDiv>
+          <S.ErrorDiv>{errorContent}</S.ErrorDiv>
         </S.SubtitleWrapper>
         <S.SubtitleWrapper>
           <S.Subtitle>주소</S.Subtitle>
@@ -57,21 +80,29 @@ export default function BoardWritePresenter(P) {
             <S.InputW77pxH52px
               type="text"
               placeholder="12212"
-              onChange={P.onChangeZipcode}
+              onChange={onChangeZipcode}
+              defaultValue={existingData?.fetchBoard.boardAddress.zipcode}
             />
-            <S.PostButton>우편번호 검색</S.PostButton>
+            <S.PostBtn>우편번호 검색</S.PostBtn>
           </div>
-
-          <S.InputW100per type="text" onChange={P.onChangeAddressCity} />
-
-          <S.InputW100per type="text" onChange={P.onChangeAddressDetail} />
+          <S.InputW100per
+            type="text"
+            onChange={onChangeAddressCity}
+            defaultValue={existingData?.fetchBoard.boardAddress.address}
+          />
+          <S.InputW100per
+            type="text"
+            onChange={onChangeAddressDetail}
+            defaultValue={existingData?.fetchBoard.boardAddress.addressDetail}
+          />
         </S.SubtitleWrapper>
         <S.SubtitleWrapper>
           <S.Subtitle>유튜브</S.Subtitle>
           <S.InputW100per
             type="text"
             placeholder="링크를 복사해주세요."
-            onChange={P.onChangeYoutubeLink}
+            onChange={onChangeYoutubeLink}
+            defaultValue={existingData?.fetchBoard.youtubeUrl}
           />
         </S.SubtitleWrapper>
         <S.SubtitleWrapper>
@@ -97,14 +128,14 @@ export default function BoardWritePresenter(P) {
             <S.RadioLabel htmlFor="picture">사진</S.RadioLabel>
           </S.InputRadioWrapper>
         </S.SubtitleWrapper>
-        <S.SubmitButtonWrapper>
-          <S.SubmitButton
-            onClick={P.isEdit ? P.UpdateButton : P.SubmitButton}
-            isCompleteColor={P.isCompleteColor}
+        <S.SubmitBtnWrapper>
+          <S.SubmitBtn
+            onClick={isEdit ? UpdateBtn : CreateBtn}
+            isCompleteColor={isCompleteColor}
           >
-            {P.isEdit ? "수정완료" : "등록하기"}
-          </S.SubmitButton>
-        </S.SubmitButtonWrapper>
+            {isEdit ? "수정완료" : "등록하기"}
+          </S.SubmitBtn>
+        </S.SubmitBtnWrapper>
       </S.ContentContainer>
     </S.Container>
   );

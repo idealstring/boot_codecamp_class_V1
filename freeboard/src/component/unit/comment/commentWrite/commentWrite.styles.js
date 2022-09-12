@@ -94,19 +94,11 @@ export const CharactersCounter = styled.div`
   color: #bdbdbd;
 `;
 
-export const CommentCreateButton = styled.button`
+export const CommentBtn = styled.button`
   height: 52px;
   padding: 14px;
-  background-color: #000000;
-  color: #ffffff;
   border: none;
   cursor: pointer;
-`;
-export const CommentUpdateButton = styled.button`
-  height: 52px;
-  padding: 14px;
-  background-color: #ffd600;
-  color: #000000;
-  border: none;
-  cursor: pointer;
+  background-color: ${(props) => (props.isEdit ? "#ffd600" : "#000000")}
+  color: ${(props) => (props.isEdit ? "#000000" : "#ffffff")}
 `;

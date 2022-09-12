@@ -2,7 +2,7 @@ import BoardDetailPresenter from "./boardsDetail.presenter";
 import { useQuery, useMutation, ApolloError } from "@apollo/client";
 import { useRouter } from "next/router";
 import { FETCH_BOARD, LIKE_BOARD, DISLIKE_BOARD } from "./boardsDetail.queries";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function BoardDetailContainer() {
   const router = useRouter();
@@ -26,7 +26,7 @@ export default function BoardDetailContainer() {
       return { ...modal, map: !modal.map };
     });
   };
-  const onclickLikeButton = async () => {
+  const onClickLikeBtn = async () => {
     try {
       await likeUp({
         variables: {
@@ -45,7 +45,7 @@ export default function BoardDetailContainer() {
       alert(error.message);
     }
   };
-  const onclickDislikeButton = async () => {
+  const onClickDislikeBtn = async () => {
     try {
       await dislikeUp({
         variables: {
@@ -65,6 +65,8 @@ export default function BoardDetailContainer() {
     }
   };
 
+  const onClickDeleteBtn = () => {};
+
   const onClickMoveToList = () => {
     router.push("/boards");
   };
@@ -78,10 +80,11 @@ export default function BoardDetailContainer() {
       onRolloverLinkModal={onRolloverLinkModal}
       onRolloverMapModal={onRolloverMapModal}
       modal={modal}
-      onclickLikeButton={onclickLikeButton}
-      onclickDislikeButton={onclickDislikeButton}
+      onClickLikeBtn={onClickLikeBtn}
+      onClickDislikeBtn={onClickDislikeBtn}
       onClickMoveToList={onClickMoveToList}
       onClickMoveToEdit={onClickMoveToEdit}
+      onClickDeleteBtn={onClickDeleteBtn}
     />
   );
 }

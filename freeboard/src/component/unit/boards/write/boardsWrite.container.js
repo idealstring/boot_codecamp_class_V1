@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import { CREATE_BOARD, UPDATE_BOARD } from "./boardsWrite.queries";
 
 export default function BoardWriteContainer(P) {
+  const { isEdit, data: existingData } = P;
+
   const [inputData, setInputData] = useState({
     writer: "",
     pwd: "",
@@ -61,6 +63,12 @@ export default function BoardWriteContainer(P) {
       inputData.contentTitle &&
       inputData.contentText
     ) {
+      setIsCompleteColor(true);
+    } else {
+      setIsCompleteColor(false);
+    }
+
+    if (isEdit && e.target.value) {
       setIsCompleteColor(true);
     } else {
       setIsCompleteColor(false);
@@ -125,7 +133,7 @@ export default function BoardWriteContainer(P) {
     });
   }
 
-  const SubmitButton = async () => {
+  const CreateBtn = async () => {
     if (!inputData["writer"]) {
       setErrorWriter("이름을 입력하세요.");
     }
@@ -169,25 +177,40 @@ export default function BoardWriteContainer(P) {
       }
     }
   };
-  const UpdateButton = async () => {
-    console.log(router);
+  const UpdateBtn = async () => {
+    console.log(router.query.detail);
+    const myVariables = {
+      boardId: router.query.detail,
+      password: inputData.pwd,
+      updateBoardInput: { boardAddress: {} },
+    };
+
+    if (inputData.contentTitle) {
+      myVariables.updateBoardInput.title = inputData.contentTitle;
+    }
+    if (inputData.contentText) {
+      myVariables.updateBoardInput.contents = inputData.contentText;
+    }
+    if (inputData.youtubeLink) {
+      myVariables.updateBoardInput.youtubeUrl = inputData.youtubeLink;
+    }
+    if (inputData.images) {
+      myVariables.updateBoardInput.images = inputData.images;
+    }
+    if (inputData.zipcode) {
+      myVariables.updateBoardInput.boardAddress.zipcode = inputData.zipcode;
+    }
+    if (inputData.addressCity) {
+      myVariables.updateBoardInput.boardAddress.address = inputData.addressCity;
+    }
+    if (inputData.addressDetail) {
+      myVariables.updateBoardInput.boardAddress.addressDetail =
+        inputData.addressDetail;
+    }
+
     try {
       const result = await UpdateInputData({
-        variables: {
-          updateBoardInput: {
-            title: inputData.contentTitle,
-            contents: inputData.contentText,
-            youtubeUrl: inputData.youtubeLink,
-            boardAddress: {
-              zipcode: inputData.zipcode,
-              address: inputData.addressCity,
-              addressDetail: inputData.addressDetail,
-            },
-            images: "",
-          },
-          password: inputData.pwd,
-          boardId: router.query.detail,
-        },
+        variables: myVariables,
       });
       alert("게시물 수정이 완료되었습니다.");
       router.push(`/boards/${result.data.updateBoard._id}`);
@@ -198,7 +221,6 @@ export default function BoardWriteContainer(P) {
 
   return (
     <BoardWritePresenter
-      inputData={inputData}
       errorPwd={errorPwd}
       errorWriter={errorWriter}
       errorContentTitle={errorContentTitle}
@@ -211,10 +233,11 @@ export default function BoardWriteContainer(P) {
       onChangeAddressCity={onChangeAddressCity}
       onChangeAddressDetail={onChangeAddressDetail}
       onChangeYoutubeLink={onChangeYoutubeLink}
-      SubmitButton={SubmitButton}
-      UpdateButton={UpdateButton}
+      CreateBtn={CreateBtn}
+      UpdateBtn={UpdateBtn}
       isCompleteColor={isCompleteColor}
-      isEdit={P.isEdit}
+      isEdit={isEdit}
+      existingData={existingData}
     />
   );
 }

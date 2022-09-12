@@ -4,8 +4,8 @@ import { FETCH_BOARDS, FETCH_BOARDS_OF_THE_BEST } from "./boardsList.queries";
 import { useRouter } from "next/router";
 
 export default function BoardListContainer() {
-  const { data: fetchBoards } = useQuery(FETCH_BOARDS);
-  const { data: fetchBoardsOfTheBest } = useQuery(FETCH_BOARDS_OF_THE_BEST);
+  const { data: fetchBoardsData } = useQuery(FETCH_BOARDS);
+  const { data: fetchBoardsOfTheBestDate } = useQuery(FETCH_BOARDS_OF_THE_BEST);
   const router = useRouter();
 
   const onClickToWrite = () => {
@@ -14,8 +14,8 @@ export default function BoardListContainer() {
 
   return (
     <BoardListPresenter
-      fetchBoardsOfTheBest={fetchBoardsOfTheBest}
-      fetchBoards={fetchBoards}
+      fetchBoardsOfTheBestDate={fetchBoardsOfTheBestDate}
+      fetchBoardsData={fetchBoardsData}
       onClickToWrite={onClickToWrite}
     />
   );

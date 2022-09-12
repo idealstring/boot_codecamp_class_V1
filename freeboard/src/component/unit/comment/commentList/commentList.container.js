@@ -5,7 +5,8 @@ import { FETCH_BOARD_COMMENTS } from "./commentList.queries";
 
 export default function CommentListContainer() {
   const router = useRouter();
-  const { data } = useQuery(FETCH_BOARD_COMMENTS, {
+
+  const { data: existingData } = useQuery(FETCH_BOARD_COMMENTS, {
     variables: {
       page: 1,
       boardId: router.query.detail,
@@ -13,5 +14,5 @@ export default function CommentListContainer() {
   });
 
   // console.log(data);
-  return <CommentListPresenter data={data} />;
+  return <CommentListPresenter existingData={existingData} />;
 }

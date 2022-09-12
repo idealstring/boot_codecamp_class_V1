@@ -87,7 +87,7 @@ export const InputW77pxH52px = styled.input`
   border: 1px solid #bdbdbd;
 `;
 
-export const PostButton = styled.button`
+export const PostBtn = styled.button`
   margin-left: 16px;
   padding: 0 16px;
   width: 124px;
@@ -145,14 +145,14 @@ export const RadioLabel = styled.label`
   margin-right: 20px;
 `;
 
-export const SubmitButtonWrapper = styled.div`
+export const SubmitBtnWrapper = styled.div`
   background-color: none;
   display: flex;
   flex-direction: row;
   justify-content: center;
 `;
 
-export const SubmitButton = styled.button`
+export const SubmitBtn = styled.button`
   padding: 0 16px;
   width: 179px;
   height: 52px;

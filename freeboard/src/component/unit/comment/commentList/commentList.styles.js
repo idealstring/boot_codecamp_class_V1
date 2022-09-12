@@ -52,18 +52,19 @@ export const CommentContentName = styled.span`
   font-weight: 500;
 `;
 
-export const CommentViewButtonWrapper = styled.div`
+export const CommentViewBtnWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
-  button {
-    margin-left: 10px;
-    padding: 0 5px;
-    border: none;
-    background: none;
-    cursor: pointer;
-  }
+`;
+
+export const CommentViewBtn = styled.button`
+  margin-left: 10px;
+  padding: 0 5px;
+  border: none;
+  background: none;
+  cursor: pointer;
 `;
 
 export const CommentViewContent = styled.div`

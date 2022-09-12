@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-// import tempimg from "../../../../../public/temp_bg.png";
 
 export const BoardContainer = styled.div`
   box-sizing: border-box;
@@ -26,21 +25,21 @@ export const BestListContainer = styled.div`
 `;
 export const BestListWrapper = styled.div`
   margin: 0 auto;
-  padding: 80px 100px;
+  padding: 100px;
   width: 1200px;
   height: 400px;
 
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  flex-flow: row nowrap;
+  justify-content: space-between;
   align-items: center;
+  overflow: hidden;
 `;
 
 export const BestBoard = styled.div`
-  margin: 0;
   padding: 30px 40px;
-  width: 360px;
-  height: 203px;
+  width: 230px;
+  height: 200px;
 
   background-color: #ffffff;
   border-radius: 10px;
@@ -51,20 +50,30 @@ export const BestBoard = styled.div`
   flex-direction: column;
   justify-content: space-between;
 
+  cursor: pointer;
+
   position: relative;
 `;
 
 export const BestTitle = styled.span`
   margin-top: 10px;
+  width: 100%;
   font-size: 20px;
   z-index: 10;
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+  // white-space: nowrap;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 `;
 export const BestImg = styled.img`
-  width: 360px;
-  height: 203px;
+  width: 230px;
+  height: 200px;
   border-radius: 10px;
 
-  // background-image:
   object-fit: cover;
 
   z-index: 0;
@@ -99,7 +108,7 @@ export const SearchWord = styled.input`
   border: 1px solid #d8d8d8;
 `;
 
-export const SearchButton = styled.button`
+export const SearchBtn = styled.button`
   appearance: none;
   border: none;
   background: none;
@@ -208,6 +217,10 @@ export const ContentWriter = styled.span`
   width: 110px;
   line-height: 88px;
   text-align: center;
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 `;
 export const ContentDate = styled.span`
   width: 110px;
@@ -231,7 +244,7 @@ export const ListNumbering = styled.div`
   text-align: center; ;
 `;
 
-export const ContentButton = styled.button`
+export const ContentBtn = styled.button`
   width: 122px;
   height: 46px;
   border: 1px solid #999999;

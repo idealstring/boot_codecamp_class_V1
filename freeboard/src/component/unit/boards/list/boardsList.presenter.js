@@ -4,12 +4,13 @@ import { Fragment } from "react";
 import Link from "next/link";
 
 export default function BoardListPresenter(P) {
+  const { fetchBoardsOfTheBestDate, fetchBoardsData, onClickToWrite } = P;
   return (
     <Fragment>
       <S.Title>리스트</S.Title>
       <S.BestListContainer>
         <S.BestListWrapper>
-          {P.fetchBoardsOfTheBest?.fetchBoardsOfTheBest?.map((bestBoard) => (
+          {fetchBoardsOfTheBestDate?.fetchBoardsOfTheBest?.map((bestBoard) => (
             <Link href={`/boards/${bestBoard._id}`} key={bestBoard._id}>
               <S.BestBoard>
                 <S.BestTitle>{bestBoard.title}</S.BestTitle>
@@ -28,9 +29,9 @@ export default function BoardListPresenter(P) {
               className="검색바"
               placeholder="검색어를 입력하세요."
             />
-            <S.SearchButton>
+            <S.SearchBtn>
               <S.SearchIcon src="/search_icon.png" />
-            </S.SearchButton>
+            </S.SearchBtn>
           </S.SearchWordWrapper>
         </S.SearchbarWrapper>
         <S.ListContainer>
@@ -41,7 +42,7 @@ export default function BoardListPresenter(P) {
               <S.ListWriter>작성자</S.ListWriter>
               <S.ListDate>날짜</S.ListDate>
             </S.ListTop>
-            {P.fetchBoards?.fetchBoards?.map((board, i) => (
+            {fetchBoardsData?.fetchBoards?.map((board, i) => (
               <Link href={`/boards/${board._id}`} key={board._id}>
                 <S.ListContent>
                   <S.ContentNumber>{i + 1}</S.ContentNumber>
@@ -58,7 +59,7 @@ export default function BoardListPresenter(P) {
 
           <S.ListFooter>
             <S.ListNumbering>1 | 2 | 3 | 4 | 5</S.ListNumbering>
-            <S.ContentButton onClick={P.onClickToWrite}>글쓰기</S.ContentButton>
+            <S.ContentBtn onClick={onClickToWrite}>글쓰기</S.ContentBtn>
           </S.ListFooter>
         </S.ListContainer>
       </S.BoardContainer>
