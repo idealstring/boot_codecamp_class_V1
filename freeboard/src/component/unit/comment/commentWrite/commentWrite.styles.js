@@ -102,3 +102,10 @@ export const CommentBtn = styled.button`
   background-color: ${(props) => (props.isEdit ? "#ffd600" : "#000000")}
   color: ${(props) => (props.isEdit ? "#000000" : "#ffffff")}
 `;
+
+export const ErrorDiv = styled.div`
+  height: 12px;
+  color: red;
+  font-size: 12px;
+  font-weight: 500;
+`;

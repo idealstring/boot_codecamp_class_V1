@@ -1,6 +1,10 @@
 import { useState } from "react";
 import CommentWrite from "../../../../commons/libraries/comment/commentWrite";
 import * as S from "./commentList.styles";
+import {
+  dateFormatter,
+  dateTimeFormatter,
+} from "../../../../commons/utils/utils";
 
 export default function CommentListPresenterItem(P) {
   const { comment } = P;
@@ -38,7 +42,9 @@ export default function CommentListPresenterItem(P) {
               </S.ViewContentTop>
               <S.CommentViewContent>{comment.contents}</S.CommentViewContent>
               <S.CommentViewContentDate>
-                {comment.createAt}
+                {comment?.createdAt !== comment?.updatedAt
+                  ? `${dateTimeFormatter(comment.updatedAt)}(수정됨)`
+                  : `${dateFormatter(comment.createdAt)}`}
               </S.CommentViewContentDate>
             </S.CommentViewContentWrapper>
           </S.CommentViewInner>

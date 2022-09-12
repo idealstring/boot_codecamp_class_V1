@@ -2,6 +2,7 @@ import * as S from "./commentWrite.styles.js";
 
 export default function CommentWritePresenter(P) {
   const {
+    errorWord,
     onClickCreateCommentBtn,
     onclickUpdateBtn,
     onChangeWriter,
@@ -26,6 +27,7 @@ export default function CommentWritePresenter(P) {
               placeholder="작성자"
               defaultValue={comment?.writer}
               onChange={onChangeWriter}
+              disabled={isEdit ? true : false}
             />
             <S.InputW180H52
               type="password"
@@ -54,6 +56,7 @@ export default function CommentWritePresenter(P) {
               )}
             </S.CommentContentBottom>
           </S.CommentContentWrapper>
+          <S.ErrorDiv>{errorWord}</S.ErrorDiv>
         </S.CommentNonmemberWrapper>
       </S.CommentWrapper>
     </>
