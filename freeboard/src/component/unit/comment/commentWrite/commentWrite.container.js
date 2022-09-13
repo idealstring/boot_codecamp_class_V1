@@ -137,6 +137,10 @@ export default function CommentWriteContainer(P) {
 
   return (
     <CommentWritePresenter
+      writer={writer}
+      pwd={pwd}
+      contents={contents}
+      rating={rating}
       errorWriter={errorWriter}
       errorPwd={errorPwd}
       errorContents={errorContents}

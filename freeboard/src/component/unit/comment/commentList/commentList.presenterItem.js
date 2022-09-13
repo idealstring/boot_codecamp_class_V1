@@ -31,9 +31,9 @@ export default function CommentListPresenterItem(P) {
     setDeleteId(e.currentTarget.id);
   };
 
-  if (deleteRun) {
+  const deleteBoardCommentFunc = async () => {
     try {
-      const result = deleteBoardComment({
+      const result = await deleteBoardComment({
         variables: {
           boardCommentId: deleteId,
           password: deletePwd,
@@ -50,6 +50,11 @@ export default function CommentListPresenterItem(P) {
     } catch (error) {
       alert(error.message);
     }
+  };
+
+  if (deleteRun) {
+    deleteBoardCommentFunc();
+    setDeleteRun(false);
   }
 
   return (

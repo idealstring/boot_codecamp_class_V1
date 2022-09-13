@@ -2,6 +2,9 @@ import * as S from "./commentWrite.styles.js";
 
 export default function CommentWritePresenter(P) {
   const {
+    writer,
+    pwd,
+    contents,
     errorWriter,
     errorPwd,
     errorContents,
@@ -43,6 +46,7 @@ export default function CommentWritePresenter(P) {
             <S.InputName
               type="text"
               placeholder="작성자"
+              value={comment?.writer ? null : writer}
               defaultValue={comment?.writer}
               onChange={onChangeWriter}
               disabled={isEdit ? true : false}
@@ -51,6 +55,7 @@ export default function CommentWritePresenter(P) {
             <S.InputPwd
               type="password"
               placeholder="비밀번호"
+              value={pwd}
               onChange={onChangePwd}
               errorColor={errorPwd}
             />
@@ -67,11 +72,13 @@ export default function CommentWritePresenter(P) {
               type="text"
               placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
               onChange={onChangeContents}
+              value={comment?.contents ? null : contents}
               defaultValue={comment?.contents}
               errorColor={errorContents}
+              maxLength={100}
             />
             <S.CommentContentBottom>
-              <S.CharactersCounter>0/100</S.CharactersCounter>
+              <S.CharactersCounter>{contents.length}/100</S.CharactersCounter>
               {isEdit ? (
                 <>
                   <div>
