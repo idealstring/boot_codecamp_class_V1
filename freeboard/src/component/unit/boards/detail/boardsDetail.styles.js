@@ -79,11 +79,6 @@ export const IconWrapper = styled.div`
   align-items: center;
 `;
 
-export const LinkIcon = styled.img`
-  width: 26px;
-  height: 13px;
-`;
-
 export const LinkModal = styled.div`
   top: 35px;
   right: 30px;
@@ -151,6 +146,7 @@ export const LikeDislikeWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
 `;
 
 export const LikeWrapper = styled.div`
@@ -164,6 +160,7 @@ export const LikeWrapper = styled.div`
   color: #ffd600;
   cursor: pointer;
 `;
+
 export const DislikeWrapper = styled.div`
   margin: 0 10px;
 
@@ -174,6 +171,10 @@ export const DislikeWrapper = styled.div`
   text-align: center;
   color: #828282;
   cursor: pointer;
+`;
+
+export const Svg = styled.svg`
+  margin: 0 auto;
 `;
 
 export const ContentBtnWrapper = styled.div`
