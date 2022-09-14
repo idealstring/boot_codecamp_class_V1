@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { ICompleteColorProps, IErrorColorProps } from "./boardsWrite.types";
 
 export const Container = styled.div`
   box-sizing: border-box;
@@ -56,9 +57,11 @@ export const InputName = styled.input`
   width: 486px;
   height: 52px;
   border: 1px solid #bdbdbd;
-  background-color: ${(props) => (props.errorColor ? "red" : "default")};
+  background-color: ${(props: IErrorColorProps) =>
+    props.errorColor ? "red" : "default"};
   ::placeholder {
-    color: ${(props) => (props.errorColor ? "white" : "default")};
+    color: ${(props: IErrorColorProps) =>
+      props.errorColor ? "white" : "default"};
   }
 `;
 
@@ -68,9 +71,11 @@ export const InputPwd = styled.input`
   width: 486px;
   height: 52px;
   border: 1px solid #bdbdbd;
-  background-color: ${(props) => (props.errorColor ? "red" : "default")};
+  background-color: ${(props: IErrorColorProps) =>
+    props.errorColor ? "red" : "default"};
   ::placeholder {
-    color: ${(props) => (props.errorColor ? "white" : "default")};
+    color: ${(props: IErrorColorProps) =>
+      props.errorColor ? "white" : "default"};
   }
 `;
 
@@ -86,9 +91,11 @@ export const InputTitle = styled.input`
   width: 100%;
   height: 52px;
   border: 1px solid #bdbdbd;
-  background-color: ${(props) => (props.errorColor ? "red" : "default")};
+  background-color: ${(props: IErrorColorProps) =>
+    props.errorColor ? "red" : "default"};
   ::placeholder {
-    color: ${(props) => (props.errorColor ? "white" : "default")};
+    color: ${(props: IErrorColorProps) =>
+      props.errorColor ? "white" : "default"};
   }
 `;
 
@@ -106,9 +113,11 @@ export const TextareaContent = styled.textarea`
   width: 100%;
   height: 480px;
   border: 1px solid #bdbdbd;
-  background-color: ${(props) => (props.errorColor ? "red" : "default")};
+  background-color: ${(props: IErrorColorProps) =>
+    props.errorColor ? "red" : "default"};
   ::placeholder {
-    color: ${(props) => (props.errorColor ? "white" : "default")};
+    color: ${(props: IErrorColorProps) =>
+      props.errorColor ? "white" : "default"};
   }
 `;
 
@@ -181,8 +190,9 @@ export const RadioLabel = styled.label`
 export const SubmitBtnWrapper = styled.div`
   background-color: none;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const SubmitBtn = styled.button`
@@ -193,8 +203,21 @@ export const SubmitBtn = styled.button`
   border: none;
   font-weight: 500;
   color: #000000;
-  background-color: ${(P) => (P.isCompleteColor ? "#ffd600" : "default")};
+  background-color: ${(props: ICompleteColorProps) =>
+    props.isCompleteColor ? "#ffd600" : "default"};
   cursor: pointer;
+`;
+export const CancelBtn = styled.button`
+  margin-top: 16px;
+  padding: 0 16px 16px 16px;
+  border: none;
+  font-weight: 500;
+  color: #bdbdbd;
+  background-color: white;
+  cursor: pointer;
+  &:hover {
+    color: #000000;
+  }
 `;
 
 export const ImgUploadWrapper = styled.div`

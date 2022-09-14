@@ -1,4 +1,4 @@
-export const dateFormatter = (rawDate) => {
+export const dateFormatter = (rawDate: Date) => {
   let date = new Date(rawDate);
   const yyyy = date.getFullYear();
   const mm = String(date.getMonth() + 1).padStart(2, "0");
@@ -6,7 +6,7 @@ export const dateFormatter = (rawDate) => {
   return `${yyyy}-${mm}-${dd}`;
 };
 
-export const dateTimeFormatter = (rawDate) => {
+export const dateTimeFormatter = (rawDate: Date) => {
   let date = new Date(rawDate);
   const yyyy = date.getFullYear();
   const mm = String(date.getMonth() + 1).padStart(2, "0");

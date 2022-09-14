@@ -2,8 +2,15 @@ import * as S from "./boardsList.styles";
 import { dateFormatter } from "../../../../commons/utils/utils";
 import { Fragment } from "react";
 import Link from "next/link";
+import { IQuery } from "../../../../commons/types/generated/types";
 
-export default function BoardListPresenter(P) {
+type IBoardListPresenterProps = {
+  fetchBoardsOfTheBestDate?: Pick<IQuery, "fetchBoardsOfTheBest">;
+  fetchBoardsData?: Pick<IQuery, "fetchBoards">;
+  onClickToWrite: () => void;
+};
+
+export default function BoardListPresenter(P: IBoardListPresenterProps) {
   const { fetchBoardsOfTheBestDate, fetchBoardsData, onClickToWrite } = P;
   return (
     <Fragment>

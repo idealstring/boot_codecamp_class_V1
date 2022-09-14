@@ -1,6 +1,9 @@
+import { ChangeEvent } from "react";
+import { IQuery } from "../../../../commons/types/generated/types";
 import * as S from "./boardsWrite.styles";
+import { IBoardWritePresenterProps } from "./boardsWrite.types";
 
-export default function BoardWritePresenter(P) {
+export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
   const {
     errorPwd,
     errorWriter,
@@ -16,6 +19,8 @@ export default function BoardWritePresenter(P) {
     onChangeYoutubeLink,
     CreateBtn,
     UpdateBtn,
+    CreateCancelBtn,
+    UpdateCancelBtn,
     isCompleteColor,
     isEdit,
     existingData,
@@ -67,7 +72,6 @@ export default function BoardWritePresenter(P) {
             내용 <S.CompulsoryStar>*</S.CompulsoryStar>
           </S.Subtitle>
           <S.TextareaContent
-            type="text"
             placeholder="내용을 작성해주세요."
             onChange={onChangeContentText}
             defaultValue={existingData?.fetchBoard.contents}
@@ -82,19 +86,19 @@ export default function BoardWritePresenter(P) {
               type="text"
               placeholder="12212"
               onChange={onChangeZipcode}
-              defaultValue={existingData?.fetchBoard.boardAddress.zipcode}
+              defaultValue={existingData?.fetchBoard?.boardAddress?.zipcode}
             />
             <S.PostBtn>우편번호 검색</S.PostBtn>
           </div>
           <S.InputW100per
             type="text"
             onChange={onChangeAddressCity}
-            defaultValue={existingData?.fetchBoard.boardAddress.address}
+            defaultValue={existingData?.fetchBoard?.boardAddress?.address}
           />
           <S.InputW100per
             type="text"
             onChange={onChangeAddressDetail}
-            defaultValue={existingData?.fetchBoard.boardAddress.addressDetail}
+            defaultValue={existingData?.fetchBoard?.boardAddress?.addressDetail}
           />
         </S.SubtitleWrapper>
         <S.SubtitleWrapper>
@@ -136,6 +140,9 @@ export default function BoardWritePresenter(P) {
           >
             {isEdit ? "수정완료" : "등록하기"}
           </S.SubmitBtn>
+          <S.CancelBtn onClick={isEdit ? UpdateCancelBtn : CreateCancelBtn}>
+            취소
+          </S.CancelBtn>
         </S.SubmitBtnWrapper>
       </S.ContentContainer>
     </S.Container>

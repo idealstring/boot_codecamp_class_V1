@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import { useMutation } from "@apollo/client";
 import CommentWrite from "../../../../commons/libraries/comment/commentWrite";
 import * as S from "./commentList.styles";
@@ -6,14 +6,17 @@ import {
   dateFormatter,
   dateTimeFormatter,
 } from "../../../../commons/utils/utils";
-import Modal from "../../../../commons/libraries/modal/deleteModal";
+import DeleteModal from "../../../../commons/libraries/modal/deleteModal";
 import {
   DELETE_BOARD_COMMENT,
   FETCH_BOARD_COMMENTS,
 } from "./commentList.queries";
 import { useRouter } from "next/router";
+import { ICommentListPresenterItemProps } from "./commentList.types";
 
-export default function CommentListPresenterItem(P) {
+export default function CommentListPresenterItem(
+  P: ICommentListPresenterItemProps
+) {
   const { comment } = P;
   const router = useRouter();
   const [isEdit, setIsEdit] = useState(false);
@@ -26,7 +29,7 @@ export default function CommentListPresenterItem(P) {
   const onClickUpdateBtn = () => {
     setIsEdit(true);
   };
-  const onClickDeleteBtn = (e) => {
+  const onClickDeleteBtn = (e: MouseEvent<HTMLButtonElement>) => {
     setIsDelete(true);
     setDeleteId(e.currentTarget.id);
   };
@@ -47,7 +50,7 @@ export default function CommentListPresenterItem(P) {
       });
       setDeleteRun(false);
       setIsDelete(false);
-    } catch (error) {
+    } catch (error: any) {
       alert(error.message);
     }
   };
@@ -60,7 +63,7 @@ export default function CommentListPresenterItem(P) {
   return (
     <>
       {isDelete && (
-        <Modal
+        <DeleteModal
           setIsDelete={setIsDelete}
           setDeleteRun={setDeleteRun}
           setDeletePwd={setDeletePwd}

@@ -1,10 +1,12 @@
-import * as S from "./commentWrite.styles.js";
+import * as S from "./commentWrite.styles";
+import { ICommentWritePresenterProps } from "./commentWrite.types.js";
 
-export default function CommentWritePresenter(P) {
+export default function CommentWritePresenter(P: ICommentWritePresenterProps) {
   const {
     writer,
     pwd,
     contents,
+    rating,
     errorWriter,
     errorPwd,
     errorContents,
@@ -59,11 +61,7 @@ export default function CommentWritePresenter(P) {
               onChange={onChangePwd}
               errorColor={errorPwd}
             />
-            <div
-              className="별점"
-              onChange={onChangeRating}
-              errorColor={errorRating}
-            >
+            <div className="별점" onChange={onChangeRating}>
               별 별 별 별 별
             </div>
           </S.CommentNameInfo>

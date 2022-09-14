@@ -1,13 +1,24 @@
 import BoardWritePresenter from "./boardsWrite.presenter";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useMutation, gql } from "@apollo/client";
 import { useRouter } from "next/router";
 import { CREATE_BOARD, UPDATE_BOARD } from "./boardsWrite.queries";
+import {
+  IMutation,
+  IMutationCreateBoardArgs,
+  IMutationUpdateBoardArgs,
+  IQuery,
+} from "../../../../commons/types/generated/types";
+import {
+  IBoardWriteContainerProps,
+  IInputDateProps,
+  IMyVrivables,
+} from "./boardsWrite.types";
 
-export default function BoardWriteContainer(P) {
+export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
   const { isEdit, data: existingData } = P;
 
-  const [inputData, setInputData] = useState({
+  const [inputData, setInputData] = useState<IInputDateProps>({
     writer: "",
     pwd: "",
     contentTitle: "",
@@ -16,6 +27,7 @@ export default function BoardWriteContainer(P) {
     addressCity: "",
     addressDetail: "",
     youtubeLink: "",
+    images: "",
   });
 
   const [errorWriter, setErrorWriter] = useState(false);
@@ -25,21 +37,25 @@ export default function BoardWriteContainer(P) {
 
   const [isCompleteColor, setIsCompleteColor] = useState(false);
 
-  const [SubmitInputData] = useMutation(CREATE_BOARD);
-  const [UpdateInputData] = useMutation(UPDATE_BOARD);
+  const [SubmitInputData] = useMutation<
+    Pick<IMutation, "createBoard">,
+    IMutationCreateBoardArgs
+  >(CREATE_BOARD);
+  const [UpdateInputData] =
+    useMutation<Pick<IMutation, "updateBoard">>(UPDATE_BOARD);
 
   const router = useRouter();
 
-  function onChangeWriter(e) {
+  function onChangeWriter(event: ChangeEvent<HTMLInputElement>) {
     setInputData((state) => {
-      return { ...state, writer: e.target.value };
+      return { ...state, writer: event.target.value };
     });
 
-    if (e.target.value !== "") {
+    if (event.target.value !== "") {
       setErrorWriter(false);
     }
     if (
-      e.target.value &&
+      event.target.value &&
       inputData.pwd &&
       inputData.contentTitle &&
       inputData.contentText
@@ -49,17 +65,17 @@ export default function BoardWriteContainer(P) {
       setIsCompleteColor(false);
     }
   }
-  function onChangePwd(e) {
+  function onChangePwd(event: ChangeEvent<HTMLInputElement>) {
     setInputData((state) => {
-      return { ...state, pwd: e.target.value };
+      return { ...state, pwd: event.target.value };
     });
-    if (e.target.value !== "") {
+    if (event.target.value !== "") {
       setErrorPwd(false);
     }
 
     if (
       inputData.writer &&
-      e.target.value &&
+      event.target.value &&
       inputData.contentTitle &&
       inputData.contentText
     ) {
@@ -68,24 +84,24 @@ export default function BoardWriteContainer(P) {
       setIsCompleteColor(false);
     }
 
-    if (isEdit && e.target.value) {
+    if (isEdit && event.target.value) {
       setIsCompleteColor(true);
     } else {
       setIsCompleteColor(false);
     }
   }
-  function onChangeContentTitle(e) {
+  function onChangeContentTitle(event: ChangeEvent<HTMLInputElement>) {
     setInputData((state) => {
-      return { ...state, contentTitle: e.target.value };
+      return { ...state, contentTitle: event.target.value };
     });
-    if (e.target.value !== "") {
+    if (event.target.value !== "") {
       setErrorContentTitle(false);
     }
 
     if (
       inputData.writer &&
       inputData.pwd &&
-      e.target.value &&
+      event.target.value &&
       inputData.contentText
     ) {
       setIsCompleteColor(true);
@@ -93,11 +109,11 @@ export default function BoardWriteContainer(P) {
       setIsCompleteColor(false);
     }
   }
-  function onChangeContentText(e) {
+  function onChangeContentText(event: ChangeEvent<HTMLTextAreaElement>) {
     setInputData((state) => {
-      return { ...state, contentText: e.target.value };
+      return { ...state, contentText: event.target.value };
     });
-    if (e.target.value !== "") {
+    if (event.target.value !== "") {
       setErrorContent(false);
     }
 
@@ -105,31 +121,31 @@ export default function BoardWriteContainer(P) {
       inputData.writer &&
       inputData.pwd &&
       inputData.contentTitle &&
-      e.target.value
+      event.target.value
     ) {
       setIsCompleteColor(true);
     } else {
       setIsCompleteColor(false);
     }
   }
-  function onChangeZipcode(e) {
+  function onChangeZipcode(event: ChangeEvent<HTMLInputElement>) {
     setInputData((state) => {
-      return { ...state, zipcode: e.target.value };
+      return { ...state, zipcode: event.target.value };
     });
   }
-  function onChangeAddressCity(e) {
+  function onChangeAddressCity(event: ChangeEvent<HTMLInputElement>) {
     setInputData((state) => {
-      return { ...state, addressCity: e.target.value };
+      return { ...state, addressCity: event.target.value };
     });
   }
-  function onChangeAddressDetail(e) {
+  function onChangeAddressDetail(event: ChangeEvent<HTMLInputElement>) {
     setInputData((state) => {
-      return { ...state, addressDetail: e.target.value };
+      return { ...state, addressDetail: event.target.value };
     });
   }
-  function onChangeYoutubeLink(e) {
+  function onChangeYoutubeLink(event: ChangeEvent<HTMLInputElement>) {
     setInputData((state) => {
-      return { ...state, youtubeLink: e.target.value };
+      return { ...state, youtubeLink: event.target.value };
     });
   }
 
@@ -166,19 +182,19 @@ export default function BoardWriteContainer(P) {
                 address: inputData.addressCity,
                 addressDetail: inputData.addressDetail,
               },
-              images: "",
+              images: null,
             },
           },
         });
         alert("게시물 등록이 완료되었습니다.");
-        router.push(`/boards/${result.data.createBoard._id}`);
-      } catch (error) {
+        router.push(`/boards/${result?.data?.createBoard._id}`);
+      } catch (error: any) {
         alert(error.message);
       }
     }
   };
   const UpdateBtn = async () => {
-    const myVariables = {
+    const myVariables: IMyVrivables = {
       boardId: router.query.detail,
       password: inputData.pwd,
       updateBoardInput: {},
@@ -200,11 +216,7 @@ export default function BoardWriteContainer(P) {
       if (myVariables.updateBoardInput.boardAddress === undefined) {
         myVariables.updateBoardInput = { boardAddress: {} };
       }
-      if (
-        (myVariables.updateBoardInput =
-          myVariables.updateBoardInput.boardAddress.zipcode =
-            inputData.zipcode)
-      );
+      myVariables.updateBoardInput.boardAddress.zipcode = inputData.zipcode;
     }
     if (inputData.addressCity) {
       if (myVariables.updateBoardInput.boardAddress === undefined) {
@@ -226,13 +238,20 @@ export default function BoardWriteContainer(P) {
           variables: myVariables,
         });
         alert("게시물 수정이 완료되었습니다.");
-        router.push(`/boards/${result.data.updateBoard._id}`);
-      } catch (error) {
+        router.push(`/boards/${result?.data?.updateBoard._id}`);
+      } catch (error: any) {
         alert(error.message);
       }
     } else {
       setErrorPwd(true);
     }
+  };
+
+  const CreateCancelBtn = () => {
+    router.push(`boards/`);
+  };
+  const UpdateCancelBtn = () => {
+    router.push(`/boards/${router.query.detail}`);
   };
 
   return (
@@ -251,6 +270,8 @@ export default function BoardWriteContainer(P) {
       onChangeYoutubeLink={onChangeYoutubeLink}
       CreateBtn={CreateBtn}
       UpdateBtn={UpdateBtn}
+      CreateCancelBtn={CreateCancelBtn}
+      UpdateCancelBtn={UpdateCancelBtn}
       isCompleteColor={isCompleteColor}
       isEdit={isEdit}
       existingData={existingData}

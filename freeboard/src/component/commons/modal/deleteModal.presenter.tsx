@@ -1,6 +1,8 @@
+import { ChangeEvent } from "react";
 import * as S from "./deleteModal.styles";
+import { IModalPresenterProps } from "./deleteModal.types";
 
-export default function ModalPresenter(P) {
+export default function ModalPresenter(P: IModalPresenterProps) {
   const { onChangeInputPwd, onClickCancelBtn, onClickConfirmBtn } = P;
   return (
     <S.Container>

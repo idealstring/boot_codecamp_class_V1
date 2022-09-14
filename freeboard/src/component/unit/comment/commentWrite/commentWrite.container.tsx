@@ -5,15 +5,27 @@ import {
   UPDATE_BOARD_COMMENT,
 } from "./commentWrite.queries";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { FETCH_BOARD_COMMENTS } from "../commentList/commentList.queries";
+import {
+  IMutation,
+  IMutationCreateBoardCommentArgs,
+  IMutationDeleteBoardCommentArgs,
+} from "../../../../commons/types/generated/types";
+import { ICommentWriteContainerProps } from "./commentWrite.types";
 
-export default function CommentWriteContainer(P) {
+export default function CommentWriteContainer(P: ICommentWriteContainerProps) {
   const { isEdit, setIsEdit, comment } = P;
   const router = useRouter();
 
-  const [createComment] = useMutation(CREATE_BOARD_COMMENT);
-  const [updateComment] = useMutation(UPDATE_BOARD_COMMENT);
+  const [createComment] = useMutation<
+    Pick<IMutation, "createBoardComment">
+    // IMutationCreateBoardCommentArgs
+  >(CREATE_BOARD_COMMENT);
+  const [updateComment] = useMutation<
+    Pick<IMutation, "updateBoardComment">,
+    IMutationDeleteBoardCommentArgs
+  >(UPDATE_BOARD_COMMENT);
 
   const [writer, setWriter] = useState("");
   const [pwd, setPwd] = useState("");
@@ -22,9 +34,9 @@ export default function CommentWriteContainer(P) {
   const [errorWriter, setErrorWriter] = useState(false);
   const [errorPwd, setErrorPwd] = useState(false);
   const [errorContents, setErrorContents] = useState(false);
-  const [errorRating, setErrorRating] = useState(false);
+  const [errorRating, setErrorRating] = useState(0);
 
-  const onChangeWriter = (e) => {
+  const onChangeWriter = (e: ChangeEvent<HTMLInputElement>) => {
     setWriter(e.target.value);
     if (e.target.value) {
       setErrorWriter(false);
@@ -33,7 +45,7 @@ export default function CommentWriteContainer(P) {
       setErrorWriter(false);
     }
   };
-  const onChangePwd = (e) => {
+  const onChangePwd = (e: ChangeEvent<HTMLInputElement>) => {
     setPwd(e.target.value);
     if (e.target.value) {
       setErrorPwd(false);
@@ -42,7 +54,7 @@ export default function CommentWriteContainer(P) {
       setErrorPwd(false);
     }
   };
-  const onChangeContents = (e) => {
+  const onChangeContents = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setContents(e.target.value);
     if (e.target.value) {
       setErrorContents(false);
@@ -51,12 +63,12 @@ export default function CommentWriteContainer(P) {
       setErrorContents(false);
     }
   };
-  const onChangeRating = (e) => {
+  const onChangeRating = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) {
-      setErrorRating(false);
+      setErrorRating(0);
     }
     if (isEdit && e.target.value) {
-      setErrorRating(false);
+      setErrorRating(0);
     }
   };
 
@@ -90,7 +102,7 @@ export default function CommentWriteContainer(P) {
             },
           ],
         });
-      } catch (error) {
+      } catch (error: any) {
         alert(error.message);
       }
       setWriter("");
@@ -100,7 +112,16 @@ export default function CommentWriteContainer(P) {
   };
 
   const onClickUpdateBtn = async () => {
-    const myVariables = {
+    type IMyVariables = {
+      boardCommentId: string;
+      password: string;
+      updateBoardCommentInput?: {
+        contents?: string;
+        rating?: number;
+      };
+    };
+
+    const myVariables: IMyVariables = {
       boardCommentId: comment._id,
       password: pwd,
       updateBoardCommentInput: {

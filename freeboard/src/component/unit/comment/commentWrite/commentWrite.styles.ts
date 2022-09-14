@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { IErrorColorProps, IIsCancelIsEditProps } from "./commentWrite.types";
 
 export const HrLine = styled.hr`
   margin: 40px 0;
@@ -55,9 +56,11 @@ export const InputName = styled.input`
   width: 180px;
   height: 52px;
   border: 1px solid #bdbdbd;
-  background-color: ${(props) => (props.errorColor ? "red" : "default")};
+  background-color: ${(props: IErrorColorProps) =>
+    props.errorColor ? "red" : "default"};
   ::placeholder {
-    color: ${(props) => (props.errorColor ? "white" : "default")};
+    color: ${(props: IErrorColorProps) =>
+      props.errorColor ? "white" : "default"};
   }
 `;
 
@@ -67,9 +70,11 @@ export const InputPwd = styled.input`
   width: 180px;
   height: 52px;
   border: 1px solid #bdbdbd;
-  background-color: ${(props) => (props.errorColor ? "red" : "default")};
+  background-color: ${(props: IErrorColorProps) =>
+    props.errorColor ? "red" : "default"};
   ::placeholder {
-    color: ${(props) => (props.errorColor ? "white" : "default")};
+    color: ${(props: IErrorColorProps) =>
+      props.errorColor ? "white" : "default"};
   }
 `;
 
@@ -92,9 +97,11 @@ export const TextareaW1200 = styled.textarea`
   border: none;
   border-bottom: 1px solid #f2f2f2;
   resize: none;
-  background-color: ${(props) => (props.errorColor ? "red" : "default")};
+  background-color: ${(props: IErrorColorProps) =>
+    props.errorColor ? "red" : "default"};
   ::placeholder {
-    color: ${(props) => (props.errorColor ? "white" : "default")};
+    color: ${(props: IErrorColorProps) =>
+      props.errorColor ? "white" : "default"};
   }
 `;
 
@@ -117,12 +124,13 @@ export const CommentBtn = styled.button`
   height: 52px;
   padding: 14px;
   border: none;
-  border-left: ${(props) =>
+  border-left: ${(props: IIsCancelIsEditProps) =>
     props.isEdit && props.isCancel ? "1px solid #f2f2f2" : "none"};
   cursor: pointer;
-  background-color: ${(props) =>
+  background-color: ${(props: IIsCancelIsEditProps) =>
     props.isEdit ? (props.isCancel ? "#ffffff" : "#ffd600") : "#000000"};
-  color: ${(props) => (props.isEdit ? "#000000" : "#ffffff")};
+  color: ${(props: IIsCancelIsEditProps) =>
+    props.isEdit ? "#000000" : "#ffffff"};
 `;
 
 export const ErrorDiv = styled.div`

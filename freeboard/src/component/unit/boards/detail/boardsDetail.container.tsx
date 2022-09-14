@@ -8,13 +8,16 @@ import {
   DELETE_BOARD,
 } from "./boardsDetail.queries";
 import { useState } from "react";
+import { IMutation } from "../../../../commons/types/generated/types";
 
 export default function BoardDetailContainer() {
   const router = useRouter();
   const [modal, setModal] = useState({ link: false, map: false });
-  const [likeUp] = useMutation(LIKE_BOARD);
-  const [dislikeUp] = useMutation(DISLIKE_BOARD);
-  const [deleteBoard] = useMutation(DELETE_BOARD);
+  const [likeUp] = useMutation<Pick<IMutation, "likeBoard">>(LIKE_BOARD);
+  const [dislikeUp] =
+    useMutation<Pick<IMutation, "dislikeBoard">>(DISLIKE_BOARD);
+  const [deleteBoard] =
+    useMutation<Pick<IMutation, "deleteBoard">>(DELETE_BOARD);
 
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
@@ -47,7 +50,7 @@ export default function BoardDetailContainer() {
           },
         ],
       });
-    } catch (error) {
+    } catch (error: any) {
       alert(error.message);
     }
   };
@@ -66,7 +69,7 @@ export default function BoardDetailContainer() {
           },
         ],
       });
-    } catch (error) {
+    } catch (error: any) {
       alert(error.message);
     }
   };
@@ -79,7 +82,7 @@ export default function BoardDetailContainer() {
         },
       });
       router.push("/boards");
-    } catch (error) {
+    } catch (error: any) {
       alert(error.message);
     }
   };

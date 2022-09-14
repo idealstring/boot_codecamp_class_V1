@@ -1,7 +1,8 @@
 import { dateTimeFormatter } from "../../../../commons/utils/utils";
 import * as S from "./boardsDetail.styles";
+import { IBoardDetailPresenterProps } from "./boardsDetail.types";
 
-export default function BoardDetailPresenter(P) {
+export default function BoardDetailPresenter(P: IBoardDetailPresenterProps) {
   const {
     data,
     onClickLinkModal,
@@ -108,6 +109,3 @@ export default function BoardDetailPresenter(P) {
     </S.Container>
   );
 }
-
-
-

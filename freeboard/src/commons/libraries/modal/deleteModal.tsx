@@ -1,6 +1,7 @@
 import ModalContainer from "../../../component/commons/modal/deleteModal.container";
+import { IDeleteModalProps } from "../../../component/commons/modal/deleteModal.types";
 
-export default function Modal(P) {
+export default function DeleteModal(P: IDeleteModalProps) {
   const { setIsDelete, setDeleteRun, setDeletePwd } = P;
 
   return (
