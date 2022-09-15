@@ -27,7 +27,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
       <br />
       <S.BlueButton
         onClick={props.isEdit ? props.onClickUpdate : props.onClickSubmit}
-        mycolor={props.mycolor}
+        myColor={props.mycolor}
         fz="30px"
         fw="700"
       >
