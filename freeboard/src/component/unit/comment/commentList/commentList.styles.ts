@@ -49,7 +49,13 @@ export const ViewContentTop = styled.div`
 
 export const CommentContentName = styled.span`
   margin-right: 15px;
+  font-size: 16px;
   font-weight: 500;
+`;
+
+export const RateStarWrapper = styled.div`
+  margin: 0;
+  padding-bottom: 5px;
 `;
 
 export const CommentViewBtnWrapper = styled.div`
@@ -68,8 +74,9 @@ export const CommentViewBtn = styled.button`
 `;
 
 export const CommentViewContent = styled.div`
+  margin: 10px 0 15px 0;
+  font-size: 18px;
   font-weight: 300;
-  margin-bottom: 15px;
 `;
 export const CommentViewContentDate = styled.div`
   font-size: 12px;

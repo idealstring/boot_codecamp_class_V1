@@ -139,6 +139,15 @@ export const ContentInner = styled.div`
   margin-bottom: 10px;
   line-height: 30px;
 `;
+export const YoutubeUrlWrapper = styled.div`
+  margin-top: 50px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  algin-items: center;
+`;
 
 export const LikeDislikeWrapper = styled.div`
   margin: 50px 0;

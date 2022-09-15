@@ -6,8 +6,6 @@ import { CREATE_BOARD, UPDATE_BOARD } from "./boardsWrite.queries";
 import {
   IMutation,
   IMutationCreateBoardArgs,
-  IMutationUpdateBoardArgs,
-  IQuery,
 } from "../../../../commons/types/generated/types";
 import {
   IBoardWriteContainerProps,
@@ -29,13 +27,13 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
     youtubeLink: "",
     images: "",
   });
-
   const [errorWriter, setErrorWriter] = useState(false);
   const [errorPwd, setErrorPwd] = useState(false);
   const [errorContentTitle, setErrorContentTitle] = useState(false);
   const [errorContent, setErrorContent] = useState(false);
-
   const [isCompleteColor, setIsCompleteColor] = useState(false);
+
+  const router = useRouter();
 
   const [SubmitInputData] = useMutation<
     Pick<IMutation, "createBoard">,
@@ -44,9 +42,7 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
   const [UpdateInputData] =
     useMutation<Pick<IMutation, "updateBoard">>(UPDATE_BOARD);
 
-  const router = useRouter();
-
-  function onChangeWriter(event: ChangeEvent<HTMLInputElement>) {
+  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setInputData((state) => {
       return { ...state, writer: event.target.value };
     });
@@ -64,8 +60,9 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
     } else {
       setIsCompleteColor(false);
     }
-  }
-  function onChangePwd(event: ChangeEvent<HTMLInputElement>) {
+  };
+
+  const onChangePwd = (event: ChangeEvent<HTMLInputElement>) => {
     setInputData((state) => {
       return { ...state, pwd: event.target.value };
     });
@@ -89,8 +86,9 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
     } else {
       setIsCompleteColor(false);
     }
-  }
-  function onChangeContentTitle(event: ChangeEvent<HTMLInputElement>) {
+  };
+
+  const onChangeContentTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setInputData((state) => {
       return { ...state, contentTitle: event.target.value };
     });
@@ -108,8 +106,9 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
     } else {
       setIsCompleteColor(false);
     }
-  }
-  function onChangeContentText(event: ChangeEvent<HTMLTextAreaElement>) {
+  };
+
+  const onChangeContentText = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setInputData((state) => {
       return { ...state, contentText: event.target.value };
     });
@@ -127,27 +126,29 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
     } else {
       setIsCompleteColor(false);
     }
-  }
-  function onChangeZipcode(event: ChangeEvent<HTMLInputElement>) {
+  };
+
+  const onChangeZipcode = (event: ChangeEvent<HTMLInputElement>) => {
     setInputData((state) => {
       return { ...state, zipcode: event.target.value };
     });
-  }
-  function onChangeAddressCity(event: ChangeEvent<HTMLInputElement>) {
+  };
+
+  const onChangeAddressCity = (event: ChangeEvent<HTMLInputElement>) => {
     setInputData((state) => {
       return { ...state, addressCity: event.target.value };
     });
-  }
-  function onChangeAddressDetail(event: ChangeEvent<HTMLInputElement>) {
+  };
+  const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
     setInputData((state) => {
       return { ...state, addressDetail: event.target.value };
     });
-  }
-  function onChangeYoutubeLink(event: ChangeEvent<HTMLInputElement>) {
+  };
+  const onChangeYoutubeLink = (event: ChangeEvent<HTMLInputElement>) => {
     setInputData((state) => {
       return { ...state, youtubeLink: event.target.value };
     });
-  }
+  };
 
   const CreateBtn = async () => {
     if (!inputData["writer"]) {
@@ -188,16 +189,16 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
         });
         alert("게시물 등록이 완료되었습니다.");
         router.push(`/boards/${result?.data?.createBoard._id}`);
-      } catch (error: any) {
-        alert(error.message);
+      } catch (error) {
+        if (error instanceof Error) alert(error.message);
       }
     }
   };
   const UpdateBtn = async () => {
     const myVariables: IMyVrivables = {
-      boardId: router.query.detail,
+      boardId: String(router.query.detail),
       password: inputData.pwd,
-      updateBoardInput: {},
+      updateBoardInput: { boardAddress: {} },
     };
 
     if (inputData.contentTitle) {
@@ -250,6 +251,7 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
   const CreateCancelBtn = () => {
     router.push(`boards/`);
   };
+
   const UpdateCancelBtn = () => {
     router.push(`/boards/${router.query.detail}`);
   };

@@ -51,6 +51,7 @@ export const CancelBtn = styled.button`
 
   border: none;
   background-color: white;
+  cursor: pointer;
 `;
 
 export const ConfirmBtn = styled.button`
@@ -59,4 +60,5 @@ export const ConfirmBtn = styled.button`
 
   border: none;
   background-color: #ffd600;
+  cursor: pointer;
 `;

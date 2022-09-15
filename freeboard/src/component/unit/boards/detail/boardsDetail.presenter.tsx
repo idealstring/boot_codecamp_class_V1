@@ -1,6 +1,8 @@
 import { dateTimeFormatter } from "../../../../commons/utils/utils";
 import * as S from "./boardsDetail.styles";
 import { IBoardDetailPresenterProps } from "./boardsDetail.types";
+import ReactPlayer from "react-player";
+import { useRouter } from "next/router";
 
 export default function BoardDetailPresenter(P: IBoardDetailPresenterProps) {
   const {
@@ -14,7 +16,7 @@ export default function BoardDetailPresenter(P: IBoardDetailPresenterProps) {
     onClickMoveToEdit,
     onClickDeleteBtn,
   } = P;
-
+  const router = useRouter();
   return (
     <S.Container>
       <S.TitleWrapper>
@@ -44,7 +46,7 @@ export default function BoardDetailPresenter(P: IBoardDetailPresenterProps) {
           </S.IconWrapper>
           {modal.link ? (
             <S.LinkModal onMouseLeave={onClickLinkModal}>
-              {data?.fetchBoard.youtubeUrl}
+              {router.asPath}
             </S.LinkModal>
           ) : null}
           <S.IconWrapper>
@@ -68,6 +70,13 @@ export default function BoardDetailPresenter(P: IBoardDetailPresenterProps) {
         <S.ContentInner>
           {data ? data.fetchBoard.contents : "Loading..."}
         </S.ContentInner>
+        {data?.fetchBoard.youtubeUrl ? (
+          <S.ContentInner>
+            <S.YoutubeUrlWrapper>
+              <ReactPlayer url={data?.fetchBoard.youtubeUrl} />
+            </S.YoutubeUrlWrapper>
+          </S.ContentInner>
+        ) : undefined}
         <S.LikeDislikeWrapper>
           <S.LikeWrapper onClick={onClickLikeBtn}>
             <S.Svg

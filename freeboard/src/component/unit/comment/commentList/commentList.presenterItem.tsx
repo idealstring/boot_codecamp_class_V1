@@ -1,18 +1,19 @@
 import { MouseEvent, useState } from "react";
 import { useMutation } from "@apollo/client";
-import CommentWrite from "../../../../commons/libraries/comment/commentWrite";
 import * as S from "./commentList.styles";
 import {
   dateFormatter,
   dateTimeFormatter,
 } from "../../../../commons/utils/utils";
-import DeleteModal from "../../../../commons/libraries/modal/deleteModal";
+import DeleteModal from "../../../commons/modal/deleteModal";
 import {
   DELETE_BOARD_COMMENT,
   FETCH_BOARD_COMMENTS,
 } from "./commentList.queries";
 import { useRouter } from "next/router";
 import { ICommentListPresenterItemProps } from "./commentList.types";
+import CommentWriteContainer from "../commentWrite/commentWrite.container";
+import { Rate } from "antd";
 
 export default function CommentListPresenterItem(
   P: ICommentListPresenterItemProps
@@ -21,16 +22,23 @@ export default function CommentListPresenterItem(
   const router = useRouter();
   const [isEdit, setIsEdit] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
-  const [deleteRun, setDeleteRun] = useState(false);
   const [deletePwd, setDeletePwd] = useState("");
   const [deleteId, setDeleteId] = useState("");
   const [deleteBoardComment] = useMutation(DELETE_BOARD_COMMENT);
 
+  const onClickIsEditToggle = () => {
+    setIsEdit((isEdit) => !isEdit);
+  };
+
+  const onClickIsDeleteToggle = () => {
+    setIsDelete((isDelete) => !isDelete);
+  };
+
   const onClickUpdateBtn = () => {
-    setIsEdit(true);
+    onClickIsEditToggle();
   };
   const onClickDeleteBtn = (e: MouseEvent<HTMLButtonElement>) => {
-    setIsDelete(true);
+    onClickIsDeleteToggle();
     setDeleteId(e.currentTarget.id);
   };
 
@@ -48,29 +56,27 @@ export default function CommentListPresenterItem(
           },
         ],
       });
-      setDeleteRun(false);
-      setIsDelete(false);
-    } catch (error: any) {
-      alert(error.message);
+      onClickIsDeleteToggle();
+    } catch (error) {
+      if (error instanceof Error) alert(error.message);
     }
   };
-
-  if (deleteRun) {
-    deleteBoardCommentFunc();
-    setDeleteRun(false);
-  }
 
   return (
     <>
       {isDelete && (
         <DeleteModal
-          setIsDelete={setIsDelete}
-          setDeleteRun={setDeleteRun}
           setDeletePwd={setDeletePwd}
+          onClickIsDeleteToggle={onClickIsDeleteToggle}
+          deleteBoardCommentFunc={deleteBoardCommentFunc}
         />
       )}
       {isEdit && (
-        <CommentWrite isEdit={isEdit} setIsEdit={setIsEdit} comment={comment} />
+        <CommentWriteContainer
+          isEdit={isEdit}
+          onClickIsEditToggle={onClickIsEditToggle}
+          comment={comment}
+        />
       )}
       {!isEdit && (
         <S.CommentViewWrapper key={comment._id}>
@@ -93,7 +99,9 @@ export default function CommentListPresenterItem(
               <S.ViewContentTop>
                 <S.CommentNameInfo>
                   <S.CommentContentName>{comment.writer}</S.CommentContentName>
-                  <div>별 별 별 별 별</div>
+                  <S.RateStarWrapper>
+                    <Rate defaultValue={comment.rating} disabled={true} />
+                  </S.RateStarWrapper>
                 </S.CommentNameInfo>
                 <S.CommentViewBtnWrapper>
                   <S.CommentViewBtn onClick={onClickUpdateBtn}>

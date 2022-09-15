@@ -1,5 +1,7 @@
 import * as S from "./commentWrite.styles";
 import { ICommentWritePresenterProps } from "./commentWrite.types.js";
+import { Rate } from "antd";
+import "antd/dist/antd.css";
 
 export default function CommentWritePresenter(P: ICommentWritePresenterProps) {
   const {
@@ -48,7 +50,7 @@ export default function CommentWritePresenter(P: ICommentWritePresenterProps) {
             <S.InputName
               type="text"
               placeholder="작성자"
-              value={comment?.writer ? null : writer}
+              value={comment?.writer ? undefined : writer}
               defaultValue={comment?.writer}
               onChange={onChangeWriter}
               disabled={isEdit ? true : false}
@@ -61,16 +63,19 @@ export default function CommentWritePresenter(P: ICommentWritePresenterProps) {
               onChange={onChangePwd}
               errorColor={errorPwd}
             />
-            <div className="별점" onChange={onChangeRating}>
-              별 별 별 별 별
-            </div>
+            <S.RateStarWrapper errorColor={errorRating}>
+              <Rate
+                onChange={onChangeRating}
+                defaultValue={comment?.rating}
+                value={rating}
+              />
+            </S.RateStarWrapper>
           </S.CommentNameInfo>
           <S.CommentContentWrapper>
             <S.TextareaW1200
-              type="text"
               placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
               onChange={onChangeContents}
-              value={comment?.contents ? null : contents}
+              value={comment?.contents ? undefined : contents}
               defaultValue={comment?.contents}
               errorColor={errorContents}
               maxLength={100}

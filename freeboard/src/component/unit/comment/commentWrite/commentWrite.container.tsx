@@ -5,22 +5,25 @@ import {
   UPDATE_BOARD_COMMENT,
 } from "./commentWrite.queries";
 import { useRouter } from "next/router";
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { FETCH_BOARD_COMMENTS } from "../commentList/commentList.queries";
 import {
   IMutation,
   IMutationCreateBoardCommentArgs,
   IMutationDeleteBoardCommentArgs,
 } from "../../../../commons/types/generated/types";
-import { ICommentWriteContainerProps } from "./commentWrite.types";
+import {
+  ICommentWriteContainerProps,
+  IMyVariables,
+} from "./commentWrite.types";
 
 export default function CommentWriteContainer(P: ICommentWriteContainerProps) {
-  const { isEdit, setIsEdit, comment } = P;
+  const { isEdit, onClickIsEditToggle, comment } = P;
   const router = useRouter();
 
   const [createComment] = useMutation<
-    Pick<IMutation, "createBoardComment">
-    // IMutationCreateBoardCommentArgs
+    Pick<IMutation, "createBoardComment">,
+    IMutationCreateBoardCommentArgs
   >(CREATE_BOARD_COMMENT);
   const [updateComment] = useMutation<
     Pick<IMutation, "updateBoardComment">,
@@ -30,11 +33,11 @@ export default function CommentWriteContainer(P: ICommentWriteContainerProps) {
   const [writer, setWriter] = useState("");
   const [pwd, setPwd] = useState("");
   const [contents, setContents] = useState("");
-  const [rating, setRating] = useState(1);
+  const [rating, setRating] = useState(0);
   const [errorWriter, setErrorWriter] = useState(false);
   const [errorPwd, setErrorPwd] = useState(false);
   const [errorContents, setErrorContents] = useState(false);
-  const [errorRating, setErrorRating] = useState(0);
+  const [errorRating, setErrorRating] = useState(false);
 
   const onChangeWriter = (e: ChangeEvent<HTMLInputElement>) => {
     setWriter(e.target.value);
@@ -63,12 +66,13 @@ export default function CommentWriteContainer(P: ICommentWriteContainerProps) {
       setErrorContents(false);
     }
   };
-  const onChangeRating = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value) {
-      setErrorRating(0);
+  const onChangeRating = (e: number) => {
+    setRating(e);
+    if (e) {
+      setErrorRating(false);
     }
-    if (isEdit && e.target.value) {
-      setErrorRating(0);
+    if (isEdit && e) {
+      setErrorRating(false);
     }
   };
 
@@ -82,12 +86,15 @@ export default function CommentWriteContainer(P: ICommentWriteContainerProps) {
     if (!contents) {
       setErrorContents(true);
     }
+    if (!rating) {
+      setErrorRating(true);
+    }
 
     if (writer && pwd && contents && rating) {
       try {
         const result = await createComment({
           variables: {
-            boardId: router.query.detail,
+            boardId: String(router.query.detail),
             createBoardCommentInput: {
               writer,
               password: pwd,
@@ -108,28 +115,21 @@ export default function CommentWriteContainer(P: ICommentWriteContainerProps) {
       setWriter("");
       setPwd("");
       setContents("");
+      setRating(0);
     }
   };
 
   const onClickUpdateBtn = async () => {
-    type IMyVariables = {
-      boardCommentId: string;
-      password: string;
-      updateBoardCommentInput?: {
-        contents?: string;
-        rating?: number;
-      };
-    };
-
     const myVariables: IMyVariables = {
       boardCommentId: comment._id,
       password: pwd,
-      updateBoardCommentInput: {
-        rating: 0,
-      },
+      updateBoardCommentInput: {},
     };
     if (contents) {
       myVariables.updateBoardCommentInput.contents = contents;
+    }
+    if (rating) {
+      myVariables.updateBoardCommentInput.rating = rating;
     }
 
     if (!pwd) {
@@ -145,7 +145,7 @@ export default function CommentWriteContainer(P: ICommentWriteContainerProps) {
             },
           ],
         });
-        setIsEdit(false);
+        onClickIsEditToggle();
       } catch (error) {
         console.error(error);
       }
@@ -153,7 +153,7 @@ export default function CommentWriteContainer(P: ICommentWriteContainerProps) {
   };
 
   const onClickCancelBtn = () => {
-    setIsEdit(false);
+    onClickIsEditToggle();
   };
 
   return (

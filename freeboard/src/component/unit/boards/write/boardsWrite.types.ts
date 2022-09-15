@@ -28,10 +28,10 @@ export type IMyVrivables = {
     contents?: string;
     youtubeUrl?: string;
     images?: string;
-    boardAddress?: {
-      zipcode?: string;
-      address?: string;
-      addressDetail?: string;
+    boardAddress: {
+      zipcode?: string | undefined;
+      address?: string | undefined;
+      addressDetail?: string | undefined;
     };
   };
 };
@@ -57,7 +57,7 @@ export interface IBoardWritePresenterProps {
   UpdateCancelBtn: () => void;
   isCompleteColor: boolean;
   isEdit: boolean;
-  existingData: Pick<IQuery, "fetchBoard">;
+  existingData?: Pick<IQuery, "fetchBoard">;
 }
 
 //styles

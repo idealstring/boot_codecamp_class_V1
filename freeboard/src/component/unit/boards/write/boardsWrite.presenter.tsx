@@ -1,5 +1,4 @@
-import { ChangeEvent } from "react";
-import { IQuery } from "../../../../commons/types/generated/types";
+import Router, { useRouter } from "next/router";
 import * as S from "./boardsWrite.styles";
 import { IBoardWritePresenterProps } from "./boardsWrite.types";
 
@@ -25,6 +24,13 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
     isEdit,
     existingData,
   } = P;
+
+  // const router = useRouter();
+  // if (typeof existingData !== "string") {
+  //   router.push("/");
+  //   return <></>;
+  // }
+
   return (
     <S.Container>
       <S.Title>게시물 {isEdit ? "수정" : "등록"}</S.Title>
@@ -38,7 +44,7 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
               type="text"
               placeholder="이름을 적어주세요."
               onChange={onChangeWriter}
-              defaultValue={existingData?.fetchBoard.writer}
+              defaultValue={existingData?.fetchBoard.writer || ""}
               disabled={isEdit ? true : false}
               errorColor={errorWriter}
             />
@@ -86,19 +92,23 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
               type="text"
               placeholder="12212"
               onChange={onChangeZipcode}
-              defaultValue={existingData?.fetchBoard?.boardAddress?.zipcode}
+              defaultValue={
+                existingData?.fetchBoard?.boardAddress?.zipcode || ""
+              }
             />
             <S.PostBtn>우편번호 검색</S.PostBtn>
           </div>
           <S.InputW100per
             type="text"
             onChange={onChangeAddressCity}
-            defaultValue={existingData?.fetchBoard?.boardAddress?.address}
+            defaultValue={existingData?.fetchBoard?.boardAddress?.address || ""}
           />
           <S.InputW100per
             type="text"
             onChange={onChangeAddressDetail}
-            defaultValue={existingData?.fetchBoard?.boardAddress?.addressDetail}
+            defaultValue={
+              existingData?.fetchBoard?.boardAddress?.addressDetail || ""
+            }
           />
         </S.SubtitleWrapper>
         <S.SubtitleWrapper>
@@ -107,7 +117,7 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
             type="text"
             placeholder="링크를 복사해주세요."
             onChange={onChangeYoutubeLink}
-            defaultValue={existingData?.fetchBoard.youtubeUrl}
+            defaultValue={existingData?.fetchBoard.youtubeUrl || ""}
           />
         </S.SubtitleWrapper>
         <S.SubtitleWrapper>

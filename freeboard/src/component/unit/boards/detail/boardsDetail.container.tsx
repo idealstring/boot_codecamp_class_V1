@@ -69,8 +69,8 @@ export default function BoardDetailContainer() {
           },
         ],
       });
-    } catch (error: any) {
-      alert(error.message);
+    } catch (error) {
+      if (error instanceof Error) alert(error.message);
     }
   };
 

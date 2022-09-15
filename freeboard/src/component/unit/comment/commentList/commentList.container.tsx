@@ -11,12 +11,12 @@ export default function CommentListContainer() {
   const router = useRouter();
 
   const { data: existingData } = useQuery<
-    Pick<IQuery, "fetchBoardComments">
-    // IQueryFetchBoardCommentsArgs
+    Pick<IQuery, "fetchBoardComments">,
+    IQueryFetchBoardCommentsArgs
   >(FETCH_BOARD_COMMENTS, {
     variables: {
       page: 1,
-      boardId: router.query.detail,
+      boardId: String(router.query.detail),
     },
   });
 

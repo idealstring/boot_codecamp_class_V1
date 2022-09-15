@@ -1,19 +1,20 @@
-//page
-
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
-
-export type ICommentWriteProps = {
-  comment: any;
-  setIsEdit: Dispatch<SetStateAction<boolean>>;
-  isEdit: boolean;
-};
+import { ChangeEvent, Dispatch, ReactPropTypes, SetStateAction } from "react";
 
 //container
 
 export type ICommentWriteContainerProps = {
   comment?: any;
-  setIsEdit?: Dispatch<SetStateAction<boolean>>;
+  onClickIsEditToggle: () => void;
   isEdit: boolean;
+};
+
+export type IMyVariables = {
+  boardCommentId: string;
+  password: string;
+  updateBoardCommentInput: {
+    contents?: string;
+    rating?: number;
+  };
 };
 
 //presenter
@@ -26,14 +27,14 @@ export type ICommentWritePresenterProps = {
   errorWriter: boolean;
   errorPwd: boolean;
   errorContents: boolean;
-  errorRating: number;
+  errorRating: boolean;
   onClickCreateBtn: () => void;
   onClickUpdateBtn: () => void;
   onClickCancelBtn: () => void;
   onChangeWriter: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangePwd: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangeContents: (e: ChangeEvent<HTMLTextAreaElement>) => void;
-  onChangeRating: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeRating: (e: number) => void;
   isEdit: boolean;
   comment: any;
 };

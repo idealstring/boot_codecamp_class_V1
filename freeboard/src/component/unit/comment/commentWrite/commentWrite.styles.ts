@@ -78,6 +78,14 @@ export const InputPwd = styled.input`
   }
 `;
 
+export const RateStarWrapper = styled.div`
+  padding: 7px 0;
+  width: 100%;
+  height: 52px;
+  background-color: ${(props: IErrorColorProps) =>
+    props.errorColor ? "red" : "default"};
+`;
+
 export const CommentContentWrapper = styled.div`
   padding: 0;
 
