@@ -5,7 +5,7 @@ import {
   dateFormatter,
   dateTimeFormatter,
 } from "../../../../commons/utils/utils";
-import DeleteModal from "../../../commons/modal/deleteModal";
+import DeleteModal from "../../../commons/modal/commentDelete";
 import {
   DELETE_BOARD_COMMENT,
   FETCH_BOARD_COMMENTS,

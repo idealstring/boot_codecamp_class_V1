@@ -1,4 +1,10 @@
-import { AllHTMLAttributes, ChangeEvent, HTMLAttributes } from "react";
+import {
+  AllHTMLAttributes,
+  ChangeEvent,
+  Dispatch,
+  HTMLAttributes,
+  SetStateAction,
+} from "react";
 import { IQuery } from "../../../../commons/types/generated/types";
 
 // container
@@ -58,6 +64,8 @@ export interface IBoardWritePresenterProps {
   isCompleteColor: boolean;
   isEdit: boolean;
   existingData?: Pick<IQuery, "fetchBoard">;
+  setInputData: Dispatch<SetStateAction<IInputDateProps>>;
+  inputData: IInputDateProps;
 }
 
 //styles

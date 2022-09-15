@@ -1,5 +1,5 @@
-import ModalContainer from "../../unit/modal/deleteModal.container";
-import { IDeleteModalProps } from "../../unit/modal/deleteModal.types";
+import ModalContainer from "../../unit/modal/commentDelete/deleteModal.container";
+import { IDeleteModalProps } from "../../unit/modal/commentDelete/deleteModal.types";
 
 export default function DeleteModal(P: IDeleteModalProps) {
   const { onClickIsDeleteToggle, deleteBoardCommentFunc, setDeletePwd } = P;

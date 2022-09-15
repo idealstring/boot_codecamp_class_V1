@@ -67,7 +67,7 @@ export default function CommentWritePresenter(P: ICommentWritePresenterProps) {
               <Rate
                 onChange={onChangeRating}
                 defaultValue={comment?.rating}
-                value={rating}
+                value={comment?.rating ? undefined : rating}
               />
             </S.RateStarWrapper>
           </S.CommentNameInfo>

@@ -84,6 +84,7 @@ export const RateStarWrapper = styled.div`
   height: 52px;
   background-color: ${(props: IErrorColorProps) =>
     props.errorColor ? "red" : "default"};
+  z-index: 0;
 `;
 
 export const CommentContentWrapper = styled.div`

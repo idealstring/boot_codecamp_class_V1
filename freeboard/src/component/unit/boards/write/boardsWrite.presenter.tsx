@@ -1,4 +1,4 @@
-import Router, { useRouter } from "next/router";
+import ZipcodeModal from "../../../commons/modal/zipcodeModal";
 import * as S from "./boardsWrite.styles";
 import { IBoardWritePresenterProps } from "./boardsWrite.types";
 
@@ -23,6 +23,8 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
     isCompleteColor,
     isEdit,
     existingData,
+    setInputData,
+    inputData,
   } = P;
 
   // const router = useRouter();
@@ -93,21 +95,29 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
               placeholder="12212"
               onChange={onChangeZipcode}
               defaultValue={
-                existingData?.fetchBoard?.boardAddress?.zipcode || ""
+                isEdit
+                  ? existingData?.fetchBoard?.boardAddress?.zipcode || ""
+                  : inputData.zipcode
               }
             />
-            <S.PostBtn>우편번호 검색</S.PostBtn>
+            <ZipcodeModal setInputData={setInputData} />
           </div>
           <S.InputW100per
             type="text"
             onChange={onChangeAddressCity}
-            defaultValue={existingData?.fetchBoard?.boardAddress?.address || ""}
+            defaultValue={
+              isEdit
+                ? existingData?.fetchBoard?.boardAddress?.address || ""
+                : inputData.addressCity
+            }
           />
           <S.InputW100per
             type="text"
             onChange={onChangeAddressDetail}
             defaultValue={
-              existingData?.fetchBoard?.boardAddress?.addressDetail || ""
+              isEdit
+                ? existingData?.fetchBoard?.boardAddress?.addressDetail || ""
+                : inputData.addressDetail
             }
           />
         </S.SubtitleWrapper>

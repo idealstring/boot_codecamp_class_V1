@@ -3,6 +3,7 @@ import * as S from "./boardsDetail.styles";
 import { IBoardDetailPresenterProps } from "./boardsDetail.types";
 import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
+import BoardDeleteModal from "../../../commons/modal/boardDelete";
 
 export default function BoardDetailPresenter(P: IBoardDetailPresenterProps) {
   const {
@@ -113,7 +114,8 @@ export default function BoardDetailPresenter(P: IBoardDetailPresenterProps) {
       <S.ContentBtnWrapper>
         <S.ContentBtn onClick={onClickMoveToList}>목록으로</S.ContentBtn>
         <S.ContentBtn onClick={onClickMoveToEdit}>수정하기</S.ContentBtn>
-        <S.ContentBtn onClick={onClickDeleteBtn}>삭제하기</S.ContentBtn>
+        {/* <S.ContentBtn onClick={onClickDeleteBtn}>삭제하기</S.ContentBtn> */}
+        <BoardDeleteModal onClickDeleteBtn={onClickDeleteBtn} />
       </S.ContentBtnWrapper>
     </S.Container>
   );

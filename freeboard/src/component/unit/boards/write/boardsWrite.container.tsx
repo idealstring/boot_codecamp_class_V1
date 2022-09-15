@@ -6,12 +6,18 @@ import { CREATE_BOARD, UPDATE_BOARD } from "./boardsWrite.queries";
 import {
   IMutation,
   IMutationCreateBoardArgs,
+  IMutationUpdateBoardArgs,
 } from "../../../../commons/types/generated/types";
 import {
   IBoardWriteContainerProps,
   IInputDateProps,
   IMyVrivables,
 } from "./boardsWrite.types";
+import {
+  CreateBoardSuccess,
+  UpdateBoardSuccess,
+  PostFail,
+} from "../../../commons/modal/boardSuccessFail";
 
 export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
   const { isEdit, data: existingData } = P;
@@ -187,10 +193,12 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
             },
           },
         });
-        alert("게시물 등록이 완료되었습니다.");
+
+        // alert("게시물 등록이 완료되었습니다.");\
+        CreateBoardSuccess();
         router.push(`/boards/${result?.data?.createBoard._id}`);
       } catch (error) {
-        if (error instanceof Error) alert(error.message);
+        if (error instanceof Error) PostFail(error.message);
       }
     }
   };
@@ -198,7 +206,7 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
     const myVariables: IMyVrivables = {
       boardId: String(router.query.detail),
       password: inputData.pwd,
-      updateBoardInput: { boardAddress: {} },
+      updateBoardInput: {},
     };
 
     if (inputData.contentTitle) {
@@ -238,10 +246,11 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
         const result = await UpdateInputData({
           variables: myVariables,
         });
-        alert("게시물 수정이 완료되었습니다.");
+        // alert("게시물 수정이 완료되었습니다.");
+        UpdateBoardSuccess();
         router.push(`/boards/${result?.data?.updateBoard._id}`);
-      } catch (error: any) {
-        alert(error.message);
+      } catch (error) {
+        if (error instanceof Error) PostFail(error.message);
       }
     } else {
       setErrorPwd(true);
@@ -249,7 +258,7 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
   };
 
   const CreateCancelBtn = () => {
-    router.push(`boards/`);
+    router.push(`/boards/`);
   };
 
   const UpdateCancelBtn = () => {
@@ -277,6 +286,8 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
       isCompleteColor={isCompleteColor}
       isEdit={isEdit}
       existingData={existingData}
+      setInputData={setInputData}
+      inputData={inputData}
     />
   );
 }
