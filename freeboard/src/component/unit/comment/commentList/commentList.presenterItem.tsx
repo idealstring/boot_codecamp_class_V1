@@ -44,7 +44,7 @@ export default function CommentListPresenterItem(
 
   const deleteBoardCommentFunc = async () => {
     try {
-      const result = await deleteBoardComment({
+      await deleteBoardComment({
         variables: {
           boardCommentId: deleteId,
           password: deletePwd,

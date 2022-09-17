@@ -1,6 +1,6 @@
 import BoardWritePresenter from "./boardsWrite.presenter";
 import { ChangeEvent, useState } from "react";
-import { useMutation, gql } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { CREATE_BOARD, UPDATE_BOARD } from "./boardsWrite.queries";
 import {
@@ -10,8 +10,10 @@ import {
 } from "../../../../commons/types/generated/types";
 import {
   IBoardWriteContainerProps,
+  IInnerupdateBoardInput,
   IInputDateProps,
   IMyVrivables,
+  IUpdateBoardAddress,
 } from "./boardsWrite.types";
 import {
   CreateBoardSuccess,
@@ -45,8 +47,10 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
     Pick<IMutation, "createBoard">,
     IMutationCreateBoardArgs
   >(CREATE_BOARD);
-  const [UpdateInputData] =
-    useMutation<Pick<IMutation, "updateBoard">>(UPDATE_BOARD);
+  const [UpdateInputData] = useMutation<
+    Pick<IMutation, "updateBoard">,
+    IMutationUpdateBoardArgs
+  >(UPDATE_BOARD);
 
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setInputData((state) => {
@@ -157,23 +161,23 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
   };
 
   const CreateBtn = async () => {
-    if (!inputData["writer"]) {
+    if (!inputData.writer) {
       setErrorWriter(true);
     }
-    if (!inputData["pwd"]) {
+    if (!inputData.pwd) {
       setErrorPwd(true);
     }
-    if (!inputData["contentTitle"]) {
+    if (!inputData.contentTitle) {
       setErrorContentTitle(true);
     }
-    if (!inputData["contentText"]) {
+    if (!inputData.contentText) {
       setErrorContent(true);
     }
     if (
-      inputData["writer"] &&
-      inputData["pwd"] &&
-      inputData["contentTitle"] &&
-      inputData["contentText"]
+      inputData.writer &&
+      inputData.pwd &&
+      inputData.contentTitle &&
+      inputData.contentText
     ) {
       try {
         const result = await SubmitInputData({
@@ -196,17 +200,22 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
 
         // alert("게시물 등록이 완료되었습니다.");\
         CreateBoardSuccess();
-        router.push(`/boards/${result?.data?.createBoard._id}`);
+        await router.push(`/boards/${result?.data?.createBoard._id || ""}`);
       } catch (error) {
         if (error instanceof Error) PostFail(error.message);
       }
     }
   };
   const UpdateBtn = async () => {
+    const boardAddress: IUpdateBoardAddress = {};
+    const InnerupdateBoardInput: IInnerupdateBoardInput = {
+      boardAddress,
+    };
+
     const myVariables: IMyVrivables = {
       boardId: String(router.query.detail),
       password: inputData.pwd,
-      updateBoardInput: {},
+      updateBoardInput: InnerupdateBoardInput,
     };
 
     if (inputData.contentTitle) {
@@ -221,34 +230,31 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
     if (inputData.images) {
       myVariables.updateBoardInput.images = inputData.images;
     }
-    if (inputData.zipcode) {
-      if (myVariables.updateBoardInput.boardAddress === undefined) {
-        myVariables.updateBoardInput = { boardAddress: {} };
+
+    if (inputData.zipcode || inputData.addressCity || inputData.addressDetail) {
+      myVariables.updateBoardInput = { boardAddress: {} };
+
+      if (inputData.zipcode) {
+        myVariables.updateBoardInput.boardAddress.zipcode = inputData.zipcode;
       }
-      myVariables.updateBoardInput.boardAddress.zipcode = inputData.zipcode;
-    }
-    if (inputData.addressCity) {
-      if (myVariables.updateBoardInput.boardAddress === undefined) {
-        myVariables.updateBoardInput = { boardAddress: {} };
+      if (inputData.addressCity) {
+        myVariables.updateBoardInput.boardAddress.address =
+          inputData.addressCity;
       }
-      myVariables.updateBoardInput.boardAddress.address = inputData.addressCity;
-    }
-    if (inputData.addressDetail) {
-      if (myVariables.updateBoardInput.boardAddress === undefined) {
-        myVariables.updateBoardInput = { boardAddress: {} };
+      if (inputData.addressDetail) {
+        myVariables.updateBoardInput.boardAddress.addressDetail =
+          inputData.addressDetail;
       }
-      myVariables.updateBoardInput.boardAddress.addressDetail =
-        inputData.addressDetail;
     }
 
-    if (inputData["pwd"]) {
+    if (inputData.pwd) {
       try {
         const result = await UpdateInputData({
           variables: myVariables,
         });
         // alert("게시물 수정이 완료되었습니다.");
         UpdateBoardSuccess();
-        router.push(`/boards/${result?.data?.updateBoard._id}`);
+        await router.push(`/boards/${result?.data?.updateBoard._id || ""}`);
       } catch (error) {
         if (error instanceof Error) PostFail(error.message);
       }
@@ -257,12 +263,12 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
     }
   };
 
-  const CreateCancelBtn = () => {
-    router.push(`/boards/`);
+  const CreateCancelBtn = async () => {
+    await router.push(`/boards/`);
   };
 
-  const UpdateCancelBtn = () => {
-    router.push(`/boards/${router.query.detail}`);
+  const UpdateCancelBtn = async () => {
+    await router.push(`/boards/${String(router.query.detail)}`);
   };
 
   return (

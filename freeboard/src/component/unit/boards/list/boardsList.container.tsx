@@ -3,12 +3,13 @@ import { useQuery } from "@apollo/client";
 import { FETCH_BOARDS, FETCH_BOARDS_OF_THE_BEST } from "./boardsList.queries";
 import { useRouter } from "next/router";
 import {
-  IMutation,
   IQuery,
   IQueryFetchBoardArgs,
 } from "../../../../commons/types/generated/types";
+import { useState } from "react";
 
 export default function BoardListContainer() {
+  const [isDateOpen, setIsDateOpen] = useState(false);
   const { data: fetchBoardsData } = useQuery<
     Pick<IQuery, "fetchBoards">,
     IQueryFetchBoardArgs
@@ -18,8 +19,12 @@ export default function BoardListContainer() {
   >(FETCH_BOARDS_OF_THE_BEST);
   const router = useRouter();
 
-  const onClickToWrite = () => {
-    router.push("/boards/new");
+  const onClickToWrite = async () => {
+    await router.push("/boards/new");
+  };
+
+  const onClickDateOpen = () => {
+    setIsDateOpen((isDateOpen) => !isDateOpen);
   };
 
   return (
@@ -27,6 +32,8 @@ export default function BoardListContainer() {
       fetchBoardsOfTheBestDate={fetchBoardsOfTheBestDate}
       fetchBoardsData={fetchBoardsData}
       onClickToWrite={onClickToWrite}
+      onClickDateOpen={onClickDateOpen}
+      isDateOpen={isDateOpen}
     />
   );
 }

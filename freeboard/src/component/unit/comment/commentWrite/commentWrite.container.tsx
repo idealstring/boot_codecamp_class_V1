@@ -92,7 +92,7 @@ export default function CommentWriteContainer(P: ICommentWriteContainerProps) {
 
     if (writer && pwd && contents && rating) {
       try {
-        const result = await createComment({
+        await createComment({
           variables: {
             boardId: String(router.query.detail),
             createBoardCommentInput: {
@@ -136,7 +136,7 @@ export default function CommentWriteContainer(P: ICommentWriteContainerProps) {
       setErrorPwd(true);
     } else {
       try {
-        const result = await updateComment({
+        await updateComment({
           variables: myVariables,
           refetchQueries: [
             {

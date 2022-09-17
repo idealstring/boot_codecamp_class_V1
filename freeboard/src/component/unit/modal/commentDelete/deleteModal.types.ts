@@ -4,10 +4,10 @@ import { ChangeEvent, Dispatch, SetStateAction } from "react";
 export type IDeleteModalProps = {
   onClickIsDeleteToggle: () => void;
   deleteBoardCommentFunc: () => void;
-  setDeletePwd: Dispatch<SetStateAction<string>>; //(value: boolean | ((prevVar: boolean) => boolean)) => void;
+  setDeletePwd: Dispatch<SetStateAction<string>>; // (value: boolean | ((prevVar: boolean) => boolean)) => void;
 };
 
-//container
+// container
 
 export type IModalContainerProps = {
   onClickIsDeleteToggle: () => void;
@@ -15,7 +15,7 @@ export type IModalContainerProps = {
   setDeletePwd: Dispatch<SetStateAction<string>>;
 };
 
-//presenter
+// presenter
 
 export type IModalPresenterProps = {
   onClickIsDeleteToggle: () => void;

@@ -2,19 +2,19 @@ import * as S from "./boardsList.styles";
 import { dateFormatter } from "../../../../commons/utils/utils";
 import { Fragment } from "react";
 import Link from "next/link";
-import { IQuery } from "../../../../commons/types/generated/types";
-
-type IBoardListPresenterProps = {
-  fetchBoardsOfTheBestDate?: Pick<IQuery, "fetchBoardsOfTheBest">;
-  fetchBoardsData?: Pick<IQuery, "fetchBoards">;
-  onClickToWrite: () => void;
-};
+import { IBoardListPresenterProps } from "./boardList.types";
 
 export default function BoardListPresenter(P: IBoardListPresenterProps) {
-  const { fetchBoardsOfTheBestDate, fetchBoardsData, onClickToWrite } = P;
+  const {
+    fetchBoardsOfTheBestDate,
+    fetchBoardsData,
+    onClickToWrite,
+    onClickDateOpen,
+    isDateOpen,
+  } = P;
   return (
     <Fragment>
-      <S.Title>리스트</S.Title>
+      {/* <S.Title>리스트</S.Title> */}
       <S.BestListContainer>
         <S.BestListWrapper>
           {fetchBoardsOfTheBestDate?.fetchBoardsOfTheBest?.map((bestBoard) => (
@@ -30,7 +30,6 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
       </S.BestListContainer>
       <S.BoardContainer>
         <S.SearchbarWrapper>
-          {/* <S.SearchData className="날짜바">YYYY-MM-DD ~ YYYY-MM-DD</S.SearchData> */}
           <S.SearchWordWrapper>
             <S.SearchWord
               className="검색바"
@@ -51,6 +50,43 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
               </svg>
             </S.SearchBtn>
           </S.SearchWordWrapper>
+          <S.DateOpenBtn onClick={onClickDateOpen}>
+            {!isDateOpen ? (
+              <svg
+                // class="svg-icon"
+                // style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;"
+                width="14px"
+                height="14px"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                fill="#8d8d8d"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M894.973949 322.308432a24.8 24.8 0 1 0 35.071884-35.073108 24.8 24.8 0 1 0-35.071884 35.073108Z" />
+                <path d="M114.9 291.4l-35.3 35.3 422.5 422.5 427.6-427.7-30.6-30.6h-7.8L502.9 679.4z" />
+                <path d="M79.547924 326.565605a24.8 24.8 0 1 0 35.071885-35.073108 24.8 24.8 0 1 0-35.071885 35.073108Z" />
+              </svg>
+            ) : (
+              <svg
+                // class="svg-icon"
+                // style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;"
+                width="14px"
+                height="14px"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                fill="#8d8d8d"
+                xmlns="http://www.w3.org/2000/svg"
+                transform="rotate(180)"
+              >
+                <path d="M894.973949 322.308432a24.8 24.8 0 1 0 35.071884-35.073108 24.8 24.8 0 1 0-35.071884 35.073108Z" />
+                <path d="M114.9 291.4l-35.3 35.3 422.5 422.5 427.6-427.7-30.6-30.6h-7.8L502.9 679.4z" />
+                <path d="M79.547924 326.565605a24.8 24.8 0 1 0 35.071885-35.073108 24.8 24.8 0 1 0-35.071885 35.073108Z" />
+              </svg>
+            )}
+          </S.DateOpenBtn>
+          {isDateOpen ? (
+            <S.SearchDate>YYYY-MM-DD ~ YYYY-MM-DD</S.SearchDate>
+          ) : null}
         </S.SearchbarWrapper>
         <S.ListContainer>
           <S.ListWrapper>

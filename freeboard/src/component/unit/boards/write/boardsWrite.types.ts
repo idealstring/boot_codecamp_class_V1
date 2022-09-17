@@ -1,10 +1,4 @@
-import {
-  AllHTMLAttributes,
-  ChangeEvent,
-  Dispatch,
-  HTMLAttributes,
-  SetStateAction,
-} from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { IQuery } from "../../../../commons/types/generated/types";
 
 // container
@@ -29,22 +23,26 @@ export type IInputDateProps = {
 export type IMyVrivables = {
   boardId: string;
   password: string;
-  updateBoardInput: {
-    title?: string;
-    contents?: string;
-    youtubeUrl?: string;
-    images?: string;
-    boardAddress: {
-      zipcode?: string | undefined;
-      address?: string | undefined;
-      addressDetail?: string | undefined;
-    };
-  };
+  updateBoardInput: IInnerupdateBoardInput;
 };
 
-//presenter
+export type IInnerupdateBoardInput = {
+  title?: string;
+  contents?: string;
+  youtubeUrl?: string;
+  images?: string[];
+  boardAddress: IUpdateBoardAddress;
+};
 
-export interface IBoardWritePresenterProps {
+export type IUpdateBoardAddress = {
+  zipcode?: string;
+  address?: string;
+  addressDetail?: string;
+};
+
+// presenter
+
+export type IBoardWritePresenterProps = {
   errorPwd: boolean;
   errorWriter: boolean;
   errorContentTitle: boolean;
@@ -66,12 +64,12 @@ export interface IBoardWritePresenterProps {
   existingData?: Pick<IQuery, "fetchBoard">;
   setInputData: Dispatch<SetStateAction<IInputDateProps>>;
   inputData: IInputDateProps;
-}
+};
 
-//styles
-export interface IErrorColorProps {
+// styles
+export type IErrorColorProps = {
   errorColor?: boolean;
-}
+};
 
 export type ICompleteColorProps = {
   isCompleteColor?: boolean;

@@ -64,11 +64,14 @@ export default function CommentWritePresenter(P: ICommentWritePresenterProps) {
               errorColor={errorPwd}
             />
             <S.RateStarWrapper errorColor={errorRating}>
-              <Rate
-                onChange={onChangeRating}
-                defaultValue={comment?.rating}
-                value={comment?.rating ? undefined : rating}
-              />
+              {isEdit ? (
+                <Rate
+                  onChange={onChangeRating}
+                  defaultValue={comment?.rating}
+                />
+              ) : (
+                <Rate onChange={onChangeRating} value={rating} />
+              )}
             </S.RateStarWrapper>
           </S.CommentNameInfo>
           <S.CommentContentWrapper>

@@ -1,6 +1,6 @@
-import { ChangeEvent, Dispatch, ReactPropTypes, SetStateAction } from "react";
+import { ChangeEvent } from "react";
 
-//container
+// container
 
 export type ICommentWriteContainerProps = {
   comment?: any;
@@ -17,7 +17,7 @@ export type IMyVariables = {
   };
 };
 
-//presenter
+// presenter
 
 export type ICommentWritePresenterProps = {
   writer: string;
@@ -39,7 +39,7 @@ export type ICommentWritePresenterProps = {
   comment: any;
 };
 
-//styles
+// styles
 
 export type IErrorColorProps = {
   errorColor: boolean;

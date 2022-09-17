@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 export const BoardContainer = styled.div`
   box-sizing: border-box;
   margin: 0 auto;
-  padding: 60px 100px 100px 100px;
+  padding: 40px 100px 100px 100px;
   width: 1200px;
   display: flex;
   flex-direction: column;
@@ -58,7 +58,8 @@ export const BestBoard = styled.div`
 export const BestTitle = styled.span`
   margin-top: 10px;
   width: 100%;
-  font-size: 20px;
+  font-size: 1.12857rem;
+  font-weight: 600;
   z-index: 10;
 
   text-overflow: ellipsis;
@@ -90,15 +91,21 @@ export const BestDate = styled.span`
 `;
 
 export const SearchbarWrapper = styled.div`
-  padding-bottom: 32px;
+  width: 100%;
+
+  padding-bottom: 5px;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+  flex-direction: column;
+  justify-content: center;
   algin-items: center;
 `;
 
 export const SearchWordWrapper = styled.div`
   position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  algin-items: center;
 `;
 
 export const SearchWord = styled.input`
@@ -116,11 +123,33 @@ export const SearchBtn = styled.button`
   cursor: pointer;
 
   position: absolute;
-  right: 15px;
+  right: 330px;
   top: 14px;
 `;
 
-export const SearchData = styled.div`
+export const DateOpenBtn = styled.button`
+  margin: 0 auto;
+  margin-top: 10px;
+  padding: 2px;
+  width: 100px;
+  border: none;
+  background-color: white;
+
+  // position: relative;
+  // &::after {
+  //   content: "";
+  //   position: absolute;
+  //   width: 8px;
+  //   height: 8px;
+  //   border-right: 1px solid #ddd;
+  //   border-bottom: 1px solid #8d8d8d;
+  //   transform: rotate(45deg) translateX(-1px);
+  // }
+`;
+
+export const SearchDate = styled.div`
+  margin: 0 auto;
+  margin-bottom: 25px;
   width: 360px;
   height: 48px;
   background-color: #f2f2f2;
@@ -146,6 +175,8 @@ export const ListWrapper = styled.ul`
   flex-direction: column;
   justify-content: space-between;
   algin-items: center;
+
+  font-size: 1.14286rem;
 `;
 
 export const ListTop = styled.li`
@@ -156,6 +187,9 @@ export const ListTop = styled.li`
   flex-direction: row;
   justify-content: space-between;
   algin-items: center;
+
+  letter-spacing: -0.6px;
+  font-size: 1.07143rem;
 `;
 
 export const ListNumber = styled.span`

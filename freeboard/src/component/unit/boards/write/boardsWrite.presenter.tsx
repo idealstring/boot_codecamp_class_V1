@@ -27,12 +27,6 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
     inputData,
   } = P;
 
-  // const router = useRouter();
-  // if (typeof existingData !== "string") {
-  //   router.push("/");
-  //   return <></>;
-  // }
-
   return (
     <S.Container>
       <S.Title>게시물 {isEdit ? "수정" : "등록"}</S.Title>
@@ -47,7 +41,7 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
               placeholder="이름을 적어주세요."
               onChange={onChangeWriter}
               defaultValue={existingData?.fetchBoard.writer || ""}
-              disabled={isEdit ? true : false}
+              disabled={isEdit}
               errorColor={errorWriter}
             />
           </S.WriterPwd>
@@ -95,9 +89,9 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
               placeholder="12212"
               onChange={onChangeZipcode}
               defaultValue={
-                isEdit
-                  ? existingData?.fetchBoard?.boardAddress?.zipcode || ""
-                  : inputData.zipcode
+                inputData.zipcode ||
+                existingData?.fetchBoard?.boardAddress?.zipcode ||
+                ""
               }
             />
             <ZipcodeModal setInputData={setInputData} />
@@ -106,18 +100,18 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
             type="text"
             onChange={onChangeAddressCity}
             defaultValue={
-              isEdit
-                ? existingData?.fetchBoard?.boardAddress?.address || ""
-                : inputData.addressCity
+              inputData.addressCity ||
+              existingData?.fetchBoard?.boardAddress?.address ||
+              ""
             }
           />
           <S.InputW100per
             type="text"
             onChange={onChangeAddressDetail}
             defaultValue={
-              isEdit
-                ? existingData?.fetchBoard?.boardAddress?.addressDetail || ""
-                : inputData.addressDetail
+              inputData.addressDetail ||
+              existingData?.fetchBoard?.boardAddress?.addressDetail ||
+              ""
             }
           />
         </S.SubtitleWrapper>
