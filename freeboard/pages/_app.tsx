@@ -4,6 +4,7 @@ import { AppProps } from "next/app";
 import "antd/dist/antd.css";
 import { Global } from "@emotion/react";
 import { GlobalStyle } from "../src/commons/style/globalStyle";
+import Layout from "../src/component/commons/layout";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const client = new ApolloClient({
@@ -13,8 +14,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <ApolloProvider client={client}>
-      <Global styles={GlobalStyle} />
-      <Component {...pageProps} />
+      <Layout>
+        <>
+          <Global styles={GlobalStyle} />
+          <Component {...pageProps} />
+        </>
+      </Layout>
     </ApolloProvider>
   );
 }

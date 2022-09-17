@@ -5,7 +5,7 @@ export const Container = styled.div`
   box-sizing: border-box;
   margin: 0 auto;
   padding: 60px 100px 100px 100px;
-  width: 1200px;
+  width: 1000px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,7 +16,7 @@ export const Container = styled.div`
 export const Title = styled.div`
   margin-bottom: 40px;
   text-align: center;
-  font-size: 36px;
+  font-size: 1.6rem;
   font-weight: 700px;
 `;
 
@@ -28,6 +28,7 @@ export const ContentContainer = styled.div`
 `;
 
 export const WriterPwdWrapper = styled.div`
+  width: 100%;
   margin-bottom: 28px;
   display: flex;
   flex-direction: row;
@@ -54,7 +55,7 @@ export const CompulsoryStar = styled.span`
 export const InputName = styled.input`
   margin-top: 16px;
   padding: 16px;
-  width: 486px;
+  width: 385px;
   height: 52px;
   border: 1px solid #bdbdbd;
   background-color: ${(props: IErrorColorProps) =>
@@ -68,7 +69,7 @@ export const InputName = styled.input`
 export const InputPwd = styled.input`
   margin-top: 16px;
   padding: 16px;
-  width: 486px;
+  width: 385px;
   height: 52px;
   border: 1px solid #bdbdbd;
   background-color: ${(props: IErrorColorProps) =>
@@ -121,10 +122,10 @@ export const TextareaContent = styled.textarea`
   }
 `;
 
-export const InputW77pxH52px = styled.input`
+export const InputW85pxH52px = styled.input`
   margin-top: 16px;
   padding: 16px;
-  width: 77px;
+  width: 85px;
   height: 52px;
   border: 1px solid #bdbdbd;
 `;

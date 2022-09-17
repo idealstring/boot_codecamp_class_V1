@@ -124,7 +124,7 @@ export const SearchBtn = styled.button`
 
   position: absolute;
   right: 330px;
-  top: 14px;
+  top: 8px;
 `;
 
 export const DateOpenBtn = styled.button`

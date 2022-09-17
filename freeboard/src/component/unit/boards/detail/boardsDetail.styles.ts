@@ -4,7 +4,7 @@ export const Container = styled.div`
   box-sizing: border-box;
   margin: 0 auto;
   padding: 60px 100px 100px 100px;
-  width: 1200px;
+  width: 1000px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -64,7 +64,7 @@ export const TitleInfoBottom = styled.div`
   cursor: pointer;
 
   position: absolute;
-  left: 680px;
+  left: 470px;
   top: 110px;
 `;
 
@@ -187,8 +187,9 @@ export const Svg = styled.svg`
 `;
 
 export const ContentBtnWrapper = styled.div`
-  margin: 0 270px;
+  margin: 0 auto;
 
+  width: 500px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;

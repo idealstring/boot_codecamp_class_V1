@@ -10,7 +10,7 @@ export const HrLine = styled.hr`
 
 export const CommentWrapper = styled.div`
   margin: 0 auto;
-  width: 1200px;
+  width: 1000px;
 
   display: flex;
   flex-direction: column;

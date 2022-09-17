@@ -84,7 +84,7 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
         <S.SubtitleWrapper>
           <S.Subtitle>주소</S.Subtitle>
           <div className="우편번호">
-            <S.InputW77pxH52px
+            <S.InputW85pxH52px
               type="text"
               placeholder="12212"
               onChange={onChangeZipcode}

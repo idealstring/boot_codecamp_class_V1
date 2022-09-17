@@ -5,7 +5,7 @@ export const GlobalStyle = css`
   body {
     padding: 0;
     margin: 0 auto;
-    font-family: NanumSquareR, -apple-system, BlinkMacSystemFont, Segoe UI,
+    font-family: NanumSquare_acR, -apple-system, BlinkMacSystemFont, Segoe UI,
       Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
       sans-serif;
   }
@@ -29,9 +29,8 @@ export const GlobalStyle = css`
       background: black;
     }
   }
-
   @font-face {
-    font-family: "NanumSquareR";
-    src: url("/fonts/NanumSquareR.ttf");
+    font-family: "NanumSquare_acR";
+    src: url("/fonts/NanumSquare_acR.ttf");
   }
 `;

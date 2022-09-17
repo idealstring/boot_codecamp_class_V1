@@ -37,15 +37,15 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
             />
             <S.SearchBtn>
               <svg
-                width="18"
-                height="18"
-                viewBox="0 0 18 18"
-                fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                width="30px"
+                height="30px"
               >
                 <path
-                  d="M12.5 11H11.71L11.43 10.73C12.41 9.59 13 8.11 13 6.5C13 2.91 10.09 0 6.5 0C2.91 0 0 2.91 0 6.5C0 10.09 2.91 13 6.5 13C8.11 13 9.59 12.41 10.73 11.43L11 11.71V12.5L16 17.49L17.49 16L12.5 11ZM6.5 11C4.01 11 2 8.99 2 6.5C2 4.01 4.01 2 6.5 2C8.99 2 11 4.01 11 6.5C11 8.99 8.99 11 6.5 11Z"
-                  fill="black"
+                  d="M680 444.8c0-129.6-105.6-236.8-236.8-236.8S208 315.2 208 444.8s105.6 236.8 236.8 236.8c59.2 0 113.6-22.4 155.2-59.2l211.2 211.2 22.4-22.4-211.2-211.2c35.2-41.6 57.6-96 57.6-155.2zM444.8 240c112 0 204.8 91.2 204.8 204.8s-91.2 204.8-204.8 204.8S240 556.8 240 444.8 331.2 240 444.8 240z"
+                  fill="#8d8d8d"
                 />
               </svg>
             </S.SearchBtn>
@@ -53,8 +53,6 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
           <S.DateOpenBtn onClick={onClickDateOpen}>
             {!isDateOpen ? (
               <svg
-                // class="svg-icon"
-                // style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;"
                 width="14px"
                 height="14px"
                 viewBox="0 0 1024 1024"
@@ -68,8 +66,6 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
               </svg>
             ) : (
               <svg
-                // class="svg-icon"
-                // style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;"
                 width="14px"
                 height="14px"
                 viewBox="0 0 1024 1024"

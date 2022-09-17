@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const CommentWrapper = styled.div`
   margin: 0 auto;
-  width: 1200px;
+  width: 1000px;
 
   display: flex;
   flex-direction: column;
