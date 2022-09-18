@@ -1,11 +1,23 @@
+import Head from "next/head";
+import { useRouter } from "next/router";
 import * as S from "../../../unit/layout/header/header.styes";
 import { IHeaderProps } from "../../../unit/layout/header/header.types";
 
 export default function Header(P: IHeaderProps) {
   const { onClickIsNav } = P;
+  const router = useRouter();
+
+  const onClickLogo = () => {
+    router.push("/");
+  };
 
   return (
     <S.Container>
+      <Head>
+        <title>LEESANGHYEON - first Portfolio</title>
+        <meta name="description" content="LEESANGHYEON first Portfolio" />
+        <link rel="icon" href="/favicon_leesanghyeon.ico" />
+      </Head>
       <S.Wrapper>
         <S.NavBtnWrapper>
           <S.NavBtn onClick={onClickIsNav}>
@@ -21,21 +33,22 @@ export default function Header(P: IHeaderProps) {
           </S.NavBtn>
         </S.NavBtnWrapper>
         <S.LogoWrapper>
-          <svg
-            version="1.0"
-            xmlns="http://www.w3.org/2000/svg"
-            width="68pt"
-            height="43.2pt"
-            viewBox="0 0 341.000000 217.000000"
-            preserveAspectRatio="xMidYMid meet"
-          >
-            <g
-              transform="translate(0.000000,217.000000) scale(0.100000,-0.100000)"
-              fill="#000"
-              stroke="none"
+          <S.LogoBtn onClick={onClickLogo}>
+            <svg
+              version="1.0"
+              xmlns="http://www.w3.org/2000/svg"
+              width="68pt"
+              height="43.2pt"
+              viewBox="0 0 341.000000 217.000000"
+              preserveAspectRatio="xMidYMid meet"
             >
-              <path
-                d="M40 1805 l0 -365 67 0 67 0 -45 -28 c-108 -69 -129 -202 -46 -290 43
+              <g
+                transform="translate(0.000000,217.000000) scale(0.100000,-0.100000)"
+                fill="#000"
+                stroke="none"
+              >
+                <path
+                  d="M40 1805 l0 -365 67 0 67 0 -45 -28 c-108 -69 -129 -202 -46 -290 43
 -46 86 -66 214 -102 150 -43 183 -81 124 -141 -59 -59 -162 -26 -190 60 l-14
 44 -60 -7 c-33 -3 -80 -6 -103 -6 -39 0 -44 -2 -44 -24 0 -64 54 -155 114
 -191 l41 -25 -62 0 -63 0 0 -365 0 -365 115 0 115 0 0 150 0 150 125 0 125 0
@@ -74,9 +87,10 @@ l127 -3 17 -55z m-528 -28 c-4 -16 -13 -22 -34 -22 l-29 0 0 -125 0 -125 -125
 -24z m-433 -5 c-4 -13 -9 -35 -12 -50 l-5 -28 -174 0 -174 0 0 50 0 50 186 0
 186 0 -7 -22z m-18 -275 c6 -27 14 -58 18 -70 l7 -23 -186 0 -186 0 0 70 0 70
 168 0 168 0 11 -47z"
-              />
-            </g>
-          </svg>
+                />
+              </g>
+            </svg>
+          </S.LogoBtn>
         </S.LogoWrapper>
         <S.LoginWrapper>
           {/* <S.NoMemberWrapper>

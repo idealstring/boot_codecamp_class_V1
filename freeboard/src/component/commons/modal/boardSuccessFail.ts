@@ -14,9 +14,9 @@ export function UpdateBoardSuccess() {
   });
 }
 
-export function PostFail(mesaage: string) {
+export function PostFail(message: string) {
   Modal.error({
-    content: mesaage,
+    content: message,
     onOk() {},
   });
 }

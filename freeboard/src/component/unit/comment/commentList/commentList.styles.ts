@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const CommentWrapper = styled.div`
+export const CommentWrapper = styled.section`
   margin: 0 auto;
   width: 1000px;
 

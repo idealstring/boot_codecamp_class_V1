@@ -15,7 +15,9 @@ import {
 import {
   ICommentWriteContainerProps,
   IMyVariables,
+  IUpdateBoardCommentInput,
 } from "./commentWrite.types";
+import { CommentFail } from "../../../commons/modal/commentSuccessFail";
 
 export default function CommentWriteContainer(P: ICommentWriteContainerProps) {
   const { isEdit, onClickIsEditToggle, comment } = P;
@@ -120,16 +122,22 @@ export default function CommentWriteContainer(P: ICommentWriteContainerProps) {
   };
 
   const onClickUpdateBtn = async () => {
+    const myUpdateBoardCommentInput: IUpdateBoardCommentInput = {};
+
     const myVariables: IMyVariables = {
       boardCommentId: comment._id,
       password: pwd,
-      updateBoardCommentInput: {},
+      updateBoardCommentInput: myUpdateBoardCommentInput,
     };
     if (contents) {
       myVariables.updateBoardCommentInput.contents = contents;
+    } else {
+      myVariables.updateBoardCommentInput.contents = comment.contents;
     }
     if (rating) {
       myVariables.updateBoardCommentInput.rating = rating;
+    } else {
+      myVariables.updateBoardCommentInput.rating = comment.rating;
     }
 
     if (!pwd) {
@@ -147,7 +155,7 @@ export default function CommentWriteContainer(P: ICommentWriteContainerProps) {
         });
         onClickIsEditToggle();
       } catch (error) {
-        console.error(error);
+        if (error instanceof Error) CommentFail(error.message);
       }
     }
   };

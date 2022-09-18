@@ -23,7 +23,9 @@ export default function Navigation(P: INavigationProps) {
     <>
       {isNav ? (
         <Container>
-          <Wrapper>OUTER | INNER | NOTICE</Wrapper>
+          <Wrapper>
+            OUTER | INNER | <></>NOTICE
+          </Wrapper>
         </Container>
       ) : null}
     </>

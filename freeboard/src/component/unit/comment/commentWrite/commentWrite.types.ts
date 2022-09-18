@@ -11,10 +11,12 @@ export type ICommentWriteContainerProps = {
 export type IMyVariables = {
   boardCommentId: string;
   password: string;
-  updateBoardCommentInput: {
-    contents?: string;
-    rating?: number;
-  };
+  updateBoardCommentInput: IUpdateBoardCommentInput;
+};
+
+export type IUpdateBoardCommentInput = {
+  contents?: string;
+  rating?: GLfloat;
 };
 
 // presenter

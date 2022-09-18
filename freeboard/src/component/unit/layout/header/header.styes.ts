@@ -30,6 +30,15 @@ export const LogoWrapper = styled.div`
   //   padding: 0 30px;
 `;
 
+export const LogoBtn = styled.button`
+  margin: 10px;
+  padding: 0;
+  background-color: white;
+  border: 0;
+
+  cursor: pointer;
+`;
+
 export const LoginWrapper = styled.div``;
 
 export const NoMemberWrapper = styled.div`
