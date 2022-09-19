@@ -10,7 +10,6 @@ interface ILayoutProps {
 }
 
 const Body = styled.div`
-  height: 500px;
   display: flex;
 `;
 

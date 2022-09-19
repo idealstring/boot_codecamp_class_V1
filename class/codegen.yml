@@ -7,7 +7,8 @@
 # schema 백엔드주소
 # generates 파일 저장주소
 
-schema: http://example.codebootcamp.co.kr/graphql
+# schema: http://example.codebootcamp.co.kr/graphql
+schema: http://backend09.codebootcamp.co.kr/graphql
 generates:
   ./src/commons/types/generated/types.ts:
     plugins:
