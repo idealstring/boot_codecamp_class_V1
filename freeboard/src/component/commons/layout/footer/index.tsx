@@ -7,8 +7,8 @@ const Container = styled.footer`
 `;
 const Wrapper = styled.footer`
   margin: 0 auto;
-  padding: 50px 100px;
-  width: 1200px;
+  padding: 50px 0;
+  width: 1000px;
 
   display: flex;
   flex-direction: row;
