@@ -58,7 +58,8 @@ export default function IndexMainCarousel() {
 
   const totalSlide = 4;
   const [currentSlide, setCurrentSlide] = useState(0);
-  const slideRef = useRef();
+  const slideRef = useRef<HTMLDivElement>(null);
+  //   const slideRef = useRef<(HTMLDivElement | null)[]>([]);
 
   const onClickNext = () => {
     if (currentSlide >= totalSlide) {
@@ -80,8 +81,10 @@ export default function IndexMainCarousel() {
   };
 
   useEffect(() => {
-    slideRef.current.style.transition = "all 0.5s ease-in-out";
-    slideRef.current.style.transform = `translateX(-${currentSlide}00%)`;
+    if (slideRef.current) {
+      slideRef.current.style.transition = "all 0.5s ease-in-out";
+      slideRef.current.style.transform = `translateX(-${currentSlide}00%)`;
+    }
   }, [currentSlide]);
 
   return (

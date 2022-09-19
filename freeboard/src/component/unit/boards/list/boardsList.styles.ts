@@ -58,7 +58,7 @@ export const BestBoard = styled.div`
 export const BestTitle = styled.span`
   margin-top: 10px;
   width: 100%;
-  font-size: 1.12857rem;
+  font-size: 1.02857rem;
   font-weight: 600;
   z-index: 10;
 
@@ -86,11 +86,12 @@ export const BestImg = styled.img`
 `;
 export const BestDate = styled.span`
   color: #aaa;
+  font-size: 0.02857rem;
 
   z-index: 10;
 `;
 
-export const SearchbarWrapper = styled.div`
+export const SearchBarWrapper = styled.div`
   width: 100%;
 
   padding-bottom: 5px;
@@ -176,7 +177,7 @@ export const ListWrapper = styled.ul`
   justify-content: space-between;
   algin-items: center;
 
-  font-size: 1.14286rem;
+  font-size: 1.04286rem;
 `;
 
 export const ListTop = styled.li`
@@ -265,15 +266,6 @@ export const ListFooter = styled.div`
   flex-direction: column;
 
   position: relative;
-`;
-
-export const ListNumbering = styled.div`
-  width: 100%;
-  height: 44px;
-
-  line-height: 44px;
-
-  text-align: center; ;
 `;
 
 export const ContentBtn = styled.button`

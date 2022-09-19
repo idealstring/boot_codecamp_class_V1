@@ -1,8 +1,9 @@
-import * as S from "./boardsList.styles";
-import { dateFormatter } from "../../../../commons/utils/utils";
-import { Fragment } from "react";
 import Link from "next/link";
-import { IBoardListPresenterProps } from "./boardList.types";
+import { Fragment } from "react";
+import * as S from "./boardsList.styles";
+import { IBoardListPresenterProps } from "./boardsList.types";
+import { dateFormatter } from "../../../../commons/utils/utils";
+import PaginationContainer from "../../../commons/pagination/pagination.container";
 
 export default function BoardListPresenter(P: IBoardListPresenterProps) {
   const {
@@ -11,6 +12,10 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
     onClickToWrite,
     onClickDateOpen,
     isDateOpen,
+    refetch,
+    currentPage,
+    setCurrentPage,
+    boardsCount,
   } = P;
   return (
     <Fragment>
@@ -29,7 +34,7 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
         </S.BestListWrapper>
       </S.BestListContainer>
       <S.BoardContainer>
-        <S.SearchbarWrapper>
+        <S.SearchBarWrapper>
           <S.SearchWordWrapper>
             <S.SearchWord
               className="검색바"
@@ -83,7 +88,7 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
           {isDateOpen ? (
             <S.SearchDate>YYYY-MM-DD ~ YYYY-MM-DD</S.SearchDate>
           ) : null}
-        </S.SearchbarWrapper>
+        </S.SearchBarWrapper>
         <S.ListContainer>
           <S.ListWrapper>
             <S.ListTop>
@@ -96,7 +101,6 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
               <Link href={`/boards/${board._id}`} key={board._id}>
                 <S.ListContent>
                   <S.ContentNumber>{i + 1}</S.ContentNumber>
-
                   <S.ContentTitle>{board.title}</S.ContentTitle>
                   <S.ContentWriter>{board.writer}</S.ContentWriter>
                   <S.ContentDate>
@@ -106,9 +110,13 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
               </Link>
             ))}
           </S.ListWrapper>
-
           <S.ListFooter>
-            <S.ListNumbering>1 | 2 | 3 | 4 | 5</S.ListNumbering>
+            <PaginationContainer
+              refetch={refetch}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              boardsCount={boardsCount}
+            />
             <S.ContentBtn onClick={onClickToWrite}>글쓰기</S.ContentBtn>
           </S.ListFooter>
         </S.ListContainer>

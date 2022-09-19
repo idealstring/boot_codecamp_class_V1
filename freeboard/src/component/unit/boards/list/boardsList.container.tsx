@@ -1,22 +1,29 @@
 import BoardListPresenter from "./boardsList.presenter";
 import { useQuery } from "@apollo/client";
-import { FETCH_BOARDS, FETCH_BOARDS_OF_THE_BEST } from "./boardsList.queries";
+import {
+  FETCH_BOARDS,
+  FETCH_BOARDS_COUNT,
+  FETCH_BOARDS_OF_THE_BEST,
+} from "./boardsList.queries";
 import { useRouter } from "next/router";
 import {
   IQuery,
-  IQueryFetchBoardArgs,
+  IQueryFetchBoardsArgs,
 } from "../../../../commons/types/generated/types";
 import { useState } from "react";
 
 export default function BoardListContainer() {
   const [isDateOpen, setIsDateOpen] = useState(false);
-  const { data: fetchBoardsData } = useQuery<
+  const [currentPage, setCurrentPage] = useState(0);
+  const { data: fetchBoardsData, refetch } = useQuery<
     Pick<IQuery, "fetchBoards">,
-    IQueryFetchBoardArgs
+    IQueryFetchBoardsArgs
   >(FETCH_BOARDS);
   const { data: fetchBoardsOfTheBestDate } = useQuery<
     Pick<IQuery, "fetchBoardsOfTheBest">
   >(FETCH_BOARDS_OF_THE_BEST);
+  const { data: boardsCount } = useQuery(FETCH_BOARDS_COUNT);
+
   const router = useRouter();
 
   const onClickToWrite = async () => {
@@ -34,6 +41,10 @@ export default function BoardListContainer() {
       onClickToWrite={onClickToWrite}
       onClickDateOpen={onClickDateOpen}
       isDateOpen={isDateOpen}
+      refetch={refetch}
+      currentPage={currentPage}
+      setCurrentPage={setCurrentPage}
+      boardsCount={boardsCount?.fetchBoardsCount}
     />
   );
 }
