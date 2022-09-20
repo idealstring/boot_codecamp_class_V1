@@ -14,7 +14,5 @@ export type IBoardListPresenterProps = {
   refetch: (
     variables?: Partial<IQueryFetchBoardsArgs> | undefined
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>;
-  currentPage: number;
-  setCurrentPage: Dispatch<SetStateAction<number>>;
   boardsCount: number;
 };

@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import * as S from "./boardsList.styles";
 import { IBoardListPresenterProps } from "./boardsList.types";
 import { dateFormatter } from "../../../../commons/utils/utils";
-import PaginationContainer from "../../../commons/pagination/pagination.container";
+import PaginationContainer from "../../../commons/pagination/01/pagination.container";
 
 export default function BoardListPresenter(P: IBoardListPresenterProps) {
   const {
@@ -13,13 +13,10 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
     onClickDateOpen,
     isDateOpen,
     refetch,
-    currentPage,
-    setCurrentPage,
     boardsCount,
   } = P;
   return (
     <Fragment>
-      {/* <S.Title>리스트</S.Title> */}
       <S.BestListContainer>
         <S.BestListWrapper>
           {fetchBoardsOfTheBestDate?.fetchBoardsOfTheBest?.map((bestBoard) => (
@@ -111,12 +108,7 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
             ))}
           </S.ListWrapper>
           <S.ListFooter>
-            <PaginationContainer
-              refetch={refetch}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              boardsCount={boardsCount}
-            />
+            <PaginationContainer refetch={refetch} boardsCount={boardsCount} />
             <S.ContentBtn onClick={onClickToWrite}>글쓰기</S.ContentBtn>
           </S.ListFooter>
         </S.ListContainer>

@@ -12,13 +12,6 @@ export const BoardContainer = styled.div`
   // box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 `;
 
-export const Title = styled.div`
-  margin-bottom: 40px;
-  text-align: center;
-  font-size: 36px;
-  font-weight: 700px;
-`;
-
 export const BestListContainer = styled.div`
   width: 100%;
   background-color: #eee;
@@ -86,7 +79,7 @@ export const BestImg = styled.img`
 `;
 export const BestDate = styled.span`
   color: #aaa;
-  font-size: 0.02857rem;
+  font-size: 0.82857rem;
 
   z-index: 10;
 `;

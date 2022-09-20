@@ -10,7 +10,7 @@ import {
 export default function CommentListContainer() {
   const router = useRouter();
 
-  const { data: existingData } = useQuery<
+  const { data: existingData, fetchMore } = useQuery<
     Pick<IQuery, "fetchBoardComments">,
     IQueryFetchBoardCommentsArgs
   >(FETCH_BOARD_COMMENTS, {
@@ -20,5 +20,28 @@ export default function CommentListContainer() {
     },
   });
 
-  return <CommentListPresenter existingData={existingData} />;
+  const onLoadMore = () => {
+    if (!existingData) return;
+
+    fetchMore({
+      variables: {
+        page: Math.ceil(existingData.fetchBoardComments.length / 10) + 1,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult.fetchBoardComments)
+          return { fetchBoardComments: [...prev.fetchBoardComments] };
+
+        return {
+          fetchBoardComments: [
+            ...prev.fetchBoardComments,
+            ...fetchMoreResult.fetchBoardComments,
+          ],
+        };
+      },
+    });
+  };
+
+  return (
+    <CommentListPresenter existingData={existingData} onLoadMore={onLoadMore} />
+  );
 }

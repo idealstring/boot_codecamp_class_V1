@@ -24,14 +24,13 @@ export const PagePrevNextBtn = styled.button`
 
 export const PageBtn = styled.button`
   margin: 0 5px;
-  padding: 0 1.5px 0 0;
+  padding: 0 1.3px 0 0;
   width: 24px;
   height: 24px;
   border: none;
   background-color: #fff;
-
+  font-weight: ${(props: IActiveProps) => (props.active ? "bold" : "normal")};
   border-bottom: ${(props: IActiveProps) =>
     props.active ? "1px solid black" : "none"};
-
-  cursor: pointer;
+  cursor: ${(props: IActiveProps) => (props.active ? "none" : "pointer")}; ;
 `;

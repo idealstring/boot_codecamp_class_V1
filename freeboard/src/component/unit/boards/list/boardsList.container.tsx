@@ -14,7 +14,7 @@ import { useState } from "react";
 
 export default function BoardListContainer() {
   const [isDateOpen, setIsDateOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState(0);
+
   const { data: fetchBoardsData, refetch } = useQuery<
     Pick<IQuery, "fetchBoards">,
     IQueryFetchBoardsArgs
@@ -42,8 +42,6 @@ export default function BoardListContainer() {
       onClickDateOpen={onClickDateOpen}
       isDateOpen={isDateOpen}
       refetch={refetch}
-      currentPage={currentPage}
-      setCurrentPage={setCurrentPage}
       boardsCount={boardsCount?.fetchBoardsCount}
     />
   );
