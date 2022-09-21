@@ -10,7 +10,7 @@ import {
 } from "../../../../commons/types/generated/types";
 import {
   IBoardWriteContainerProps,
-  IInnerupdateBoardInput,
+  IInnerUpdateBoardInput,
   IInputDateProps,
   IMyVrivables,
   IUpdateBoardAddress,
@@ -26,19 +26,22 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
 
   const [inputData, setInputData] = useState<IInputDateProps>({
     writer: "",
-    pwd: "",
-    contentTitle: "",
-    contentText: "",
+    password: "",
+    title: "",
+    contents: "",
     zipcode: "",
-    addressCity: "",
+    address: "",
     addressDetail: "",
-    youtubeLink: "",
+    youtubeUrl: "",
     images: "",
   });
-  const [errorWriter, setErrorWriter] = useState(false);
-  const [errorPwd, setErrorPwd] = useState(false);
-  const [errorContentTitle, setErrorContentTitle] = useState(false);
-  const [errorContent, setErrorContent] = useState(false);
+  const [errorOutput, setErrorOutput] = useState({
+    writer: false,
+    password: false,
+    title: false,
+    contents: false,
+  });
+
   const [isCompleteColor, setIsCompleteColor] = useState(false);
 
   const router = useRouter();
@@ -52,153 +55,76 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
     IMutationUpdateBoardArgs
   >(UPDATE_BOARD);
 
-  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputData((state) => {
-      return { ...state, writer: event.target.value };
+  const onChangeInput = (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setInputData((inputData) => {
+      return { ...inputData, [e.target.id]: e.target.value };
     });
-
-    if (event.target.value !== "") {
-      setErrorWriter(false);
-    }
-    if (
-      event.target.value &&
-      inputData.pwd &&
-      inputData.contentTitle &&
-      inputData.contentText
-    ) {
-      setIsCompleteColor(true);
-    } else {
-      setIsCompleteColor(false);
-    }
-  };
-
-  const onChangePwd = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputData((state) => {
-      return { ...state, pwd: event.target.value };
-    });
-    if (event.target.value !== "") {
-      setErrorPwd(false);
+    if (e.target.value !== "") {
+      setErrorOutput({ ...errorOutput, [e.target.id]: false });
     }
 
-    if (
-      inputData.writer &&
-      event.target.value &&
-      inputData.contentTitle &&
-      inputData.contentText
-    ) {
-      setIsCompleteColor(true);
-    } else {
-      setIsCompleteColor(false);
-    }
-
-    if (isEdit && event.target.value) {
-      setIsCompleteColor(true);
-    } else {
-      setIsCompleteColor(false);
-    }
-  };
-
-  const onChangeContentTitle = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputData((state) => {
-      return { ...state, contentTitle: event.target.value };
-    });
-    if (event.target.value !== "") {
-      setErrorContentTitle(false);
-    }
-
-    if (
-      inputData.writer &&
-      inputData.pwd &&
-      event.target.value &&
-      inputData.contentText
-    ) {
-      setIsCompleteColor(true);
-    } else {
-      setIsCompleteColor(false);
-    }
-  };
-
-  const onChangeContentText = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setInputData((state) => {
-      return { ...state, contentText: event.target.value };
-    });
-    if (event.target.value !== "") {
-      setErrorContent(false);
-    }
-
-    if (
-      inputData.writer &&
-      inputData.pwd &&
-      inputData.contentTitle &&
-      event.target.value
-    ) {
-      setIsCompleteColor(true);
-    } else {
-      setIsCompleteColor(false);
-    }
-  };
-
-  const onChangeZipcode = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputData((state) => {
-      return { ...state, zipcode: event.target.value };
-    });
-  };
-
-  const onChangeAddressCity = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputData((state) => {
-      return { ...state, addressCity: event.target.value };
-    });
-  };
-  const onChangeAddressDetail = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputData((state) => {
-      return { ...state, addressDetail: event.target.value };
-    });
-  };
-  const onChangeYoutubeLink = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputData((state) => {
-      return { ...state, youtubeLink: event.target.value };
-    });
+    const { writer, password, title, contents } = inputData;
+    writer && password && title && contents
+      ? setIsCompleteColor(true)
+      : setIsCompleteColor(false);
+    if (isEdit) password ? setIsCompleteColor(true) : setIsCompleteColor(false);
   };
 
   const CreateBtn = async () => {
     if (!inputData.writer) {
-      setErrorWriter(true);
+      setErrorOutput((errorOutput) => {
+        return { ...errorOutput, writer: true };
+      });
     }
-    if (!inputData.pwd) {
-      setErrorPwd(true);
+    if (!inputData.password) {
+      setErrorOutput((errorOutput) => {
+        return { ...errorOutput, password: true };
+      });
     }
-    if (!inputData.contentTitle) {
-      setErrorContentTitle(true);
+    if (!inputData.title) {
+      setErrorOutput((errorOutput) => {
+        return { ...errorOutput, title: true };
+      });
     }
-    if (!inputData.contentText) {
-      setErrorContent(true);
+    if (!inputData.contents) {
+      setErrorOutput((errorOutput) => {
+        return { ...errorOutput, contents: true };
+      });
     }
-    if (
-      inputData.writer &&
-      inputData.pwd &&
-      inputData.contentTitle &&
-      inputData.contentText
-    ) {
+
+    const {
+      writer,
+      password,
+      title,
+      contents,
+      zipcode,
+      address,
+      addressDetail,
+      youtubeUrl,
+      images,
+    } = inputData;
+    if (writer && password && title && contents) {
       try {
         const result = await SubmitInputData({
           variables: {
             createBoardInput: {
-              writer: inputData.writer,
-              password: inputData.pwd,
-              title: inputData.contentTitle,
-              contents: inputData.contentText,
-              youtubeUrl: inputData.youtubeLink,
+              writer,
+              password,
+              title,
+              contents,
+              youtubeUrl,
+              images,
               boardAddress: {
-                zipcode: inputData.zipcode,
-                address: inputData.addressCity,
-                addressDetail: inputData.addressDetail,
+                zipcode,
+                address,
+                addressDetail,
               },
-              images: null,
             },
           },
         });
 
-        // alert("게시물 등록이 완료되었습니다.");\
         CreateBoardSuccess();
         await router.push(`/boards/${result?.data?.createBoard._id || ""}`);
       } catch (error) {
@@ -208,58 +134,67 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
   };
   const UpdateBtn = async () => {
     const boardAddress: IUpdateBoardAddress = {};
-    const InnerupdateBoardInput: IInnerupdateBoardInput = {
-      boardAddress,
-    };
+    const InnerUpdateBoardInput: IInnerUpdateBoardInput = {};
 
     const myVariables: IMyVrivables = {
       boardId: String(router.query.detail),
-      password: inputData.pwd,
-      updateBoardInput: InnerupdateBoardInput,
+      password: inputData.password,
+      updateBoardInput: InnerUpdateBoardInput,
     };
 
-    if (inputData.contentTitle) {
-      myVariables.updateBoardInput.title = inputData.contentTitle;
+    if (inputData.title) {
+      myVariables.updateBoardInput.title = inputData.title;
     }
-    if (inputData.contentText) {
-      myVariables.updateBoardInput.contents = inputData.contentText;
+    if (inputData.contents) {
+      myVariables.updateBoardInput.contents = inputData.contents;
     }
-    if (inputData.youtubeLink) {
-      myVariables.updateBoardInput.youtubeUrl = inputData.youtubeLink;
+    if (inputData.youtubeUrl) {
+      myVariables.updateBoardInput.youtubeUrl = inputData.youtubeUrl;
     }
     if (inputData.images) {
       myVariables.updateBoardInput.images = inputData.images;
     }
-
-    if (inputData.zipcode || inputData.addressCity || inputData.addressDetail) {
-      myVariables.updateBoardInput = { boardAddress: {} };
+    console.log(myVariables);
+    if (inputData.zipcode || inputData.address || inputData.addressDetail) {
+      myVariables.updateBoardInput = {
+        ...myVariables.updateBoardInput,
+        boardAddress: {},
+      };
 
       if (inputData.zipcode) {
+        if (!myVariables.updateBoardInput.boardAddress) {
+          return;
+        }
         myVariables.updateBoardInput.boardAddress.zipcode = inputData.zipcode;
       }
-      if (inputData.addressCity) {
-        myVariables.updateBoardInput.boardAddress.address =
-          inputData.addressCity;
+      if (inputData.address) {
+        if (!myVariables.updateBoardInput.boardAddress) {
+          return;
+        }
+        myVariables.updateBoardInput.boardAddress.address = inputData.address;
       }
       if (inputData.addressDetail) {
+        if (!myVariables.updateBoardInput.boardAddress) {
+          return;
+        }
         myVariables.updateBoardInput.boardAddress.addressDetail =
           inputData.addressDetail;
       }
     }
 
-    if (inputData.pwd) {
+    if (inputData.password) {
       try {
         const result = await UpdateInputData({
           variables: myVariables,
         });
-        // alert("게시물 수정이 완료되었습니다.");
         UpdateBoardSuccess();
         await router.push(`/boards/${result?.data?.updateBoard._id || ""}`);
       } catch (error) {
         if (error instanceof Error) PostFail(error.message);
       }
     } else {
-      setErrorPwd(true);
+      setErrorOutput({ ...errorOutput, password: true });
+      PostFail("비밀번호를 입력하세요.");
     }
   };
 
@@ -273,18 +208,8 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
 
   return (
     <BoardWritePresenter
-      errorPwd={errorPwd}
-      errorWriter={errorWriter}
-      errorContentTitle={errorContentTitle}
-      errorContent={errorContent}
-      onChangeWriter={onChangeWriter}
-      onChangePwd={onChangePwd}
-      onChangeContentTitle={onChangeContentTitle}
-      onChangeContentText={onChangeContentText}
-      onChangeZipcode={onChangeZipcode}
-      onChangeAddressCity={onChangeAddressCity}
-      onChangeAddressDetail={onChangeAddressDetail}
-      onChangeYoutubeLink={onChangeYoutubeLink}
+      errorOutput={errorOutput}
+      onChangeInput={onChangeInput}
       CreateBtn={CreateBtn}
       UpdateBtn={UpdateBtn}
       CreateCancelBtn={CreateCancelBtn}

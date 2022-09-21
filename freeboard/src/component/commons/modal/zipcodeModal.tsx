@@ -17,7 +17,7 @@ const ZipcodeModal = (P: IZipcodeModalP) => {
       return {
         ...state,
         zipcode: address.zonecode,
-        addressCity: address.address,
+        address: address.address,
         addressDetail: address.buildingName,
       };
     });

@@ -10,28 +10,28 @@ export type IBoardWriteContainerProps = {
 
 export type IInputDateProps = {
   writer: string;
-  pwd: string;
-  contentTitle: string;
-  contentText: string;
+  password: string;
+  title: string;
+  contents: string;
   zipcode: string;
-  addressCity: string;
+  address: string;
   addressDetail: string;
-  youtubeLink: string;
+  youtubeUrl: string;
   images: any;
 };
 
 export type IMyVrivables = {
   boardId: string;
   password: string;
-  updateBoardInput: IInnerupdateBoardInput;
+  updateBoardInput: IInnerUpdateBoardInput;
 };
 
-export type IInnerupdateBoardInput = {
+export type IInnerUpdateBoardInput = {
   title?: string;
   contents?: string;
   youtubeUrl?: string;
   images?: string[];
-  boardAddress: IUpdateBoardAddress;
+  boardAddress?: IUpdateBoardAddress;
 };
 
 export type IUpdateBoardAddress = {
@@ -43,18 +43,15 @@ export type IUpdateBoardAddress = {
 // presenter
 
 export type IBoardWritePresenterProps = {
-  errorPwd: boolean;
-  errorWriter: boolean;
-  errorContentTitle: boolean;
-  errorContent: boolean;
-  onChangeWriter: (event: ChangeEvent<HTMLInputElement>) => void;
-  onChangePwd: (event: ChangeEvent<HTMLInputElement>) => void;
-  onChangeContentTitle: (event: ChangeEvent<HTMLInputElement>) => void;
-  onChangeContentText: (event: ChangeEvent<HTMLTextAreaElement>) => void;
-  onChangeZipcode: (event: ChangeEvent<HTMLInputElement>) => void;
-  onChangeAddressCity: (event: ChangeEvent<HTMLInputElement>) => void;
-  onChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
-  onChangeYoutubeLink: (event: ChangeEvent<HTMLInputElement>) => void;
+  errorOutput: {
+    writer: boolean;
+    password: boolean;
+    title: boolean;
+    contents: boolean;
+  };
+  onChangeInput: (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => void;
   CreateBtn: () => void;
   UpdateBtn: () => void;
   CreateCancelBtn: () => void;

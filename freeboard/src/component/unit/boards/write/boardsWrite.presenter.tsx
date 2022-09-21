@@ -4,18 +4,8 @@ import { IBoardWritePresenterProps } from "./boardsWrite.types";
 
 export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
   const {
-    errorPwd,
-    errorWriter,
-    errorContentTitle,
-    errorContent,
-    onChangeWriter,
-    onChangePwd,
-    onChangeContentTitle,
-    onChangeContentText,
-    onChangeZipcode,
-    onChangeAddressCity,
-    onChangeAddressDetail,
-    onChangeYoutubeLink,
+    errorOutput,
+    onChangeInput,
     CreateBtn,
     UpdateBtn,
     CreateCancelBtn,
@@ -38,11 +28,12 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
             </S.Subtitle>
             <S.InputName
               type="text"
+              id="writer"
               placeholder="이름을 적어주세요."
-              onChange={onChangeWriter}
+              onChange={onChangeInput}
               defaultValue={existingData?.fetchBoard.writer || ""}
               disabled={isEdit}
-              errorColor={errorWriter}
+              errorColor={errorOutput.writer}
             />
           </S.WriterPwd>
           <S.WriterPwd>
@@ -51,9 +42,10 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
             </S.Subtitle>
             <S.InputPwd
               type="password"
+              id="password"
               placeholder="비밀번호를 입력해주세요."
-              onChange={onChangePwd}
-              errorColor={errorPwd}
+              onChange={onChangeInput}
+              errorColor={errorOutput.password}
             />
           </S.WriterPwd>
         </S.WriterPwdWrapper>
@@ -63,10 +55,11 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
           </S.Subtitle>
           <S.InputTitle
             type="text"
+            id="title"
             placeholder="제목을 작성해주세요."
-            onChange={onChangeContentTitle}
+            onChange={onChangeInput}
             defaultValue={existingData?.fetchBoard.title}
-            errorColor={errorContentTitle}
+            errorColor={errorOutput.title}
           />
         </S.SubtitleWrapper>
         <S.SubtitleWrapper>
@@ -74,20 +67,21 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
             내용 <S.CompulsoryStar>*</S.CompulsoryStar>
           </S.Subtitle>
           <S.TextareaContent
+            id="contents"
             placeholder="내용을 작성해주세요."
-            onChange={onChangeContentText}
+            onChange={onChangeInput}
             defaultValue={existingData?.fetchBoard.contents}
-            errorColor={errorContent}
+            errorColor={errorOutput.contents}
           />
-          <S.ErrorDiv>{errorContent}</S.ErrorDiv>
         </S.SubtitleWrapper>
         <S.SubtitleWrapper>
           <S.Subtitle>주소</S.Subtitle>
           <div className="우편번호">
             <S.InputW85pxH52px
               type="text"
-              placeholder="12212"
-              onChange={onChangeZipcode}
+              id="zipcode"
+              placeholder="12345"
+              onChange={onChangeInput}
               defaultValue={
                 inputData.zipcode ||
                 existingData?.fetchBoard?.boardAddress?.zipcode ||
@@ -98,16 +92,18 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
           </div>
           <S.InputW100per
             type="text"
-            onChange={onChangeAddressCity}
+            id="address"
+            onChange={onChangeInput}
             defaultValue={
-              inputData.addressCity ||
+              inputData.address ||
               existingData?.fetchBoard?.boardAddress?.address ||
               ""
             }
           />
           <S.InputW100per
             type="text"
-            onChange={onChangeAddressDetail}
+            id="addressDetail"
+            onChange={onChangeInput}
             defaultValue={
               inputData.addressDetail ||
               existingData?.fetchBoard?.boardAddress?.addressDetail ||
@@ -119,8 +115,9 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
           <S.Subtitle>유튜브</S.Subtitle>
           <S.InputW100per
             type="text"
+            id="youtubeUrl"
             placeholder="링크를 복사해주세요."
-            onChange={onChangeYoutubeLink}
+            onChange={onChangeInput}
             defaultValue={existingData?.fetchBoard.youtubeUrl || ""}
           />
         </S.SubtitleWrapper>

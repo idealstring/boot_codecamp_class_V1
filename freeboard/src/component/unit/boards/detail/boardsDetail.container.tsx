@@ -9,6 +9,7 @@ import {
 } from "./boardsDetail.queries";
 import { useState } from "react";
 import { IMutation } from "../../../../commons/types/generated/types";
+import { PostFail } from "../../../commons/modal/boardSuccessFail";
 
 export default function BoardDetailContainer() {
   const router = useRouter();
@@ -26,14 +27,10 @@ export default function BoardDetailContainer() {
   });
 
   const onClickLinkModal = () => {
-    setModal((modal) => {
-      return { ...modal, link: !modal.link };
-    });
+    setModal({ ...modal, link: !modal.link });
   };
   const onClickMapModal = () => {
-    setModal((modal) => {
-      return { ...modal, map: !modal.map };
-    });
+    setModal({ ...modal, map: !modal.map });
   };
   const onClickLikeBtn = async () => {
     try {
@@ -50,8 +47,8 @@ export default function BoardDetailContainer() {
           },
         ],
       });
-    } catch (error: any) {
-      alert(error.message);
+    } catch (error) {
+      if (error instanceof Error) PostFail(error.message);
     }
   };
   const onClickDislikeBtn = async () => {
@@ -70,7 +67,7 @@ export default function BoardDetailContainer() {
         ],
       });
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) PostFail(error.message);
     }
   };
 
@@ -82,8 +79,8 @@ export default function BoardDetailContainer() {
         },
       });
       router.push("/boards");
-    } catch (error: any) {
-      alert(error.message);
+    } catch (error) {
+      if (error instanceof Error) PostFail(error.message);
     }
   };
 
