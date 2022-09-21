@@ -15,11 +15,11 @@ export default function BoardWrite() {
   const onClickSubmit = async () => {
     const result = await 나의함수({
       variables: {
-        //variables -> $ 역할
+        // variables -> $ 역할
         writer: inputData.writer,
         title: inputData.title,
         contents: inputData.contents,
-      }, //변수 넣는 곳
+      }, // 변수 넣는 곳
     });
     console.log(result);
     alert(result.data.createBoard.message);
