@@ -32,74 +32,67 @@ export default function CommentWriteContainer(P: ICommentWriteContainerProps) {
     IMutationDeleteBoardCommentArgs
   >(UPDATE_BOARD_COMMENT);
 
-  const [writer, setWriter] = useState("");
-  const [pwd, setPwd] = useState("");
-  const [contents, setContents] = useState("");
-  const [rating, setRating] = useState(0);
-  const [errorWriter, setErrorWriter] = useState(false);
-  const [errorPwd, setErrorPwd] = useState(false);
-  const [errorContents, setErrorContents] = useState(false);
-  const [errorRating, setErrorRating] = useState(false);
+  const [inputData, setInputData] = useState({
+    writer: "",
+    password: "",
+    contents: "",
+    rating: 0,
+  });
+  const [errorOutput, setErrorOutput] = useState({
+    writer: false,
+    password: false,
+    contents: false,
+    rating: false,
+  });
 
-  const onChangeWriter = (e: ChangeEvent<HTMLInputElement>) => {
-    setWriter(e.target.value);
+  const onChangeInput = (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setInputData({ ...inputData, [e.target.id]: e.target.value });
     if (e.target.value) {
-      setErrorWriter(false);
-    }
-    if (isEdit && e.target.value) {
-      setErrorWriter(false);
+      setErrorOutput({ ...errorOutput, [e.target.id]: false });
     }
   };
-  const onChangePwd = (e: ChangeEvent<HTMLInputElement>) => {
-    setPwd(e.target.value);
-    if (e.target.value) {
-      setErrorPwd(false);
-    }
-    if (isEdit && e.target.value) {
-      setErrorPwd(false);
-    }
-  };
-  const onChangeContents = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setContents(e.target.value);
-    if (e.target.value) {
-      setErrorContents(false);
-    }
-    if (isEdit && e.target.value) {
-      setErrorContents(false);
-    }
-  };
+
   const onChangeRating = (e: number) => {
-    setRating(e);
+    const {} = inputData;
+    setInputData({ ...inputData, rating: e });
     if (e) {
-      setErrorRating(false);
-    }
-    if (isEdit && e) {
-      setErrorRating(false);
+      setErrorOutput({ ...errorOutput, rating: false });
     }
   };
 
   const onClickCreateBtn = async () => {
+    const { writer, password, contents, rating } = inputData;
     if (!writer) {
-      setErrorWriter(true);
+      setErrorOutput((errorOutput) => {
+        return { ...errorOutput, writer: true };
+      });
     }
-    if (!pwd) {
-      setErrorPwd(true);
+    if (!password) {
+      setErrorOutput((errorOutput) => {
+        return { ...errorOutput, password: true };
+      });
     }
     if (!contents) {
-      setErrorContents(true);
+      setErrorOutput((errorOutput) => {
+        return { ...errorOutput, contents: true };
+      });
     }
     if (!rating) {
-      setErrorRating(true);
+      setErrorOutput((errorOutput) => {
+        return { ...errorOutput, rating: true };
+      });
     }
 
-    if (writer && pwd && contents && rating) {
+    if (writer && password && contents && rating) {
       try {
         await createComment({
           variables: {
             boardId: String(router.query.detail),
             createBoardCommentInput: {
               writer,
-              password: pwd,
+              password,
               contents,
               rating,
             },
@@ -112,12 +105,9 @@ export default function CommentWriteContainer(P: ICommentWriteContainerProps) {
           ],
         });
       } catch (error: any) {
-        alert(error.message);
+        if (error instanceof Error) CommentFail(error.message);
       }
-      setWriter("");
-      setPwd("");
-      setContents("");
-      setRating(0);
+      setInputData({ writer: "", password: "", contents: "", rating: 0 });
     }
   };
 
@@ -126,22 +116,22 @@ export default function CommentWriteContainer(P: ICommentWriteContainerProps) {
 
     const myVariables: IMyVariables = {
       boardCommentId: comment._id,
-      password: pwd,
+      password: inputData.password,
       updateBoardCommentInput: myUpdateBoardCommentInput,
     };
-    if (contents) {
-      myVariables.updateBoardCommentInput.contents = contents;
+    if (inputData.contents) {
+      myVariables.updateBoardCommentInput.contents = inputData.contents;
     } else {
       myVariables.updateBoardCommentInput.contents = comment.contents;
     }
-    if (rating) {
-      myVariables.updateBoardCommentInput.rating = rating;
+    if (inputData.rating) {
+      myVariables.updateBoardCommentInput.rating = inputData.rating;
     } else {
       myVariables.updateBoardCommentInput.rating = comment.rating;
     }
 
-    if (!pwd) {
-      setErrorPwd(true);
+    if (!inputData.password) {
+      setErrorOutput({ ...errorOutput, password: true });
     } else {
       try {
         await updateComment({
@@ -166,20 +156,12 @@ export default function CommentWriteContainer(P: ICommentWriteContainerProps) {
 
   return (
     <CommentWritePresenter
-      writer={writer}
-      pwd={pwd}
-      contents={contents}
-      rating={rating}
-      errorWriter={errorWriter}
-      errorPwd={errorPwd}
-      errorContents={errorContents}
-      errorRating={errorRating}
+      inputData={inputData}
+      errorOutput={errorOutput}
       onClickCreateBtn={onClickCreateBtn}
       onClickUpdateBtn={onClickUpdateBtn}
       onClickCancelBtn={onClickCancelBtn}
-      onChangeWriter={onChangeWriter}
-      onChangePwd={onChangePwd}
-      onChangeContents={onChangeContents}
+      onChangeInput={onChangeInput}
       onChangeRating={onChangeRating}
       isEdit={isEdit}
       comment={comment}

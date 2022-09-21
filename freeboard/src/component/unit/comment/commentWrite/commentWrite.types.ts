@@ -22,20 +22,27 @@ export type IUpdateBoardCommentInput = {
 // presenter
 
 export type ICommentWritePresenterProps = {
-  writer: string;
-  pwd: string;
-  rating: number;
-  contents: string;
-  errorWriter: boolean;
-  errorPwd: boolean;
-  errorContents: boolean;
-  errorRating: boolean;
+  inputData: {
+    writer: string;
+    password: string;
+    rating: number;
+    contents: string;
+  };
+  errorOutput: {
+    writer: boolean;
+    password: boolean;
+    contents: boolean;
+    rating: boolean;
+  };
   onClickCreateBtn: () => void;
   onClickUpdateBtn: () => void;
   onClickCancelBtn: () => void;
-  onChangeWriter: (e: ChangeEvent<HTMLInputElement>) => void;
-  onChangePwd: (e: ChangeEvent<HTMLInputElement>) => void;
-  onChangeContents: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  // onChangeWriter: (e: ChangeEvent<HTMLInputElement>) => void;
+  // onChangePwd: (e: ChangeEvent<HTMLInputElement>) => void;
+  // onChangeContents: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  onChangeInput: (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+  ) => void;
   onChangeRating: (e: number) => void;
   isEdit: boolean;
   comment: any;
