@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { StyleSet } from "../../../../commons/style/styleSet";
 
 export const Container = styled.header`
   width: 100%;
@@ -20,7 +21,7 @@ export const NavBtnWrapper = styled.div`
 export const NavBtn = styled.button`
   margin: 10px;
   padding: 0;
-  background-color: white;
+  background-color: transparent;
   border: 0;
 
   cursor: pointer;
@@ -33,7 +34,7 @@ export const LogoWrapper = styled.div`
 export const LogoBtn = styled.button`
   margin: 10px;
   padding: 0;
-  background-color: white;
+  background-color: transparent;
   border: 0;
 
   cursor: pointer;
@@ -48,14 +49,14 @@ export const NoMemberWrapper = styled.div`
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
-  font-size: 0.82857rem;
+  font-size: ${StyleSet.fontSize.b5};
 `;
 
 export const SignIn = styled.button`
   margin: 10px;
   padding: 0;
   color: #555;
-  background-color: white;
+  background-color: transparent;
   border: 0;
 
   cursor: pointer;
@@ -65,7 +66,7 @@ export const Join = styled.button`
   margin: 10px;
   padding: 0;
   color: #555;
-  background-color: white;
+  background-color: transparent;
   border: 0;
 
   cursor: pointer;
@@ -83,7 +84,7 @@ export const MemberWrapper = styled.div`
 export const MemberBtn = styled.button`
   margin: 10px;
   padding: 0;
-  background-color: white;
+  background-color: transparent;
   border: 0;
 
   cursor: pointer;

@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { StyleSet } from "./styleSet";
 
 export const GlobalStyle = css`
   html,
@@ -20,15 +21,62 @@ export const GlobalStyle = css`
     font-size: 16px;
   }
 
+  @media (prefers-color-scheme: light) {
+    html {
+      color-scheme: light;
+    }
+    body {
+      color: ${StyleSet.colors.black};
+      background: ${StyleSet.colors.backgroundWhite};
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: ${StyleSet.colors.black};
+    }
+
+    svg g {
+      fill: ${StyleSet.colors.black};
+    }
+
+    .grayMutation {
+      background-color: ${StyleSet.colors.lightGray01};
+    }
+
+    .ListContent:hover {
+      background-color: ${StyleSet.colors.lightGray01};
+    }
+  }
+
   @media (prefers-color-scheme: dark) {
     html {
       color-scheme: dark;
     }
     body {
-      color: white;
-      background: black;
+      color: ${StyleSet.colors.white};
+      background: ${StyleSet.colors.backgroundBlack};
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: ${StyleSet.colors.white};
+    }
+
+    svg g {
+      fill: ${StyleSet.colors.white};
+    }
+
+    .grayMutation {
+      background-color: ${StyleSet.colors.black};
+    }
+
+    .ListContent:hover {
+      background-color: ${StyleSet.colors.gray};
     }
   }
+
   @font-face {
     font-family: "NanumSquare_acR";
     src: url("/fonts/NanumSquare_acR.ttf");

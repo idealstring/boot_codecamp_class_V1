@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { StyleSet } from "../../../../commons/style/styleSet";
 
 export const Container = styled.div`
   box-sizing: border-box;
@@ -16,7 +17,7 @@ export const TitleWrapper = styled.div`
   margin: 0 0 30px 0;
   padding: 50px 0;
   border-top: 0.5px solid #bdbdbd;
-  border-bottom: 1px solid #bdbdbd;
+  border-bottom: 0.5px solid #bdbdbd;
 
   height: 180px;
   display: flex;
@@ -29,12 +30,13 @@ export const TitleWrapper = styled.div`
 
 export const Title = styled.h2`
   margin: 0;
-  font-size: 2rem;
+  font-size: ${StyleSet.fontSize.h1};
   font-weight: 500;
 `;
+
 export const TitleInfoTop = styled.div`
   margin: 5px 0;
-  font-size: 0.9rem;
+  font-size: ${StyleSet.fontSize.b4};
   font-weight: 300;
 
   width: 100%;
@@ -50,7 +52,7 @@ export const TitleInfoTop = styled.div`
 `;
 export const TitleInfoBottom = styled.div`
   margin: 5px 0;
-  font-size: 0.9rem;
+  font-size: ${StyleSet.fontSize.b4};
   font-weight: 400;
 
   width: 300px;
@@ -84,7 +86,7 @@ export const LinkModal = styled.div`
   right: 30px;
   padding: 10px 20px;
   background-color: #999999;
-  color: #ffffff;
+  color: #fff;
 
   // display: none;
 

@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
+import { StyleSet } from "../../../../commons/style/styleSet";
 
 const Container = styled.footer`
   margin-top: 50px;
   width: 100%;
-  background-color: #f7f9fa;
 `;
 const Wrapper = styled.footer`
   margin: 0 auto;
@@ -18,7 +18,7 @@ const WrapperLeft = styled.div`
   margin-right: 50px;
 `;
 const WrapperRight = styled.div`
-  font-size: 0.92857rem;
+  font-size: ${StyleSet.fontSize.b3}
   color: #555;
 `;
 
@@ -35,19 +35,18 @@ const OutLinkBtn = styled.a`
   margin: 0;
   padding: 0;
   border: 0;
-  background: #f7f9fa;
+  background: transparent;
 
   cursor: pointer;
 `;
 
 const Copyright = styled.div`
   margin-top: 20px;
-  color: #ccc;
 `;
 
 export default function Footer() {
   return (
-    <Container>
+    <Container className="grayMutation">
       <Wrapper>
         <WrapperLeft>
           <svg

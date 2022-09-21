@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { StyleSet } from "../../../../commons/style/styleSet";
 import { ICompleteColorProps, IErrorColorProps } from "./boardsWrite.types";
 
 export const Container = styled.div`
@@ -16,7 +17,7 @@ export const Container = styled.div`
 export const Title = styled.div`
   margin-bottom: 40px;
   text-align: center;
-  font-size: 1.6rem;
+  font-size: ${StyleSet.fontSize.h2};
   font-weight: 700px;
 `;
 
@@ -59,7 +60,7 @@ export const InputName = styled.input`
   height: 52px;
   border: 1px solid #bdbdbd;
   background-color: ${(props: IErrorColorProps) =>
-    props.errorColor ? "red" : "default"};
+    props.errorColor ? `${StyleSet.colors.point03}` : "default"};
   ::placeholder {
     color: ${(props: IErrorColorProps) =>
       props.errorColor ? "white" : "default"};
@@ -73,7 +74,7 @@ export const InputPwd = styled.input`
   height: 52px;
   border: 1px solid #bdbdbd;
   background-color: ${(props: IErrorColorProps) =>
-    props.errorColor ? "red" : "default"};
+    props.errorColor ? `${StyleSet.colors.point03}` : "default"};
   ::placeholder {
     color: ${(props: IErrorColorProps) =>
       props.errorColor ? "white" : "default"};
@@ -93,7 +94,7 @@ export const InputTitle = styled.input`
   height: 52px;
   border: 1px solid #bdbdbd;
   background-color: ${(props: IErrorColorProps) =>
-    props.errorColor ? "red" : "default"};
+    props.errorColor ? `${StyleSet.colors.point03}` : "default"};
   ::placeholder {
     color: ${(props: IErrorColorProps) =>
       props.errorColor ? "white" : "default"};
@@ -115,7 +116,7 @@ export const TextareaContent = styled.textarea`
   height: 480px;
   border: 1px solid #bdbdbd;
   background-color: ${(props: IErrorColorProps) =>
-    props.errorColor ? "red" : "default"};
+    props.errorColor ? `${StyleSet.colors.point03}` : "default"};
   ::placeholder {
     color: ${(props: IErrorColorProps) =>
       props.errorColor ? "white" : "default"};
@@ -203,9 +204,9 @@ export const SubmitBtn = styled.button`
   border-radius: 52px;
   border: none;
   font-weight: 500;
-  color: #000000;
+  color: #fff;
   background-color: ${(props: ICompleteColorProps) =>
-    props.isCompleteColor ? "#ffd600" : "default"};
+    props.isCompleteColor ? `${StyleSet.colors.point01}` : "default"};
   cursor: pointer;
 `;
 export const CancelBtn = styled.button`
@@ -214,7 +215,7 @@ export const CancelBtn = styled.button`
   border: none;
   font-weight: 500;
   color: #bdbdbd;
-  background-color: white;
+  background-color: transparent;
   cursor: pointer;
   &:hover {
     color: #000000;
@@ -230,7 +231,7 @@ export const ImgUpload = styled.div`
   margin-right: 24px;
   width: 78px;
   height: 78px;
-  background-color: #bdbdbd;
+  background-color: ${StyleSet.colors.gray};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -246,11 +247,4 @@ export const ImgUpload = styled.div`
 
 export const InputRadioWrapper = styled.div`
   margin-top: 16px;
-`;
-
-export const ErrorDiv = styled.div`
-  height: 12px;
-  color: red;
-  font-size: 12px;
-  font-weight: 500;
 `;

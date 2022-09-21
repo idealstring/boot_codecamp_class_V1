@@ -2,6 +2,9 @@ import styled from "@emotion/styled";
 import { useState, useRef, useEffect } from "react";
 
 const Wrapper = styled.div`
+  width: 100%;
+  background-color: black;
+
   display: flex;
   align-items: center;
   justify-content: center;

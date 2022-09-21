@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { StyleSet } from "../../../../commons/style/styleSet";
 
 export const BoardContainer = styled.div`
   box-sizing: border-box;
@@ -14,7 +15,6 @@ export const BoardContainer = styled.div`
 
 export const BestListContainer = styled.div`
   width: 100%;
-  background-color: #eee;
 `;
 export const BestListWrapper = styled.div`
   margin: 0 auto;
@@ -34,7 +34,7 @@ export const BestBoard = styled.div`
   width: 230px;
   height: 200px;
 
-  background-color: #ffffff;
+  background-color: transparent;
   border-radius: 10px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   font-weight: 700px;
@@ -112,7 +112,7 @@ export const SearchWord = styled.input`
 export const SearchBtn = styled.button`
   appearance: none;
   border: none;
-  background: none;
+  background: transparent;
 
   cursor: pointer;
 
@@ -127,18 +127,7 @@ export const DateOpenBtn = styled.button`
   padding: 2px;
   width: 100px;
   border: none;
-  background-color: white;
-
-  // position: relative;
-  // &::after {
-  //   content: "";
-  //   position: absolute;
-  //   width: 8px;
-  //   height: 8px;
-  //   border-right: 1px solid #ddd;
-  //   border-bottom: 1px solid #8d8d8d;
-  //   transform: rotate(45deg) translateX(-1px);
-  // }
+  background-color: transparent;
 `;
 
 export const SearchDate = styled.div`
@@ -146,7 +135,6 @@ export const SearchDate = styled.div`
   margin-bottom: 25px;
   width: 360px;
   height: 48px;
-  background-color: #f2f2f2;
   text-align: center;
   line-height: 48px;
 `;
@@ -160,7 +148,7 @@ export const ListContainer = styled.div`
 
 export const ListWrapper = styled.ul`
   padding: 0;
-  border-top: 1px solid black;
+  border-top: 1px solid;
   border-bottom: 1px solid #eee;
 
   list-style: none;
@@ -170,7 +158,7 @@ export const ListWrapper = styled.ul`
   justify-content: space-between;
   algin-items: center;
 
-  font-size: 1.04286rem;
+  font-size: ${StyleSet.fontSize.b2};
 `;
 
 export const ListTop = styled.li`
@@ -183,7 +171,7 @@ export const ListTop = styled.li`
   algin-items: center;
 
   letter-spacing: -0.6px;
-  font-size: 1.07143rem;
+  font-size: ${StyleSet.fontSize.b1};
 `;
 
 export const ListNumber = styled.span`
@@ -219,10 +207,6 @@ export const ListContent = styled.li`
   algin-items: center;
 
   cursor: pointer;
-
-  &:hover {
-    background-color: #f9f9f9;
-  }
 `;
 
 export const ContentNumber = styled.span`
@@ -266,7 +250,7 @@ export const ContentBtn = styled.button`
   height: 46px;
   border: 1px solid #999999;
   border-radius: 46px;
-  background: none;
+  background: transparent;
   cursor: pointer;
 
   position: absolute;

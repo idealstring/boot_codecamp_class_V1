@@ -16,7 +16,7 @@ export const PaginationWrapper = styled.div`
 export const PagePrevNextBtn = styled.button`
   margin: 0 10px;
   border: none;
-  background-color: #fff;
+  background-color: transparent;
 
   display: flex;
   cursor: pointer;
@@ -28,7 +28,7 @@ export const PageBtn = styled.button`
   width: 24px;
   height: 24px;
   border: none;
-  background-color: #fff;
+  background-color: transparent;
   font-weight: ${(props: IActiveProps) => (props.active ? "bold" : "normal")};
   border-bottom: ${(props: IActiveProps) =>
     props.active ? "1px solid black" : "none"};

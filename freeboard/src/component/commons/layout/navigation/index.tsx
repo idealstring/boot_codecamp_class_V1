@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
+import { StyleSet } from "../../../../commons/style/styleSet";
 
 const Container = styled.header`
   width: 100%;
@@ -16,10 +17,10 @@ const Wrapper = styled.header`
 
 const NavButton = styled.button`
   margin: 0 10px;
-  background-color: #fff;
+  background-color: transparent;
   border: none;
 
-  font-size: 1.14286rem;
+  font-size: ${StyleSet.fontSize.h5};
 
   cursor: pointer;
 `;
@@ -57,7 +58,7 @@ export default function Navigation(P: INavigationProps) {
                 router.push("/notice");
               }}
             >
-              NOTICE
+              MYPAGE
             </NavButton>
           </Wrapper>
         </Container>

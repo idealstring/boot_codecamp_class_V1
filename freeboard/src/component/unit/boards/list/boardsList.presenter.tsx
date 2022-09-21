@@ -17,7 +17,7 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
   } = P;
   return (
     <Fragment>
-      <S.BestListContainer>
+      <S.BestListContainer className="grayMutation">
         <S.BestListWrapper>
           {fetchBoardsOfTheBestDate?.fetchBoardsOfTheBest?.map((bestBoard) => (
             <Link href={`/boards/${bestBoard._id}`} key={bestBoard._id}>
@@ -59,12 +59,14 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
                 height="14px"
                 viewBox="0 0 1024 1024"
                 version="1.1"
-                fill="#8d8d8d"
+                // fill="#8d8d8d"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path d="M894.973949 322.308432a24.8 24.8 0 1 0 35.071884-35.073108 24.8 24.8 0 1 0-35.071884 35.073108Z" />
-                <path d="M114.9 291.4l-35.3 35.3 422.5 422.5 427.6-427.7-30.6-30.6h-7.8L502.9 679.4z" />
-                <path d="M79.547924 326.565605a24.8 24.8 0 1 0 35.071885-35.073108 24.8 24.8 0 1 0-35.071885 35.073108Z" />
+                <g>
+                  <path d="M894.973949 322.308432a24.8 24.8 0 1 0 35.071884-35.073108 24.8 24.8 0 1 0-35.071884 35.073108Z" />
+                  <path d="M114.9 291.4l-35.3 35.3 422.5 422.5 427.6-427.7-30.6-30.6h-7.8L502.9 679.4z" />
+                  <path d="M79.547924 326.565605a24.8 24.8 0 1 0 35.071885-35.073108 24.8 24.8 0 1 0-35.071885 35.073108Z" />
+                </g>{" "}
               </svg>
             ) : (
               <svg
@@ -72,18 +74,22 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
                 height="14px"
                 viewBox="0 0 1024 1024"
                 version="1.1"
-                fill="#8d8d8d"
+                // fill="#8d8d8d"
                 xmlns="http://www.w3.org/2000/svg"
                 transform="rotate(180)"
               >
-                <path d="M894.973949 322.308432a24.8 24.8 0 1 0 35.071884-35.073108 24.8 24.8 0 1 0-35.071884 35.073108Z" />
-                <path d="M114.9 291.4l-35.3 35.3 422.5 422.5 427.6-427.7-30.6-30.6h-7.8L502.9 679.4z" />
-                <path d="M79.547924 326.565605a24.8 24.8 0 1 0 35.071885-35.073108 24.8 24.8 0 1 0-35.071885 35.073108Z" />
+                <g>
+                  <path d="M894.973949 322.308432a24.8 24.8 0 1 0 35.071884-35.073108 24.8 24.8 0 1 0-35.071884 35.073108Z" />
+                  <path d="M114.9 291.4l-35.3 35.3 422.5 422.5 427.6-427.7-30.6-30.6h-7.8L502.9 679.4z" />
+                  <path d="M79.547924 326.565605a24.8 24.8 0 1 0 35.071885-35.073108 24.8 24.8 0 1 0-35.071885 35.073108Z" />
+                </g>
               </svg>
             )}
           </S.DateOpenBtn>
           {isDateOpen ? (
-            <S.SearchDate>YYYY-MM-DD ~ YYYY-MM-DD</S.SearchDate>
+            <S.SearchDate className="grayMutation">
+              YYYY-MM-DD ~ YYYY-MM-DD
+            </S.SearchDate>
           ) : null}
         </S.SearchBarWrapper>
         <S.ListContainer>
@@ -96,7 +102,7 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
             </S.ListTop>
             {fetchBoardsData?.fetchBoards?.map((board, i) => (
               <Link href={`/boards/${board._id}`} key={board._id}>
-                <S.ListContent>
+                <S.ListContent className="ListContent">
                   <S.ContentNumber>{i + 1}</S.ContentNumber>
                   <S.ContentTitle>{board.title}</S.ContentTitle>
                   <S.ContentWriter>{board.writer}</S.ContentWriter>

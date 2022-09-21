@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { StyleSet } from "../../../../commons/style/styleSet";
 
 export const CommentWrapper = styled.section`
   margin: 0 auto;
@@ -49,8 +50,7 @@ export const ViewContentTop = styled.div`
 
 export const CommentContentName = styled.span`
   margin-right: 15px;
-  font-size: 16px;
-  font-weight: 500;
+  font-weight: 900;
 `;
 
 export const RateStarWrapper = styled.div`
@@ -75,11 +75,11 @@ export const CommentViewBtn = styled.button`
 
 export const CommentViewContent = styled.div`
   margin: 10px 0 15px 0;
-  font-size: 18px;
+  font-size: ${StyleSet.fontSize.b2};
   font-weight: 300;
 `;
 export const CommentViewContentDate = styled.div`
-  font-size: 12px;
+  font-size: ${StyleSet.fontSize.b5};
   color: #bdbdbd;
 `;
 

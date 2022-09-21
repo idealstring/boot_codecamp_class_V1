@@ -100,9 +100,9 @@ export const CommentContentWrapper = styled.div`
 `;
 
 export const TextareaW1200 = styled.textarea`
-  padding: 24px;
+  padding: 20px;
   width: 100%;
-  height: 100px;
+  height: 75px;
   border: none;
   border-bottom: 1px solid #f2f2f2;
   resize: none;
@@ -140,11 +140,4 @@ export const CommentBtn = styled.button`
     props.isEdit ? (props.isCancel ? "#ffffff" : "#ffd600") : "#000000"};
   color: ${(props: IIsCancelIsEditProps) =>
     props.isEdit ? "#000000" : "#ffffff"};
-`;
-
-export const ErrorDiv = styled.div`
-  height: 12px;
-  color: red;
-  font-size: 12px;
-  font-weight: 500;
 `;
