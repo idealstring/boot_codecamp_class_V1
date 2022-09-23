@@ -55,7 +55,6 @@ export default function CommentWriteContainer(P: ICommentWriteContainerProps) {
   };
 
   const onChangeRating = (e: number) => {
-    const {} = inputData;
     setInputData({ ...inputData, rating: e });
     if (e) {
       setErrorOutput({ ...errorOutput, rating: false });
@@ -63,28 +62,27 @@ export default function CommentWriteContainer(P: ICommentWriteContainerProps) {
   };
 
   const onClickCreateBtn = async () => {
-    const { writer, password, contents, rating } = inputData;
-    if (!writer) {
+    if (!inputData.writer) {
       setErrorOutput((errorOutput) => {
         return { ...errorOutput, writer: true };
       });
     }
-    if (!password) {
+    if (!inputData.password) {
       setErrorOutput((errorOutput) => {
         return { ...errorOutput, password: true };
       });
     }
-    if (!contents) {
+    if (!inputData.contents) {
       setErrorOutput((errorOutput) => {
         return { ...errorOutput, contents: true };
       });
     }
-    if (!rating) {
+    if (!inputData.rating) {
       setErrorOutput((errorOutput) => {
         return { ...errorOutput, rating: true };
       });
     }
-
+    const { writer, password, contents, rating } = inputData;
     if (writer && password && contents && rating) {
       try {
         await createComment({
@@ -113,12 +111,12 @@ export default function CommentWriteContainer(P: ICommentWriteContainerProps) {
 
   const onClickUpdateBtn = async () => {
     const myUpdateBoardCommentInput: IUpdateBoardCommentInput = {};
-
     const myVariables: IMyVariables = {
       boardCommentId: comment._id,
       password: inputData.password,
       updateBoardCommentInput: myUpdateBoardCommentInput,
     };
+
     if (inputData.contents) {
       myVariables.updateBoardCommentInput.contents = inputData.contents;
     } else {
@@ -132,6 +130,7 @@ export default function CommentWriteContainer(P: ICommentWriteContainerProps) {
 
     if (!inputData.password) {
       setErrorOutput({ ...errorOutput, password: true });
+      CommentFail("비밀번호를 입력하세요.");
     } else {
       try {
         await updateComment({

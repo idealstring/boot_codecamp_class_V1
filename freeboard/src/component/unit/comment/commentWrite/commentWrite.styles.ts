@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { StyleSet } from "../../../../commons/style/styleSet";
 import { IErrorColorProps, IIsCancelIsEditProps } from "./commentWrite.types";
 
 export const HrLine = styled.hr`
@@ -20,10 +21,11 @@ export const CommentWrapper = styled.div`
 
 export const CommentTitle = styled.div`
   margin-bottom: 15px;
+  width: 60px;
 
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 `;
 
@@ -57,7 +59,7 @@ export const InputName = styled.input`
   height: 52px;
   border: 1px solid #bdbdbd;
   background-color: ${(props: IErrorColorProps) =>
-    props.errorColor ? "red" : "default"};
+    props.errorColor ? `${StyleSet.colors.inputError}` : "default"};
   ::placeholder {
     color: ${(props: IErrorColorProps) =>
       props.errorColor ? "white" : "default"};
@@ -71,7 +73,7 @@ export const InputPwd = styled.input`
   height: 52px;
   border: 1px solid #bdbdbd;
   background-color: ${(props: IErrorColorProps) =>
-    props.errorColor ? "red" : "default"};
+    props.errorColor ? `${StyleSet.colors.inputError}` : "default"};
   ::placeholder {
     color: ${(props: IErrorColorProps) =>
       props.errorColor ? "white" : "default"};
@@ -83,7 +85,7 @@ export const RateStarWrapper = styled.div`
   width: 100%;
   height: 52px;
   background-color: ${(props: IErrorColorProps) =>
-    props.errorColor ? "red" : "default"};
+    props.errorColor ? `${StyleSet.colors.inputError}` : "default"};
   z-index: 0;
 `;
 
@@ -107,7 +109,7 @@ export const TextareaW1200 = styled.textarea`
   border-bottom: 1px solid #f2f2f2;
   resize: none;
   background-color: ${(props: IErrorColorProps) =>
-    props.errorColor ? "red" : "default"};
+    props.errorColor ? `${StyleSet.colors.inputError}` : "default"};
   ::placeholder {
     color: ${(props: IErrorColorProps) =>
       props.errorColor ? "white" : "default"};

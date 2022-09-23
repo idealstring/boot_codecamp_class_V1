@@ -103,10 +103,10 @@ export const LinkModal = styled.div`
   }
 `;
 
-export const MapIcon = styled.img`
-  width: 18px;
-  height: 26px;
-`;
+// export const MapIcon = styled.button`
+//   width: 18px;
+//   height: 26px;
+// `;
 
 export const MapModal = styled.div`
   top: 35px;

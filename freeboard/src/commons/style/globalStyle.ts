@@ -21,6 +21,11 @@ export const GlobalStyle = css`
     font-size: 16px;
   }
 
+  .ant-btn-primary {
+    border-color: ${StyleSet.colors.point01};
+    background: ${StyleSet.colors.point01};
+  }
+
   @media (prefers-color-scheme: light) {
     html {
       color-scheme: light;

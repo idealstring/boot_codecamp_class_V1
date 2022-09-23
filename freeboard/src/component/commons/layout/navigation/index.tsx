@@ -47,6 +47,14 @@ export default function Navigation(P: INavigationProps) {
             |
             <NavButton
               onClick={() => {
+                router.push("/ranking");
+              }}
+            >
+              RANKING
+            </NavButton>
+            |
+            <NavButton
+              onClick={() => {
                 router.push("/boards");
               }}
             >
