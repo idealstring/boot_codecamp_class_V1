@@ -10,5 +10,4 @@ export type IBoardDetailPresenterProps = {
   onClickDislikeBtn: () => void;
   onClickMoveToList: () => void;
   onClickMoveToEdit: () => void;
-  onClickDeleteBtn: () => void;
 };

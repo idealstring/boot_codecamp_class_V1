@@ -5,72 +5,28 @@ import {
   dateFormatter,
   dateTimeFormatter,
 } from "../../../../commons/utils/utils";
-import DeleteModal from "../../../commons/modal/commentDelete";
-import {
-  DELETE_BOARD_COMMENT,
-  FETCH_BOARD_COMMENTS,
-} from "./commentList.queries";
+// import DeleteModal from "../../../commons/modal/commentDelete";
 import { useRouter } from "next/router";
 import { ICommentListPresenterItemProps } from "./commentList.types";
 import CommentWriteContainer from "../commentWrite/commentWrite.container";
 import { Rate } from "antd";
+import CommentDeleteModal from "../../../commons/modal/commentDelete";
 
 export default function CommentListPresenterItem(
   P: ICommentListPresenterItemProps
 ) {
   const { comment } = P;
-  const router = useRouter();
   const [isEdit, setIsEdit] = useState(false);
-  const [isDelete, setIsDelete] = useState(false);
-  const [deletePwd, setDeletePwd] = useState("");
-  const [deleteId, setDeleteId] = useState("");
-  const [deleteBoardComment] = useMutation(DELETE_BOARD_COMMENT);
-
   const onClickIsEditToggle = () => {
     setIsEdit((isEdit) => !isEdit);
-  };
-
-  const onClickIsDeleteToggle = () => {
-    setIsDelete((isDelete) => !isDelete);
   };
 
   const onClickUpdateBtn = () => {
     onClickIsEditToggle();
   };
-  const onClickDeleteBtn = (e: MouseEvent<HTMLButtonElement>) => {
-    onClickIsDeleteToggle();
-    setDeleteId(e.currentTarget.id);
-  };
-
-  const deleteBoardCommentFunc = async () => {
-    try {
-      await deleteBoardComment({
-        variables: {
-          boardCommentId: deleteId,
-          password: deletePwd,
-        },
-        refetchQueries: [
-          {
-            query: FETCH_BOARD_COMMENTS,
-            variables: { boardId: router.query.detail, page: 1 },
-          },
-        ],
-      });
-      onClickIsDeleteToggle();
-    } catch (error) {
-      if (error instanceof Error) alert(error.message);
-    }
-  };
 
   return (
     <>
-      {isDelete && (
-        <DeleteModal
-          setDeletePwd={setDeletePwd}
-          onClickIsDeleteToggle={onClickIsDeleteToggle}
-          deleteBoardCommentFunc={deleteBoardCommentFunc}
-        />
-      )}
       {isEdit && (
         <CommentWriteContainer
           isEdit={isEdit}
@@ -118,23 +74,7 @@ export default function CommentListPresenterItem(
                       />
                     </svg>
                   </S.CommentViewBtn>
-                  <S.CommentViewBtn
-                    id={comment?._id}
-                    onClick={onClickDeleteBtn}
-                  >
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 14 14"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z"
-                        fill="#BDBDBD"
-                      />
-                    </svg>
-                  </S.CommentViewBtn>
+                  <CommentDeleteModal id={comment?._id} />
                 </S.CommentViewBtnWrapper>
               </S.ViewContentTop>
               <S.CommentViewContent>{comment.contents}</S.CommentViewContent>

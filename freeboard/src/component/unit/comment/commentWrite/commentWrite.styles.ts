@@ -93,7 +93,7 @@ export const CommentContentWrapper = styled.div`
   padding: 0;
 
   width: 100%;
-  border: 1px solid #bdbdbd;
+  // border: 1px solid #bdbdbd;
 
   display: flex;
   flex-direction: column;
@@ -106,7 +106,7 @@ export const TextareaW1200 = styled.textarea`
   width: 100%;
   height: 75px;
   border: none;
-  border-bottom: 1px solid #f2f2f2;
+  border: 1px solid #bdbdbd;
   resize: none;
   background-color: ${(props: IErrorColorProps) =>
     props.errorColor ? `${StyleSet.colors.inputError}` : "default"};
@@ -135,11 +135,17 @@ export const CommentBtn = styled.button`
   height: 52px;
   padding: 14px;
   border: none;
-  border-left: ${(props: IIsCancelIsEditProps) =>
-    props.isEdit && props.isCancel ? "1px solid #f2f2f2" : "none"};
   cursor: pointer;
   background-color: ${(props: IIsCancelIsEditProps) =>
-    props.isEdit ? (props.isCancel ? "#ffffff" : "#ffd600") : "#000000"};
+    props.isEdit
+      ? props.isCancel
+        ? "none"
+        : `${StyleSet.colors.point01}`
+      : "#000000"};
   color: ${(props: IIsCancelIsEditProps) =>
-    props.isEdit ? "#000000" : "#ffffff"};
+    props.isEdit
+      ? props.isCancel
+        ? "#000000"
+        : `${StyleSet.colors.white}`
+      : "#ffffff"};
 `;

@@ -168,7 +168,7 @@ export const LikeWrapper = styled.div`
   justify-content: space-between;
   algin-items: center;
   text-align: center;
-  color: #ffd600;
+  color: ${StyleSet.colors.point02};
   cursor: pointer;
 `;
 

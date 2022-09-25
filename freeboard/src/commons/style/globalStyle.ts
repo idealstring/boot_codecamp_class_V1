@@ -26,6 +26,15 @@ export const GlobalStyle = css`
     background: ${StyleSet.colors.point01};
   }
 
+  .ant-btn-dangerous {
+    color: ${StyleSet.colors.point03};
+    border-color: ${StyleSet.colors.point03};
+  }
+
+  .ant-rate {
+    color: ${StyleSet.colors.point01};
+  }
+
   @media (prefers-color-scheme: light) {
     html {
       color-scheme: light;
@@ -79,6 +88,35 @@ export const GlobalStyle = css`
 
     .ListContent:hover {
       background-color: ${StyleSet.colors.gray};
+    }
+    .ant-btn {
+      background: none;
+    }
+    .ant-modal-header {
+      background-color: ${StyleSet.colors.backgroundBlack};
+      border-bottom: 1px solid ${StyleSet.colors.backgroundWhite};
+    }
+
+    .ant-modal-title {
+      color: ${StyleSet.colors.backgroundWhite};
+    }
+
+    .ant-modal-content {
+      color: ${StyleSet.colors.backgroundWhite};
+      background-color: ${StyleSet.colors.backgroundBlack};
+    }
+    .ant-modal-confirm-body .ant-modal-content input {
+      :: placeholder {
+        color: ${StyleSet.colors.white};
+      }
+    }
+
+    .ant-modal-confirm-content {
+      color: ${StyleSet.colors.backgroundWhite};
+    }
+
+    .ant-modal-footer {
+      border-top: 1px solid ${StyleSet.colors.backgroundWhite};
     }
   }
 

@@ -1,12 +1,7 @@
 import BoardDetailPresenter from "./boardsDetail.presenter";
 import { useQuery, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import {
-  FETCH_BOARD,
-  LIKE_BOARD,
-  DISLIKE_BOARD,
-  DELETE_BOARD,
-} from "./boardsDetail.queries";
+import { FETCH_BOARD, LIKE_BOARD, DISLIKE_BOARD } from "./boardsDetail.queries";
 import { useState } from "react";
 import { IMutation } from "../../../../commons/types/generated/types";
 import { PostFail } from "../../../commons/modal/boardSuccessFail";
@@ -17,8 +12,6 @@ export default function BoardDetailContainer() {
   const [likeUp] = useMutation<Pick<IMutation, "likeBoard">>(LIKE_BOARD);
   const [dislikeUp] =
     useMutation<Pick<IMutation, "dislikeBoard">>(DISLIKE_BOARD);
-  const [deleteBoard] =
-    useMutation<Pick<IMutation, "deleteBoard">>(DELETE_BOARD);
 
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
@@ -71,19 +64,6 @@ export default function BoardDetailContainer() {
     }
   };
 
-  const onClickDeleteBtn = async () => {
-    try {
-      await deleteBoard({
-        variables: {
-          boardId: router.query.detail,
-        },
-      });
-      router.push("/boards");
-    } catch (error) {
-      if (error instanceof Error) PostFail(error.message);
-    }
-  };
-
   const onClickMoveToList = () => {
     router.push("/boards");
   };
@@ -101,7 +81,6 @@ export default function BoardDetailContainer() {
       onClickDislikeBtn={onClickDislikeBtn}
       onClickMoveToList={onClickMoveToList}
       onClickMoveToEdit={onClickMoveToEdit}
-      onClickDeleteBtn={onClickDeleteBtn}
     />
   );
 }
