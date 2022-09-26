@@ -104,7 +104,7 @@ export const CommentContentWrapper = styled.div`
 export const TextareaW1200 = styled.textarea`
   padding: 20px;
   width: 100%;
-  height: 75px;
+  height: 70px;
   border: none;
   border: 1px solid #bdbdbd;
   resize: none;

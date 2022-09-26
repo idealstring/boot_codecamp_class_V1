@@ -16,6 +16,7 @@ export const FETCH_BOARDS_OF_THE_BEST = gql`
     fetchBoardsOfTheBest {
       _id
       title
+      images
       createdAt
     }
   }

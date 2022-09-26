@@ -21,9 +21,15 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
         <S.BestListWrapper>
           {fetchBoardsOfTheBestDate?.fetchBoardsOfTheBest?.map((bestBoard) => (
             <Link href={`/boards/${bestBoard._id}`} key={bestBoard._id}>
-              <S.BestBoard>
+              <S.BestBoard id="BestBoard">
                 <S.BestTitle>{bestBoard.title}</S.BestTitle>
-                <S.BestImg src="/temp_bg.png" />
+                {bestBoard.images?.[0] ? (
+                  <S.BestImg
+                    src={`https://storage.googleapis.com/${bestBoard.images}`}
+                  />
+                ) : // <S.BestImg src="/temp_bg.png" />
+                null}
+
                 <S.BestDate>{dateFormatter(bestBoard.createdAt)}</S.BestDate>
               </S.BestBoard>
             </Link>

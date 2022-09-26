@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, RefObject, SetStateAction } from "react";
 import { IQuery } from "../../../../commons/types/generated/types";
 
 // container
@@ -17,7 +17,7 @@ export type IInputDateProps = {
   address: string;
   addressDetail: string;
   youtubeUrl: string;
-  images: any;
+  images: Array<string>;
 };
 
 export type IMyVrivables = {
@@ -52,6 +52,7 @@ export type IBoardWritePresenterProps = {
   onChangeInput: (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ) => void;
+  onChangeInputImage: (e: ChangeEvent<HTMLInputElement>) => void;
   CreateBtn: () => void;
   UpdateBtn: () => void;
   CreateCancelBtn: () => void;
@@ -61,6 +62,8 @@ export type IBoardWritePresenterProps = {
   existingData?: Pick<IQuery, "fetchBoard">;
   setInputData: Dispatch<SetStateAction<IInputDateProps>>;
   inputData: IInputDateProps;
+  uploadFileInputRef: RefObject<HTMLInputElement>;
+  onClickUploadFileBtn: () => void;
 };
 
 // styles

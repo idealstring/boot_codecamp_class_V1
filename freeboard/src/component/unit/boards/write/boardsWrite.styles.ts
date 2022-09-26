@@ -231,17 +231,23 @@ export const ImgUpload = styled.div`
   margin-right: 24px;
   width: 78px;
   height: 78px;
-  background-color: ${StyleSet.colors.gray};
+  border: 1px solid ${StyleSet.colors.gray};
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #4f4f4f;
-  font-size: 24px;
+  font-size: ${StyleSet.fontSize.h2};
   cursor: pointer;
   span {
-    font-size: 12px;
+    font-size: ${StyleSet.fontSize.b5};
     font-weight: 500;
+  }
+  input {
+    display: none;
+  }
+  img {
+    width: 78px;
+    height: 78px;
   }
 `;
 

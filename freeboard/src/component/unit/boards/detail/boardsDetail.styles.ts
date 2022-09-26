@@ -46,10 +46,10 @@ export const TitleInfoTop = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
 
   position: relative;
 `;
+
 export const TitleInfoBottom = styled.div`
   margin: 5px 0;
   font-size: ${StyleSet.fontSize.b4};
@@ -140,6 +140,11 @@ export const ContentWrapper = styled.div`
 export const ContentInner = styled.div`
   margin-bottom: 10px;
   line-height: 30px;
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 export const YoutubeUrlWrapper = styled.div`
   margin-top: 50px;

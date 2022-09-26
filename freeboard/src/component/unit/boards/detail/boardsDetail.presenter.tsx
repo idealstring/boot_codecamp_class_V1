@@ -22,7 +22,8 @@ export default function BoardDetailPresenter(P: IBoardDetailPresenterProps) {
       <S.TitleWrapper>
         <S.Title>{data ? data.fetchBoard.title : "Loading..."}</S.Title>
         <S.TitleInfoTop>
-          {data?.fetchBoard.images} {data?.fetchBoard.writer}
+          {/* {data?.fetchBoard?.user?.picture} */}
+          {data?.fetchBoard.writer}
           {` `}
           {dateTimeFormatter(data?.fetchBoard.createdAt)}
         </S.TitleInfoTop>
@@ -73,7 +74,15 @@ export default function BoardDetailPresenter(P: IBoardDetailPresenterProps) {
         </S.TitleInfoBottom>
       </S.TitleWrapper>
       <S.ContentWrapper>
-        <S.ContentInner>{data?.fetchBoard.images}</S.ContentInner>
+        {data?.fetchBoard.images ? (
+          <S.ContentInner>
+            <div>
+              <img
+                src={`https://storage.googleapis.com/${data?.fetchBoard.images}`}
+              ></img>
+            </div>
+          </S.ContentInner>
+        ) : null}
         <S.ContentInner>
           {data ? data.fetchBoard.contents : "Loading..."}
         </S.ContentInner>

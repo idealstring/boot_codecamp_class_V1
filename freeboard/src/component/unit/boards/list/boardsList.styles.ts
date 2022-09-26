@@ -69,7 +69,7 @@ export const BestImg = styled.img`
   border-radius: 10px;
 
   object-fit: cover;
-
+  opacity: 0.3;
   z-index: 0;
 
   position: absolute;

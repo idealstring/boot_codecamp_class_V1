@@ -61,6 +61,11 @@ export const GlobalStyle = css`
     .ListContent:hover {
       background-color: ${StyleSet.colors.lightGray01};
     }
+
+    #BestBoard {
+      background-color: ${StyleSet.colors.white};
+      // box-shadow: 0px 2px 5px rgba(255, 255, 255, 0.2);
+    }
   }
 
   @media (prefers-color-scheme: dark) {
@@ -91,6 +96,11 @@ export const GlobalStyle = css`
     }
     .ant-btn {
       background: none;
+      color: ${StyleSet.colors.white};
+      &.ant-btn-dangerous {
+        color: ${StyleSet.colors.point03};
+        border-color: ${StyleSet.colors.point03};
+      }
     }
     .ant-modal-header {
       background-color: ${StyleSet.colors.backgroundBlack};
@@ -111,12 +121,22 @@ export const GlobalStyle = css`
       }
     }
 
+    .ant-modal-confirm-body .ant-modal-confirm-title,
+    .ant-modal-confirm-body .ant-modal-confirm-content {
+      color: ${StyleSet.colors.white};
+    }
+
     .ant-modal-confirm-content {
       color: ${StyleSet.colors.backgroundWhite};
     }
 
     .ant-modal-footer {
       border-top: 1px solid ${StyleSet.colors.backgroundWhite};
+    }
+
+    #BestBoard {
+      background-color: ${StyleSet.colors.backgroundBlack};
+      // box-shadow: 0px 2px 5px rgba(255, 255, 255, 0.2);
     }
   }
 

@@ -6,6 +6,7 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
   const {
     errorOutput,
     onChangeInput,
+    onChangeInputImage,
     CreateBtn,
     UpdateBtn,
     CreateCancelBtn,
@@ -15,6 +16,8 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
     existingData,
     setInputData,
     inputData,
+    uploadFileInputRef,
+    onClickUploadFileBtn,
   } = P;
 
   return (
@@ -124,15 +127,25 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
         <S.SubtitleWrapper>
           <S.Subtitle>사진 첨부</S.Subtitle>
           <S.ImgUploadWrapper>
-            <S.ImgUpload>
-              +<span>Upload</span>
-            </S.ImgUpload>
-            <S.ImgUpload>
-              +<span>Upload</span>
-            </S.ImgUpload>
-            <S.ImgUpload>
-              +<span>Upload</span>
-            </S.ImgUpload>
+            {new Array(3).fill(1).map((el, i) =>
+              inputData.images[i] ? (
+                <S.ImgUpload>
+                  <img
+                    src={`https://storage.googleapis.com/${inputData.images[0]}`}
+                  />
+                </S.ImgUpload>
+              ) : (
+                <S.ImgUpload onClick={onClickUploadFileBtn}>
+                  +<span>Upload</span>
+                  <input
+                    type="file"
+                    id={String(i)}
+                    onChange={onChangeInputImage}
+                    ref={uploadFileInputRef}
+                  />
+                </S.ImgUpload>
+              )
+            )}
           </S.ImgUploadWrapper>
         </S.SubtitleWrapper>
         <S.SubtitleWrapper>

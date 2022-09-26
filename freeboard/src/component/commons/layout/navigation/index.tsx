@@ -47,10 +47,18 @@ export default function Navigation(P: INavigationProps) {
             |
             <NavButton
               onClick={() => {
-                router.push("/ranking");
+                router.push("/firebase");
               }}
             >
-              RANKING
+              FIREBASE
+            </NavButton>
+            |
+            <NavButton
+              onClick={() => {
+                router.push("/openapi");
+              }}
+            >
+              openapi
             </NavButton>
             |
             <NavButton
