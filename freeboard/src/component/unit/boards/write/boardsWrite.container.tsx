@@ -77,7 +77,7 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
   };
 
   const onChangeInputImage = async (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[Number(e.target.id)];
+    const file = e.target.files?.[0];
 
     try {
       const result = await uploadFile({
@@ -85,11 +85,9 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
           file: file,
         },
       });
-      setInputData((prev) => {
-        return {
-          ...inputData,
-          images: [...prev, String(result.data?.uploadFile.url)],
-        };
+      setInputData({
+        ...inputData,
+        images: [String(result.data?.uploadFile.url)],
       });
     } catch (error: any) {
       // if(error instanceof Error)

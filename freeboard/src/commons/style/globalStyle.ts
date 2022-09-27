@@ -144,4 +144,14 @@ export const GlobalStyle = css`
     font-family: "NanumSquare_acR";
     src: url("/fonts/NanumSquare_acR.ttf");
   }
+
+  @font-face {
+    font-family: "NanumSquare_acB";
+    src: url("/fonts/NanumSquare_acB.ttf");
+  }
+
+  @font-face {
+    font-family: "NanumSquare_acEB";
+    src: url("/fonts/NanumSquare_acEB.ttf");
+  }
 `;

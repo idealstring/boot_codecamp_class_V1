@@ -25,4 +25,8 @@ export const StyleSet = {
     b4: "0.9rem",
     b5: "0.8rem",
   },
+  fontFamily: {
+    b: "NanumSquare_acB",
+    eb: "NanumSquare_acEB",
+  },
 };

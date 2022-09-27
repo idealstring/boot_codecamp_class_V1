@@ -128,7 +128,7 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
           <S.Subtitle>사진 첨부</S.Subtitle>
           <S.ImgUploadWrapper>
             {new Array(3).fill(1).map((el, i) =>
-              inputData.images[i] ? (
+              inputData.images[0] ? (
                 <S.ImgUpload>
                   <img
                     src={`https://storage.googleapis.com/${inputData.images[0]}`}
@@ -139,7 +139,6 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
                   +<span>Upload</span>
                   <input
                     type="file"
-                    id={String(i)}
                     onChange={onChangeInputImage}
                     ref={uploadFileInputRef}
                   />
