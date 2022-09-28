@@ -17,6 +17,7 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
     refetch,
     boardsCount,
     onChangeSearch,
+    onChangeDatePicker,
   } = P;
   const { RangePicker } = DatePicker;
   const dateFormat = "YYYY-MM-DD";
@@ -101,9 +102,14 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
             <S.SearchDate className="grayMutation">
               <Space>
                 <RangePicker
+                  onChange={onChangeDatePicker}
+                  allowClear={false}
                   defaultValue={[
-                    moment("2015/01/01", dateFormat),
-                    moment("2015/01/01", dateFormat),
+                    moment(new Date(), dateFormat),
+                    moment(
+                      `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`,
+                      dateFormat
+                    ),
                   ]}
                   format={dateFormat}
                 />

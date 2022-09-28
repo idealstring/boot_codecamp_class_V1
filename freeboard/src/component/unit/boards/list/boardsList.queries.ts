@@ -1,8 +1,18 @@
 import { gql } from "@apollo/client";
 
 export const FETCH_BOARDS = gql`
-  query fetchBoards($page: Int, $search: String) {
-    fetchBoards(page: $page, search: $search) {
+  query fetchBoards(
+    $page: Int
+    $search: String
+    $startDate: DateTime
+    $endDate: DateTime
+  ) {
+    fetchBoards(
+      page: $page
+      search: $search
+      startDate: $startDate
+      endDate: $endDate
+    ) {
       _id
       writer
       title
@@ -23,7 +33,11 @@ export const FETCH_BOARDS_OF_THE_BEST = gql`
 `;
 
 export const FETCH_BOARDS_COUNT = gql`
-  query {
-    fetchBoardsCount
+  query fetchBoardsCount(
+    $endDate: DateTime
+    $startDate: DateTime
+    $search: String
+  ) {
+    fetchBoardsCount(endDate: $endDate, startDate: $startDate, search: $search)
   }
 `;

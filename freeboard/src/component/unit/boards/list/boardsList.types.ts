@@ -16,4 +16,5 @@ export type IBoardListPresenterProps = {
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>;
   boardsCount: number;
   onChangeSearch: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeDatePicker: (_: any, dateString: [string, string]) => void;
 };

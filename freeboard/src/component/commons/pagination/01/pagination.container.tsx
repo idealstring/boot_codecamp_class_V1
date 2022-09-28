@@ -6,8 +6,8 @@ export default function PaginationContainer(P: IPaginationProps) {
   const { refetch, boardsCount } = P;
   const [startPage, setStartPage] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState(0);
-  const lastPage = boardsCount / 10;
-  console.log(boardsCount);
+  const lastPage = boardsCount ? Math.ceil(boardsCount / 10) : 0;
+  // console.log(`lastPage : ${lastPage}`);
 
   const onClickPrevPage = () => {
     if (startPage === 1) return;
@@ -19,7 +19,7 @@ export default function PaginationContainer(P: IPaginationProps) {
     if (startPage + 10 <= lastPage) {
       setStartPage(startPage + 10);
       setCurrentPage(startPage + 10);
-      void refetch({ page: Number(startPage + 5) });
+      void refetch({ page: Number(startPage + 10) });
     } else {
       return;
     }
