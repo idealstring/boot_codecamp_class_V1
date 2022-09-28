@@ -35,6 +35,25 @@ export const GlobalStyle = css`
     color: ${StyleSet.colors.point01};
   }
 
+  .ant-picker {
+    width: 360px;
+    height: 48px;
+    border: none;
+    border-radius: 0px;
+    background-color: ${StyleSet.colors.lightGray01};
+    input {
+      padding-left: 35px;
+    }
+    .ant-picker-active-bar {
+      background-color: ${StyleSet.colors.point01};
+    }
+  }
+  .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner,
+  .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner,
+  .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner {
+    background-color: ${StyleSet.colors.point01};
+  }
+
   @media (prefers-color-scheme: light) {
     html {
       color-scheme: light;
@@ -132,6 +151,21 @@ export const GlobalStyle = css`
 
     .ant-modal-footer {
       border-top: 1px solid ${StyleSet.colors.backgroundWhite};
+    }
+
+    .ant-picker {
+      input {
+        color: ${StyleSet.colors.white};
+      }
+      background-color: ${StyleSet.colors.black};
+      svg {
+        fill: ${StyleSet.colors.white};
+      }
+    }
+    .ant-picker-suffix {
+      svg {
+        fill: ${StyleSet.colors.white};
+      }
     }
 
     #BestBoard {

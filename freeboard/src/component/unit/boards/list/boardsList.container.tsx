@@ -1,16 +1,17 @@
-import BoardListPresenter from "./boardsList.presenter";
+import _ from "lodash";
+import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
+import { ChangeEvent, useState } from "react";
+import BoardListPresenter from "./boardsList.presenter";
 import {
   FETCH_BOARDS,
   FETCH_BOARDS_COUNT,
   FETCH_BOARDS_OF_THE_BEST,
 } from "./boardsList.queries";
-import { useRouter } from "next/router";
 import {
   IQuery,
   IQueryFetchBoardsArgs,
 } from "../../../../commons/types/generated/types";
-import { useState } from "react";
 
 export default function BoardListContainer() {
   const [isDateOpen, setIsDateOpen] = useState(false);
@@ -34,6 +35,17 @@ export default function BoardListContainer() {
     setIsDateOpen((isDateOpen) => !isDateOpen);
   };
 
+  const getDebounce = _.debounce((value) => {
+    refetch({
+      search: value,
+      page: 1,
+    });
+  }, 400);
+
+  const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    getDebounce(e.target.value);
+  };
+
   return (
     <BoardListPresenter
       fetchBoardsOfTheBestDate={fetchBoardsOfTheBestDate}
@@ -43,6 +55,7 @@ export default function BoardListContainer() {
       isDateOpen={isDateOpen}
       refetch={refetch}
       boardsCount={boardsCount?.fetchBoardsCount}
+      onChangeSearch={onChangeSearch}
     />
   );
 }

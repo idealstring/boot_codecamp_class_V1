@@ -4,6 +4,8 @@ import * as S from "./boardsList.styles";
 import { IBoardListPresenterProps } from "./boardsList.types";
 import { dateFormatter } from "../../../../commons/utils/utils";
 import PaginationContainer from "../../../commons/pagination/01/pagination.container";
+import { DatePicker, Space } from "antd";
+import moment from "moment";
 
 export default function BoardListPresenter(P: IBoardListPresenterProps) {
   const {
@@ -14,7 +16,11 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
     isDateOpen,
     refetch,
     boardsCount,
+    onChangeSearch,
   } = P;
+  const { RangePicker } = DatePicker;
+  const dateFormat = "YYYY-MM-DD";
+
   return (
     <Fragment>
       <S.BestListContainer className="grayMutation">
@@ -42,6 +48,7 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
             <S.SearchWord
               className="검색바"
               placeholder="검색어를 입력하세요."
+              onChange={onChangeSearch}
             />
             <S.SearchBtn>
               <svg
@@ -65,7 +72,6 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
                 height="14px"
                 viewBox="0 0 1024 1024"
                 version="1.1"
-                // fill="#8d8d8d"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <g>
@@ -80,7 +86,6 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
                 height="14px"
                 viewBox="0 0 1024 1024"
                 version="1.1"
-                // fill="#8d8d8d"
                 xmlns="http://www.w3.org/2000/svg"
                 transform="rotate(180)"
               >
@@ -94,7 +99,15 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
           </S.DateOpenBtn>
           {isDateOpen ? (
             <S.SearchDate className="grayMutation">
-              YYYY-MM-DD ~ YYYY-MM-DD
+              <Space>
+                <RangePicker
+                  defaultValue={[
+                    moment("2015/01/01", dateFormat),
+                    moment("2015/01/01", dateFormat),
+                  ]}
+                  format={dateFormat}
+                />
+              </Space>
             </S.SearchDate>
           ) : null}
         </S.SearchBarWrapper>

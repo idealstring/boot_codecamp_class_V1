@@ -1,5 +1,5 @@
 import { ApolloQueryResult } from "@apollo/client";
-import { Dispatch, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import {
   IQuery,
   IQueryFetchBoardsArgs,
@@ -15,4 +15,5 @@ export type IBoardListPresenterProps = {
     variables?: Partial<IQueryFetchBoardsArgs> | undefined
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>;
   boardsCount: number;
+  onChangeSearch: (e: ChangeEvent<HTMLInputElement>) => void;
 };
