@@ -23,6 +23,8 @@ export const RowWrapper = styled.div`
 `;
 
 export const Item = styled.div`
+  // padding: 0 5px;
+
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -46,10 +48,14 @@ export const Image = styled.div`
 `;
 
 export const ItemTitle = styled.div`
+  padding: 0 10px;
+
   font-weight: 500;
 `;
 
 export const ItemInnerWrapper = styled.div`
+  padding: 0 10px;
+
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
