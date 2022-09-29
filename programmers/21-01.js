@@ -42,4 +42,31 @@ function solution(participant, completion) {
   //       : (answer = el);
   //   });
   //   return answer;
+  //
+  //
+  //
+  // for (let i = 0; i < completion.length; i++) {
+  //   if (participant.includes(completion[i])) {
+  //     // console.log(participant.includes(completion[i]),completion[i])
+  //     participant.splice(participant.indexOf(completion[i]), 1);
+  //   }
+  // }
+  // return participant[0];
+  //
+  //
+  //
+  // participant.sort();
+  // completion.sort();
+  // const answer=participant.filter((name,i)=>{return name!==completion[i]})
+  // return answer[0]
+  //
+  //
+  //
+  participant.sort();
+  completion.sort();
+  for (let i = 0; i < participant.length; i++) {
+    if (participant[i] !== completion[i]) {
+      return participant[i];
+    }
+  }
 }
