@@ -10,6 +10,9 @@ interface IApolloSettingProps {
   children: JSX.Element;
 }
 
+// 함수 내에는 계속 리렌더링이 되니까 캐쉬 부분을 따로 함수 밖으로 뺀 것.
+const GLOBAL_STATE = new InMemoryCache();
+
 export default function ApolloSetting(props: IApolloSettingProps) {
   const uploadLink = createUploadLink({
     uri: "http://backend09.codebootcamp.co.kr/graphql",
@@ -19,7 +22,7 @@ export default function ApolloSetting(props: IApolloSettingProps) {
     // uri: "http://backend09.codebootcamp.co.kr/graphql", // 이미지 기능 추가하며 위로 옮김
     link: ApolloLink.from([uploadLink]),
     // 관련 내용을 여기다라 링크 시킴. ApolloLink를 가져와서 링크하는데, 인증 등 여러가지 링크하게 되기때문에 배열로 받는다.
-    cache: new InMemoryCache(),
+    cache: GLOBAL_STATE, // 페이지전환(_app.tsx 리렌더)되도, 캐시 유지.
   });
   // prettier-ignore
   return <ApolloProvider client={client}>
