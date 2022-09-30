@@ -5,6 +5,8 @@ import {
   ApolloLink,
 } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client";
+import { useRecoilState } from "recoil";
+import { accessTokenState } from "../../../commons/store";
 
 interface IApolloSettingProps {
   children: JSX.Element;
@@ -14,8 +16,11 @@ interface IApolloSettingProps {
 const GLOBAL_STATE = new InMemoryCache();
 
 export default function ApolloSetting(props: IApolloSettingProps) {
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+
   const uploadLink = createUploadLink({
     uri: "http://backend09.codebootcamp.co.kr/graphql",
+    headers: { Authorization: `Bearer ${accessToken}` }, // 로그인 인증을 해더에 넣어준 것.
   });
 
   const client = new ApolloClient({

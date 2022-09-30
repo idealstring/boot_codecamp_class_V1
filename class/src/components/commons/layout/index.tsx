@@ -13,6 +13,12 @@ const Body = styled.div`
   display: flex;
 `;
 
+const SideBar = styled.aside`
+  margin-right: 20px;
+  padding: 10px;
+  background-color: orange;
+`;
+
 // 특정페이지에서 제외하고 싶을 때
 const HIDDEN_HEADERS = ["/12-02-library-star", "/12-03-modal-alert"];
 
@@ -27,7 +33,7 @@ export default function Layout(props: ILayoutProps) {
       <LayoutBanner />
       <LayoutNavigation />
       <Body>
-        <div>사이드바</div>
+        <SideBar>사이드바</SideBar>
         <div>{props.children}</div>
       </Body>
       <LayoutFooter />
