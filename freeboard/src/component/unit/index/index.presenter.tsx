@@ -1,8 +1,11 @@
+import IndexMainCarouselSwipe from "../../commons/carousel/indexMain02";
 import * as S from "./index.styles";
 
 export default function IndexPresenter() {
   return (
     <>
+      {/* <IndexMainCarousel /> */}
+      <IndexMainCarouselSwipe />
       <S.Wrapper>
         <S.RowTitle>Today's Deal</S.RowTitle>
         <S.RowWrapper>
@@ -491,8 +494,6 @@ export default function IndexPresenter() {
               </svg>
             </S.ItemInnerWrapper>
           </S.Item>
-        </S.RowWrapper>
-        <S.RowWrapper>
           {/*  */}
           <S.Item>
             <S.Image>
@@ -733,8 +734,6 @@ export default function IndexPresenter() {
               </svg>
             </S.ItemInnerWrapper>
           </S.Item>
-        </S.RowWrapper>
-        <S.RowWrapper>
           {/*  */}
           <S.Item>
             <S.Image>

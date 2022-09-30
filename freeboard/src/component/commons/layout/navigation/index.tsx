@@ -68,14 +68,6 @@ export default function Navigation(P: INavigationProps) {
             >
               FREEBOARD
             </NavButton>
-            |
-            <NavButton
-              onClick={() => {
-                router.push("/notice");
-              }}
-            >
-              MYPAGE
-            </NavButton>
           </Wrapper>
         </Container>
       ) : null}

@@ -20,14 +20,14 @@ const Background = styled.div`
 `;
 const Wrapper = styled.div`
   margin: 0 auto;
-  width: 1000px;
-  height: 500px;
+  // width: 1000px;
+  // height: 500px;
 `;
 
 export default function IndexMainCarouselSwipe() {
   return (
     <Background>
-      <Wrapper>
+      <Wrapper className="wrapper">
         <Swiper
           spaceBetween={0}
           centeredSlides={true}

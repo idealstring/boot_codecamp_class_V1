@@ -174,6 +174,31 @@ export const GlobalStyle = css`
     }
   }
 
+  @media only screen and (min-width: 1025px) {
+    .wrapper {
+      width: 1000px;
+      height: 500px;
+    }
+    .mySwiper {
+      width: 1000px;
+      height: 500px;
+    }
+  }
+
+  @media only screen and (max-width: 1024px) {
+    .wrapper {
+      width: 768px;
+      height: 300px;
+    }
+    .mySwiper {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+  }
+
   @font-face {
     font-family: "NanumSquare_acR";
     src: url("/fonts/NanumSquare_acR.ttf");

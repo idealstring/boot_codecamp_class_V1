@@ -20,10 +20,11 @@ export const RowWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
+  flex-wrap: wrap;
 `;
 
 export const Item = styled.div`
-  // padding: 0 5px;
+  margin: 0 0 30px 0;
 
   display: flex;
   flex-direction: column;
