@@ -1,3 +1,5 @@
+import { BlockList } from "net";
+
 export type IBoardDetailPresenterProps = {
   data: any;
   onClickLinkModal: () => void;
@@ -10,4 +12,9 @@ export type IBoardDetailPresenterProps = {
   onClickDislikeBtn: () => void;
   onClickMoveToList: () => void;
   onClickMoveToEdit: () => void;
+};
+
+export type IScreenProps = {
+  isNormalScreen?: Boolean;
+  isMobile?: Boolean;
 };

@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import ZipcodeModal from "../../../commons/modal/zipcodeModal";
+import { WindowSizeContext } from "../../../commons/responsive";
 import * as S from "./boardsWrite.styles";
 import { IBoardWritePresenterProps } from "./boardsWrite.types";
 
@@ -19,12 +21,13 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
     uploadFileInputRef,
     onClickUploadFileBtn,
   } = P;
+  const { isNormalScreen } = useContext(WindowSizeContext);
 
   return (
     <S.Container>
       <S.Title>게시물 {isEdit ? "수정" : "등록"}</S.Title>
       <S.ContentContainer>
-        <S.WriterPwdWrapper>
+        <S.WriterPwdWrapper isNormalScreen={isNormalScreen}>
           <S.WriterPwd>
             <S.Subtitle>
               작성자 <S.CompulsoryStar>*</S.CompulsoryStar>
@@ -37,6 +40,7 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
               defaultValue={existingData?.fetchBoard.writer || ""}
               disabled={isEdit}
               errorColor={errorOutput.writer}
+              isNormalScreen={isNormalScreen}
             />
           </S.WriterPwd>
           <S.WriterPwd>
@@ -49,6 +53,7 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
               placeholder="비밀번호를 입력해주세요."
               onChange={onChangeInput}
               errorColor={errorOutput.password}
+              isNormalScreen={isNormalScreen}
             />
           </S.WriterPwd>
         </S.WriterPwdWrapper>

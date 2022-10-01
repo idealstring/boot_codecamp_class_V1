@@ -15,6 +15,7 @@ export default function PaginationContainer(P: IPaginationProps) {
     setCurrentPage(startPage - 10);
     void refetch({ page: Number(startPage - 10) });
   };
+
   const onClickNextPage = () => {
     if (startPage + 10 <= lastPage) {
       setStartPage(startPage + 10);

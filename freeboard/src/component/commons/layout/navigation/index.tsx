@@ -8,7 +8,9 @@ const Container = styled.header`
 const Wrapper = styled.header`
   margin: 0 auto;
   padding-bottom: 25px;
-  width: 1000px;
+  width: 100%;
+  max-width: 1000px;
+  min-width: 400px;
   display: flex;
   flex-direction: row;
   justify-content: center;

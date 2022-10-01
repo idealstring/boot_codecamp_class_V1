@@ -3,7 +3,10 @@ import { StyleSet } from "../../../commons/style/styleSet";
 
 export const Wrapper = styled.div`
   margin: 0 auto;
-  width: 1000px;
+  padding: 0 30px;
+  width: 100%;
+  max-width: 1060px;
+  min-width: 560px;
 `;
 
 export const RowTitle = styled.h1`
@@ -18,13 +21,15 @@ export const RowWrapper = styled.div`
 
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: flex-start;
   flex-wrap: wrap;
+  flex: auto;
 `;
 
 export const Item = styled.div`
   margin: 0 0 30px 0;
+  min-width: 235px;
 
   display: flex;
   flex-direction: column;

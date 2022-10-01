@@ -1,17 +1,19 @@
 import styled from "@emotion/styled";
 import { StyleSet } from "../../../../commons/style/styleSet";
-import { IErrorColorProps, IIsCancelIsEditProps } from "./commentWrite.types";
+import { ICommentWriteStyleProps } from "./commentWrite.types";
 
 export const HrLine = styled.hr`
   margin: 40px 0;
   width: 100%;
   border: none;
-  // border-bottom: 0.8px solid #dddddd;
 `;
 
 export const CommentWrapper = styled.div`
   margin: 0 auto;
-  width: 1000px;
+  padding: 0 30px;
+  width: 100%;
+  max-width: 1060px;
+  min-width: 400px;
 
   display: flex;
   flex-direction: column;
@@ -45,37 +47,53 @@ export const CommentNonmemberWrapper = styled.div`
 export const CommentNameInfo = styled.div`
   margin-top: 20px;
   margin-bottom: 15px;
+  width: ${(props: ICommentWriteStyleProps) =>
+    props.isMobile ? "100%" : "null"};
 
   display: flex;
-  flex-direction: row;
+  flex-direction: ${(props: ICommentWriteStyleProps) =>
+    props.isMobile ? "column" : "row"};
   justify-content: flex-start;
   align-items: center;
 `;
 
+export const CommentNameInfoInner = styled.div`
+  margin: 0;
+  width: 100%;
+
+  display: flex;
+  flex-direction: ${(props: ICommentWriteStyleProps) =>
+    props.isMobile ? "column" : "row"};
+`;
+
 export const InputName = styled.input`
-  margin-right: 24px;
+  margin: ${(props: ICommentWriteStyleProps) =>
+    props.isMobile ? "0 0 14px 0" : "0 24px 0 0"};
   padding: 14px 24px;
-  width: 180px;
+  width: ${(props: ICommentWriteStyleProps) =>
+    props.isMobile ? "100%" : "180px"};
   height: 52px;
   border: 1px solid #bdbdbd;
-  background-color: ${(props: IErrorColorProps) =>
+  background-color: ${(props: ICommentWriteStyleProps) =>
     props.errorColor ? `${StyleSet.colors.inputError}` : "default"};
   ::placeholder {
-    color: ${(props: IErrorColorProps) =>
+    color: ${(props: ICommentWriteStyleProps) =>
       props.errorColor ? "white" : "default"};
   }
 `;
 
 export const InputPwd = styled.input`
-  margin-right: 24px;
+  margin: ${(props: ICommentWriteStyleProps) =>
+    props.isMobile ? "0 0 14px 0" : "0 24px 0 0"};
   padding: 14px 24px;
-  width: 180px;
+  width: ${(props: ICommentWriteStyleProps) =>
+    props.isMobile ? "100%" : "180px"};
   height: 52px;
   border: 1px solid #bdbdbd;
-  background-color: ${(props: IErrorColorProps) =>
+  background-color: ${(props: ICommentWriteStyleProps) =>
     props.errorColor ? `${StyleSet.colors.inputError}` : "default"};
   ::placeholder {
-    color: ${(props: IErrorColorProps) =>
+    color: ${(props: ICommentWriteStyleProps) =>
       props.errorColor ? "white" : "default"};
   }
 `;
@@ -84,9 +102,13 @@ export const RateStarWrapper = styled.div`
   padding: 7px 0;
   width: 100%;
   height: 52px;
-  background-color: ${(props: IErrorColorProps) =>
+  background-color: ${(props: ICommentWriteStyleProps) =>
     props.errorColor ? `${StyleSet.colors.inputError}` : "default"};
   z-index: 0;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 `;
 
 export const CommentContentWrapper = styled.div`
@@ -104,14 +126,14 @@ export const CommentContentWrapper = styled.div`
 export const TextareaW1200 = styled.textarea`
   padding: 20px;
   width: 100%;
-  height: 70px;
+  height: auto;
   border: none;
   border: 1px solid #bdbdbd;
   resize: none;
-  background-color: ${(props: IErrorColorProps) =>
+  background-color: ${(props: ICommentWriteStyleProps) =>
     props.errorColor ? `${StyleSet.colors.inputError}` : "default"};
   ::placeholder {
-    color: ${(props: IErrorColorProps) =>
+    color: ${(props: ICommentWriteStyleProps) =>
       props.errorColor ? "white" : "default"};
   }
 `;
@@ -127,22 +149,23 @@ export const CommentContentBottom = styled.div`
 
 export const CharactersCounter = styled.div`
   padding: 14px 24px;
-  height: 52px;
+  height: 50px;
   color: #bdbdbd;
 `;
 
 export const CommentBtn = styled.button`
-  height: 52px;
+  height: 50px;
   padding: 14px;
   border: none;
+  border-radius: 0 0 10px 10px;
   cursor: pointer;
-  background-color: ${(props: IIsCancelIsEditProps) =>
+  background-color: ${(props: ICommentWriteStyleProps) =>
     props.isEdit
       ? props.isCancel
         ? "none"
         : `${StyleSet.colors.point01}`
       : "#000000"};
-  color: ${(props: IIsCancelIsEditProps) =>
+  color: ${(props: ICommentWriteStyleProps) =>
     props.isEdit
       ? props.isCancel
         ? "#000000"

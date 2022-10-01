@@ -8,8 +8,10 @@ export const Container = styled.footer`
 
 export const Wrapper = styled.footer`
   margin: 0 auto;
-  padding: 50px 0;
-  width: 1000px;
+  padding: 50px 50px;
+  max-width: 1100px;
+  min-width: 400px;
+  width: 100%;
 
   display: flex;
   flex-direction: row;

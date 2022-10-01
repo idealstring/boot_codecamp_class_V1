@@ -1,7 +1,12 @@
+import { useContext } from "react";
 import IndexMainCarouselSwipe from "../../commons/carousel/indexMain02";
+import { WindowSizeContext } from "../../commons/responsive";
 import * as S from "./index.styles";
 
 export default function IndexPresenter() {
+  const { isNormalScreen, isTablet, isMobile } = useContext(WindowSizeContext);
+  console.log(isNormalScreen, isTablet, isMobile);
+
   return (
     <>
       {/* <IndexMainCarousel /> */}

@@ -8,11 +8,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-// import "./styles.css";
-
-// import required modules
 import { Autoplay, Pagination, Navigation } from "swiper";
-import { StyleSet } from "../../../../commons/style/styleSet";
 
 const Background = styled.div`
   width: 100%;
@@ -20,14 +16,16 @@ const Background = styled.div`
 `;
 const Wrapper = styled.div`
   margin: 0 auto;
-  // width: 1000px;
+  width: 100%;
+  max-width: 1000px;
+  min-width: 560px;
   // height: 500px;
 `;
 
 export default function IndexMainCarouselSwipe() {
   return (
     <Background>
-      <Wrapper className="wrapper">
+      <Wrapper>
         <Swiper
           spaceBetween={0}
           centeredSlides={true}
@@ -43,22 +41,22 @@ export default function IndexMainCarouselSwipe() {
           className="mySwiper"
         >
           <SwiperSlide>
-            <img src="./img/1.jpg" />
+            <img src="./img/1.jpg" width="100%" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="./img/2.jpg" />
+            <img src="./img/2.jpg" width="100%" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="./img/3.jpg" />
+            <img src="./img/3.jpg" width="100%" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="./img/4.jpg" />
+            <img src="./img/4.jpg" width="100%" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="./img/5.jpg" />
+            <img src="./img/5.jpg" width="100%" />
           </SwiperSlide>
           <SwiperSlide>
-            <img src="./img/6.jpg" />
+            <img src="./img/6.jpg" width="100%" />
           </SwiperSlide>
         </Swiper>
       </Wrapper>

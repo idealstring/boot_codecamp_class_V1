@@ -3,6 +3,7 @@ import { IUserRegisterPresenterProps } from "./userRegister.types";
 
 export default function UserRegisterPresenter(P: IUserRegisterPresenterProps) {
   const { onchangeInputData, onClickRegister, onClickSignIn } = P;
+
   return (
     <>
       <S.Container>

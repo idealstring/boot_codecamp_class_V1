@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import * as S from "./boardsList.styles";
 import { IBoardListPresenterProps } from "./boardsList.types";
 import { dateFormatter } from "../../../../commons/utils/utils";
@@ -34,8 +34,7 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
                   <S.BestImg
                     src={`https://storage.googleapis.com/${bestBoard.images}`}
                   />
-                ) : // <S.BestImg src="/temp_bg.png" />
-                null}
+                ) : null}
 
                 <S.BestDate>{dateFormatter(bestBoard.createdAt)}</S.BestDate>
               </S.BestBoard>
@@ -51,20 +50,6 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
               placeholder="검색어를 입력하세요."
               onChange={onChangeSearch}
             />
-            <S.SearchBtn>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 1024 1024"
-                version="1.1"
-                width="30px"
-                height="30px"
-              >
-                <path
-                  d="M680 444.8c0-129.6-105.6-236.8-236.8-236.8S208 315.2 208 444.8s105.6 236.8 236.8 236.8c59.2 0 113.6-22.4 155.2-59.2l211.2 211.2 22.4-22.4-211.2-211.2c35.2-41.6 57.6-96 57.6-155.2zM444.8 240c112 0 204.8 91.2 204.8 204.8s-91.2 204.8-204.8 204.8S240 556.8 240 444.8 331.2 240 444.8 240z"
-                  fill="#8d8d8d"
-                />
-              </svg>
-            </S.SearchBtn>
           </S.SearchWordWrapper>
           <S.DateOpenBtn onClick={onClickDateOpen}>
             {!isDateOpen ? (

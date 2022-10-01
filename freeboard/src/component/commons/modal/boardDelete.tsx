@@ -2,9 +2,11 @@ import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { useMutation } from "@apollo/client";
 import { Modal } from "antd";
 import { useRouter } from "next/router";
+import { useContext } from "react";
 import { IMutation } from "../../../commons/types/generated/types";
 import { DELETE_BOARD } from "../../unit/modal/boardDelete/boardDelete.queries";
 import { ContentBtn } from "../../unit/modal/boardDelete/boardDelete.styles";
+import { WindowSizeContext } from "../responsive";
 import { PostFail } from "./boardSuccessFail";
 const { confirm } = Modal;
 
@@ -12,6 +14,7 @@ const BoardDeleteModal = () => {
   const router = useRouter();
   const [deleteBoard] =
     useMutation<Pick<IMutation, "deleteBoard">>(DELETE_BOARD);
+  const { isMobile } = useContext(WindowSizeContext);
 
   const onClickDeleteBtn = async () => {
     try {
@@ -43,6 +46,10 @@ const BoardDeleteModal = () => {
       onCancel() {},
     });
   };
-  return <ContentBtn onClick={showDeleteConfirm}>삭제하기</ContentBtn>;
+  return (
+    <ContentBtn onClick={showDeleteConfirm} isMobile={isMobile}>
+      삭제하기
+    </ContentBtn>
+  );
 };
 export default BoardDeleteModal;

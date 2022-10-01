@@ -2,6 +2,8 @@ import * as S from "./commentWrite.styles";
 import { ICommentWritePresenterProps } from "./commentWrite.types.js";
 import { Rate } from "antd";
 import "antd/dist/antd.css";
+import { useContext } from "react";
+import { WindowSizeContext } from "../../../commons/responsive";
 
 export default function CommentWritePresenter(P: ICommentWritePresenterProps) {
   const {
@@ -15,6 +17,8 @@ export default function CommentWritePresenter(P: ICommentWritePresenterProps) {
     isEdit,
     comment,
   } = P;
+  const { isMobile } = useContext(WindowSizeContext);
+
   return (
     <>
       {isEdit ? null : <S.HrLine />}
@@ -35,25 +39,29 @@ export default function CommentWritePresenter(P: ICommentWritePresenterProps) {
           </S.CommentTitle>
         )}
         <S.CommentNonmemberWrapper>
-          <S.CommentNameInfo>
-            <S.InputName
-              type="text"
-              id="writer"
-              placeholder="작성자"
-              value={comment?.writer ? undefined : inputData.writer}
-              defaultValue={comment?.writer}
-              onChange={onChangeInput}
-              disabled={isEdit ? true : false}
-              errorColor={errorOutput.writer}
-            />
-            <S.InputPwd
-              type="password"
-              id="password"
-              placeholder="비밀번호"
-              value={inputData.password}
-              onChange={onChangeInput}
-              errorColor={errorOutput.password}
-            />
+          <S.CommentNameInfo isMobile={isMobile}>
+            <S.CommentNameInfoInner isMobile={isMobile}>
+              <S.InputName
+                type="text"
+                id="writer"
+                placeholder="작성자"
+                value={comment?.writer ? undefined : inputData.writer}
+                defaultValue={comment?.writer}
+                onChange={onChangeInput}
+                disabled={isEdit ? true : false}
+                errorColor={errorOutput.writer}
+                isMobile={isMobile}
+              />
+              <S.InputPwd
+                type="password"
+                id="password"
+                placeholder="비밀번호"
+                value={inputData.password}
+                onChange={onChangeInput}
+                errorColor={errorOutput.password}
+                isMobile={isMobile}
+              />
+            </S.CommentNameInfoInner>
             <S.RateStarWrapper errorColor={errorOutput.rating}>
               {isEdit ? (
                 <Rate

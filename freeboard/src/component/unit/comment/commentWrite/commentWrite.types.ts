@@ -50,11 +50,9 @@ export type ICommentWritePresenterProps = {
 
 // styles
 
-export type IErrorColorProps = {
-  errorColor: boolean;
-};
-
-export type IIsCancelIsEditProps = {
+export type ICommentWriteStyleProps = {
+  errorColor?: boolean;
   isCancel?: boolean;
   isEdit?: boolean;
+  isMobile?: boolean;
 };

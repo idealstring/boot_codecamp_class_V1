@@ -67,10 +67,8 @@ export type IBoardWritePresenterProps = {
 };
 
 // styles
-export type IErrorColorProps = {
+export type IBoardWriteStyleProps = {
   errorColor?: boolean;
-};
-
-export type ICompleteColorProps = {
+  isNormalScreen?: boolean;
   isCompleteColor?: boolean;
 };

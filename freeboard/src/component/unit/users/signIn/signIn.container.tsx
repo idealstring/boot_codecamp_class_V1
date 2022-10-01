@@ -18,9 +18,9 @@ export default function SignInContainer() {
     Pick<IMutation, "loginUser">,
     IMutationLoginUserArgs
   >(LOGIN_USER);
-  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const [errorEmail, setErrorEmail] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const router = useRouter();
 
   const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {

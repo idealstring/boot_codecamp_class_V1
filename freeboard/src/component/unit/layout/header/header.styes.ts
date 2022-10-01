@@ -7,8 +7,12 @@ export const Container = styled.header`
 
 export const Wrapper = styled.header`
   margin: 0 auto;
-  padding: 25px 0;
-  width: 1000px;
+  padding: 25px 25px;
+
+  max-width: 1050px;
+  min-width: 400px;
+  width: 100%;
+
   display: flex;
   flex-direction: row;
   justify-content: space-between;

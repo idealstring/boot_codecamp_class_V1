@@ -6,19 +6,22 @@ import Layout from "../src/component/commons/layout";
 import { GlobalStyle } from "../src/commons/style/globalStyle";
 import ApolloSetting from "../src/component/commons/apollo/apolloSetting";
 import { RecoilRoot } from "recoil";
+import WhatViewPortSize from "../src/component/commons/responsive";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <RecoilRoot>
-      <ApolloSetting>
-        <Layout>
-          <>
-            <Global styles={GlobalStyle} />
-            <Component {...pageProps} />
-          </>
-        </Layout>
-      </ApolloSetting>
-    </RecoilRoot>
+    <WhatViewPortSize>
+      <RecoilRoot>
+        <ApolloSetting>
+          <Layout>
+            <>
+              <Global styles={GlobalStyle} />
+              <Component {...pageProps} />
+            </>
+          </Layout>
+        </ApolloSetting>
+      </RecoilRoot>
+    </WhatViewPortSize>
   );
 }
 

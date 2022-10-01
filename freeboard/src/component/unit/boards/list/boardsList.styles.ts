@@ -4,8 +4,10 @@ import { StyleSet } from "../../../../commons/style/styleSet";
 export const BoardContainer = styled.div`
   box-sizing: border-box;
   margin: 0 auto;
-  padding: 40px 100px 100px 100px;
-  width: 1200px;
+  padding: 40px 30px 100px 30px;
+  width: 100%;
+  max-width: 1060px;
+  min-width: 600px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,7 +21,9 @@ export const BestListContainer = styled.div`
 export const BestListWrapper = styled.div`
   margin: 0 auto;
   padding: 100px;
-  width: 1200px;
+  width: 100%;
+  max-width: 1200px;
+  min-width: 500px;
   height: 400px;
 
   display: flex;
@@ -30,8 +34,10 @@ export const BestListWrapper = styled.div`
 `;
 
 export const BestBoard = styled.div`
+  margin-right: 25px;
   padding: 30px 40px;
   width: 230px;
+  min-width: 230px;
   height: 200px;
 
   background-color: transparent;
@@ -109,18 +115,6 @@ export const SearchWord = styled.input`
   border: 1px solid #d8d8d8;
 `;
 
-export const SearchBtn = styled.button`
-  appearance: none;
-  border: none;
-  background: transparent;
-
-  cursor: pointer;
-
-  position: absolute;
-  right: 330px;
-  top: 8px;
-`;
-
 export const DateOpenBtn = styled.button`
   margin: 0 auto;
   margin-top: 10px;
@@ -191,6 +185,7 @@ export const ListWriter = styled.span`
 `;
 export const ListDate = styled.span`
   width: 110px;
+  min-width: 90px;
   line-height: 44px;
   text-align: center;
 `;

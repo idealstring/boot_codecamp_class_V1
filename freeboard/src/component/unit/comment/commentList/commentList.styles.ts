@@ -3,7 +3,10 @@ import { StyleSet } from "../../../../commons/style/styleSet";
 
 export const CommentWrapper = styled.section`
   margin: 0 auto;
-  width: 1000px;
+  padding: 0 30px;
+  width: 100%;
+  max-width: 1060px;
+  min-width: 400px;
 
   display: flex;
   flex-direction: column;
@@ -17,6 +20,7 @@ export const CommentViewWrapper = styled.div`
   border: none;
   border-bottom: 1px solid #bdbdbd;
 `;
+
 export const CommentViewInner = styled.div`
   display: flex;
   flex-direction: row;

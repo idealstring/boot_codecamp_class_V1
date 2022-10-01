@@ -4,6 +4,8 @@ import { IBoardDetailPresenterProps } from "./boardsDetail.types";
 import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
 import BoardDeleteModal from "../../../commons/modal/boardDelete";
+import { useContext } from "react";
+import { WindowSizeContext } from "../../../commons/responsive";
 
 export default function BoardDetailPresenter(P: IBoardDetailPresenterProps) {
   const {
@@ -17,8 +19,9 @@ export default function BoardDetailPresenter(P: IBoardDetailPresenterProps) {
     onClickMoveToEdit,
   } = P;
   const router = useRouter();
+  const { isNormalScreen, isMobile } = useContext(WindowSizeContext);
   return (
-    <S.Container>
+    <S.Container isNormalScreen={isNormalScreen}>
       <S.TitleWrapper>
         <S.Title>{data ? data.fetchBoard.title : "Loading..."}</S.Title>
         <S.TitleInfoTop>
@@ -27,7 +30,7 @@ export default function BoardDetailPresenter(P: IBoardDetailPresenterProps) {
           {` `}
           {dateTimeFormatter(data?.fetchBoard.createdAt)}
         </S.TitleInfoTop>
-        <S.TitleInfoBottom>
+        <S.TitleInfoBottom isNormalScreen={isNormalScreen}>
           <S.IconWrapper
             onClick={onClickLinkModal}
             // onMouseLeave={P.onRolloverLinkModal}
@@ -46,7 +49,10 @@ export default function BoardDetailPresenter(P: IBoardDetailPresenterProps) {
             </svg>
           </S.IconWrapper>
           {modal.link ? (
-            <S.LinkModal onMouseLeave={onClickLinkModal}>
+            <S.LinkModal
+              onMouseLeave={onClickLinkModal}
+              isNormalScreen={isNormalScreen}
+            >
               {router.asPath}
             </S.LinkModal>
           ) : null}
@@ -65,7 +71,10 @@ export default function BoardDetailPresenter(P: IBoardDetailPresenterProps) {
             </svg>
           </S.IconWrapper>
           {modal.map ? (
-            <S.MapModal onMouseLeave={onClickMapModal}>
+            <S.MapModal
+              onMouseLeave={onClickMapModal}
+              isNormalScreen={isNormalScreen}
+            >
               {data?.fetchBoard.boardAddress.address}
               <br />
               {data?.fetchBoard.boardAddress.addressDetail}
@@ -126,9 +135,13 @@ export default function BoardDetailPresenter(P: IBoardDetailPresenterProps) {
           </S.DislikeWrapper>
         </S.LikeDislikeWrapper>
       </S.ContentWrapper>
-      <S.ContentBtnWrapper>
-        <S.ContentBtn onClick={onClickMoveToList}>목록으로</S.ContentBtn>
-        <S.ContentBtn onClick={onClickMoveToEdit}>수정하기</S.ContentBtn>
+      <S.ContentBtnWrapper isMobile={isMobile}>
+        <S.ContentBtn onClick={onClickMoveToList} isMobile={isMobile}>
+          목록으로
+        </S.ContentBtn>
+        <S.ContentBtn onClick={onClickMoveToEdit} isMobile={isMobile}>
+          수정하기
+        </S.ContentBtn>
         <BoardDeleteModal />
       </S.ContentBtnWrapper>
     </S.Container>

@@ -1,12 +1,14 @@
 import styled from "@emotion/styled";
 import { StyleSet } from "../../../../commons/style/styleSet";
-import { ICompleteColorProps, IErrorColorProps } from "./boardsWrite.types";
+import { IBoardWriteStyleProps } from "./boardsWrite.types";
 
 export const Container = styled.div`
   box-sizing: border-box;
   margin: 0 auto;
   padding: 60px 100px 100px 100px;
-  width: 1000px;
+  width: 100%;
+  max-width: 1000px;
+  min-width: 400px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,7 +17,7 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.div`
-  margin-bottom: 40px;
+  margin-bottom: 12px;
   text-align: center;
   font-size: ${StyleSet.fontSize.h2};
   font-weight: 700px;
@@ -32,12 +34,14 @@ export const WriterPwdWrapper = styled.div`
   width: 100%;
   margin-bottom: 28px;
   display: flex;
-  flex-direction: row;
+  flex-direction: ${(props: IBoardWriteStyleProps) =>
+    props.isNormalScreen ? "row" : "column"};
   justify-content: space-between;
   algin-items: center;
 `;
 
 export const WriterPwd = styled.div`
+  margin-top: 28px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -56,13 +60,14 @@ export const CompulsoryStar = styled.span`
 export const InputName = styled.input`
   margin-top: 16px;
   padding: 16px;
-  width: 385px;
+  width: ${(props: IBoardWriteStyleProps) =>
+    props.isNormalScreen ? "385px" : "100%"};
   height: 52px;
   border: 1px solid #bdbdbd;
-  background-color: ${(props: IErrorColorProps) =>
+  background-color: ${(props: IBoardWriteStyleProps) =>
     props.errorColor ? `${StyleSet.colors.point03}` : "default"};
   ::placeholder {
-    color: ${(props: IErrorColorProps) =>
+    color: ${(props: IBoardWriteStyleProps) =>
       props.errorColor ? "white" : "default"};
   }
 `;
@@ -70,13 +75,14 @@ export const InputName = styled.input`
 export const InputPwd = styled.input`
   margin-top: 16px;
   padding: 16px;
-  width: 385px;
+  width: ${(props: IBoardWriteStyleProps) =>
+    props.isNormalScreen ? "385px" : "100%"};
   height: 52px;
   border: 1px solid #bdbdbd;
-  background-color: ${(props: IErrorColorProps) =>
+  background-color: ${(props: IBoardWriteStyleProps) =>
     props.errorColor ? `${StyleSet.colors.point03}` : "default"};
   ::placeholder {
-    color: ${(props: IErrorColorProps) =>
+    color: ${(props: IBoardWriteStyleProps) =>
       props.errorColor ? "white" : "default"};
   }
 `;
@@ -93,10 +99,10 @@ export const InputTitle = styled.input`
   width: 100%;
   height: 52px;
   border: 1px solid #bdbdbd;
-  background-color: ${(props: IErrorColorProps) =>
+  background-color: ${(props: IBoardWriteStyleProps) =>
     props.errorColor ? `${StyleSet.colors.point03}` : "default"};
   ::placeholder {
-    color: ${(props: IErrorColorProps) =>
+    color: ${(props: IBoardWriteStyleProps) =>
       props.errorColor ? "white" : "default"};
   }
 `;
@@ -115,10 +121,10 @@ export const TextareaContent = styled.textarea`
   width: 100%;
   height: 480px;
   border: 1px solid #bdbdbd;
-  background-color: ${(props: IErrorColorProps) =>
+  background-color: ${(props: IBoardWriteStyleProps) =>
     props.errorColor ? `${StyleSet.colors.point03}` : "default"};
   ::placeholder {
-    color: ${(props: IErrorColorProps) =>
+    color: ${(props: IBoardWriteStyleProps) =>
       props.errorColor ? "white" : "default"};
   }
 `;
@@ -205,7 +211,7 @@ export const SubmitBtn = styled.button`
   border: none;
   font-weight: 500;
   color: #fff;
-  background-color: ${(props: ICompleteColorProps) =>
+  background-color: ${(props: IBoardWriteStyleProps) =>
     props.isCompleteColor ? `${StyleSet.colors.point01}` : "default"};
   cursor: pointer;
 `;

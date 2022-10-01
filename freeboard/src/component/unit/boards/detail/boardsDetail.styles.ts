@@ -1,11 +1,15 @@
 import styled from "@emotion/styled";
 import { StyleSet } from "../../../../commons/style/styleSet";
+import { IScreenProps } from "./boardsDetail.types";
 
 export const Container = styled.div`
   box-sizing: border-box;
   margin: 0 auto;
-  padding: 60px 100px 100px 100px;
-  width: 1000px;
+  padding: ${(props: IScreenProps) =>
+    props.isNormalScreen ? "60px 100px 100px 100px" : "60px 30px 100px 30px;"};
+  width: 100%;
+  max-width: 1000px;
+  min-width: 400px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,11 +19,12 @@ export const Container = styled.div`
 
 export const TitleWrapper = styled.div`
   margin: 0 0 30px 0;
-  padding: 50px 0;
+  padding: ${(props: IScreenProps) =>
+    props.isNormalScreen ? "50px 0" : "50px 0 30px 0;"};
   border-top: 0.5px solid #bdbdbd;
   border-bottom: 0.5px solid #bdbdbd;
 
-  height: 180px;
+  // height: 180px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -51,7 +56,8 @@ export const TitleInfoTop = styled.div`
 `;
 
 export const TitleInfoBottom = styled.div`
-  margin: 5px 0;
+  margin: ${(props: IScreenProps) =>
+    props.isNormalScreen ? "5px 0" : "10px 0 0 0;"};
   font-size: ${StyleSet.fontSize.b4};
   font-weight: 400;
 
@@ -61,13 +67,15 @@ export const TitleInfoBottom = styled.div`
 
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: ${(props: IScreenProps) =>
+    props.isNormalScreen ? "flex-end" : "center"};
   align-items: center;
   cursor: pointer;
 
-  position: absolute;
-  left: 470px;
-  top: 110px;
+  position: ${(props: IScreenProps) =>
+    props.isNormalScreen ? "absolute" : "relative"};
+  left: ${(props: IScreenProps) => (props.isNormalScreen ? "470px" : null)};
+  top: ${(props: IScreenProps) => (props.isNormalScreen ? "110px" : null)};
 `;
 
 export const IconWrapper = styled.div`
@@ -82,20 +90,19 @@ export const IconWrapper = styled.div`
 `;
 
 export const LinkModal = styled.div`
-  top: 35px;
+  top: ${(props: IScreenProps) => (props.isNormalScreen ? "35px" : "40px")};
   right: 30px;
   padding: 10px 20px;
   background-color: #999999;
   color: #fff;
-
-  // display: none;
 
   position: absolute;
   &:after {
     position: absolute;
     content: "";
     top: -5px;
-    right: 20px;
+    right: ${(props: IScreenProps) =>
+      props.isNormalScreen ? "20px" : "133px"};
     width: 10px;
     height: 10px;
     background-color: #999999;
@@ -109,7 +116,7 @@ export const LinkModal = styled.div`
 // `;
 
 export const MapModal = styled.div`
-  top: 35px;
+  top: ${(props: IScreenProps) => (props.isNormalScreen ? "35px" : "40px")};
   right: -8px;
   padding: 10px 20px;
   background-color: #999999;
@@ -122,7 +129,8 @@ export const MapModal = styled.div`
     position: absolute;
     content: "";
     top: -5px;
-    right: 20px;
+    right: ${(props: IScreenProps) =>
+      props.isNormalScreen ? "20px" : "135px"};
     width: 10px;
     height: 10px;
     background-color: #999999;
@@ -144,6 +152,10 @@ export const ContentInner = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  div img {
+    width: 100%;
+    height: auto;
   }
 `;
 export const YoutubeUrlWrapper = styled.div`
@@ -196,14 +208,17 @@ export const Svg = styled.svg`
 export const ContentBtnWrapper = styled.div`
   margin: 0 auto;
 
-  width: 500px;
+  width: ${(props: IScreenProps) => (props.isMobile ? "100%" : "500px")};
+  height: ${(props: IScreenProps) => (props.isMobile ? "180px" : "auto")};
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  flex-direction: ${(props: IScreenProps) =>
+    props.isMobile ? "column" : "row"};
+  justify-content: ${(props: IScreenProps) =>
+    props.isMobile ? "space-between" : "space-around"};
 `;
 
 export const ContentBtn = styled.button`
-  width: 122px;
+  width: ${(props: IScreenProps) => (props.isMobile ? "100%" : "122px")};
   height: 46px;
   border: 1px solid #999999;
   border-radius: 46px;
