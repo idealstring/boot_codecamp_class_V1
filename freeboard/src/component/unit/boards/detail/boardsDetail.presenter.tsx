@@ -83,15 +83,13 @@ export default function BoardDetailPresenter(P: IBoardDetailPresenterProps) {
         </S.TitleInfoBottom>
       </S.TitleWrapper>
       <S.ContentWrapper>
-        {data?.fetchBoard.images ? (
-          <S.ContentInner>
+        {data?.fetchBoard?.images?.map((el: string, i: number) => (
+          <S.ContentInner key={i}>
             <div>
-              <img
-                src={`https://storage.googleapis.com/${data?.fetchBoard.images}`}
-              ></img>
+              <img src={`https://storage.googleapis.com/${el}`}></img>
             </div>
           </S.ContentInner>
-        ) : null}
+        ))}
         <S.ContentInner>
           {data ? data.fetchBoard.contents : "Loading..."}
         </S.ContentInner>

@@ -17,7 +17,7 @@ export type IInputDateProps = {
   address: string;
   addressDetail: string;
   youtubeUrl: string;
-  images: Array<string>;
+  fileUrls: Array<string>;
 };
 
 export type IMyVrivables = {
@@ -52,7 +52,7 @@ export type IBoardWritePresenterProps = {
   onChangeInput: (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ) => void;
-  onChangeInputImage: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeFileUrls: (fileUrl: string, index: number) => void;
   CreateBtn: () => void;
   UpdateBtn: () => void;
   CreateCancelBtn: () => void;
@@ -62,7 +62,6 @@ export type IBoardWritePresenterProps = {
   existingData?: Pick<IQuery, "fetchBoard">;
   setInputData: Dispatch<SetStateAction<IInputDateProps>>;
   inputData: IInputDateProps;
-  uploadFileInputRef: RefObject<HTMLInputElement>;
   onClickUploadFileBtn: () => void;
 };
 

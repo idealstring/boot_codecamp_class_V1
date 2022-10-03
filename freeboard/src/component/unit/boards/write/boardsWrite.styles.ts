@@ -233,29 +233,6 @@ export const ImgUploadWrapper = styled.div`
   display: flex;
   flex-direction: row;
 `;
-export const ImgUpload = styled.div`
-  margin-right: 24px;
-  width: 78px;
-  height: 78px;
-  border: 1px solid ${StyleSet.colors.gray};
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: ${StyleSet.fontSize.h2};
-  cursor: pointer;
-  span {
-    font-size: ${StyleSet.fontSize.b5};
-    font-weight: 500;
-  }
-  input {
-    display: none;
-  }
-  img {
-    width: 78px;
-    height: 78px;
-  }
-`;
 
 export const InputRadioWrapper = styled.div`
   margin-top: 16px;

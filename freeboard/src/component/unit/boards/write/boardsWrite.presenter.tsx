@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import ZipcodeModal from "../../../commons/modal/zipcodeModal";
 import { WindowSizeContext } from "../../../commons/responsive";
+import Uploads01 from "../../../commons/uploads/01/uploads01.container";
 import * as S from "./boardsWrite.styles";
 import { IBoardWritePresenterProps } from "./boardsWrite.types";
 
@@ -8,7 +9,7 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
   const {
     errorOutput,
     onChangeInput,
-    onChangeInputImage,
+    onChangeFileUrls,
     CreateBtn,
     UpdateBtn,
     CreateCancelBtn,
@@ -18,7 +19,6 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
     existingData,
     setInputData,
     inputData,
-    uploadFileInputRef,
     onClickUploadFileBtn,
   } = P;
   const { isNormalScreen } = useContext(WindowSizeContext);
@@ -132,24 +132,14 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
         <S.SubtitleWrapper>
           <S.Subtitle>사진 첨부</S.Subtitle>
           <S.ImgUploadWrapper>
-            {new Array(3).fill(1).map((el, i) =>
-              inputData.images[0] ? (
-                <S.ImgUpload>
-                  <img
-                    src={`https://storage.googleapis.com/${inputData.images[0]}`}
-                  />
-                </S.ImgUpload>
-              ) : (
-                <S.ImgUpload onClick={onClickUploadFileBtn}>
-                  +<span>Upload</span>
-                  <input
-                    type="file"
-                    onChange={onChangeInputImage}
-                    ref={uploadFileInputRef}
-                  />
-                </S.ImgUpload>
-              )
-            )}
+            {inputData.fileUrls.map((el, index) => (
+              <Uploads01
+                key={index}
+                index={index}
+                fileUrl={el}
+                onChangeFileUrls={onChangeFileUrls}
+              />
+            ))}
           </S.ImgUploadWrapper>
         </S.SubtitleWrapper>
         <S.SubtitleWrapper>

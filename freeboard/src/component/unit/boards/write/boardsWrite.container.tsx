@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useMutation } from "@apollo/client";
 import { ChangeEvent, useRef, useState } from "react";
 import BoardWritePresenter from "./boardsWrite.presenter";
-import { CREATE_BOARD, UPDATE_BOARD, UPLOAD_FILE } from "./boardsWrite.queries";
+import { CREATE_BOARD, UPDATE_BOARD } from "./boardsWrite.queries";
 import {
   IMutation,
   IMutationCreateBoardArgs,
@@ -36,7 +36,7 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
     address: "",
     addressDetail: "",
     youtubeUrl: "",
-    images: [],
+    fileUrls: ["", "", ""],
   });
   const [errorOutput, setErrorOutput] = useState({
     writer: false,
@@ -54,10 +54,6 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
     Pick<IMutation, "updateBoard">,
     IMutationUpdateBoardArgs
   >(UPDATE_BOARD);
-  const [uploadFile] = useMutation<
-    Pick<IMutation, "uploadFile">,
-    IMutationUploadFileArgs
-  >(UPLOAD_FILE);
 
   const onChangeInput = (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
@@ -76,24 +72,27 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
     if (isEdit) password ? setIsCompleteColor(true) : setIsCompleteColor(false);
   };
 
-  const onChangeInputImage = async (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-
-    try {
-      const result = await uploadFile({
-        variables: {
-          file: file,
-        },
-      });
-      setInputData({
-        ...inputData,
-        images: [String(result.data?.uploadFile.url)],
-      });
-    } catch (error: any) {
-      // if(error instanceof Error)
-      PostFail(error);
-    }
+  const onChangeFileUrls = async (fileUrl: string, index: number) => {
+    const newFileUrls = [...inputData.fileUrls];
+    newFileUrls[index] = fileUrl;
+    setInputData({ ...inputData, fileUrls: newFileUrls });
+    // const file = e.target.files?.[0];
+    // try {
+    //   const result = await uploadFile({
+    //     variables: {
+    //       file: file,
+    //     },
+    //   });
+    //   setInputData({
+    //     ...inputData,
+    //     fileUrls: [String(result.data?.uploadFile.url)],
+    //   });
+    // } catch (error: any) {
+    //   // if(error instanceof Error)
+    //   PostFail(error);
+    // }
   };
+
   const CreateBtn = async () => {
     if (!inputData.writer) {
       setErrorOutput((errorOutput) => {
@@ -125,7 +124,7 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
       address,
       addressDetail,
       youtubeUrl,
-      images,
+      fileUrls,
     } = inputData;
     if (writer && password && title && contents) {
       try {
@@ -137,7 +136,7 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
               title,
               contents,
               youtubeUrl,
-              images,
+              images: fileUrls,
               boardAddress: {
                 zipcode,
                 address,
@@ -174,8 +173,8 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
     if (inputData.youtubeUrl) {
       myVariables.updateBoardInput.youtubeUrl = inputData.youtubeUrl;
     }
-    if (inputData.images) {
-      myVariables.updateBoardInput.images = inputData.images;
+    if (inputData.fileUrls) {
+      myVariables.updateBoardInput.images = inputData.fileUrls;
     }
     console.log(myVariables);
     if (inputData.zipcode || inputData.address || inputData.addressDetail) {
@@ -237,7 +236,7 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
     <BoardWritePresenter
       errorOutput={errorOutput}
       onChangeInput={onChangeInput}
-      onChangeInputImage={onChangeInputImage}
+      onChangeFileUrls={onChangeFileUrls}
       CreateBtn={CreateBtn}
       UpdateBtn={UpdateBtn}
       CreateCancelBtn={CreateCancelBtn}
@@ -247,7 +246,6 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
       existingData={existingData}
       setInputData={setInputData}
       inputData={inputData}
-      uploadFileInputRef={uploadFileInputRef}
       onClickUploadFileBtn={onClickUploadFileBtn}
     />
   );
