@@ -3,12 +3,12 @@ import * as S from "./myPage.styles";
 import { IMyPagePresenterProps } from "./myPage.types";
 import { WindowSizeContext } from "../../../commons/responsive";
 import PageNation02 from "../../../commons/pagination/02/pagination02.container";
+import WithAuth from "../../../commons/hocs/withAuth";
 
-export default function MyPagePresenter(P: IMyPagePresenterProps) {
+function MyPagePresenter(P: IMyPagePresenterProps) {
   const { fetchLoggedData } = P;
   const { isNormalScreen } = useContext(WindowSizeContext);
 
-  console.log(fetchLoggedData);
   return (
     <>
       <S.Container isNormalScreen={isNormalScreen}>
@@ -78,3 +78,5 @@ export default function MyPagePresenter(P: IMyPagePresenterProps) {
     </>
   );
 }
+
+export default WithAuth(MyPagePresenter);

@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useMutation } from "@apollo/client";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import BoardWritePresenter from "./boardsWrite.presenter";
 import { CREATE_BOARD, UPDATE_BOARD } from "./boardsWrite.queries";
 import {
@@ -76,22 +76,16 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
     const newFileUrls = [...inputData.fileUrls];
     newFileUrls[index] = fileUrl;
     setInputData({ ...inputData, fileUrls: newFileUrls });
-    // const file = e.target.files?.[0];
-    // try {
-    //   const result = await uploadFile({
-    //     variables: {
-    //       file: file,
-    //     },
-    //   });
-    //   setInputData({
-    //     ...inputData,
-    //     fileUrls: [String(result.data?.uploadFile.url)],
-    //   });
-    // } catch (error: any) {
-    //   // if(error instanceof Error)
-    //   PostFail(error);
-    // }
   };
+
+  useEffect(() => {
+    if (existingData?.fetchBoard.images?.length) {
+      setInputData({
+        ...inputData,
+        fileUrls: [...existingData?.fetchBoard.images],
+      });
+    }
+  }, [existingData]);
 
   const CreateBtn = async () => {
     if (!inputData.writer) {

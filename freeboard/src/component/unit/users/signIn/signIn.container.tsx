@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { Modal } from "antd";
 import { useRouter } from "next/router";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../../commons/store";
 import {
@@ -10,7 +10,7 @@ import {
   IQuery,
 } from "../../../../commons/types/generated/types";
 import SignInPresenter from "./signIn.presenter";
-import { FETCH_USER_LOGGED_IN, LOGIN_USER } from "./signIn.queries";
+import { LOGIN_USER } from "./signIn.queries";
 
 export default function SignInContainer() {
   const [email, setEmail] = useState("");
@@ -23,8 +23,6 @@ export default function SignInContainer() {
   const [errorPassword, setErrorPassword] = useState(false);
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const router = useRouter();
-  const { data: fetchLoggedData } =
-    useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
 
   const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -68,15 +66,13 @@ export default function SignInContainer() {
         Modal.error({ content: "로그인 실패. 다시 시도 바랍니다." });
         return;
       }
+
       setAccessToken(accessToken);
-      moveToMyPage();
+      localStorage.setItem("accessToken", accessToken);
+      router.push(`/users/mypage`);
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
-  };
-
-  const moveToMyPage = () => {
-    router.push(`/users/${fetchLoggedData?.fetchUserLoggedIn._id}`);
   };
 
   const onClickRePassword = () => {
