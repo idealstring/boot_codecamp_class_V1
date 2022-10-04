@@ -32,7 +32,7 @@ export default function BoardListPresenter(P: IBoardListPresenterProps) {
                 <S.BestTitle>{bestBoard.title}</S.BestTitle>
                 {bestBoard.images?.[0] ? (
                   <S.BestImg
-                    src={`https://storage.googleapis.com/${bestBoard.images}`}
+                    src={`https://storage.googleapis.com/${bestBoard.images[0]}`}
                   />
                 ) : null}
 
