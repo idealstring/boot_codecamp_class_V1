@@ -1,16 +1,17 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { Modal } from "antd";
 import { useRouter } from "next/router";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../../commons/store";
 import {
   IMutation,
   IMutationLoginUserArgs,
-  IQuery,
 } from "../../../../commons/types/generated/types";
 import SignInPresenter from "./signIn.presenter";
 import { LOGIN_USER } from "./signIn.queries";
+import * as yup from "yup";
+import { IOnClickSignInProps } from "./signIn.types";
 
 export default function SignInContainer() {
   const [email, setEmail] = useState("");
@@ -19,45 +20,19 @@ export default function SignInContainer() {
     Pick<IMutation, "loginUser">,
     IMutationLoginUserArgs
   >(LOGIN_USER);
-  const [errorEmail, setErrorEmail] = useState(false);
-  const [errorPassword, setErrorPassword] = useState(false);
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const router = useRouter();
 
-  const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-    if (email) {
-      setErrorEmail(false);
-    }
-  };
+  const schema = yup.object({
+    email: yup.string().email().required(`false`),
+    password: yup.string().required(`false`),
+  });
 
-  const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-    if (password) {
-      setErrorPassword(false);
-    }
-  };
-
-  const onClickSignIn = async () => {
-    if (!email && !password) {
-      setErrorEmail(true);
-      setErrorPassword(true);
-      return;
-    }
-    if (!email) {
-      setErrorEmail(true);
-      return;
-    }
-    if (!password) {
-      setErrorPassword(true);
-      return;
-    }
-
+  const onClickSignIn = async (data: IOnClickSignInProps) => {
     try {
       const result = await loginUser({
         variables: {
-          email,
-          password,
+          ...data,
         },
       });
 
@@ -86,13 +61,10 @@ export default function SignInContainer() {
   return (
     <>
       <SignInPresenter
-        onChangeEmail={onChangeEmail}
-        onChangePassword={onChangePassword}
         onClickSignIn={onClickSignIn}
         onClickRePassword={onClickRePassword}
         onClickRegister={onClickRegister}
-        errorEmail={errorEmail}
-        errorPassword={errorPassword}
+        schema={schema}
       />
     </>
   );

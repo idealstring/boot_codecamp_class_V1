@@ -1,0 +1,152 @@
+import styled from "@emotion/styled";
+import { StyleSet } from "../../../../commons/style/styleSet";
+import { IMarketWriteStylesProps } from "./marketWrite.types";
+
+export const Container = styled.section`
+  margin: 0 auto;
+  padding: 60px 100px 60px;
+  width: 100%;
+  max-width: 1000px;
+  min-width: 500px;
+
+  box-shadow: 0px 4px 20px rgb(0 0 0 / 20%);
+`;
+
+export const SectionTitle = styled.h2`
+  padding-bottom: 24px;
+  font-size: ${StyleSet.fontSize.h1};
+  font-family: ${StyleSet.fontFamily.b};
+  text-align: center;
+`;
+
+export const Wrapper01 = styled.div`
+  margin-bottom: 28px;
+`;
+
+export const Wrapper02 = styled.div`
+  margin-bottom: 28px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const Wrapper03 = styled.div`
+  margin-bottom: 28px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const Wrapper04 = styled.div`
+  //   margin-bottom: 28px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+export const Wrapper05 = styled.div`
+  margin-bottom: 28px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const Wrapper06 = styled.div`
+  margin-bottom: ${(props: IMarketWriteStylesProps) =>
+    props.isNormalScreen ? "28px" : "0"};
+
+  display: flex;
+  flex-direction: ${(props: IMarketWriteStylesProps) =>
+    props.isNormalScreen ? "row" : "column"};
+  justify-content: space-between;
+  algin-items: flex-start;
+`;
+
+export const InputText01 = styled.input`
+  width: 100%;
+
+  border: none;
+  border-bottom: 1px solid ${StyleSet.colors.lightGray02};
+  font-size: ${StyleSet.fontSize.h2};
+  background-color: transparent;
+`;
+
+export const InputText02 = styled.input`
+  width: 100%;
+
+  border: none;
+  border-bottom: 1px solid ${StyleSet.colors.lightGray02};
+  background-color: transparent;
+`;
+
+export const InputText03 = styled.input`
+  width: 45%;
+
+  border: none;
+  border-bottom: 1px solid ${StyleSet.colors.lightGray02};
+  background-color: transparent;
+`;
+
+export const InputText04 = styled.input`
+  margin-bottom: 20px;
+  width: 100%;
+
+  border: none;
+  border-bottom: 1px solid ${StyleSet.colors.lightGray02};
+  background-color: transparent;
+`;
+
+export const Textarea = styled.textarea`
+  width: 100%;
+  height: 300px;
+
+  border: none;
+  border-bottom: 1px solid ${StyleSet.colors.lightGray02};
+  background-color: transparent;
+
+  resize: none;
+`;
+
+export const Label01 = styled.label`
+  width: 110px;
+  font-family: ${StyleSet.fontFamily.b};
+`;
+
+export const Label02 = styled.label`
+  margin-bottom: 16px;
+  width: 100%;
+  font-family: ${StyleSet.fontFamily.b};
+
+  display: block;
+`;
+
+export const Label03 = styled.label`
+  margin: 0 20px 0 4px;
+`;
+
+export const CreateBtn = styled.button`
+  padding: 0 16px;
+  width: 179px;
+  height: 52px;
+  border-radius: 52px;
+  border: none;
+  font-weight: 500;
+  color: #fff;
+  background-color: default;
+  cursor: pointer;
+`;
+
+export const CancelBtn = styled.button`
+  margin-top: 16px;
+  padding: 0 16px 16px 16px;
+  border: none;
+  font-weight: 500;
+  color: #bdbdbd;
+  background-color: transparent;
+  cursor: pointer;
+`;

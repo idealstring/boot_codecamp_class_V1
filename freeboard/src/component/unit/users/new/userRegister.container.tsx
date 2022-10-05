@@ -1,21 +1,30 @@
+import { useMutation } from "@apollo/client";
+import { Modal } from "antd";
 import { useRouter } from "next/router";
-import { ChangeEvent, useState } from "react";
 import UserRegisterPresenter from "./userRegister.presenter";
+import { CREATE_USER } from "./userRegister.queries";
+import { IOnClickRegisterProps } from "./userRegister.types";
 
 export default function UserRegisterContainer() {
   const router = useRouter();
-  const [inputData, setInputData] = useState({
-    email: "",
-    password: "",
-    passwordConfirm: "",
-    name: "",
-  });
+  const [createUser] = useMutation(CREATE_USER);
 
-  const onchangeInputData = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputData({ ...inputData, [e.target.id]: e.target.value });
+  const onClickRegister = async (data: IOnClickRegisterProps) => {
+    console.log(data);
+    try {
+      const result = await createUser({
+        variables: {
+          createUserInput: {
+            ...data,
+          },
+        },
+      });
+      console.log(result);
+      router.push("/users/signIn");
+    } catch (error) {
+      if (error instanceof Error) Modal.error({ content: error.message });
+    }
   };
-
-  const onClickRegister = () => {};
 
   const onClickSignIn = () => {
     router.push("/users/signIn");
@@ -24,7 +33,6 @@ export default function UserRegisterContainer() {
   return (
     <>
       <UserRegisterPresenter
-        onchangeInputData={onchangeInputData}
         onClickRegister={onClickRegister}
         onClickSignIn={onClickSignIn}
       />

@@ -19,7 +19,7 @@ export const Hgroup = styled.hgroup`
   }
 `;
 
-export const BGroup = styled.section`
+export const Form = styled.form`
   padding: 20px 0;
   width: 100%;
 
@@ -35,15 +35,6 @@ export const Inner = styled.label`
   flex-direction: row;
   justify-content: flex-start;
   algin-items: flex-start;
-`;
-
-export const Input = styled.input`
-  padding: 9px 15px 9px 15px;
-  border: 1px solid ${StyleSet.colors.lightGray02};
-  border-radius: 5px;
-  ::placeholder {
-    color: ${StyleSet.colors.lightGray02};
-  }
 `;
 
 export const Label = styled.label`
@@ -99,7 +90,7 @@ export const Line = styled.hr`
 `;
 
 export const UserRegisterBtn = styled.button`
-  margin: 10px 0 0 0;
+  margin: 28px 0 0 0;
   width: 100%;
   padding: 11px 10px;
   font-size: ${StyleSet.fontSize.b2};
@@ -108,10 +99,11 @@ export const UserRegisterBtn = styled.button`
   background-color: ${StyleSet.colors.point01};
   border: none;
   border-radius: 5px;
+
+  cursor: pointer;
 `;
 
 export const LoginWrapper = styled.div`
-  margin: 25px 0;
   width: 100%;
   text-align: center;
 `;

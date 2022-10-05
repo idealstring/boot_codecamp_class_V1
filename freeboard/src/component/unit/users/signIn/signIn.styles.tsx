@@ -20,7 +20,7 @@ export const Hgroup = styled.hgroup`
   }
 `;
 
-export const BGroup = styled.section`
+export const Form = styled.form`
   margin: 20px 0;
   width: 100%;
 
@@ -74,7 +74,7 @@ export const Label = styled.label`
 `;
 
 export const SignInBtn = styled.button`
-  margin: 10px 0 0 0;
+  margin: 28px 0 0 0;
   width: 100%;
   padding: 11px 10px;
   font-size: ${StyleSet.fontSize.b2};

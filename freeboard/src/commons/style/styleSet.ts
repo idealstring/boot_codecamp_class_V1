@@ -10,7 +10,8 @@ export const StyleSet = {
     point01: "#06c",
     point02: "#ec7333",
     point03: "#b1312d",
-    inputError: "#988383",
+    inputError: "#b1312d",
+    // inputError: "#988383",
   },
   fontSize: {
     h1: "2rem",

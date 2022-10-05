@@ -5,12 +5,12 @@ import {
   IMutation,
   IMutationUploadFileArgs,
 } from "../../../../commons/types/generated/types";
-import { checkValidationImage } from "./uploads01.validation";
-import Uploads01Presenter from "./uploads01.presenter";
-import { UPLOAD_FILE } from "./uploads01.queries";
-import { IUploads01Props } from "./uploads01.types";
+import { checkValidationImage } from "./uploads02.validation";
+import Uploads02Presenter from "./uploads02.presenter";
+import { UPLOAD_FILE } from "./uploads02.queries";
+import { IUploads02Props } from "./uploads02.types";
 
-export default function Uploads01(P: IUploads01Props) {
+export default function Uploads02(P: IUploads02Props) {
   const { key, index, fileUrl, onChangeFileUrls } = P;
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [uploadFile] = useMutation<
@@ -45,7 +45,7 @@ export default function Uploads01(P: IUploads01Props) {
 
   return (
     <>
-      <Uploads01Presenter
+      <Uploads02Presenter
         onChangeFile={onChangeFile}
         inputFileRef={inputFileRef}
         onClickUpload={onClickUpload}

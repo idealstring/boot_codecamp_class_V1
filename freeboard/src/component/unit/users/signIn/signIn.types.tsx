@@ -1,15 +1,21 @@
-import { ChangeEvent } from "react";
+import { FieldError } from "rc-field-form/lib/interface";
 
 export type ISignInPresenterProps = {
-  onChangeEmail: (e: ChangeEvent<HTMLInputElement>) => void;
-  onChangePassword: (e: ChangeEvent<HTMLInputElement>) => void;
   onClickSignIn: () => void;
   onClickRePassword: () => void;
   onClickRegister: () => void;
-  errorEmail: boolean;
-  errorPassword: boolean;
+};
+
+export type IOnClickSignInProps = {
+  email: string;
+  password: string;
 };
 
 export type IErrorProps = {
-  error: boolean;
+  error?:
+    | string
+    | FieldError
+    | any
+    // | Merge<FieldError, FieldErrorsImpl<any>>
+    | undefined;
 };
