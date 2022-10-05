@@ -1,5 +1,4 @@
 import { useQuery, gql } from "@apollo/client";
-import { MouseEvent } from "react";
 import {
   IBoard,
   IQuery,
