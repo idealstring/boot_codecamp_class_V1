@@ -5,6 +5,8 @@ import {
   ApolloLink,
 } from "@apollo/client";
 import { createUploadLink } from "apollo-upload-client";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../commons/store";
 
@@ -17,6 +19,42 @@ const GLOBAL_STATE = new InMemoryCache();
 
 export default function ApolloSetting(props: IApolloSettingProps) {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const router = useRouter();
+
+  // 1. 프리렌더링 예제 - process.browser
+  if (process.browser) {
+    // console.log("지금은 브라우저!!");
+    // const result = localStorage.getItem("accessToken");
+    // console.log(result);
+    // if (result) setAccessToken(result);
+  } else {
+    // console.log("(yarn dev로 실행된) 프론트서버!! ");
+    // const result = localStorage.getItem("accessToken");
+    // console.log(result);
+    // if (result) setAccessToken(result);
+  }
+
+  // 2. 프리렌더링 예제 - typeof window
+  if (typeof window !== "undefined") {
+    // console.log("지금은 브라우저!!");
+    // const result = localStorage.getItem("accessToken");
+    // console.log(result);
+    // if (result) setAccessToken(result);
+  } else {
+    // console.log("(yarn dev로 실행된) 프론트서버!! ");
+    // const result = localStorage.getItem("accessToken");
+    // console.log(result);
+    // if (result) setAccessToken(result);
+  }
+
+  // 3. 프리렌더링 예제 - useEffect (프리렌더링 무시)
+  // useEffect(() => {
+  //   console.log("지금은 브라우저!!");
+  //   const result = localStorage.getItem("accessToken");
+  //   // console.log(result);
+  //   if (result) setAccessToken(result);
+  //   void router.push("/23-02-login-localstorage-success");
+  // }, []);
 
   const uploadLink = createUploadLink({
     uri: "http://backend09.codebootcamp.co.kr/graphql",

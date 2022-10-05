@@ -19,5 +19,7 @@ module.exports = {
     "@typescript-eslint/triple-slash-reference": "off", // 슬래시 3개를 쓰지 말라는 것인데, next-env-d.ts라는 nextjs 기본설정에서 쓰기 때문에 제외 시키는 것.
     "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/array-type": "off",
+    "react/display-name": "off",
+    "@typescript-eslint/prefer-nullish-coalescing": "off",
   },
 };
