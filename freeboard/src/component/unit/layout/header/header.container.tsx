@@ -24,7 +24,7 @@ export default function HeaderContainer(P: IHeaderContainerProps) {
   };
 
   const onClickMyPage = async () => {
-    await router.push(`/users/${fetchLoggedData?.fetchUserLoggedIn._id}`);
+    await router.push(`/users/mypage`);
   };
 
   return (
