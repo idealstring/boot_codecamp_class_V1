@@ -21,5 +21,7 @@ module.exports = {
     "@typescript-eslint/array-type": "off",
     "react/display-name": "off",
     "@typescript-eslint/prefer-nullish-coalescing": "off",
+    "@typescript-eslint/naming-convention": "off",
+    "@typescript-eslint/restrict-plus-operands": "off",
   },
 };
