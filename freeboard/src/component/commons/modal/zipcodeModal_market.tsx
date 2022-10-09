@@ -1,11 +1,11 @@
 import { Modal } from "antd";
 import { useState } from "react";
-import * as S from "../../unit/modal/zipcode/zipcodeModal.styles";
+import * as S from "../../unit/modal/zipcodeMarket/zipcodeModal.styles";
 import DaumPostcodeEmbed, { Address } from "react-daum-postcode";
-import { IZipcodeModalP } from "../../unit/modal/zipcode/zipcodeModal.types";
+import { IZipcodeModalMarketProps } from "../../unit/modal/zipcodeMarket/zipcodeModal.types";
 
-const ZipcodeModal = (P: IZipcodeModalP) => {
-  const { setInputData } = P;
+const ZipcodeModalMarket = (P: IZipcodeModalMarketProps) => {
+  const { setValue } = P;
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const onClickModalToggle = () => {
@@ -13,14 +13,17 @@ const ZipcodeModal = (P: IZipcodeModalP) => {
   };
 
   const handleComplete = (address: Address) => {
-    setInputData((state) => {
-      return {
-        ...state,
-        zipcode: address.zonecode,
-        address: address.address,
-        addressDetail: address.buildingName,
-      };
-    });
+    // setValue("useditemAddress", {
+    //   lng: "",
+    //   lat: "",
+    //   zipcode: address.zonecode,
+    //   address: address.address,
+    //   addressDetail: address.buildingName,
+    // });
+
+    setValue("useditemAddress.zipcode", address.zonecode);
+    setValue("useditemAddress.address", address.address);
+    setValue("useditemAddress.addressDetail", address.buildingName);
     onClickModalToggle();
   };
 
@@ -46,4 +49,4 @@ const ZipcodeModal = (P: IZipcodeModalP) => {
   );
 };
 
-export default ZipcodeModal;
+export default ZipcodeModalMarket;

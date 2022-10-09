@@ -11,7 +11,7 @@ import { UPLOAD_FILE } from "./uploads02.queries";
 import { IUploads02Props } from "./uploads02.types";
 
 export default function Uploads02(P: IUploads02Props) {
-  const { key, index, fileUrl, onChangeFileUrls } = P;
+  const { index, fileUrl, onChangeFileUrls } = P;
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [uploadFile] = useMutation<
     Pick<IMutation, "uploadFile">,
@@ -33,6 +33,7 @@ export default function Uploads02(P: IUploads02Props) {
           file,
         },
       });
+      console.log(result);
       if (!result.data) {
         Modal.error({ content: "업로드 실패. 다시 시도해주세요." });
         return;

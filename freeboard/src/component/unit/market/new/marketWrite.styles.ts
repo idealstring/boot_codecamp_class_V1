@@ -67,29 +67,18 @@ export const Wrapper06 = styled.div`
   algin-items: flex-start;
 `;
 
-export const InputText01 = styled.input`
-  width: 100%;
+export const Wrapper07 = styled.div`
+  margin-bottom: 28px;
 
-  border: none;
-  border-bottom: 1px solid ${StyleSet.colors.lightGray02};
-  font-size: ${StyleSet.fontSize.h2};
-  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 `;
 
-export const InputText02 = styled.input`
-  width: 100%;
-
-  border: none;
-  border-bottom: 1px solid ${StyleSet.colors.lightGray02};
-  background-color: transparent;
-`;
-
-export const InputText03 = styled.input`
-  width: 45%;
-
-  border: none;
-  border-bottom: 1px solid ${StyleSet.colors.lightGray02};
-  background-color: transparent;
+export const Wrapper08 = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 export const InputText04 = styled.input`
@@ -106,7 +95,10 @@ export const Textarea = styled.textarea`
   height: 300px;
 
   border: none;
-  border-bottom: 1px solid ${StyleSet.colors.lightGray02};
+  border-bottom: ${(props: any) =>
+    props.error
+      ? `1px solid ${StyleSet.colors.inputError}`
+      : `1px solid ${StyleSet.colors.lightGray02}`};
   background-color: transparent;
 
   resize: none;
@@ -127,6 +119,12 @@ export const Label02 = styled.label`
 
 export const Label03 = styled.label`
   margin: 0 20px 0 4px;
+`;
+
+export const KakaoMap = styled.div`
+  width: 100%;
+  min-width: 384px;
+  height: 252px;
 `;
 
 export const CreateBtn = styled.button`

@@ -37,10 +37,16 @@ export const DetailNav = styled.div`
 `;
 
 export const ImageWrapper = styled.div`
-  width: 100%;
-  max-width: 380px;
-  max-height: 380px;
-  aspect-ratio: 1/1;
+  // width: 100%;
+  // max-width: 380px;
+  // max-height: 380px;
+  // aspect-ratio: 1/1;
+  img {
+    width: 100%;
+    max-width: 380px;
+    max-height: 380px;
+    aspect-ratio: 1/1;
+  }
 `;
 
 export const InfoWrapper = styled.div`
@@ -75,17 +81,29 @@ export const ProductAddressWrapper = styled.div`
 `;
 
 export const ProductAddress = styled.span`
-  margin: 0 0 0 5px;
+  margin: 0 0 0 10px;
+
+  display: block;
+`;
+
+export const MiddleTitle = styled.span`
+  margin: 0 0 20px 0;
+  font-family: ${StyleSet.fontFamily.b};
 
   display: block;
 `;
 
 export const BodyWrapper = styled.div`
   margin: 0 0 20px 0;
-  padding: 20px 0;
+  padding: 0 0 20px 0;
   width: 100%;
 
   border-bottom: 1px solid ${StyleSet.colors.lightGray02};
+`;
+
+export const KakaoMap = styled.div`
+  width: 100%;
+  height: 300px;
 `;
 
 export const BottomWrapper = styled.div`

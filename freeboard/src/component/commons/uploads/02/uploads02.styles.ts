@@ -17,8 +17,8 @@ export const ImgUpload = styled.div`
     font-weight: 500;
   }
   img {
-    width: 78px;
-    height: 78px;
+    width: 180px;
+    height: 180px;
   }
 `;
 

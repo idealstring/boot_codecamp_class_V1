@@ -6,6 +6,7 @@ export const WindowSizeContext = createContext({
   isTablet: false,
   isMobile: false,
 });
+
 export default function WhatViewPortSize(props: any) {
   const isNormalScreen = useMediaQuery({ query: "(min-width: 1025px)" });
   const isTablet = useMediaQuery({
