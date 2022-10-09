@@ -30,7 +30,7 @@ const result3 = first3("영희")(8);
 //
 // 4. HOF  - generic 타입(화살표함수)
 // prettier-ignore
-const first4 = <T,>(arg1: T) => <U,>(arg2: U): [T, U] => {
+const first4 = <T>(arg1: T) => <U>(arg2: U): [T, U] => {
     return [arg1, arg2];
   };
 const result4 = first4("영희")(8);
@@ -39,7 +39,7 @@ const result4 = first4("영희")(8);
 //
 // 5. HOF  - generic 타입(컴포넌트에 응용)
 // prettier-ignore
-const first5 = <C,>(arg1: C) => <P,>(arg2: P): [C, P] => {
+const first5 = <C>(arg1: C) => <P>(arg2: P): [C, P] => {
     return [arg1, arg2];
   };
 const result5 = widthAuth("bbb")({ qqq: "영희" });

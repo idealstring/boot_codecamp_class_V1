@@ -66,6 +66,7 @@ export default function ApolloSetting(props: IApolloSettingProps) {
     link: ApolloLink.from([uploadLink]),
     // 관련 내용을 여기다라 링크 시킴. ApolloLink를 가져와서 링크하는데, 인증 등 여러가지 링크하게 되기때문에 배열로 받는다.
     cache: GLOBAL_STATE, // 페이지전환(_app.tsx 리렌더)되도, 캐시 유지.
+    connectToDevTools: true,
   });
   // prettier-ignore
   return <ApolloProvider client={client}>
