@@ -7,14 +7,35 @@ import MarketListPresenter from "./marketList.presenter";
 import { FETCH_USED_ITEMS } from "./marketList.queries";
 
 export default function MarketListContainer() {
-  const { data } = useQuery<
+  const { data, fetchMore } = useQuery<
     Pick<IQuery, "fetchUseditems">,
     IQueryFetchUseditemsArgs
   >(FETCH_USED_ITEMS);
 
+  const onLoadMore = () => {
+    if (!data) return;
+
+    fetchMore({
+      variables: {
+        page: Math.ceil(data.fetchUseditems.length / 10) + 1,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult.fetchUseditems)
+          return { fetchUseditems: [...prev.fetchUseditems] };
+
+        return {
+          fetchUseditems: [
+            ...prev.fetchUseditems,
+            ...fetchMoreResult.fetchUseditems,
+          ],
+        };
+      },
+    });
+  };
+
   return (
     <>
-      <MarketListPresenter data={data} />
+      <MarketListPresenter data={data} onLoadMore={onLoadMore} />
     </>
   );
 }
