@@ -23,7 +23,7 @@ export default function MarketDetailContainer() {
   useEffect(() => {
     const script = document.createElement("script");
     script.src =
-      "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=197590e1eca014c399a79f6900e8f800&libraries=services";
+      "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=197590e1eca014c399a79f6900e8f800";
     document.head.appendChild(script);
 
     script.onload = () => {
@@ -31,17 +31,17 @@ export default function MarketDetailContainer() {
         const container = document.getElementById("map");
         const options = {
           center: new window.kakao.maps.LatLng(
-            data?.fetchUseditem.useditemAddress?.lng,
-            data?.fetchUseditem.useditemAddress?.lat
+            data?.fetchUseditem.useditemAddress?.lat,
+            data?.fetchUseditem.useditemAddress?.lng
           ),
-          level: 3,
+          level: 2,
         };
 
         // 마커
         const map = new window.kakao.maps.Map(container, options);
         const markerPosition = new window.kakao.maps.LatLng(
-          data?.fetchUseditem.useditemAddress?.lng,
-          data?.fetchUseditem.useditemAddress?.lat
+          data?.fetchUseditem.useditemAddress?.lat,
+          data?.fetchUseditem.useditemAddress?.lng
         );
         const marker = new window.kakao.maps.Marker({
           position: markerPosition,
