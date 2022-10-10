@@ -11,7 +11,7 @@ export default function MarketListContainer() {
     Pick<IQuery, "fetchUseditems">,
     IQueryFetchUseditemsArgs
   >(FETCH_USED_ITEMS);
-  console.log(data);
+
   return (
     <>
       <MarketListPresenter data={data} />

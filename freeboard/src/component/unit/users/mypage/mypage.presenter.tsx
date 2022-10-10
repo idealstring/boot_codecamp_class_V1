@@ -79,4 +79,4 @@ function MyPagePresenter(P: IMyPagePresenterProps) {
   );
 }
 
-export default WithAuth(MyPagePresenter);
+export default MyPagePresenter;

@@ -11,8 +11,10 @@ import {
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, useWatch } from "react-hook-form";
 import { useEffect, useState } from "react";
+import useAuth from "../../../commons/hooks/useAuth";
 
 export default function MarketContainer() {
+  useAuth();
   const [fileUrls, setFileUrls] = useState(["", ""]);
   const router = useRouter();
   const schema = yup.object({

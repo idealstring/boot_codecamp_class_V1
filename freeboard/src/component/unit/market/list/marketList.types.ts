@@ -1,3 +1,5 @@
+import { IQuery } from "../../../../commons/types/generated/types";
+
 export type IMarketListPresenterProps = {
-  data: Pick<IQuery, "fetchUseditems"> | undefined;
+  data?: Pick<IQuery, "fetchUseditems"> | undefined;
 };

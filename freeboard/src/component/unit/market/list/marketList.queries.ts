@@ -5,9 +5,16 @@ export const FETCH_USED_ITEMS = gql`
     fetchUseditems(page: $page) {
       _id
       name
+      remarks
       contents
       price
+      tags
+      seller {
+        name
+        picture
+      }
       images
+      createdAt
     }
   }
 `;
