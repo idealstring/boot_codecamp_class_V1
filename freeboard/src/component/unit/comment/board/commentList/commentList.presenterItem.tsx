@@ -4,13 +4,13 @@ import * as S from "./commentList.styles";
 import {
   dateFormatter,
   dateTimeFormatter,
-} from "../../../../commons/utils/utils";
+} from "../../../../../commons/utils/utils";
 // import DeleteModal from "../../../commons/modal/commentDelete";
 import { useRouter } from "next/router";
 import { ICommentListPresenterItemProps } from "./commentList.types";
 import CommentWriteContainer from "../commentWrite/commentWrite.container";
 import { Rate } from "antd";
-import CommentDeleteModal from "../../../commons/modal/commentDelete";
+import CommentDeleteModal from "../../../../commons/modal/commentDelete";
 
 export default function CommentListPresenterItem(
   P: ICommentListPresenterItemProps

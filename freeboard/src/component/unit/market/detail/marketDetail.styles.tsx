@@ -37,6 +37,7 @@ export const DetailNav = styled.div`
 `;
 
 export const ImageWrapper = styled.div`
+  margin: 0 20px 0 0;
   // width: 100%;
   // max-width: 380px;
   // max-height: 380px;
@@ -62,26 +63,34 @@ export const ProductSeller = styled.span`
 
 export const ProductTitle = styled.h2`
   margin: 0 0 10px 0;
-  font-size: ${StyleSet.fontSize.b2};
+  font-size: ${StyleSet.fontSize.h2};
 `;
 
 export const ProductPrice = styled.span`
   margin: 0 0 10px 0;
-  font-size: ${StyleSet.fontSize.h3};
-  font-family: ${StyleSet.fontFamily.b};
+  font-size: ${StyleSet.fontSize.h2};
+  font-family: ${StyleSet.fontFamily.eb};
 
   display: block;
 `;
 
-export const ProductAddressWrapper = styled.div`
+export const DealInfoWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 `;
 
-export const ProductAddress = styled.span`
-  margin: 0 0 0 10px;
+export const DealInfoTitle = styled.span`
+  font-size: ${StyleSet.fontSize.b4};
+  font-family: ${StyleSet.fontFamily.b};
+  color: ${StyleSet.colors.gray};
+
+  display: block;
+`;
+
+export const DealInfo = styled.span`
+  margin: 0 0 0 20px;
 
   display: block;
 `;

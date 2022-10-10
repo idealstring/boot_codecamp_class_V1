@@ -3,7 +3,7 @@ import { ICommentWritePresenterProps } from "./commentWrite.types.js";
 import { Rate } from "antd";
 import "antd/dist/antd.css";
 import { useContext } from "react";
-import { WindowSizeContext } from "../../../commons/responsive";
+import { WindowSizeContext } from "../../../../commons/responsive";
 
 export default function CommentWritePresenter(P: ICommentWritePresenterProps) {
   const {

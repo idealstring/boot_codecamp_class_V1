@@ -1,4 +1,4 @@
-import { IQuery } from "../../../../commons/types/generated/types";
+import { IQuery } from "../../../../../commons/types/generated/types";
 
 // presenter
 export type ICommentListPresenterProps = {

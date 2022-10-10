@@ -1,4 +1,4 @@
-import CommentWriteContainer from "../../unit/comment/commentWrite/commentWrite.container";
+import CommentWriteContainer from "../../../unit/comment/board/commentWrite/commentWrite.container";
 
 export default function CommentUpdate() {
   return (

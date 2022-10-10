@@ -11,13 +11,13 @@ import {
   IMutation,
   IMutationCreateBoardCommentArgs,
   IMutationDeleteBoardCommentArgs,
-} from "../../../../commons/types/generated/types";
+} from "../../../../../commons/types/generated/types";
 import {
   ICommentWriteContainerProps,
   IMyVariables,
   IUpdateBoardCommentInput,
 } from "./commentWrite.types";
-import { CommentFail } from "../../../commons/modal/commentSuccessFail";
+import { CommentFail } from "../../../../commons/modal/commentSuccessFail";
 
 export default function CommentWriteContainer(P: ICommentWriteContainerProps) {
   const { isEdit, onClickIsEditToggle, comment } = P;

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { StyleSet } from "../../../../commons/style/styleSet";
+import { StyleSet } from "../../../../../commons/style/styleSet";
 import { ICommentWriteStyleProps } from "./commentWrite.types";
 
 export const HrLine = styled.hr`

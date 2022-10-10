@@ -5,7 +5,7 @@ import { FETCH_BOARD_COMMENTS } from "./commentList.queries";
 import {
   IQuery,
   IQueryFetchBoardCommentsArgs,
-} from "../../../../commons/types/generated/types";
+} from "../../../../../commons/types/generated/types";
 
 export default function CommentListContainer() {
   const router = useRouter();

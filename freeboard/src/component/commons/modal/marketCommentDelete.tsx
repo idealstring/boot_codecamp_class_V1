@@ -1,22 +1,18 @@
 import { Modal } from "antd";
 import React, { ChangeEvent, useState } from "react";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import {
-  DELETE_BOARD_COMMENT,
-  FETCH_BOARD_COMMENTS,
-} from "../../unit/comment/board/commentList/commentList.queries";
+import { FETCH_BOARD_COMMENTS } from "../../unit/comment/board/commentList/commentList.queries";
 import { useRouter } from "next/router";
 import { useMutation } from "@apollo/client";
 import * as S from "../../unit/modal/commentDelete/deleteModal.styles";
 import { ICommentDeleteModalProps } from "../../unit/modal/commentDelete/deleteModal.types";
 import { CommentFail } from "./commentSuccessFail";
+import { DELETE_USEDITEM_QUESTION } from "../../unit/comment/market/commentList/commentList.queries";
 
-export default function CommentDeleteModal(P: ICommentDeleteModalProps) {
+export default function MarketCommentDeleteModal(P: ICommentDeleteModalProps) {
   const { id } = P;
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [password, setPassword] = useState("");
-  const [deleteBoardComment] = useMutation(DELETE_BOARD_COMMENT);
-  const router = useRouter();
+  const [deleteUseditemQuestion] = useMutation(DELETE_USEDITEM_QUESTION);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -24,30 +20,38 @@ export default function CommentDeleteModal(P: ICommentDeleteModalProps) {
 
   const handleOk = () => {
     setIsModalOpen(false);
-    deleteBoardCommentFunc();
+    deleteMarketCommentFunc();
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
   };
 
-  const onChangeInputPassword = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
-  const deleteBoardCommentFunc = async () => {
+  const deleteMarketCommentFunc = async () => {
     try {
-      await deleteBoardComment({
+      await deleteUseditemQuestion({
         variables: {
-          boardCommentId: id,
-          password: password,
+          useditemQuestionId: id,
         },
-        refetchQueries: [
-          {
-            query: FETCH_BOARD_COMMENTS,
-            variables: { boardId: router.query.detail, page: 1 },
-          },
-        ],
+        update(chche, { data }) {
+          chche.modify({
+            fields: {
+              fetchUseditemQuestions: (prev, { readField }) => {
+                const deletedId = data.deleteUseditemQuestion;
+                const filterdPrev = prev.filter(
+                  (el) => readField("_id", el) !== deletedId
+                );
+                return [...filterdPrev];
+              },
+            },
+          });
+        },
+        // refetchQueries: [
+        //   {
+        //     query: FETCH_BOARD_COMMENTS,
+        //     variables: { boardId: router.query.detail, page: 1 },
+        //   },
+        // ],
       });
     } catch (error) {
       if (error instanceof Error) CommentFail(error.message);
@@ -85,13 +89,6 @@ export default function CommentDeleteModal(P: ICommentDeleteModalProps) {
             <ExclamationCircleOutlined style={{ color: "#b1312d" }} />
             &nbsp;&nbsp;&nbsp;삭제하시면 다시 복구할 수 없습니다. 정말
             삭제하시겠습니까?
-          </S.InnerRow>
-          <S.InnerRow>
-            <S.InputDesign
-              type="text"
-              onChange={onChangeInputPassword}
-              placeholder="비밀번호를 입력하세요."
-            />
           </S.InnerRow>
         </S.Wrapper>
       </Modal>

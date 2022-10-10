@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { StyleSet } from "../../../../commons/style/styleSet";
+import { StyleSet } from "../../../../../commons/style/styleSet";
 
 export const CommentWrapper = styled.section`
   margin: 0 auto;
