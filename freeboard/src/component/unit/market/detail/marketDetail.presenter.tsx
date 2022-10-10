@@ -3,16 +3,15 @@ import { useRouter } from "next/router";
 import { useContext } from "react";
 import { StyleSet } from "../../../../commons/style/styleSet";
 import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
+import MarketDeleteModal from "../../../commons/modal/marketDelete";
 import { WindowSizeContext } from "../../../commons/responsive";
 import * as S from "./marketDetail.styles";
 import { IMarketDetailPresenterProps } from "./marketDetail.types";
 
 export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
-  const { data } = P;
+  const { data, onClickDeleteProduct } = P;
   const { isMobile } = useContext(WindowSizeContext);
   const { onClickMoveToPage } = useMoveToPage();
-  console.log(data?.fetchUseditem.pickedCount);
-  console.log(data?.fetchUseditem);
   const router = useRouter();
   return (
     <>
@@ -82,15 +81,7 @@ export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
           >
             목록으로
           </S.ToListBtn>
-          <S.ToListBtn
-            isMobile={isMobile}
-            // onClick={onClickMoveToPage("/basket")}
-            onClick={() => {
-              Modal.error({ content: "미완성기능" });
-            }}
-          >
-            삭제
-          </S.ToListBtn>
+          <MarketDeleteModal />
           <S.ToListBtn
             isMobile={isMobile}
             onClick={() => {

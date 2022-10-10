@@ -1,4 +1,5 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
+import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import {
@@ -50,9 +51,16 @@ export default function MarketDetailContainer() {
     };
   }, [data]);
 
+  const onClickDeleteProduct = () => {
+    console.log(String(router.query.detail));
+  };
+
   return (
     <>
-      <MarketDetailPresenter data={data} />
+      <MarketDetailPresenter
+        data={data}
+        onClickDeleteProduct={onClickDeleteProduct}
+      />
     </>
   );
 }

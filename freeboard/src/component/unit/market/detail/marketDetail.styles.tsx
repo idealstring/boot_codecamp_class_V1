@@ -149,7 +149,6 @@ export const ToListBtn = styled.button`
   border-radius: 52px;
   border: none;
   font-weight: 500;
-  // color: #fff;
   background-color: default;
   cursor: pointer;
 `;
