@@ -84,6 +84,12 @@ export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
           <MarketDeleteModal />
           <S.ToListBtn
             isMobile={isMobile}
+            onClick={onClickMoveToPage(`/market/${router.query.detail}/edit`)}
+          >
+            수정하기
+          </S.ToListBtn>
+          <S.ToListBtn
+            isMobile={isMobile}
             onClick={() => {
               Modal.error({ content: "미완성기능" });
             }}

@@ -63,3 +63,73 @@ export const CREATE_USED_ITEM = gql`
     }
   }
 `;
+
+export const UPDATE_USED_ITEM = gql`
+  mutation updateUseditem(
+    $updateUseditemInput: UpdateUseditemInput!
+    $useditemId: ID!
+  ) {
+    updateUseditem(
+      updateUseditemInput: $updateUseditemInput
+      useditemId: $useditemId
+    ) {
+      _id
+      name
+      remarks
+      contents
+      price
+      tags
+      images
+      pickedCount
+      useditemAddress {
+        _id
+        zipcode
+        address
+        addressDetail
+        lat
+        lng
+        createdAt
+        updatedAt
+        deletedAt
+      }
+      buyer {
+        _id
+        email
+        name
+        picture
+        # userPoint {
+        #   _id
+        #   amount
+        #   user
+        #   createdAt
+        #   updatedAt
+        #   deletedAt
+        # }
+        createdAt
+        updatedAt
+        deletedAt
+      }
+      seller {
+        _id
+        email
+        name
+        picture
+        # userPoint {
+        #   _id
+        #   amount
+        #   user
+        #   createdAt
+        #   updatedAt
+        #   deletedAt
+        # }
+        createdAt
+        updatedAt
+        deletedAt
+      }
+      soldAt
+      createdAt
+      updatedAt
+      deletedAt
+    }
+  }
+`;

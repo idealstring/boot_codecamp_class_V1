@@ -29,7 +29,7 @@ const ZipcodeModalMarket = (P: IZipcodeModalMarketProps) => {
 
   return (
     <>
-      <S.ZipcodeModal onClick={onClickModalToggle}>
+      <S.ZipcodeModal type="button" onClick={onClickModalToggle}>
         우편번호 검색
       </S.ZipcodeModal>
       {isModalOpen && (

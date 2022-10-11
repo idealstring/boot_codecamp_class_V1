@@ -19,7 +19,6 @@ export default function BoardWritePresenter(P: IBoardWritePresenterProps) {
     existingData,
     setInputData,
     inputData,
-    onClickUploadFileBtn,
   } = P;
   const { isNormalScreen } = useContext(WindowSizeContext);
 

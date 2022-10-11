@@ -5,6 +5,15 @@ import {
   UseFormRegister,
   UseFormSetValue,
 } from "react-hook-form";
+import { IQuery } from "../../../../commons/types/generated/types";
+
+// container
+
+export type IMarketContainerProps = {
+  isEdit: boolean;
+  existingData?: Pick<IQuery, "fetchUseditem"> | undefined;
+  loading: any;
+};
 
 // presenter
 
@@ -15,7 +24,7 @@ export type IMarketPresenterProps = {
   // ) => (
   //   event?: BaseSyntheticEvent<object, any, any> | undefined
   // ) => Promise<any>;
-
+  onClickUpdate: (data: any) => Promise<void>;
   setValue: UseFormSetValue<{
     name: string;
     remarks: string;
@@ -44,15 +53,17 @@ export type IMarketPresenterProps = {
       lat: string;
     };
   }>;
-
   handleSubmit: UseFormHandleSubmit<FieldValues>;
   formState: FormState<FieldValues>;
   fileUrls: string[];
   onChangeFileUrls: (fileUrl: string, index: number) => Promise<void>;
+  isEdit: boolean;
+  existingData?: Pick<IQuery, "fetchUseditem"> | undefined;
 };
 
 // styles
 
 export type IMarketWriteStylesProps = {
   isNormalScreen?: Boolean;
+  isActive?: boolean;
 };

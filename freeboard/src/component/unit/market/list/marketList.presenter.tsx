@@ -13,7 +13,7 @@ export default function MarketListPresenter(P: IMarketListPresenterProps) {
   return (
     <InfiniteScroll pageStart={1} loadMore={onLoadMore} hasMore={true}>
       <S.Container>
-        <S.wrapper01>
+        <S.Wrapper01>
           {data?.fetchUseditems.map((el: IUseditem, i: number) => (
             <Link href={`/market/${el._id}`} key={i}>
               <a>
@@ -42,12 +42,20 @@ export default function MarketListPresenter(P: IMarketListPresenterProps) {
               </a>
             </Link>
           ))}
-        </S.wrapper01>
-        <S.wrapper02>
-          <S.CreateBtn onClick={onClickMoveToPage("/market/new")}>
-            상품등록
-          </S.CreateBtn>
-        </S.wrapper02>
+        </S.Wrapper01>
+        <S.Wrapper02>
+          <S.SideSticky>
+            <S.Wrapper03>
+              <S.Subtext>최근 본 상품</S.Subtext>
+              <S.RecentItem>아이템1</S.RecentItem>
+              <S.RecentItem>아이템1</S.RecentItem>
+              <S.RecentItem>아이템1</S.RecentItem>
+            </S.Wrapper03>
+            <S.CreateBtn onClick={onClickMoveToPage("/market/new")}>
+              상품등록
+            </S.CreateBtn>
+          </S.SideSticky>
+        </S.Wrapper02>
       </S.Container>
     </InfiniteScroll>
   );

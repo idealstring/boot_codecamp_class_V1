@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { StyleSet } from "../../../../commons/style/styleSet";
 import { UseFormRegisterReturn } from "react-hook-form";
+import { IQuery } from "../../../../commons/types/generated/types";
 
 const Input = styled.input`
   width: 100%;
@@ -15,6 +16,7 @@ type IInput03Props = {
   register: UseFormRegisterReturn;
   placeholder: string;
   error?: any;
+  existingData?: Pick<IQuery, "fetchUseditem"> | undefined;
 };
 
 export default function Input03(P: IInput03Props) {

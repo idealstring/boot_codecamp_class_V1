@@ -3,18 +3,21 @@ import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { useMutation } from "@apollo/client";
 import MarketPresenter from "./marketWrite.presenter";
-import { CREATE_USED_ITEM } from "./marketWrite.queries";
+import { CREATE_USED_ITEM, UPDATE_USED_ITEM } from "./marketWrite.queries";
 import {
   IMutation,
   IMutationCreateUseditemArgs,
+  IMutationUpdateUseditemArgs,
 } from "../../../../commons/types/generated/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, useWatch } from "react-hook-form";
 import { useEffect, useState } from "react";
 import useAuth from "../../../commons/hooks/useAuth";
+import { IMarketContainerProps } from "./marketWrite.types";
 
-export default function MarketContainer() {
+export default function MarketContainer(P: IMarketContainerProps) {
   useAuth();
+  const { isEdit, existingData, loading } = P;
   const [fileUrls, setFileUrls] = useState(["", ""]);
   const router = useRouter();
   const schema = yup.object({
@@ -55,6 +58,44 @@ export default function MarketContainer() {
     Pick<IMutation, "createUseditem">,
     IMutationCreateUseditemArgs
   >(CREATE_USED_ITEM);
+  const [updateUseditem] = useMutation<
+    Pick<IMutation, "updateUseditem">,
+    IMutationUpdateUseditemArgs
+  >(UPDATE_USED_ITEM);
+
+  useEffect(() => {
+    if (!loading) {
+      if (!existingData) return;
+      setValue("name", existingData?.fetchUseditem.name);
+      setValue("remarks", existingData?.fetchUseditem.remarks);
+      setValue("contents", existingData?.fetchUseditem.contents);
+      setValue("price", existingData?.fetchUseditem.price);
+      setValue("tags", existingData?.fetchUseditem.tags);
+      setValue(
+        "useditemAddress.lng",
+        existingData?.fetchUseditem.useditemAddress?.lng
+      );
+      setValue(
+        "useditemAddress.lat",
+        existingData?.fetchUseditem.useditemAddress?.lat
+      );
+      setValue(
+        "useditemAddress.zipcode",
+        existingData?.fetchUseditem.useditemAddress?.zipcode
+      );
+      setValue(
+        "useditemAddress.address",
+        existingData?.fetchUseditem.useditemAddress?.address
+      );
+      setValue(
+        "useditemAddress.addressDetail",
+        existingData?.fetchUseditem.useditemAddress?.addressDetail
+      );
+      existingData?.fetchUseditem.images
+        ? setFileUrls(existingData?.fetchUseditem.images)
+        : ["", ""];
+    }
+  }, [loading]);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -133,16 +174,38 @@ export default function MarketContainer() {
     }
   };
 
+  const onClickUpdate = async (data: any) => {
+    try {
+      const result = await updateUseditem({
+        variables: {
+          useditemId: String(router.query.detail),
+          updateUseditemInput: {
+            ...data,
+            images: fileUrls,
+          },
+        },
+      });
+      router.push(`/market/${result.data?.updateUseditem._id}`, undefined, {
+        shallow: true,
+      });
+    } catch (error) {
+      if (error instanceof Error) Modal.error({ content: error.message });
+    }
+  };
+
   return (
     <>
       <MarketPresenter
         onClickSubmit={onClickSubmit}
+        onClickUpdate={onClickUpdate}
         register={register}
         setValue={setValue}
         handleSubmit={handleSubmit}
         formState={formState}
         fileUrls={fileUrls}
         onChangeFileUrls={onChangeFileUrls}
+        isEdit={isEdit}
+        existingData={existingData}
       />
     </>
   );

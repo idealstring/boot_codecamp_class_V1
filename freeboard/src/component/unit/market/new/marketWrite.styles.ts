@@ -134,8 +134,10 @@ export const CreateBtn = styled.button`
   border-radius: 52px;
   border: none;
   font-weight: 500;
-  color: #fff;
-  background-color: default;
+  color: ${(props: IMarketWriteStylesProps) =>
+    props.isActive ? "#fff" : "#000"};
+  background-color: ${(props: IMarketWriteStylesProps) =>
+    props.isActive ? `${StyleSet.colors.point01}` : "default"};
   cursor: pointer;
 `;
 

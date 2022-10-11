@@ -14,12 +14,15 @@ import ZipcodeModalMarket from "../../../commons/modal/zipcodeModal_market";
 export default function MarketPresenter(P: IMarketPresenterProps) {
   const {
     onClickSubmit,
+    onClickUpdate,
     setValue,
     register,
     handleSubmit,
     formState,
     fileUrls,
     onChangeFileUrls,
+    isEdit,
+    existingData,
   } = P;
   const { isNormalScreen } = useContext(WindowSizeContext);
   const { onClickMoveToPage } = useMoveToPage();
@@ -27,13 +30,20 @@ export default function MarketPresenter(P: IMarketPresenterProps) {
   return (
     <>
       <S.Container>
-        <form onSubmit={handleSubmit(onClickSubmit)}>
+        <form
+          onSubmit={
+            isEdit ? handleSubmit(onClickUpdate) : handleSubmit(onClickSubmit)
+          }
+        >
           <S.Wrapper01>
-            <S.SectionTitle>상품 등록</S.SectionTitle>
+            <S.SectionTitle>
+              {isEdit ? "상품 수정" : "상품 등록"}
+            </S.SectionTitle>
           </S.Wrapper01>
           <S.Wrapper01>
             <Input02
               type="text"
+              id="name"
               placeholder="상품명"
               register={register("name")}
               error={formState.errors.name?.message}
@@ -61,6 +71,7 @@ export default function MarketPresenter(P: IMarketPresenterProps) {
               placeholder="100,000"
               register={register("price")}
               error={formState.errors.price?.message}
+              existingData={existingData}
             />
           </S.Wrapper02>
           <S.Wrapper02>
@@ -69,6 +80,7 @@ export default function MarketPresenter(P: IMarketPresenterProps) {
               type="text"
               placeholder="#태그 #태그 #태그"
               register={register("tags")}
+              existingData={existingData}
             />
           </S.Wrapper02>
           <S.Wrapper06 isNormalScreen={isNormalScreen}>
@@ -151,7 +163,11 @@ export default function MarketPresenter(P: IMarketPresenterProps) {
             </div>
           </S.Wrapper01>
           <S.Wrapper05>
-            <S.CreateBtn type="submit">등록하기</S.CreateBtn>
+            {isEdit ? (
+              <S.CreateBtn>수정하기</S.CreateBtn>
+            ) : (
+              <S.CreateBtn>등록하기</S.CreateBtn>
+            )}
             <S.CancelBtn type="button" onClick={onClickMoveToPage("/market")}>
               취소
             </S.CancelBtn>
