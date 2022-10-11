@@ -7,7 +7,7 @@ import * as S from "./marketList.styles";
 import { IMarketListPresenterProps } from "./marketList.types";
 
 export default function MarketListPresenter(P: IMarketListPresenterProps) {
-  const { data, onLoadMore } = P;
+  const { data, onLoadMore, recentItems } = P;
   const { onClickMoveToPage } = useMoveToPage();
 
   return (
@@ -47,9 +47,20 @@ export default function MarketListPresenter(P: IMarketListPresenterProps) {
           <S.SideSticky>
             <S.Wrapper03>
               <S.Subtext>최근 본 상품</S.Subtext>
-              <S.RecentItem>아이템1</S.RecentItem>
-              <S.RecentItem>아이템1</S.RecentItem>
-              <S.RecentItem>아이템1</S.RecentItem>
+              {typeof window !== "undefined" &&
+                recentItems?.map((el: any, i: number) => (
+                  <Link href={`/market/${el.id}`} key={i}>
+                    <a>
+                      <S.RecentItem>
+                        <img
+                          width="100%"
+                          height="100%"
+                          src={`https://storage.googleapis.com/${el.imageUrl}`}
+                        />
+                      </S.RecentItem>
+                    </a>
+                  </Link>
+                ))}
             </S.Wrapper03>
             <S.CreateBtn onClick={onClickMoveToPage("/market/new")}>
               상품등록

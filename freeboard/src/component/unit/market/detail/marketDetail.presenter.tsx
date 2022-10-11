@@ -1,7 +1,6 @@
 import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { useContext } from "react";
-import { StyleSet } from "../../../../commons/style/styleSet";
 import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import MarketDeleteModal from "../../../commons/modal/marketDelete";
 import { WindowSizeContext } from "../../../commons/responsive";
@@ -9,7 +8,7 @@ import * as S from "./marketDetail.styles";
 import { IMarketDetailPresenterProps } from "./marketDetail.types";
 
 export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
-  const { data, onClickDeleteProduct } = P;
+  const { data, fetchUserData } = P;
   const { isMobile } = useContext(WindowSizeContext);
   const { onClickMoveToPage } = useMoveToPage();
   const router = useRouter();
@@ -81,13 +80,20 @@ export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
           >
             목록으로
           </S.ToListBtn>
-          <MarketDeleteModal />
-          <S.ToListBtn
-            isMobile={isMobile}
-            onClick={onClickMoveToPage(`/market/${router.query.detail}/edit`)}
-          >
-            수정하기
-          </S.ToListBtn>
+          {fetchUserData?.fetchUserLoggedIn._id ===
+          data?.fetchUseditem.seller?._id ? (
+            <MarketDeleteModal />
+          ) : null}
+          {fetchUserData?.fetchUserLoggedIn._id ===
+          data?.fetchUseditem.seller?._id ? (
+            <S.ToListBtn
+              isMobile={isMobile}
+              onClick={onClickMoveToPage(`/market/${router.query.detail}/edit`)}
+            >
+              수정하기
+            </S.ToListBtn>
+          ) : null}
+
           <S.ToListBtn
             isMobile={isMobile}
             onClick={() => {

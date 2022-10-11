@@ -1,4 +1,5 @@
 import { useQuery } from "@apollo/client";
+import { useEffect } from "react";
 import {
   IQuery,
   IQueryFetchUseditemsArgs,
@@ -11,6 +12,10 @@ export default function MarketListContainer() {
     Pick<IQuery, "fetchUseditems">,
     IQueryFetchUseditemsArgs
   >(FETCH_USED_ITEMS);
+
+  let getItems =
+    typeof window !== "undefined" &&
+    JSON.parse(String(localStorage.getItem("recentItems")));
 
   const onLoadMore = () => {
     if (!data) return;
@@ -35,7 +40,11 @@ export default function MarketListContainer() {
 
   return (
     <>
-      <MarketListPresenter data={data} onLoadMore={onLoadMore} />
+      <MarketListPresenter
+        data={data}
+        onLoadMore={onLoadMore}
+        recentItems={getItems}
+      />
     </>
   );
 }

@@ -1,5 +1,4 @@
-import { useMutation, useQuery } from "@apollo/client";
-import { Modal } from "antd";
+import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import {
@@ -7,7 +6,7 @@ import {
   IQueryFetchUseditemArgs,
 } from "../../../../commons/types/generated/types";
 import MarketDetailPresenter from "./marketDetail.presenter";
-import { FETCH_USED_ITEM } from "./marketDetail.queries";
+import { FETCH_USED_ITEM, FETCH_USER_LOGGED_IN } from "./marketDetail.queries";
 
 export default function MarketDetailContainer() {
   const router = useRouter();
@@ -19,6 +18,38 @@ export default function MarketDetailContainer() {
       useditemId: String(router.query.detail),
     },
   });
+  const { data: fetchUserData } =
+    useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
+
+  const imageUrl = data?.fetchUseditem?.images?.[0];
+
+  useEffect(() => {
+    if (data) {
+      if (localStorage.getItem("recentItems")) {
+        let getItems = JSON.parse(String(localStorage.getItem("recentItems")));
+        const setItem = {
+          id: router.query.detail,
+          imageUrl: imageUrl,
+        };
+
+        const temp = getItems.filter((el: any) => el.id === setItem.id);
+        if (temp.length === 1) return;
+        getItems.unshift(setItem);
+        if (getItems.length > 5) {
+          getItems.pop();
+        }
+        localStorage.setItem("recentItems", JSON.stringify(getItems));
+      } else {
+        const setItem = [
+          {
+            id: router.query.detail,
+            imageUrl: imageUrl,
+          },
+        ];
+        localStorage.setItem("recentItems", JSON.stringify(setItem));
+      }
+    }
+  }, [data]);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -51,16 +82,9 @@ export default function MarketDetailContainer() {
     };
   }, [data]);
 
-  const onClickDeleteProduct = () => {
-    console.log(String(router.query.detail));
-  };
-
   return (
     <>
-      <MarketDetailPresenter
-        data={data}
-        onClickDeleteProduct={onClickDeleteProduct}
-      />
+      <MarketDetailPresenter data={data} fetchUserData={fetchUserData} />
     </>
   );
 }
