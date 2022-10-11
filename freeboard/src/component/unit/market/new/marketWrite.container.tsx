@@ -42,7 +42,7 @@ export default function MarketContainer(P: IMarketContainerProps) {
         name: "",
         remarks: "",
         contents: "",
-        price: Number(),
+        price: 0,
         tags: "",
         useditemAddress: {
           lng: "",
@@ -71,26 +71,8 @@ export default function MarketContainer(P: IMarketContainerProps) {
       setValue("contents", existingData?.fetchUseditem.contents);
       setValue("price", existingData?.fetchUseditem.price);
       setValue("tags", existingData?.fetchUseditem.tags);
-      setValue(
-        "useditemAddress.lng",
-        existingData?.fetchUseditem.useditemAddress?.lng
-      );
-      setValue(
-        "useditemAddress.lat",
-        existingData?.fetchUseditem.useditemAddress?.lat
-      );
-      setValue(
-        "useditemAddress.zipcode",
-        existingData?.fetchUseditem.useditemAddress?.zipcode
-      );
-      setValue(
-        "useditemAddress.address",
-        existingData?.fetchUseditem.useditemAddress?.address
-      );
-      setValue(
-        "useditemAddress.addressDetail",
-        existingData?.fetchUseditem.useditemAddress?.addressDetail
-      );
+      setValue("useditemAddress", existingData?.fetchUseditem.useditemAddress);
+
       existingData?.fetchUseditem.images
         ? setFileUrls(existingData?.fetchUseditem.images)
         : ["", ""];
@@ -120,7 +102,13 @@ export default function MarketContainer(P: IMarketContainerProps) {
         // 주소로 좌표를 검색합니다
         geocoder.addressSearch(
           getValues("useditemAddress.address"),
-          function (result, status) {
+          function (
+            result: {
+              y: any;
+              x: any;
+            }[],
+            status: any
+          ) {
             // 정상적으로 검색이 완료됐으면
             if (status === window.kakao.maps.services.Status.OK) {
               const coords = new window.kakao.maps.LatLng(

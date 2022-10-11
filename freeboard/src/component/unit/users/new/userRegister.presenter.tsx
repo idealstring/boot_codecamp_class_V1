@@ -16,6 +16,11 @@ export default function UserRegisterPresenter(P: IUserRegisterPresenterProps) {
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(schema),
     mode: "onChange",
+    defaultValues: {
+      name: null,
+      email: null,
+      password: null,
+    },
   });
 
   return (
