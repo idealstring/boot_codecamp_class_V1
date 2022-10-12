@@ -9,56 +9,67 @@ import * as S from "./marketDetail.styles";
 import { IMarketDetailPresenterProps } from "./marketDetail.types";
 
 export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
-  const { data, fetchUserData } = P;
+  const { data, fetchUserData, onClickBasket } = P;
   const { isMobile } = useContext(WindowSizeContext);
   const { onClickMoveToPage } = useMoveToPage();
   const router = useRouter();
   return (
     <>
       <S.Container>
-        <S.TopWrapper>
-          <S.ImageWrapper>
+        <S.TopWrapper isMobile={isMobile}>
+          <S.ImageWrapper isMobile={isMobile}>
             {data?.fetchUseditem ? (
               <img
                 src={`https://storage.googleapis.com/${data?.fetchUseditem?.images?.[0]}`}
               />
             ) : null}
           </S.ImageWrapper>
-          <S.InfoWrapper>
-            <S.ProductSeller>
-              {data?.fetchUseditem.seller?.name}
-            </S.ProductSeller>
-            <S.ProductTitle>{data?.fetchUseditem.name}</S.ProductTitle>
-            <S.ProductPrice>
-              {PriceFormatter(data?.fetchUseditem.price)}
-            </S.ProductPrice>
-            <S.DealInfoWrapper>
-              <S.DealInfoTitle>거래방법</S.DealInfoTitle>
-              <S.DealInfo>직거래</S.DealInfo>
-            </S.DealInfoWrapper>
-            <S.DealInfoWrapper>
-              {/* <svg
-                viewBox="0 0 1024 1024"
-                version="1.1"
-                width={16}
-                fill={StyleSet.colors.point01}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M512 0C321.240382 0 167.210876 154.029505 167.210876 344.789124c0 73.460226 23.696847 142.181082 62.796645 197.868672L452.757883 959.722303l29.621058 50.948221c17.772635 17.772635 40.28464 17.772635 58.057275 0L570.057275 959.722303l222.750362-417.064507c39.099798-55.68759 62.796644-124.408447 62.796644-197.868672C856.789124 154.029505 701.574776 0 512 0z m0 526.070003c-72.275383 0-133.887185-41.469482-163.508244-101.896442-11.848423-23.696847-17.772635-50.948221-17.772635-79.384437 0-100.7116 81.754122-181.280879 181.280879-181.28088 100.7116 0 181.280879 81.754122 181.280879 181.28088 0 28.436216-7.109054 55.68759-17.772635 79.384437-29.621059 60.42696-92.417703 101.896442-163.508244 101.896442z" />
-              </svg> */}
-              <S.DealInfoTitle>거래장소</S.DealInfoTitle>
-              <div>
-                <S.DealInfo>
-                  {data?.fetchUseditem.useditemAddress?.address}{" "}
-                </S.DealInfo>
-                <S.DealInfo>
-                  {data?.fetchUseditem.useditemAddress?.addressDetail}
-                </S.DealInfo>
-              </div>
-            </S.DealInfoWrapper>
+          <S.InfoWrapper isMobile={isMobile}>
+            <div>
+              <S.ProductSeller>
+                {data?.fetchUseditem.seller?.name}
+              </S.ProductSeller>
+              <S.ProductTitle>{data?.fetchUseditem.name}</S.ProductTitle>
+              <S.ProductPrice>
+                {PriceFormatter(data?.fetchUseditem.price)}
+              </S.ProductPrice>
+              <S.DealInfoWrapper>
+                <S.DealInfoTitle>방법</S.DealInfoTitle>
+                <S.DealInfo>직거래</S.DealInfo>
+              </S.DealInfoWrapper>
+              <S.DealInfoWrapper>
+                <S.DealInfoTitle>장소</S.DealInfoTitle>
+                <div>
+                  <S.DealInfo>
+                    {data?.fetchUseditem.useditemAddress?.address}
+                  </S.DealInfo>
+                  <S.DealInfo>
+                    {data?.fetchUseditem.useditemAddress?.addressDetail}
+                  </S.DealInfo>
+                </div>
+              </S.DealInfoWrapper>
+              {data?.fetchUseditem.tags ? (
+                <S.DealInfoWrapper>
+                  <S.DealInfoTitle>태그</S.DealInfoTitle>
+                  <S.DealInfo>{data?.fetchUseditem.tags}</S.DealInfo>
+                </S.DealInfoWrapper>
+              ) : null}
+            </div>
+            <S.InfoBtnRrapper>
+              <S.BasketBtn onClick={onClickBasket}>담기</S.BasketBtn>
+              <S.PurchaseBtn>구매</S.PurchaseBtn>
+            </S.InfoBtnRrapper>
           </S.InfoWrapper>
         </S.TopWrapper>
+      </S.Container>
+      <S.DeailNavWrapper>
         <S.DetailNav>상세보기 댓글보기</S.DetailNav>
+      </S.DeailNavWrapper>
+      <S.Container>
+        <S.BodyWrapper>
+          <S.MiddleTitle>판매자 한마디</S.MiddleTitle>
+          <div>{data?.fetchUseditem.remarks}</div>
+        </S.BodyWrapper>
         <S.BodyWrapper>
           <S.MiddleTitle>상품정보</S.MiddleTitle>
           {/* <div>

@@ -91,5 +91,22 @@ export const MemberBtn = styled.button`
   background-color: transparent;
   border: 0;
 
+  position: relative;
+
   cursor: pointer;
+`;
+
+export const BasketAmount = styled.div`
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: ${StyleSet.colors.point02};
+  color: #fff;
+  font-size: ${StyleSet.fontSize.b5};
+  line-height: 1rem;
+  text-align: center;
+
+  position: absolute;
+  top: 0;
+  right: -5px;
 `;

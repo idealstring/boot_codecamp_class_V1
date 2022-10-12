@@ -1,12 +1,19 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
+import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import {
   IQuery,
   IQueryFetchUseditemArgs,
+  IQueryFetchUseditemsIPickedArgs,
 } from "../../../../commons/types/generated/types";
 import MarketDetailPresenter from "./marketDetail.presenter";
-import { FETCH_USED_ITEM, FETCH_USER_LOGGED_IN } from "./marketDetail.queries";
+import {
+  FETCH_USEDITEMS_IPICKED,
+  FETCH_USED_ITEM,
+  FETCH_USER_LOGGED_IN,
+  TOGGLE_USEDITEM_PICK,
+} from "./marketDetail.queries";
 
 export default function MarketDetailContainer() {
   const router = useRouter();
@@ -20,7 +27,16 @@ export default function MarketDetailContainer() {
   });
   const { data: fetchUserData } =
     useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
-
+  const { data: IPickItemData } = useQuery<
+    Pick<IQuery, "fetchUseditemsIPicked">,
+    IQueryFetchUseditemsIPickedArgs
+  >(FETCH_USEDITEMS_IPICKED, {
+    variables: {
+      search: "",
+      page: 1,
+    },
+  });
+  const [toggleUseditemPick] = useMutation(TOGGLE_USEDITEM_PICK);
   const imageUrl = data?.fetchUseditem?.images?.[0];
 
   useEffect(() => {
@@ -31,7 +47,6 @@ export default function MarketDetailContainer() {
           id: router.query.detail,
           imageUrl: imageUrl,
         };
-
         const temp = getItems.filter((el: any) => el.id === setItem.id);
         if (temp.length === 1) return;
         getItems.unshift(setItem);
@@ -82,9 +97,40 @@ export default function MarketDetailContainer() {
     };
   }, [data]);
 
+  const onClickBasket = async () => {
+    const temp = IPickItemData?.fetchUseditemsIPicked.filter((el) => {
+      return el._id === router.query.detail;
+    });
+
+    await toggleUseditemPick({
+      variables: {
+        useditemId: router.query.detail,
+      },
+      refetchQueries: [
+        {
+          query: FETCH_USEDITEMS_IPICKED,
+          variables: {
+            search: "",
+            page: 1,
+          },
+        },
+      ],
+    });
+
+    if (temp?.length === 1) {
+      Modal.info({ content: "장바구니에서 뺐습니다." });
+    } else {
+      Modal.success({ content: "장바구니에 넣었습니다." });
+    }
+  };
+
   return (
     <>
-      <MarketDetailPresenter data={data} fetchUserData={fetchUserData} />
+      <MarketDetailPresenter
+        data={data}
+        fetchUserData={fetchUserData}
+        onClickBasket={onClickBasket}
+      />
     </>
   );
 }

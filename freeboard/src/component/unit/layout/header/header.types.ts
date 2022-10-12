@@ -1,3 +1,5 @@
+import { IQuery } from "../../../../commons/types/generated/types";
+
 export type IHeaderProps = {
   onClickIsNav: () => void;
 };
@@ -16,4 +18,5 @@ export type IHeaderPresenterProps = {
   onClickRegister: () => void;
   onClickSignIn: () => void;
   onClickMyPage: () => void;
+  IPickItemData: Pick<IQuery, "fetchUseditemsIPicked"> | undefined;
 };

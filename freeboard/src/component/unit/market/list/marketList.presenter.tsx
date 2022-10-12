@@ -62,7 +62,8 @@ export default function MarketListPresenter(P: IMarketListPresenterProps) {
                   </Link>
                 ))}
             </S.Wrapper03>
-            {localStorage.getItem("accessToken") ? (
+            {typeof window !== "undefined" &&
+            localStorage.getItem("accessToken") ? (
               <S.CreateBtn onClick={onClickMoveToPage("/market/new")}>
                 상품등록
               </S.CreateBtn>

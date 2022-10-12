@@ -11,6 +11,7 @@ export default function HeaderPresenter(P: IHeaderPresenterProps) {
     onClickRegister,
     onClickSignIn,
     onClickMyPage,
+    IPickItemData,
   } = P;
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   return (
@@ -133,6 +134,9 @@ l127 -3 17 -55z m-528 -28 c-4 -16 -13 -22 -34 -22 l-29 0 0 -125 0 -125 -125
                       <path d="M917.71 319.87H316.15c-9.16 0-16.59-7.42-16.59-16.59s7.43-16.59 16.59-16.59h601.56c9.16 0 16.59 7.42 16.59 16.59s-7.42 16.59-16.59 16.59z" />
                     </g>
                   </svg>
+                  <S.BasketAmount>
+                    {IPickItemData?.fetchUseditemsIPicked.length}
+                  </S.BasketAmount>
                 </S.MemberBtn>
                 <S.MemberBtn>
                   <svg

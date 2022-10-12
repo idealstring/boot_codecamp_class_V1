@@ -4,7 +4,7 @@ import { IMarketDetailStylesProps } from "./marketDetail.types";
 
 export const Container = styled.section`
   margin: 0 auto;
-  padding: 60px 100px 60px;
+  padding: 20px 100px 20px;
 
   width: 100%;
   max-width: 1000px;
@@ -12,17 +12,28 @@ export const Container = styled.section`
 `;
 
 export const TopWrapper = styled.div`
-  // margin: 0 0 20px 0;
+  margin: 0 0 20px 0;
 
   display: flex;
+  flex-direction: ${(props: IMarketDetailStylesProps) =>
+    props.isMobile ? "column" : "row"};
   justify-content: space-between;
   align-items: flex-start;
+`;
 
-  border-bottom: 1px solid ${StyleSet.colors.lightGray02};
+export const DeailNavWrapper = styled.div`
+  margin: 0 auto;
+  padding: 0 100px;
+
+  width: 100%;
+  background-color: #fff;
 `;
 
 export const DetailNav = styled.div`
-  margin: 0 0 20px 0;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 800px;
+  min-width: 500px;
   padding: 20px 0;
 
   display: flex;
@@ -37,12 +48,11 @@ export const DetailNav = styled.div`
 `;
 
 export const ImageWrapper = styled.div`
-  margin: 0 20px 0 0;
-  // width: 100%;
-  // max-width: 380px;
-  // max-height: 380px;
-  // aspect-ratio: 1/1;
+  margin: ${(props: IMarketDetailStylesProps) =>
+    props.isMobile ? "0 auto" : "0 20px 0 0"};
+
   img {
+    margin: 0 auto;
     width: 100%;
     max-width: 380px;
     max-height: 380px;
@@ -51,13 +61,25 @@ export const ImageWrapper = styled.div`
 `;
 
 export const InfoWrapper = styled.div`
+  margin: ${(props: IMarketDetailStylesProps) =>
+    props.isMobile ? "28px 0 0 0" : "0"};
   width: 100%;
-  max-width: 380px;
+  max-width: ${(props: IMarketDetailStylesProps) =>
+    props.isMobile ? "100%" : "380px"};
+  // max-height: 380px;
+  max-height: ${(props: IMarketDetailStylesProps) =>
+    props.isMobile ? "310px" : "380px"};
+  aspect-ratio: 1/1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
 `;
 
 export const ProductSeller = styled.span`
   margin: 0 0 10px 0;
-
+  font-family: ${StyleSet.fontFamily.eb};
   display: block;
 `;
 
@@ -82,6 +104,7 @@ export const DealInfoWrapper = styled.div`
 `;
 
 export const DealInfoTitle = styled.span`
+  min-width: 25px;
   font-size: ${StyleSet.fontSize.b4};
   font-family: ${StyleSet.fontFamily.b};
   color: ${StyleSet.colors.gray};
@@ -93,6 +116,38 @@ export const DealInfo = styled.span`
   margin: 0 0 0 20px;
 
   display: block;
+`;
+
+export const InfoBtnRrapper = styled.div`
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const BasketBtn = styled.button`
+  margin: 0 10px 0 0;
+  width: 100%;
+  height: 55px;
+
+  border: none;
+  border: 1px solid ${StyleSet.colors.point01};
+  border-radius: 4px;
+  background-color: #fff;
+  color: ${StyleSet.colors.point01};
+`;
+
+export const PurchaseBtn = styled.button`
+  width: 100%;
+  height: 55px;
+
+  border: none;
+  border: 1px solid ${StyleSet.colors.point01};
+  border-radius: 4px;
+  background-color: ${StyleSet.colors.point01};
+  color: #fff;
 `;
 
 export const MiddleTitle = styled.span`
