@@ -66,7 +66,8 @@ export default function MarketContainer(P: IMarketContainerProps) {
   useEffect(() => {
     if (!loading) {
       if (!existingData) return;
-
+      delete existingData?.fetchUseditem?.useditemAddress?.__typename;
+      delete existingData?.fetchUseditem?.useditemAddress?._id;
       setValue("name", existingData?.fetchUseditem.name);
       setValue("remarks", existingData?.fetchUseditem.remarks);
       setValue("contents", existingData?.fetchUseditem.contents);

@@ -3,10 +3,9 @@ import * as S from "./myPage.styles";
 import { IMyPagePresenterProps } from "./myPage.types";
 import { WindowSizeContext } from "../../../commons/responsive";
 import PageNation02 from "../../../commons/pagination/02/pagination02.container";
-import WithAuth from "../../../commons/hocs/withAuth";
 
 function MyPagePresenter(P: IMyPagePresenterProps) {
-  const { fetchLoggedData } = P;
+  const { fetchLoggedData, onClickLogOut } = P;
   const { isNormalScreen } = useContext(WindowSizeContext);
 
   return (
@@ -17,7 +16,10 @@ function MyPagePresenter(P: IMyPagePresenterProps) {
             <img src="/" style={{ width: "120px", height: "120px" }} />
             <S.NicknameWrapper isNormalScreen={isNormalScreen}>
               <span>{fetchLoggedData?.fetchUserLoggedIn.name}</span>
-              <S.EditButton>설정</S.EditButton>
+              <S.BtnWrapper isNormalScreen={isNormalScreen}>
+                <S.EditButton>설정</S.EditButton>
+                <S.LogoutBtn onClick={onClickLogOut}>로그아웃</S.LogoutBtn>
+              </S.BtnWrapper>
             </S.NicknameWrapper>
           </S.ProfileTop>
           <S.ProfileBottom>
@@ -52,8 +54,10 @@ function MyPagePresenter(P: IMyPagePresenterProps) {
           <div>
             <S.PageTitle>내 장터</S.PageTitle>
             <div>
+              <S.contentsButton>장바구니</S.contentsButton>
+              <S.contentsButton>거래 내역</S.contentsButton>
               <S.contentsButton>판매 내역</S.contentsButton>
-              <S.contentsButton>찜한 상품</S.contentsButton>
+              <S.contentsButton>구매 내역</S.contentsButton>
             </div>
             <S.BoardWrapper>
               <S.BoardTopWrapper>

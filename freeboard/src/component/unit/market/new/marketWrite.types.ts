@@ -16,17 +16,17 @@ export type IMarketContainerProps = {
 };
 
 type IValueProps = {
-  name: string;
-  remarks: string;
-  contents: string;
-  price: number;
-  tags: string;
-  useditemAddress: {
-    lng: string;
-    lat: string;
-    zipcode: string;
-    address: string;
-    addressDetail: string;
+  name?: string;
+  remarks?: string;
+  contents?: string;
+  price?: number;
+  tags?: string;
+  useditemAddress?: {
+    lng?: string;
+    lat?: string;
+    zipcode?: string;
+    address?: string;
+    addressDetail?: string;
   };
 };
 

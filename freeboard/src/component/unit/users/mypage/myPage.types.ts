@@ -4,6 +4,7 @@ import { IQuery } from "../../../../commons/types/generated/types";
 
 export type IMyPagePresenterProps = {
   fetchLoggedData: Pick<IQuery, "fetchUserLoggedIn"> | undefined;
+  onClickLogOut: () => void;
 };
 
 // style

@@ -12,7 +12,6 @@ export const CREATE_USED_ITEM = gql`
       images
       pickedCount
       useditemAddress {
-        _id
         zipcode
         address
         addressDetail
@@ -82,7 +81,6 @@ export const UPDATE_USED_ITEM = gql`
       images
       pickedCount
       useditemAddress {
-        _id
         zipcode
         address
         addressDetail

@@ -1,6 +1,7 @@
 import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { useContext } from "react";
+import { PriceFormatter } from "../../../../commons/utils/utils";
 import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import MarketDeleteModal from "../../../commons/modal/marketDelete";
 import { WindowSizeContext } from "../../../commons/responsive";
@@ -28,7 +29,9 @@ export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
               {data?.fetchUseditem.seller?.name}
             </S.ProductSeller>
             <S.ProductTitle>{data?.fetchUseditem.name}</S.ProductTitle>
-            <S.ProductPrice>{data?.fetchUseditem.price}</S.ProductPrice>
+            <S.ProductPrice>
+              {PriceFormatter(data?.fetchUseditem.price)}
+            </S.ProductPrice>
             <S.DealInfoWrapper>
               <S.DealInfoTitle>거래방법</S.DealInfoTitle>
               <S.DealInfo>직거래</S.DealInfo>

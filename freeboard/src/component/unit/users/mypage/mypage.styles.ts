@@ -49,17 +49,37 @@ export const ProfileTop = styled.section`
 export const NicknameWrapper = styled.div`
   margin: ${(props: IMyPageStylesProps) =>
     props.isNormalScreen ? "0" : "0 0 0 24px"};
-  min-height: 70px;
+  min-height: ${(props: IMyPageStylesProps) =>
+    props.isNormalScreen ? "100px" : "70px"};
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: ${(props: IMyPageStylesProps) =>
+    props.isNormalScreen ? "center" : "flex-start"};
 
   span {
+    margin: 10px 0 0 0;
     font-size: ${StyleSet.fontSize.h5};
     font-family: ${StyleSet.fontFamily.eb};
   }
+`;
+
+export const BtnWrapper = styled.div`
+  display: flex;
+  flex-direction: ${(props: IMyPageStylesProps) =>
+    props.isNormalScreen ? "column" : "row"};
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const LogoutBtn = styled.button`
+  margin: 5px 0 0 0;
+  border: none;
+  background-color: transparent;
+  font-size: ${StyleSet.fontSize.b5};
+
+  cursor: pointer;
 `;
 
 export const EditButton = styled.button`
@@ -126,6 +146,7 @@ export const PageTitle = styled.h1`
 `;
 
 export const contentsButton = styled.button`
+  margin: 0 10px 0 0;
   border: none;
   background-color: transparent;
 
