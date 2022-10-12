@@ -1,7 +1,7 @@
 import Link from "next/link";
 import InfiniteScroll from "react-infinite-scroller";
 import { IUseditem } from "../../../../commons/types/generated/types";
-import { dateFormatter } from "../../../../commons/utils/utils";
+import { dateFormatter, PriceFormatter } from "../../../../commons/utils/utils";
 import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import * as S from "./marketList.styles";
 import { IMarketListPresenterProps } from "./marketList.types";
@@ -25,7 +25,7 @@ export default function MarketListPresenter(P: IMarketListPresenterProps) {
                     <S.ItemLeftMiddle>
                       <div>
                         <S.Name>{el.name}</S.Name>
-                        <S.Price>{el.price}</S.Price>
+                        <S.Price>{PriceFormatter(el.price)}</S.Price>
                         <S.Subtext>{el.tags}</S.Subtext>
                       </div>
                       <div>
@@ -62,9 +62,11 @@ export default function MarketListPresenter(P: IMarketListPresenterProps) {
                   </Link>
                 ))}
             </S.Wrapper03>
-            <S.CreateBtn onClick={onClickMoveToPage("/market/new")}>
-              상품등록
-            </S.CreateBtn>
+            {localStorage.getItem("accessToken") ? (
+              <S.CreateBtn onClick={onClickMoveToPage("/market/new")}>
+                상품등록
+              </S.CreateBtn>
+            ) : null}
           </S.SideSticky>
         </S.Wrapper02>
       </S.Container>

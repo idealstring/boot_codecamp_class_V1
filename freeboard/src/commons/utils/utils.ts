@@ -1,3 +1,5 @@
+import { Maybe } from "graphql/jsutils/Maybe";
+
 export const dateFormatter = (rawDate: Date) => {
   let date = new Date(rawDate);
   const yyyy = date.getFullYear();
@@ -15,4 +17,9 @@ export const dateTimeFormatter = (rawDate: Date) => {
   const mi = String(date.getMinutes()).padStart(2, "0");
   const ss = String(date.getSeconds()).padStart(2, "0");
   return `${yyyy}-${mm}-${dd} ${hh}:${mi}:${ss}`;
+};
+
+export const PriceFormatter = (price: Maybe<number> | undefined) => {
+  // return String(price).replace(/^([0-9]+)?([0-9]{3})([0-9]{3})$/, "₩$1,$2,$3");
+  return `₩${price?.toLocaleString()}`;
 };
