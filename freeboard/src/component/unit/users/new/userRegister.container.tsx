@@ -12,14 +12,14 @@ export default function UserRegisterContainer() {
   const onClickRegister = async (data: IOnClickRegisterProps) => {
     console.log(data);
     try {
-      const result = await createUser({
+      await createUser({
         variables: {
           createUserInput: {
             ...data,
           },
         },
       });
-      console.log(result);
+      Modal.info({ content: "회원가입을 축하합니다!" });
       router.push("/users/signIn");
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });

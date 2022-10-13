@@ -11,14 +11,22 @@ import {
 } from "../../../../commons/types/generated/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, useWatch } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useAuth from "../../../commons/hooks/useAuth";
 import { IMarketContainerProps } from "./marketWrite.types";
+import "@toast-ui/editor/dist/toastui-editor.css";
+import { Editor } from "@toast-ui/react-editor";
+
+declare const window: Window &
+  typeof globalThis & {
+    toastui: any;
+  };
 
 export default function MarketContainer(P: IMarketContainerProps) {
   useAuth();
   const { isEdit, existingData, loading } = P;
   const [fileUrls, setFileUrls] = useState(["", ""]);
+  const contentsRef = useRef();
   const router = useRouter();
   const schema = yup.object({
     name: yup.string().required(),
@@ -54,6 +62,7 @@ export default function MarketContainer(P: IMarketContainerProps) {
       },
     });
   const address = useWatch({ control, name: "useditemAddress.address" });
+
   const [createUseditem] = useMutation<
     Pick<IMutation, "createUseditem">,
     IMutationCreateUseditemArgs
@@ -91,17 +100,12 @@ export default function MarketContainer(P: IMarketContainerProps) {
       window.kakao.maps.load(function () {
         const container = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
         const options = {
-          //지도를 생성할 때 필요한 기본 옵션
           center: new window.kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
           level: 3, //지도의 레벨(확대, 축소 정도)
         };
 
-        const map = new window.kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-
-        // 주소-좌표 변환 객체를 생성합니다
+        const map = new window.kakao.maps.Map(container, options);
         const geocoder = new window.kakao.maps.services.Geocoder();
-
-        // 주소로 좌표를 검색합니다
         geocoder.addressSearch(
           getValues("useditemAddress.address"),
           function (
@@ -111,27 +115,21 @@ export default function MarketContainer(P: IMarketContainerProps) {
             }[],
             status: any
           ) {
-            // 정상적으로 검색이 완료됐으면
             if (status === window.kakao.maps.services.Status.OK) {
               const coords = new window.kakao.maps.LatLng(
                 result[0].y,
                 result[0].x
               );
-              console.log(coords);
-              // 결과값으로 받은 위치를 마커로 표시합니다
               const marker = new window.kakao.maps.Marker({
                 map: map,
                 position: coords,
               });
-
-              // 인포윈도우로 장소에 대한 설명을 표시합니다
               const infowindow = new window.kakao.maps.InfoWindow({
                 content:
                   '<div style="width:150px;text-align:center;padding:6px 0;">거래 위치</div>',
               });
               infowindow.open(map, marker);
 
-              // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
               setValue("useditemAddress.lat", coords.Ma);
               setValue("useditemAddress.lng", coords.La);
               map.setCenter(coords);
@@ -148,8 +146,14 @@ export default function MarketContainer(P: IMarketContainerProps) {
     setFileUrls(newFileUrls);
   };
 
+  const onChangeContents = () => {
+    const text = contentsRef?.current?.getInstance().getHTML();
+    setValue("contents", text === "<p><br><p>" ? "" : text);
+  };
+
   const onClickSubmit = async (data: any) => {
     try {
+      // console.log(data);
       const result = await createUseditem({
         variables: {
           createUseditemInput: {
@@ -183,11 +187,16 @@ export default function MarketContainer(P: IMarketContainerProps) {
     }
   };
 
+  const onClickCancel = () => {
+    router.back();
+  };
+
   return (
     <>
       <MarketPresenter
         onClickSubmit={onClickSubmit}
         onClickUpdate={onClickUpdate}
+        onClickCancel={onClickCancel}
         register={register}
         setValue={setValue}
         handleSubmit={handleSubmit}
@@ -196,6 +205,9 @@ export default function MarketContainer(P: IMarketContainerProps) {
         onChangeFileUrls={onChangeFileUrls}
         isEdit={isEdit}
         existingData={existingData}
+        Editor={Editor}
+        onChangeContents={onChangeContents}
+        contentsRef={contentsRef}
       />
     </>
   );

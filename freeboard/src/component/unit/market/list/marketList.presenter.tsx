@@ -62,12 +62,9 @@ export default function MarketListPresenter(P: IMarketListPresenterProps) {
                   </Link>
                 ))}
             </S.Wrapper03>
-            {typeof window !== "undefined" &&
-            localStorage.getItem("accessToken") ? (
-              <S.CreateBtn onClick={onClickMoveToPage("/market/new")}>
-                상품등록
-              </S.CreateBtn>
-            ) : null}
+            <S.CreateBtn onClick={onClickMoveToPage("/market/new")}>
+              상품등록
+            </S.CreateBtn>
           </S.SideSticky>
         </S.Wrapper02>
       </S.Container>

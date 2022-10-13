@@ -136,7 +136,7 @@ export const CreateBtn = styled.button`
   width: 122px;
   height: 46px;
   border: 1px solid #999999;
-  border-radius: 46px;
+  border-radius: 4px;
   background: transparent;
   cursor: pointer;
 `;

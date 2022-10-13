@@ -7,6 +7,10 @@ import MarketDeleteModal from "../../../commons/modal/marketDelete";
 import { WindowSizeContext } from "../../../commons/responsive";
 import * as S from "./marketDetail.styles";
 import { IMarketDetailPresenterProps } from "./marketDetail.types";
+import "@toast-ui/editor/dist/toastui-editor-viewer.css";
+import { Viewer } from "@toast-ui/react-editor";
+import WithAuth from "../../../commons/hocs/withAuth";
+// import Viewer from "@toast-ui/editor/dist/toastui-editor-viewer";
 
 export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
   const { data, fetchUserData, onClickBasket } = P;
@@ -81,7 +85,16 @@ export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
               </div>
             ))}
           </div> */}
-          <div>{data?.fetchUseditem.contents}</div>
+          {data?.fetchUseditem.contents ? (
+            <Viewer initialValue={data?.fetchUseditem.contents} />
+          ) : (
+            <div>loadding</div>
+          )}
+          {/* <div
+            dangerouslySetInnerHTML={{
+              __html: String(data?.fetchUseditem.contents),
+            }}
+          /> */}
         </S.BodyWrapper>
         <S.BodyWrapper>
           <S.MiddleTitle>거래위치</S.MiddleTitle>
@@ -108,14 +121,13 @@ export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
             </S.ToListBtn>
           ) : null}
 
-          <S.ToListBtn
-            isMobile={isMobile}
-            onClick={() => {
-              Modal.error({ content: "미완성기능" });
-            }}
-          >
-            담기
-          </S.ToListBtn>
+          {fetchUserData?.fetchUserLoggedIn._id !==
+          data?.fetchUseditem.seller?._id ? (
+            <S.ToListBtn isMobile={isMobile} onClick={onClickBasket}>
+              담기
+            </S.ToListBtn>
+          ) : null}
+
           <S.BuyBtn
             isMobile={isMobile}
             onClick={() => {

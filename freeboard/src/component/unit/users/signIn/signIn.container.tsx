@@ -14,8 +14,6 @@ import * as yup from "yup";
 import { IOnClickSignInProps } from "./signIn.types";
 
 export default function SignInContainer() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [loginUser] = useMutation<
     Pick<IMutation, "loginUser">,
     IMutationLoginUserArgs

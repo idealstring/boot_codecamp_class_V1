@@ -6,23 +6,28 @@ import Input05 from "../../../commons/inputs/05/input05";
 import { WindowSizeContext } from "../../../commons/responsive";
 import Uploads02 from "../../../commons/uploads/02/uploads02.container";
 import * as S from "./marketWrite.styles";
-import Textarea01 from "../../../commons/textarea/01/textarea01";
 import { IMarketPresenterProps } from "./marketWrite.types";
 import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import ZipcodeModalMarket from "../../../commons/modal/zipcodeModal_market";
+import { useRouter } from "next/router";
+import "@toast-ui/editor/dist/i18n/ko-kr";
 
 export default function MarketPresenter(P: IMarketPresenterProps) {
   const {
     onClickSubmit,
     onClickUpdate,
+    onClickCancel,
     setValue,
     register,
     handleSubmit,
     formState,
     fileUrls,
     onChangeFileUrls,
+    onChangeContents,
     isEdit,
     existingData,
+    Editor,
+    contentsRef,
   } = P;
   const { isNormalScreen } = useContext(WindowSizeContext);
   const { onClickMoveToPage } = useMoveToPage();
@@ -58,11 +63,32 @@ export default function MarketPresenter(P: IMarketPresenterProps) {
             />
           </S.Wrapper01>
           <S.Wrapper01>
-            <Textarea01
-              placeholder="내용을 입력해주세요."
-              register={register("contents")}
-              error={formState.errors.remarks?.message}
-            />
+            {existingData?.fetchUseditem.contents ? (
+              <Editor
+                ref={contentsRef}
+                height="auto"
+                max-height="1000px"
+                initialEditType="wysiwyg"
+                placeholder="내용을 입력해 주세요."
+                hideModeSwitch="true"
+                onChange={onChangeContents}
+                language="ko-KR"
+                initialValue={existingData?.fetchUseditem.contents}
+              />
+            ) : isEdit ? (
+              <div>loadding...</div>
+            ) : (
+              <Editor
+                ref={contentsRef}
+                height="auto"
+                max-height="1000px"
+                initialEditType="wysiwyg"
+                placeholder="내용을 입력해 주세요."
+                hideModeSwitch="true"
+                onChange={onChangeContents}
+                language="ko-KR"
+              />
+            )}
           </S.Wrapper01>
           <S.Wrapper02>
             <S.Label01>판매가격(원)</S.Label01>
@@ -168,7 +194,7 @@ export default function MarketPresenter(P: IMarketPresenterProps) {
             ) : (
               <S.CreateBtn>등록하기</S.CreateBtn>
             )}
-            <S.CancelBtn type="button" onClick={onClickMoveToPage("/market")}>
+            <S.CancelBtn type="button" onClick={onClickCancel}>
               취소
             </S.CancelBtn>
           </S.Wrapper05>

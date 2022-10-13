@@ -1,7 +1,7 @@
-import { useMutation, useQuery } from "@apollo/client";
 import { Modal } from "antd";
-import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useMutation, useQuery } from "@apollo/client";
 import {
   IQuery,
   IQueryFetchUseditemArgs,
@@ -98,6 +98,10 @@ export default function MarketDetailContainer() {
   }, [data]);
 
   const onClickBasket = async () => {
+    if (!localStorage.getItem("accessToken")) {
+      Modal.error({ content: "로그인 후 이용할 수 있습니다." });
+      return;
+    }
     const temp = IPickItemData?.fetchUseditemsIPicked.filter((el) => {
       return el._id === router.query.detail;
     });

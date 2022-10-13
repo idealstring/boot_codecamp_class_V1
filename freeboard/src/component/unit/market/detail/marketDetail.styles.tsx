@@ -125,10 +125,11 @@ export const InfoBtnRrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  gap: 0 10px;
 `;
 
 export const BasketBtn = styled.button`
-  margin: 0 10px 0 0;
+  // margin: 0 10px 0 0;
   width: 100%;
   height: 55px;
 
@@ -179,6 +180,7 @@ export const BottomWrapper = styled.div`
     props.isMobile ? "column" : "row"};
   justify-content: center;
   align-items: center;
+  gap: 0 10px;
 `;
 
 export const BuyBtn = styled.button`
@@ -186,8 +188,8 @@ export const BuyBtn = styled.button`
   width: ${(props: IMarketDetailStylesProps) =>
     props.isMobile ? "100%" : "179px"};
   height: 52px;
-  border-radius: 52px;
   border: none;
+  border-radius: 4px;
   font-weight: 500;
   color: #fff;
   background-color: ${StyleSet.colors.point01};
@@ -200,10 +202,11 @@ export const ToListBtn = styled.button`
   padding: 0 16px;
   width: ${(props: IMarketDetailStylesProps) =>
     props.isMobile ? "100%" : "179px"};
-  height: 52px;
-  border-radius: 52px;
+  height: 55px;
+
   border: none;
-  font-weight: 500;
-  background-color: default;
+  border-radius: 4px;
+  background-color: default
+  color: #fff;
   cursor: pointer;
 `;
