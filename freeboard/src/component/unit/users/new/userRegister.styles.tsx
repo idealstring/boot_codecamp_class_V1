@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { StyleSet } from "../../../../commons/style/styleSet";
-import { IUserRegisterStylesProps } from "./userRegister.types";
+// import { IUserRegisterStylesProps } from "./userRegister.types";
 
 export const Container = styled.div`
   width: 100%;

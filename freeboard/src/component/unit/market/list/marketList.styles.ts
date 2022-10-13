@@ -37,7 +37,7 @@ export const Wrapper03 = styled.div`
   padding: 30px 20px;
   width: 122px;
   border: 1px solid ${StyleSet.colors.lightGray02};
-  border-radius: 20px;
+  border-radius: 5px;
 
   display: flex;
   flex-direction: column;
@@ -61,7 +61,7 @@ export const RecentItem = styled.div`
   margin: 30px 0 0 0;
   width: 80px;
   height: 80px;
-  border-radius: 100%;
+  border-radius: 20%;
   background-color: #000;
 
   overflow: hidden;
