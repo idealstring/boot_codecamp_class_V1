@@ -38,6 +38,9 @@ export default function MarketDetailContainer() {
   });
   const [toggleUseditemPick] = useMutation(TOGGLE_USEDITEM_PICK);
   const imageUrl = data?.fetchUseditem?.images?.[0];
+  const IPicked = IPickItemData?.fetchUseditemsIPicked.filter((el) => {
+    return el._id === router.query.detail;
+  });
 
   useEffect(() => {
     if (data) {
@@ -102,9 +105,6 @@ export default function MarketDetailContainer() {
       Modal.error({ content: "로그인 후 이용할 수 있습니다." });
       return;
     }
-    const temp = IPickItemData?.fetchUseditemsIPicked.filter((el) => {
-      return el._id === router.query.detail;
-    });
 
     await toggleUseditemPick({
       variables: {
@@ -121,7 +121,7 @@ export default function MarketDetailContainer() {
       ],
     });
 
-    if (temp?.length === 1) {
+    if (IPicked?.length === 1) {
       Modal.info({ content: "장바구니에서 뺐습니다." });
     } else {
       Modal.success({ content: "장바구니에 넣었습니다." });
@@ -134,6 +134,7 @@ export default function MarketDetailContainer() {
         data={data}
         fetchUserData={fetchUserData}
         onClickBasket={onClickBasket}
+        IPicked={IPicked}
       />
     </>
   );

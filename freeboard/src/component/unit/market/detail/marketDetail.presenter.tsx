@@ -9,11 +9,9 @@ import * as S from "./marketDetail.styles";
 import { IMarketDetailPresenterProps } from "./marketDetail.types";
 import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 import { Viewer } from "@toast-ui/react-editor";
-import WithAuth from "../../../commons/hocs/withAuth";
-// import Viewer from "@toast-ui/editor/dist/toastui-editor-viewer";
 
 export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
-  const { data, fetchUserData, onClickBasket } = P;
+  const { data, fetchUserData, onClickBasket, IPicked } = P;
   const { isMobile } = useContext(WindowSizeContext);
   const { onClickMoveToPage } = useMoveToPage();
   const router = useRouter();
@@ -60,7 +58,9 @@ export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
               ) : null}
             </div>
             <S.InfoBtnRrapper>
-              <S.BasketBtn onClick={onClickBasket}>담기</S.BasketBtn>
+              <S.BasketBtn onClick={onClickBasket} IPicked={IPicked}>
+                {IPicked?.length ? "빼기" : "담기"}{" "}
+              </S.BasketBtn>
               <S.PurchaseBtn>구매</S.PurchaseBtn>
             </S.InfoBtnRrapper>
           </S.InfoWrapper>

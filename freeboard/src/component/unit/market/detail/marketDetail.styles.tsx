@@ -134,10 +134,15 @@ export const BasketBtn = styled.button`
   height: 55px;
 
   border: none;
-  border: 1px solid ${StyleSet.colors.point01};
+  border: ${(props: IMarketDetailStylesProps) =>
+    props.IPicked?.length
+      ? `1px solid ${StyleSet.colors.point02};`
+      : `1px solid ${StyleSet.colors.point01}`};
   border-radius: 4px;
-  background-color: #fff;
-  color: ${StyleSet.colors.point01};
+  background-color: ${(props: IMarketDetailStylesProps) =>
+    props.IPicked?.length ? `${StyleSet.colors.backgroundBlack}` : `#fff`};
+  color: ${(props: IMarketDetailStylesProps) =>
+    props.IPicked?.length ? "#ffffff" : `${StyleSet.colors.point01}`};
 `;
 
 export const PurchaseBtn = styled.button`
