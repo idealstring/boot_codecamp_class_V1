@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -7,12 +7,13 @@ import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../src/commons/store";
 import {
   IMutation,
-  IMutationLoginUserArgs,
+  IMutationLoginUserExampleArgs,
 } from "../../src/commons/types/generated/types";
 
-const LOGIN_USER = gql`
-  mutation loginUser($email: String!, $password: String!) {
-    loginUser(email: $email, password: $password) {
+// loginUserExample 5초 만료 토큰임
+const LOGIN_USER_EXAMPLE = gql`
+  mutation loginUserExample($email: String!, $password: String!) {
+    loginUserExample(email: $email, password: $password) {
       accessToken
     }
   }
@@ -22,22 +23,22 @@ export default function LoginPage() {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loginUser] = useMutation<
-    Pick<IMutation, "loginUser">,
-    IMutationLoginUserArgs
-  >(LOGIN_USER);
+  const [loginUserExample] = useMutation<
+    Pick<IMutation, "loginUserExample">,
+    IMutationLoginUserExampleArgs
+  >(LOGIN_USER_EXAMPLE);
   const router = useRouter();
 
   const onClickLogin = async () => {
     try {
       // 1. 로그인해서 accessToken 받아오기
-      const result = await loginUser({
+      const result = await loginUserExample({
         variables: {
           email,
           password,
         },
       });
-      const accessToken = result.data?.loginUser.accessToken;
+      const accessToken = result.data?.loginUserExample.accessToken;
       console.log(accessToken);
 
       // 2. accessToken을 globalState에 저장하기
@@ -48,7 +49,7 @@ export default function LoginPage() {
       setAccessToken(accessToken);
 
       // 3. 로그인 성공 페이지로 이동하기
-      void router.push("/22-02-login-success");
+      void router.push("/30-02-login-refreshtoken-success");
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
