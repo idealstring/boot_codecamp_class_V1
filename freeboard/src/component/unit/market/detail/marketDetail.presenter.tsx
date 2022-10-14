@@ -11,7 +11,7 @@ import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 import { Viewer } from "@toast-ui/react-editor";
 
 export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
-  const { data, fetchUserData, onClickBasket, IPicked } = P;
+  const { data, fetchUserData, onClickBasket, onClickPurchase, IPicked } = P;
   const { isMobile } = useContext(WindowSizeContext);
   const { onClickMoveToPage } = useMoveToPage();
   const router = useRouter();
@@ -61,7 +61,7 @@ export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
               <S.BasketBtn onClick={onClickBasket} IPicked={IPicked}>
                 {IPicked?.length ? "빼기" : "담기"}{" "}
               </S.BasketBtn>
-              <S.PurchaseBtn>구매</S.PurchaseBtn>
+              <S.PurchaseBtn onClick={onClickPurchase}>구매</S.PurchaseBtn>
             </S.InfoBtnRrapper>
           </S.InfoWrapper>
         </S.TopWrapper>
@@ -88,7 +88,7 @@ export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
           {data?.fetchUseditem.contents ? (
             <Viewer initialValue={data?.fetchUseditem.contents} />
           ) : (
-            <div>loadding</div>
+            <div>loadding...</div>
           )}
           {/* <div
             dangerouslySetInnerHTML={{
@@ -105,37 +105,30 @@ export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
             isMobile={isMobile}
             onClick={onClickMoveToPage("/market")}
           >
-            목록으로
+            목록
           </S.ToListBtn>
           {fetchUserData?.fetchUserLoggedIn._id ===
-          data?.fetchUseditem.seller?._id ? (
-            <MarketDeleteModal />
-          ) : null}
+            data?.fetchUseditem.seller?._id && <MarketDeleteModal />}
           {fetchUserData?.fetchUserLoggedIn._id ===
-          data?.fetchUseditem.seller?._id ? (
+            data?.fetchUseditem.seller?._id && (
             <S.ToListBtn
               isMobile={isMobile}
               onClick={onClickMoveToPage(`/market/${router.query.detail}/edit`)}
             >
-              수정하기
+              수정
             </S.ToListBtn>
-          ) : null}
+          )}
 
           {fetchUserData?.fetchUserLoggedIn._id !==
-          data?.fetchUseditem.seller?._id ? (
-            <S.ToListBtn isMobile={isMobile} onClick={onClickBasket}>
-              담기
-            </S.ToListBtn>
-          ) : null}
-
-          <S.BuyBtn
-            isMobile={isMobile}
-            onClick={() => {
-              Modal.error({ content: "미완성기능" });
-            }}
-          >
-            구매하기
-          </S.BuyBtn>
+            data?.fetchUseditem.seller?._id && (
+            <S.BasketBtn onClick={onClickBasket} IPicked={IPicked}>
+              {IPicked?.length ? "빼기" : "담기"}{" "}
+            </S.BasketBtn>
+          )}
+          {fetchUserData?.fetchUserLoggedIn._id !==
+            data?.fetchUseditem.seller?._id && (
+            <S.BuyBtn onClick={onClickPurchase}>구매</S.BuyBtn>
+          )}
         </S.BottomWrapper>
       </S.Container>
     </>

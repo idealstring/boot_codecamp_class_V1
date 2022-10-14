@@ -53,7 +53,7 @@ const MarketDeleteModal = () => {
   };
   return (
     <ContentBtn onClick={showDeleteConfirm} isMobile={isMobile}>
-      삭제하기
+      삭제
     </ContentBtn>
   );
 };

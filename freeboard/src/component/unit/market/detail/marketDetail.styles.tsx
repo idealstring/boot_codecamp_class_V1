@@ -143,6 +143,8 @@ export const BasketBtn = styled.button`
     props.IPicked?.length ? `${StyleSet.colors.backgroundBlack}` : `#fff`};
   color: ${(props: IMarketDetailStylesProps) =>
     props.IPicked?.length ? "#ffffff" : `${StyleSet.colors.point01}`};
+
+  cursor: pointer;
 `;
 
 export const PurchaseBtn = styled.button`
@@ -154,6 +156,8 @@ export const PurchaseBtn = styled.button`
   border-radius: 4px;
   background-color: ${StyleSet.colors.point01};
   color: #fff;
+
+  cursor: pointer;
 `;
 
 export const MiddleTitle = styled.span`
@@ -190,8 +194,7 @@ export const BottomWrapper = styled.div`
 
 export const BuyBtn = styled.button`
   padding: 0 16px;
-  width: ${(props: IMarketDetailStylesProps) =>
-    props.isMobile ? "100%" : "179px"};
+  width: 100%;
   height: 52px;
   border: none;
   border-radius: 4px;

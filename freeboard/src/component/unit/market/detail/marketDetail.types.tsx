@@ -1,11 +1,12 @@
-// presenter
-
 import { IQuery, IUseditem } from "../../../../commons/types/generated/types";
+
+// presenter
 
 export type IMarketDetailPresenterProps = {
   data: Pick<IQuery, "fetchUseditem"> | undefined;
   fetchUserData: Pick<IQuery, "fetchUserLoggedIn"> | undefined;
-  onClickBasket?: () => void;
+  onClickBasket?: () => Promise<void>;
+  onClickPurchase: () => Promise<void>;
   IPicked: IUseditem[] | undefined;
 };
 

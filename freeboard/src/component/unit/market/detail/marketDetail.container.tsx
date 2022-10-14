@@ -105,6 +105,12 @@ export default function MarketDetailContainer() {
       Modal.error({ content: "로그인 후 이용할 수 있습니다." });
       return;
     }
+    if (
+      fetchUserData?.fetchUserLoggedIn._id === data?.fetchUseditem.seller?._id
+    ) {
+      Modal.warn({ content: "본인 상품은 담을 수 없습니다." });
+      return;
+    }
 
     await toggleUseditemPick({
       variables: {
@@ -128,12 +134,28 @@ export default function MarketDetailContainer() {
     }
   };
 
+  const onClickPurchase = async () => {
+    if (!localStorage.getItem("accessToken")) {
+      Modal.error({ content: "로그인 후 이용할 수 있습니다." });
+      return;
+    }
+    if (
+      fetchUserData?.fetchUserLoggedIn._id === data?.fetchUseditem.seller?._id
+    ) {
+      Modal.warn({ content: "본인 상품은 구매할 수 없습니다." });
+      return;
+    }
+
+    Modal.info({ content: "미완성기능!" });
+  };
+
   return (
     <>
       <MarketDetailPresenter
         data={data}
         fetchUserData={fetchUserData}
         onClickBasket={onClickBasket}
+        onClickPurchase={onClickPurchase}
         IPicked={IPicked}
       />
     </>
