@@ -86,3 +86,19 @@ export const FETCH_USEDITEMS_IPICKED = gql`
     }
   }
 `;
+
+export const CREATE_BUYING_SELLING = gql`
+  mutation createPointTransactionOfBuyingAndSelling($useritemId: ID!) {
+    createPointTransactionOfBuyingAndSelling(useritemId: $useritemId) {
+      _id
+      name
+      price
+      buyer {
+        name
+      }
+      seller {
+        name
+      }
+    }
+  }
+`;

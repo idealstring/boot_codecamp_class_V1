@@ -6,7 +6,6 @@ export type IMarketDetailPresenterProps = {
   data: Pick<IQuery, "fetchUseditem"> | undefined;
   fetchUserData: Pick<IQuery, "fetchUserLoggedIn"> | undefined;
   onClickBasket?: () => Promise<void>;
-  onClickPurchase: () => Promise<void>;
   IPicked: IUseditem[] | undefined;
 };
 

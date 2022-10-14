@@ -1,14 +1,14 @@
-import { Modal } from "antd";
-import { useRouter } from "next/router";
 import { useContext } from "react";
-import { PriceFormatter } from "../../../../commons/utils/utils";
-import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
-import MarketDeleteModal from "../../../commons/modal/marketDelete";
-import { WindowSizeContext } from "../../../commons/responsive";
+import { useRouter } from "next/router";
 import * as S from "./marketDetail.styles";
-import { IMarketDetailPresenterProps } from "./marketDetail.types";
-import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 import { Viewer } from "@toast-ui/react-editor";
+import "@toast-ui/editor/dist/toastui-editor-viewer.css";
+import { WindowSizeContext } from "../../../commons/responsive";
+import { PriceFormatter } from "../../../../commons/utils/utils";
+import { IMarketDetailPresenterProps } from "./marketDetail.types";
+import MarketDeleteModal from "../../../commons/modal/marketDelete";
+import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
+import MarketProductPurchase from "../../../commons/modal/marketProductBuying";
 
 export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
   const { data, fetchUserData, onClickBasket, onClickPurchase, IPicked } = P;
@@ -61,7 +61,8 @@ export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
               <S.BasketBtn onClick={onClickBasket} IPicked={IPicked}>
                 {IPicked?.length ? "빼기" : "담기"}{" "}
               </S.BasketBtn>
-              <S.PurchaseBtn onClick={onClickPurchase}>구매</S.PurchaseBtn>
+              {/* <S.PurchaseBtn onClick={onClickPurchase}>구매</S.PurchaseBtn> */}
+              <MarketProductPurchase />
             </S.InfoBtnRrapper>
           </S.InfoWrapper>
         </S.TopWrapper>
@@ -127,7 +128,8 @@ export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
           )}
           {fetchUserData?.fetchUserLoggedIn._id !==
             data?.fetchUseditem.seller?._id && (
-            <S.BuyBtn onClick={onClickPurchase}>구매</S.BuyBtn>
+            // <S.BuyBtn onClick={onClickPurchase}>구매</S.BuyBtn>
+            <MarketProductPurchase />
           )}
         </S.BottomWrapper>
       </S.Container>
