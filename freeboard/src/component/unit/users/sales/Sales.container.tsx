@@ -1,16 +1,16 @@
 import Link from "next/link";
-import * as S from "./basket.styles";
+import * as S from "./Sales.styles";
 import { gql, useQuery } from "@apollo/client";
 import {
   IQuery,
-  IQueryFetchUseditemsIPickedArgs,
+  IQueryFetchUseditemsISoldArgs,
 } from "../../../../commons/types/generated/types";
 import { dateFormatter, PriceFormatter } from "../../../../commons/utils/utils";
 import PageNation02 from "../../../commons/pagination/02/pagination02.container";
 
-const FETCH_USEDITEMS_IPICKED = gql`
-  query fetchUseditemsIPicked($search: String, $page: Int) {
-    fetchUseditemsIPicked(search: $search, page: $page) {
+const FETCH_USEDITEMS_ISOLD = gql`
+  query fetchUseditemsISold($search: String, $page: Int) {
+    fetchUseditemsISold(search: $search, page: $page) {
       _id
       name
       price
@@ -23,16 +23,15 @@ const FETCH_USEDITEMS_IPICKED = gql`
   }
 `;
 
-export default function BasketContainer() {
+export default function SalesContainer() {
   const { data } = useQuery<
-    Pick<IQuery, "fetchUseditemsIPicked">,
-    IQueryFetchUseditemsIPickedArgs
-  >(FETCH_USEDITEMS_IPICKED, { variables: { search: "", page: 1 } });
-  console.log(data);
+    Pick<IQuery, "fetchUseditemsISold">,
+    IQueryFetchUseditemsISoldArgs
+  >(FETCH_USEDITEMS_ISOLD, { variables: { search: "", page: 1 } });
 
   return (
     <div>
-      <S.PageTitle>장바구니</S.PageTitle>
+      <S.PageTitle>판매 내역</S.PageTitle>
       <div>
         <S.contentsButton>장바구니</S.contentsButton>
         <S.contentsButton>판매내역</S.contentsButton>
@@ -45,20 +44,20 @@ export default function BasketContainer() {
           <S.BoardThPrice>가격</S.BoardThPrice>
           <S.BoardThDate>날짜</S.BoardThDate>
         </S.BoardTopWrapper>
-        {data?.fetchUseditemsIPicked.map((pickItem, i) => (
-          <Link href={`/market/${pickItem._id}`}>
+        {data?.fetchUseditemsISold.map((soldItem, i) => (
+          <Link href={`/market/${soldItem._id}`}>
             <a>
               <S.BoardBodyWrapper key={i}>
-                <S.ContentNumber>{pickItem._id}</S.ContentNumber>
-                <S.ContentTitle>{pickItem.name}</S.ContentTitle>
+                <S.ContentNumber>{soldItem._id}</S.ContentNumber>
+                <S.ContentTitle>{soldItem.name}</S.ContentTitle>
                 <S.ContentSell>
-                  {pickItem.soldAt ? "판매완료" : null}
+                  {soldItem.soldAt ? "판매완료" : null}
                 </S.ContentSell>
                 <S.ContentPrice>
-                  {PriceFormatter(pickItem.price)}
+                  {PriceFormatter(soldItem.price)}
                 </S.ContentPrice>
                 <S.ContentDate>
-                  {dateFormatter(pickItem.createdAt)}
+                  {dateFormatter(soldItem.createdAt)}
                 </S.ContentDate>
               </S.BoardBodyWrapper>
             </a>

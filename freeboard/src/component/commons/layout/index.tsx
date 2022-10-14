@@ -24,6 +24,7 @@ export default function Layout(props: ILayoutP) {
     "/users/mypage",
     "/users/mypage/basket",
     "/users/mypage/charge",
+    "/users/mypage/sales",
   ];
 
   const isShowMyPage = SHOW_NAVIGATIONS.includes(router.asPath);

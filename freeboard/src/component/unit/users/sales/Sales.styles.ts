@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { StyleSet } from "../../../../commons/style/styleSet";
 
-export type IBasketStylesProps = {
+export type ISalesStylesProps = {
   isNormalScreen?: boolean;
 };
 
@@ -13,16 +13,16 @@ export const Container = styled.div`
   min-width: 500px;
 
   display: flex;
-  flex-direction: ${(props: IBasketStylesProps) =>
+  flex-direction: ${(props: ISalesStylesProps) =>
     props.isNormalScreen ? "row" : "column"};
   justify-content: space-between;
   align-items: flex-start;
 `;
 
 export const contentsWrapper = styled.section`
-  padding: ${(props: IBasketStylesProps) =>
+  padding: ${(props: ISalesStylesProps) =>
     props.isNormalScreen ? "30px" : "30px 0"};
-  width: ${(props: IBasketStylesProps) =>
+  width: ${(props: ISalesStylesProps) =>
     props.isNormalScreen ? "80%" : "100%"};
   max-width: 1000px;
   min-width: 200px;
