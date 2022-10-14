@@ -1,14 +1,14 @@
-// container
-
 import { IQuery } from "../../../../commons/types/generated/types";
 
+// presenter
+
 export type IMyPagePresenterProps = {
-  fetchLoggedData: Pick<IQuery, "fetchUserLoggedIn"> | undefined;
-  onClickLogOut: () => void;
+  fetchPointTransactions: Pick<IQuery, "fetchPointTransactions"> | undefined;
+  fetchUserLoggedIn: Pick<IQuery, "fetchUserLoggedIn"> | undefined;
 };
 
 // style
 
 export type IMyPageStylesProps = {
-  isNormalScreen?: boolean;
+  // isNormalScreen?: boolean;
 };

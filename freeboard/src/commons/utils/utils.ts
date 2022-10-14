@@ -23,3 +23,7 @@ export const PriceFormatter = (price: Maybe<number> | undefined) => {
   // return String(price).replace(/^([0-9]+)?([0-9]{3})([0-9]{3})$/, "₩$1,$2,$3");
   return `₩${price?.toLocaleString()}`;
 };
+
+export const PointFormatter = (price: Maybe<number> | undefined) => {
+  return `${price?.toLocaleString()}`;
+};

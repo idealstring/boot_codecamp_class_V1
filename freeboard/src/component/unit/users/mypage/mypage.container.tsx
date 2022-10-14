@@ -1,28 +1,55 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
+import {
+  IQuery,
+  IQueryFetchPointTransactionsArgs,
+} from "../../../../commons/types/generated/types";
 import MyPagePresenter from "./myPage.presenter";
-import { FETCH_USER_LOGGED_IN, LOGOUT_USER } from "./myPage.queries";
-import { IQuery } from "../../../../commons/types/generated/types";
-import useAuth from "../../../commons/hooks/useAuth";
-import { useRouter } from "next/router";
+
+const FETCH_USER_LOGGED_IN = gql`
+  query fetchUserLoggedIn {
+    fetchUserLoggedIn {
+      _id
+      userPoint {
+        amount
+      }
+    }
+  }
+`;
+
+const FETCH_POINT_TRANSACTIONS = gql`
+  query fetchPointTransactions($search: String, $page: Int) {
+    fetchPointTransactions(search: $search, page: $page) {
+      _id
+      impUid
+      amount
+      balance
+      status
+      statusDetail
+      # useditem
+      user {
+        userPoint {
+          amount
+        }
+      }
+      createdAt
+      updatedAt
+      deletedAt
+    }
+  }
+`;
 
 function MyPageContainer() {
-  useAuth();
-  const { data: fetchLoggedData } =
+  const { data: fetchPointTransactions } = useQuery<
+    Pick<IQuery, "fetchPointTransactions">,
+    IQueryFetchPointTransactionsArgs
+  >(FETCH_POINT_TRANSACTIONS, { variables: { search: "", page: 1 } });
+  const { data: fetchUserLoggedIn } =
     useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
-  const [logoutUser] = useMutation(LOGOUT_USER);
-  const router = useRouter();
-
-  const onClickLogOut = () => {
-    localStorage.removeItem("accessToken");
-    // logoutUser({ variables: {} });
-    router.reload();
-    // router.push("/")
-  };
   return (
     <>
       <MyPagePresenter
-        fetchLoggedData={fetchLoggedData}
-        onClickLogOut={onClickLogOut}
+        fetchUserLoggedIn={fetchUserLoggedIn}
+        fetchPointTransactions={fetchPointTransactions}
       />
     </>
   );
