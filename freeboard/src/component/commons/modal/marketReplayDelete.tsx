@@ -1,15 +1,13 @@
 import { Modal } from "antd";
 import React, { ChangeEvent, useState } from "react";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { FETCH_BOARD_COMMENTS } from "../../unit/comment/board/commentList/commentList.queries";
-import { useRouter } from "next/router";
 import { useMutation } from "@apollo/client";
 import * as S from "../../unit/modal/commentDelete/deleteModal.styles";
 import { ICommentDeleteModalProps } from "../../unit/modal/commentDelete/deleteModal.types";
 import { CommentFail } from "./commentSuccessFail";
-import { DELETE_USEDITEM_QUESTION } from "../../unit/comment/market/commentList/commentList.queries";
+import { DELETE_USEDITEM_QUESTION } from "../../unit/comment/market/inquiryList/inquiryList.queries";
 
-export default function MarketCommentDeleteModal(P: ICommentDeleteModalProps) {
+export default function MarketReplyDeleteModal(P: ICommentDeleteModalProps) {
   const { id } = P;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteUseditemQuestion] = useMutation(DELETE_USEDITEM_QUESTION);

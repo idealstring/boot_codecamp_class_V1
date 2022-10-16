@@ -1,38 +1,35 @@
-import { BaseSyntheticEvent, ChangeEvent } from "react";
+import { BaseSyntheticEvent } from "react";
 import {
   FieldError,
   FieldErrorsImpl,
   FieldValues,
   FormState,
   Merge,
-  SubmitErrorHandler,
   SubmitHandler,
   UseFormGetValues,
-  UseFormHandleSubmit,
   UseFormRegister,
-  useFormState,
 } from "react-hook-form";
 
 // container
 
-export type ICommentWriteContainerProps = {
+export type IInquirytWriteContainerProps = {
   questions?: any;
   onClickIsEditToggle: () => void;
   isEdit: boolean;
 };
 
-export type IMyVariables = {
-  useditemQuestionId: string;
-  updateUseditemQuestionInput: IUpdateMarketCommentInput;
-};
+// export type IMyVariables = {
+//   useditemQuestionId: string;
+//   updateUseditemQuestionInput: IUpdateMarketInquiryInput;
+// };
 
-export type IUpdateMarketCommentInput = {
-  contents?: string;
-};
+// export type IUpdateMarketInquiryInput = {
+//   contents?: string;
+// };
 
 // presenter
 
-export type ICommentWritePresenterProps = {
+export type IInquiryWritePresenterProps = {
   register: UseFormRegister<FieldValues>;
   handleSubmit: (
     data?: any
@@ -48,7 +45,7 @@ export type ICommentWritePresenterProps = {
 
 // styles
 
-export type ICommentWriteStyleProps = {
+export type IInquiryWriteStyleProps = {
   errorColor?:
     | string
     | FieldError

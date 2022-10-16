@@ -1,10 +1,8 @@
-import * as S from "./commentWrite.styles";
-import { ICommentWritePresenterProps } from "./commentWrite.types.js";
-import { useContext } from "react";
-import { WindowSizeContext } from "../../../../commons/responsive";
+import * as S from "./inquiryWrite.styles";
+import { IInquiryWritePresenterProps } from "./inquiryWrite.types.js";
 
-export default function MarketCommentWritePresenter(
-  P: ICommentWritePresenterProps
+export default function MarketInquiryWritePresenter(
+  P: IInquiryWritePresenterProps
 ) {
   const {
     register,
@@ -37,12 +35,12 @@ export default function MarketCommentWritePresenter(
             댓글
           </S.CommentTitle>
         )}
-        <S.CommentNonmemberWrapper>
+        <S.CommentInnerWrapper>
           <S.CommentContentForm>
             <S.TextareaW1200
               id="contents"
-              placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
-              // value={questions?.contents ? undefined : getValues("contents")}
+              isEdit={isEdit}
+              placeholder="문의 내용을 입력하세요."
               defaultValue={questions?.contents}
               errorColor={formState.errors.contents?.message}
               {...register("contents")}
@@ -51,19 +49,12 @@ export default function MarketCommentWritePresenter(
               {isEdit ? (
                 <>
                   <div>
-                    <S.CommentBtn
-                      type="button"
-                      onClick={onClickCancelBtn}
-                      isEdit={isEdit}
-                      isCancel={true}
-                    >
+                    <S.CommentBtn type="button" onClick={onClickCancelBtn}>
                       취소
                     </S.CommentBtn>
                     <S.CommentBtn
                       type="submit"
                       onClick={handleSubmit(onClickUpdateBtn)}
-                      isEdit={isEdit}
-                      isCancel={false}
                     >
                       수정하기
                     </S.CommentBtn>
@@ -73,14 +64,13 @@ export default function MarketCommentWritePresenter(
                 <S.CommentBtn
                   type="submit"
                   onClick={handleSubmit(onClickCreateBtn)}
-                  isEdit={isEdit}
                 >
                   등록하기
                 </S.CommentBtn>
               )}
             </S.FormBottom>
           </S.CommentContentForm>
-        </S.CommentNonmemberWrapper>
+        </S.CommentInnerWrapper>
       </S.CommentWrapper>
     </>
   );

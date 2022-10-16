@@ -54,6 +54,13 @@ export const GlobalStyle = css`
     background-color: ${StyleSet.colors.point01};
   }
 
+  .toastui-editor-contents > div {
+    font-family: NanumSquareNeo, NanumSquare_acR, -apple-system,
+      BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
+      Droid Sans, Helvetica Neue, sans-serif;
+    font-weight: 300;
+  }
+
   @media (prefers-color-scheme: light) {
     html {
       color-scheme: light;

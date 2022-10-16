@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { StyleSet } from "../../../../../commons/style/styleSet";
-import { ICommentWriteStyleProps } from "./commentWrite.types";
+import { IInquiryWriteStyleProps } from "./inquiryWrite.types";
 
 export const HrLine = styled.hr`
   margin: 40px 0;
@@ -10,9 +10,7 @@ export const HrLine = styled.hr`
 
 export const CommentWrapper = styled.div`
   margin: 0 auto;
-  padding: 0 30px;
   width: 100%;
-  max-width: 1060px;
   min-width: 400px;
 
   display: flex;
@@ -35,23 +33,25 @@ export const CommentTitleImg = styled.img`
   margin-right: 10px;
 `;
 
-export const CommentNonmemberWrapper = styled.div`
+export const CommentInnerWrapper = styled.div`
   width: 100%;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
+
+  position: relative;
 `;
 
 export const CommentNameInfo = styled.div`
   margin-top: 20px;
   margin-bottom: 15px;
-  width: ${(props: ICommentWriteStyleProps) =>
+  width: ${(props: IInquiryWriteStyleProps) =>
     props.isMobile ? "100%" : "null"};
 
   display: flex;
-  flex-direction: ${(props: ICommentWriteStyleProps) =>
+  flex-direction: ${(props: IInquiryWriteStyleProps) =>
     props.isMobile ? "column" : "row"};
   justify-content: flex-start;
   align-items: center;
@@ -59,22 +59,22 @@ export const CommentNameInfo = styled.div`
 
 export const CommentContentForm = styled.form`
   padding: 0;
-
   width: 100%;
-  // border: 1px solid #bdbdbd;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: space-between;
+  // align-items: flex-start;
 `;
 
 export const TextareaW1200 = styled.textarea`
-  padding: 20px;
+  padding: 20px 100px 20px 20px;
+  padding: ${(props: IInquiryWriteStyleProps) =>
+    props.isEdit ? "20px 150px 20px 20px" : "20px 110px 20px 20px"};
   width: 100%;
-  height: auto;
+  height: 68px;
   border: none;
-  border: ${(props: ICommentWriteStyleProps) =>
+  border: ${(props: IInquiryWriteStyleProps) =>
     props.errorColor
       ? `1px solid ${StyleSet.colors.inputError}`
       : "1px solid #bdbdbd;"};
@@ -82,11 +82,13 @@ export const TextareaW1200 = styled.textarea`
 `;
 
 export const FormBottom = styled.div`
-  width: 100%;
-
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+
+  position: absolute;
+  top: 8px;
+  right: 15px;
 `;
 
 export const CharactersCounter = styled.div`
@@ -97,20 +99,13 @@ export const CharactersCounter = styled.div`
 
 export const CommentBtn = styled.button`
   height: 50px;
-  padding: 14px;
+  padding: 14px 10px;
   border: none;
-  border-radius: 0 0 10px 10px;
   cursor: pointer;
-  background-color: ${(props: ICommentWriteStyleProps) =>
-    props.isEdit
-      ? props.isCancel
-        ? "none"
-        : `${StyleSet.colors.point01}`
-      : "#000000"};
-  color: ${(props: ICommentWriteStyleProps) =>
-    props.isEdit
-      ? props.isCancel
-        ? "#000000"
-        : `${StyleSet.colors.white}`
-      : "#ffffff"};
+  background-color: transparent;
+  color: ${StyleSet.colors.gray};
+  transition: 0.3s;
+  &:hover {
+    color: ${StyleSet.colors.black};
+  }
 `;

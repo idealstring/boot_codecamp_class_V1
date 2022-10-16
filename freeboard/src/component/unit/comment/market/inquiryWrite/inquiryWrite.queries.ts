@@ -11,7 +11,6 @@ export const CREATE_USEDITEM_QUESTION = gql`
     ) {
       _id
       contents
-      # useditem
       user {
         _id
         email
@@ -36,7 +35,6 @@ export const UPDATE_USEDITEM_QUESTION = gql`
     ) {
       _id
       contents
-      # useditem
       user {
         _id
         email

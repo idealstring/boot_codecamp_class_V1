@@ -1,13 +1,16 @@
-import MarketCommentListPresenter from "./commentList.presenter";
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
-import { FETCH_USEDITEM_QUESTIONS } from "./commentList.queries";
+import {
+  FETCH_USEDITEM_QUESTIONS,
+  FETCH_USER_LOGGED_IN,
+} from "./inquiryList.queries";
 import {
   IQuery,
   IQueryFetchUseditemQuestionsArgs,
 } from "../../../../../commons/types/generated/types";
+import MarketInquiryListPresenter from "./inquiryList.presenter";
 
-export default function MarketCommentListContainer() {
+export default function MarketInquiryListContainer() {
   const router = useRouter();
   const { data: existingData, fetchMore } = useQuery<
     Pick<IQuery, "fetchUseditemQuestions">,
@@ -18,16 +21,16 @@ export default function MarketCommentListContainer() {
       page: 1,
     },
   });
+  const { data: fetchUserLoggedIn } =
+    useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
 
   const onLoadMore = () => {
-    console.log("more");
     if (!existingData) return;
     fetchMore({
       variables: {
         page: Math.ceil(existingData.fetchUseditemQuestions.length / 10) + 1,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
-        console.log(fetchMoreResult.fetchUseditemQuestions);
         if (!fetchMoreResult.fetchUseditemQuestions)
           return { fetchUseditemQuestions: [...prev.fetchUseditemQuestions] };
         return {
@@ -41,9 +44,10 @@ export default function MarketCommentListContainer() {
   };
 
   return (
-    <MarketCommentListPresenter
+    <MarketInquiryListPresenter
       existingData={existingData}
       onLoadMore={onLoadMore}
+      fetchUserLoggedIn={fetchUserLoggedIn}
     />
   );
 }

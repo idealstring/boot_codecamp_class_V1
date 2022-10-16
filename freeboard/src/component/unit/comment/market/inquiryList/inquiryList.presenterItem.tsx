@@ -1,30 +1,38 @@
 import { useState } from "react";
-import * as S from "./commentList.styles";
+import * as S from "./inquiryList.styles";
 import {
   dateFormatter,
   dateTimeFormatter,
 } from "../../../../../commons/utils/utils";
-import { ICommentListPresenterItemProps } from "./commentList.types";
-import CommentWriteContainer from "../commentWrite/commentWrite.container";
-import MarketCommentDeleteModal from "../../../../commons/modal/marketCommentDelete";
+import { IInquiryListPresenterItemProps } from "./inquiryList.types";
+import MarketCommentWriteContainer from "../inquiryWrite/inquiryWrite.container";
+import MarketInquiryDeleteModal from "../../../../commons/modal/marketReplayDelete";
+import ReplayWriteContainer from "../replyWrite/replyWrite.container";
+import ReplayListContainer from "../replyList/replyList.container";
 
 export default function MarketCommentListPresenterItem(
-  P: ICommentListPresenterItemProps
+  P: IInquiryListPresenterItemProps
 ) {
-  const { questions } = P;
+  const { questions, fetchUserLoggedIn } = P;
   const [isEdit, setIsEdit] = useState(false);
+  const [isReply, setReply] = useState(false);
   const onClickIsEditToggle = () => {
     setIsEdit((isEdit) => !isEdit);
   };
-
   const onClickUpdateBtn = () => {
     onClickIsEditToggle();
+  };
+  const onClickReplyToggle = () => {
+    setReply((isReply) => !isReply);
+  };
+  const onClickReplyBtn = () => {
+    onClickReplyToggle();
   };
 
   return (
     <>
       {isEdit && (
-        <CommentWriteContainer
+        <MarketCommentWriteContainer
           isEdit={isEdit}
           onClickIsEditToggle={onClickIsEditToggle}
           questions={questions}
@@ -53,23 +61,35 @@ export default function MarketCommentListPresenterItem(
                   <S.CommentContentName>
                     {questions.user.name}
                   </S.CommentContentName>
+                  {questions.user._id ===
+                  fetchUserLoggedIn?.fetchUserLoggedIn._id ? (
+                    <S.MyComment>내 문의</S.MyComment>
+                  ) : null}
                 </S.CommentNameInfo>
-                <S.CommentViewBtnWrapper>
-                  <S.CommentBtn onClick={onClickUpdateBtn}>수정</S.CommentBtn>
-                  <MarketCommentDeleteModal id={questions?._id} />
-                  <S.CommentBtn onClick={onClickUpdateBtn}>
-                    댓글보기
-                  </S.CommentBtn>
-                </S.CommentViewBtnWrapper>
               </S.ViewContentTop>
               <S.CommentViewContent>{questions.contents}</S.CommentViewContent>
-              <S.CommentViewContentDate>
-                {questions?.createdAt !== questions?.updatedAt
-                  ? `${dateTimeFormatter(questions.updatedAt)}(수정됨)`
-                  : `${dateFormatter(questions.createdAt)}`}
-              </S.CommentViewContentDate>
+              <S.CommentViewBtnWrapper>
+                <S.CommentViewContentDate>
+                  {questions?.createdAt !== questions?.updatedAt
+                    ? `${dateTimeFormatter(questions.updatedAt)}(수정됨)`
+                    : `${dateFormatter(questions.createdAt)}`}
+                </S.CommentViewContentDate>
+                <S.CommentReplyBtn onClick={onClickReplyBtn}>
+                  답글달기
+                </S.CommentReplyBtn>
+                <S.CommentUpdateBtn onClick={onClickUpdateBtn}>
+                  수정
+                </S.CommentUpdateBtn>
+                <MarketInquiryDeleteModal id={questions?._id} />
+              </S.CommentViewBtnWrapper>
             </S.CommentViewContentWrapper>
           </S.CommentViewInner>
+          {isReply && (
+            <S.ReplyWrapper>
+              <ReplayListContainer questionsId={questions._id} />
+              <ReplayWriteContainer questionsId={questions._id} />
+            </S.ReplyWrapper>
+          )}
         </S.CommentViewWrapper>
       )}
     </>

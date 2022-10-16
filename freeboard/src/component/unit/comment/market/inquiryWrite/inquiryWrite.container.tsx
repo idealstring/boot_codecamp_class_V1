@@ -1,26 +1,34 @@
-import MarketCommentWritePresenter from "./commentWrite.presenter";
+import MarketInquiryWritePresenter from "./inquiryWrite.presenter";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import {
-  ICommentWriteContainerProps,
-  IMyVariables,
-} from "./commentWrite.types";
+import { IInquirytWriteContainerProps } from "./inquiryWrite.types";
 import { CommentFail } from "../../../../commons/modal/commentSuccessFail";
 import {
   CREATE_USEDITEM_QUESTION,
   UPDATE_USEDITEM_QUESTION,
-} from "./commentWrite.queries";
+} from "./inquiryWrite.queries";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import {
+  IMutation,
+  IMutationCreateUseditemQuestionArgs,
+  IMutationUpdateUseditemQuestionArgs,
+} from "../../../../../commons/types/generated/types";
 
-export default function MarketCommentWriteContainer(
-  P: ICommentWriteContainerProps
+export default function MarketInquiryWriteContainer(
+  P: IInquirytWriteContainerProps
 ) {
   const { isEdit, onClickIsEditToggle, questions } = P;
   const router = useRouter();
-  const [createQuestion] = useMutation(CREATE_USEDITEM_QUESTION);
-  const [updateQuestion] = useMutation(UPDATE_USEDITEM_QUESTION);
+  const [createQuestion] = useMutation<
+    Pick<IMutation, "createUseditemQuestion">,
+    IMutationCreateUseditemQuestionArgs
+  >(CREATE_USEDITEM_QUESTION);
+  const [updateQuestion] = useMutation<
+    Pick<IMutation, "updateUseditemQuestion">,
+    IMutationUpdateUseditemQuestionArgs
+  >(UPDATE_USEDITEM_QUESTION);
   const schema = yup.object({
     contents: yup
       .string()
@@ -45,7 +53,7 @@ export default function MarketCommentWriteContainer(
           cache.modify({
             fields: {
               fetchUseditemQuestions: (prev) => {
-                return [data.createUseditemQuestion, ...prev];
+                return [data?.createUseditemQuestion, ...prev];
               },
             },
           });
@@ -58,7 +66,7 @@ export default function MarketCommentWriteContainer(
   };
 
   const onClickUpdateBtn = async (data: SubmitHandler<FieldValues>) => {
-    const myVariables: IMyVariables = {
+    const myVariables: IMutationUpdateUseditemQuestionArgs = {
       useditemQuestionId: questions._id,
       updateUseditemQuestionInput: {
         contents: getValues("contents"),
@@ -93,7 +101,7 @@ export default function MarketCommentWriteContainer(
   };
 
   return (
-    <MarketCommentWritePresenter
+    <MarketInquiryWritePresenter
       register={register}
       handleSubmit={handleSubmit}
       formState={formState}
