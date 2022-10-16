@@ -21,30 +21,10 @@ export default function HeaderContainer(P: IHeaderContainerProps) {
     },
   });
 
-  const onClickLogo = () => {
-    router.push("/");
-  };
-
-  const onClickRegister = () => {
-    router.push("/users/new");
-  };
-
-  const onClickSignIn = () => {
-    router.push("/users/signIn");
-  };
-
-  const onClickMyPage = async () => {
-    await router.push(`/users/mypage`);
-  };
-
   return (
     <>
       <HeaderPresenter
         onClickIsNav={onClickIsNav}
-        onClickLogo={onClickLogo}
-        onClickRegister={onClickRegister}
-        onClickSignIn={onClickSignIn}
-        onClickMyPage={onClickMyPage}
         IPickItemData={IPickItemData}
       />
     </>

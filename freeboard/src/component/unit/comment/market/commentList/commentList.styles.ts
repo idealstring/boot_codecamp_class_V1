@@ -54,7 +54,7 @@ export const ViewContentTop = styled.div`
 
 export const CommentContentName = styled.span`
   margin-right: 15px;
-  font-weight: 900;
+  font-weight: 600;
 `;
 
 export const RateStarWrapper = styled.div`
@@ -69,10 +69,11 @@ export const CommentViewBtnWrapper = styled.div`
   align-items: center;
 `;
 
-export const CommentViewBtn = styled.button`
+export const CommentBtn = styled.button`
   margin-left: 10px;
   padding: 0 5px;
   border: none;
+  color: ${StyleSet.colors.lightGray02};
   background: none;
   cursor: pointer;
 `;

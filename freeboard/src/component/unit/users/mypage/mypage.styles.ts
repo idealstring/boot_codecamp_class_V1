@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { StyleSet } from "../../../../commons/style/styleSet";
+import { IMyPageStylesProps } from "./myPage.types";
 
 export const PointWrapper = styled.div`
   padding: 0 0 30px 0;
@@ -21,12 +22,12 @@ export const PointInnerWrapper = styled.div`
 
 export const PointTitle = styled.span`
   font-size: ${StyleSet.fontSize.h3};
-  font-family: ${StyleSet.fontFamily.b};
+  font-weight: 500;
 `;
 
 export const Point = styled.span`
   font-size: ${StyleSet.fontSize.h2};
-  font-family: ${StyleSet.fontFamily.eb};
+  font-weight: 700;
   color: ${StyleSet.colors.point01};
 `;
 
@@ -34,6 +35,7 @@ export const Word = styled.span`
   padding: 5px 100px;
   background-color: ${StyleSet.colors.lightGray01};
   color: ${StyleSet.colors.gray};
+  font-weight: 100;
 `;
 
 export const HistoryTitleWrapper = styled.div`
@@ -50,7 +52,7 @@ export const HistoryTitleWrapper = styled.div`
 
 export const HistoryTitle = styled.span`
   font-size: ${StyleSet.fontSize.h3};
-  font-family: ${StyleSet.fontFamily.b};
+  font-weight: 500;
 `;
 
 export const ChargeBtn = styled.button`
@@ -58,7 +60,7 @@ export const ChargeBtn = styled.button`
   border: none;
   background-color: transparent;
   color: ${StyleSet.colors.point02};
-  font-family: ${StyleSet.fontFamily.b};
+  font-weight: 500;
 `;
 
 export const HistoryWrapper = styled.div`
@@ -74,26 +76,30 @@ export const HistoryWrapper = styled.div`
 
 export const HistoryTH = styled.span`
   width: 25%;
-  font-family: ${StyleSet.fontFamily.b};
+  font-weight: 500;
   text-align: center;
 `;
 
 export const HistoryDate = styled.span`
   width: 25%;
   color: ${StyleSet.colors.gray};
+  font-weight: 300;
   text-align: center;
 `;
 export const ChargePurchase = styled.span`
   width: 25%;
+  font-weight: 300;
   text-align: center;
 `;
 export const IncreaDecrea = styled.span`
   width: 25%;
-  font-family: ${StyleSet.fontFamily.b};
-  color: ${StyleSet.colors.point01};
+  font-weight: 500;
+  color: ${(props: IMyPageStylesProps) =>
+    props.minus ? `${StyleSet.colors.point03}` : `${StyleSet.colors.point01}`};
   text-align: center;
 `;
 export const Balance = styled.span`
   width: 25%;
+  font-weight: 400;
   text-align: center;
 `;

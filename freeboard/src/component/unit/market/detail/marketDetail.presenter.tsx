@@ -8,10 +8,10 @@ import { PriceFormatter } from "../../../../commons/utils/utils";
 import { IMarketDetailPresenterProps } from "./marketDetail.types";
 import MarketDeleteModal from "../../../commons/modal/marketDelete";
 import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
-import MarketProductPurchase from "../../../commons/modal/marketProductBuying";
+import MarketProductPurchase from "../../../commons/modal/marketPurchaseBtn";
 
 export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
-  const { data, fetchUserData, onClickBasket, onClickPurchase, IPicked } = P;
+  const { data, fetchUserData, onClickBasket, IPicked } = P;
   const { isMobile } = useContext(WindowSizeContext);
   const { onClickMoveToPage } = useMoveToPage();
   const router = useRouter();
@@ -56,12 +56,17 @@ export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
                   <S.DealInfo>{data?.fetchUseditem.tags}</S.DealInfo>
                 </S.DealInfoWrapper>
               ) : null}
+              <S.DealInfoWrapper>
+                <S.DealInfoTitle>판매</S.DealInfoTitle>
+                <S.DealInfo>
+                  {data?.fetchUseditem.soldAt ? "판매완료" : "판매중"}
+                </S.DealInfo>
+              </S.DealInfoWrapper>
             </div>
             <S.InfoBtnRrapper>
               <S.BasketBtn onClick={onClickBasket} IPicked={IPicked}>
                 {IPicked?.length ? "빼기" : "담기"}{" "}
               </S.BasketBtn>
-              {/* <S.PurchaseBtn onClick={onClickPurchase}>구매</S.PurchaseBtn> */}
               <MarketProductPurchase />
             </S.InfoBtnRrapper>
           </S.InfoWrapper>
@@ -73,7 +78,7 @@ export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
       <S.Container>
         <S.BodyWrapper>
           <S.MiddleTitle>판매자 한마디</S.MiddleTitle>
-          <div>{data?.fetchUseditem.remarks}</div>
+          <S.MiddleContents>{data?.fetchUseditem.remarks}</S.MiddleContents>
         </S.BodyWrapper>
         <S.BodyWrapper>
           <S.MiddleTitle>상품정보</S.MiddleTitle>
@@ -86,16 +91,18 @@ export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
               </div>
             ))}
           </div> */}
-          {data?.fetchUseditem.contents ? (
-            <Viewer initialValue={data?.fetchUseditem.contents} />
-          ) : (
-            <div>loadding...</div>
-          )}
-          {/* <div
+          <S.MiddleContents>
+            {data?.fetchUseditem.contents ? (
+              <Viewer initialValue={data?.fetchUseditem.contents} />
+            ) : (
+              <div>loadding...</div>
+            )}
+            {/* <div
             dangerouslySetInnerHTML={{
               __html: String(data?.fetchUseditem.contents),
             }}
           /> */}
+          </S.MiddleContents>
         </S.BodyWrapper>
         <S.BodyWrapper>
           <S.MiddleTitle>거래위치</S.MiddleTitle>
@@ -127,10 +134,7 @@ export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
             </S.BasketBtn>
           )}
           {fetchUserData?.fetchUserLoggedIn._id !==
-            data?.fetchUseditem.seller?._id && (
-            // <S.BuyBtn onClick={onClickPurchase}>구매</S.BuyBtn>
-            <MarketProductPurchase />
-          )}
+            data?.fetchUseditem.seller?._id && <MarketProductPurchase />}
         </S.BottomWrapper>
       </S.Container>
     </>

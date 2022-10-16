@@ -15,7 +15,7 @@ export const TitleWrapper = styled.div`
 
 export const Title = styled.span`
   font-size: ${StyleSet.fontSize.h3};
-  font-family: ${StyleSet.fontFamily.b};
+  font-weight: 500;
 `;
 
 export const BodyWrapper = styled.div`
@@ -52,6 +52,7 @@ export const ChargeButton = styled.button`
   height: 52px;
   border: none;
   border-radius: 4px;
+  font-size: ${StyleSet.fontSize.b2};
   font-weight: 500;
   color: #fff;
   background-color: ${StyleSet.colors.point01};

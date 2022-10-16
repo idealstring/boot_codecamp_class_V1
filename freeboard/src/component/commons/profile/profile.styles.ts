@@ -47,7 +47,7 @@ export const NicknameWrapper = styled.div`
   span {
     margin: 10px 0 0 0;
     font-size: ${StyleSet.fontSize.h5};
-    font-family: ${StyleSet.fontFamily.eb};
+    font-weight: 700;
   }
 `;
 
@@ -64,7 +64,7 @@ export const LogoutBtn = styled.button`
   border: none;
   background-color: transparent;
   font-size: ${StyleSet.fontSize.b5};
-
+  font-weight: 100;
   cursor: pointer;
 `;
 
@@ -94,7 +94,7 @@ export const ProfileBottom = styled.section`
 export const BottomButton = styled.button`
   margin: 0 5px;
   padding: 3px 14px;
-  width: 65px;
+  width: 70px;
   height: 65px;
 
   display: flex;

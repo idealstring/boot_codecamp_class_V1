@@ -27,14 +27,6 @@ export const FETCH_USED_ITEM = gql`
         email
         name
         picture
-        # userPoint {
-        #   _id
-        #   amount
-        #   user
-        #   createdAt
-        #   updatedAt
-        #   deletedAt
-        # }
         createdAt
         updatedAt
         deletedAt
@@ -44,14 +36,6 @@ export const FETCH_USED_ITEM = gql`
         email
         name
         picture
-        # userPoint {
-        #   _id
-        #   amount
-        #   user
-        #   createdAt
-        #   updatedAt
-        #   deletedAt
-        # }
         createdAt
         updatedAt
         deletedAt
@@ -79,26 +63,11 @@ export const TOGGLE_USEDITEM_PICK = gql`
     toggleUseditemPick(useditemId: $useditemId)
   }
 `;
+
 export const FETCH_USEDITEMS_IPICKED = gql`
   query fetchUseditemsIPicked($search: String, $page: Int) {
     fetchUseditemsIPicked(search: $search, page: $page) {
       _id
-    }
-  }
-`;
-
-export const CREATE_BUYING_SELLING = gql`
-  mutation createPointTransactionOfBuyingAndSelling($useritemId: ID!) {
-    createPointTransactionOfBuyingAndSelling(useritemId: $useritemId) {
-      _id
-      name
-      price
-      buyer {
-        name
-      }
-      seller {
-        name
-      }
     }
   }
 `;

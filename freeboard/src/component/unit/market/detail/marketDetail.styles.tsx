@@ -79,19 +79,21 @@ export const InfoWrapper = styled.div`
 
 export const ProductSeller = styled.span`
   margin: 0 0 10px 0;
-  font-family: ${StyleSet.fontFamily.eb};
+  font-size: ${StyleSet.fontSize.b3};
+  font-weight: 600;
   display: block;
 `;
 
 export const ProductTitle = styled.h2`
   margin: 0 0 10px 0;
   font-size: ${StyleSet.fontSize.h2};
+  font-weight: 400;
 `;
 
 export const ProductPrice = styled.span`
   margin: 0 0 10px 0;
   font-size: ${StyleSet.fontSize.h2};
-  font-family: ${StyleSet.fontFamily.eb};
+  font-weight: 700;
 
   display: block;
 `;
@@ -106,7 +108,7 @@ export const DealInfoWrapper = styled.div`
 export const DealInfoTitle = styled.span`
   min-width: 25px;
   font-size: ${StyleSet.fontSize.b4};
-  font-family: ${StyleSet.fontFamily.b};
+  font-weight: 500;
   color: ${StyleSet.colors.gray};
 
   display: block;
@@ -114,11 +116,12 @@ export const DealInfoTitle = styled.span`
 
 export const DealInfo = styled.span`
   margin: 0 0 0 20px;
-
+  font-weight: 300;
   display: block;
 `;
 
 export const InfoBtnRrapper = styled.div`
+  margin: 20px 0 0 0;
   width: 100%;
 
   display: flex;
@@ -162,14 +165,20 @@ export const PurchaseBtn = styled.button`
 
 export const MiddleTitle = styled.span`
   margin: 0 0 20px 0;
-  font-family: ${StyleSet.fontFamily.b};
+  font-weight: 500;
+
+  display: block;
+`;
+
+export const MiddleContents = styled.span`
+  margin: 0 0 20px 0;
+  font-weight: 300;
 
   display: block;
 `;
 
 export const BodyWrapper = styled.div`
   margin: 0 0 20px 0;
-  padding: 0 0 20px 0;
   width: 100%;
 
   border-bottom: 1px solid ${StyleSet.colors.lightGray02};
@@ -190,18 +199,6 @@ export const BottomWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 0 10px;
-`;
-
-export const BuyBtn = styled.button`
-  padding: 0 16px;
-  width: 100%;
-  height: 52px;
-  border: none;
-  border-radius: 4px;
-  font-weight: 500;
-  color: #fff;
-  background-color: ${StyleSet.colors.point01};
-  cursor: pointer;
 `;
 
 export const ToListBtn = styled.button`

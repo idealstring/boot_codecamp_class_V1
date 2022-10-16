@@ -11,4 +11,5 @@ export type IMyPagePresenterProps = {
 
 export type IMyPageStylesProps = {
   // isNormalScreen?: boolean;
+  minus?: boolean;
 };

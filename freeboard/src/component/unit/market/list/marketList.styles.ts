@@ -121,14 +121,14 @@ export const Name = styled.h1`
 
 export const Price = styled.span`
   margin-bottom: 5px;
-  font-family: ${StyleSet.fontFamily.eb};
+  font-weight: 600;
   font-size: ${StyleSet.fontSize.h2};
 `;
 
 export const Subtext = styled.span`
   margin-bottom: 5px;
   color: ${StyleSet.colors.gray};
-
+  font-weight: 200;
   display: block;
 `;
 

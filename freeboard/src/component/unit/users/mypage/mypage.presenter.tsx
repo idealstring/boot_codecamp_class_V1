@@ -25,7 +25,7 @@ function MyPagePresenter(P: IMyPagePresenterProps) {
             P
           </S.Point>
         </S.PointInnerWrapper>
-        <S.Word>적절한 구입이 생활에 도움이 됩니다.</S.Word>
+        <S.Word>적절한 구입이 삶을 윤택하게 만듭니다.</S.Word>
       </S.PointWrapper>
       <S.HistoryTitleWrapper>
         <S.HistoryTitle>포인트 내역</S.HistoryTitle>
@@ -36,15 +36,17 @@ function MyPagePresenter(P: IMyPagePresenterProps) {
       <S.HistoryWrapper>
         <S.HistoryTH>날짜</S.HistoryTH>
         <S.HistoryTH>상태</S.HistoryTH>
-        <S.HistoryTH>금액</S.HistoryTH>
-        <S.HistoryTH>잔액</S.HistoryTH>
+        <S.HistoryTH>포인트</S.HistoryTH>
+        <S.HistoryTH>잔여 포인트</S.HistoryTH>
       </S.HistoryWrapper>
       {fetchPointTransactions?.fetchPointTransactions.map((el) => (
         <S.HistoryWrapper>
           <S.HistoryDate>{dateFormatter(el.createdAt)}</S.HistoryDate>
           <S.ChargePurchase>{el.status}</S.ChargePurchase>
-          <S.IncreaDecrea>{PriceFormatter(el.amount)}</S.IncreaDecrea>
-          <S.Balance>{PriceFormatter(el.balance)}</S.Balance>
+          <S.IncreaDecrea minus={String(el.amount).includes("-")}>
+            {PointFormatter(el.amount)} P
+          </S.IncreaDecrea>
+          <S.Balance>{PointFormatter(el.balance)} P</S.Balance>
         </S.HistoryWrapper>
       ))}
     </div>

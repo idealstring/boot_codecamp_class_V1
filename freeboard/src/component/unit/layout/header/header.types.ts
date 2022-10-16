@@ -14,9 +14,5 @@ export type IHeaderContainerProps = {
 
 export type IHeaderPresenterProps = {
   onClickIsNav: () => void;
-  onClickLogo: () => void;
-  onClickRegister: () => void;
-  onClickSignIn: () => void;
-  onClickMyPage: () => void;
   IPickItemData: Pick<IQuery, "fetchUseditemsIPicked"> | undefined;
 };

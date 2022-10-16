@@ -1,6 +1,7 @@
 import { Modal } from "antd";
 import styled from "@emotion/styled";
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import { StyleSet } from "../../../commons/style/styleSet";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import {
@@ -9,7 +10,6 @@ import {
   IQuery,
   IQueryFetchUseditemArgs,
 } from "../../../commons/types/generated/types";
-import { useRouter } from "next/router";
 import { PriceFormatter } from "../../../commons/utils/utils";
 
 const BuyBtn = styled.button`
@@ -49,6 +49,7 @@ export const FETCH_USED_ITEM = gql`
       _id
       name
       price
+      soldAt
       seller {
         _id
       }
@@ -88,6 +89,14 @@ const MarketProductPurchase = () => {
     try {
       await BuyingAndSelling({
         variables: { useritemId: String(router.query.detail) },
+        refetchQueries: [
+          {
+            query: FETCH_USED_ITEM,
+            variables: {
+              useditemId: router.query.detail,
+            },
+          },
+        ],
       });
 
       Modal.info({ content: "상품 구매 완료" });

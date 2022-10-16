@@ -1,19 +1,15 @@
 import Head from "next/head";
-import { useRecoilState } from "recoil";
-import { accessTokenState } from "../../../../commons/store";
 import * as S from "./header.styes";
+import { useRecoilState } from "recoil";
 import { IHeaderPresenterProps } from "./header.types";
+import { accessTokenState } from "../../../../commons/store";
+import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 
 export default function HeaderPresenter(P: IHeaderPresenterProps) {
-  const {
-    onClickIsNav,
-    onClickLogo,
-    onClickRegister,
-    onClickSignIn,
-    onClickMyPage,
-    IPickItemData,
-  } = P;
+  const { onClickIsNav, IPickItemData } = P;
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const { onClickMoveToPage } = useMoveToPage();
+
   return (
     <>
       <S.Container>
@@ -39,7 +35,7 @@ export default function HeaderPresenter(P: IHeaderPresenterProps) {
             </S.NavBtn>
           </S.NavBtnWrapper>
           <S.LogoWrapper>
-            <S.LogoBtn onClick={onClickLogo}>
+            <S.LogoBtn onClick={onClickMoveToPage("/")}>
               <svg
                 version="1.0"
                 xmlns="http://www.w3.org/2000/svg"
@@ -101,13 +97,17 @@ l127 -3 17 -55z m-528 -28 c-4 -16 -13 -22 -34 -22 l-29 0 0 -125 0 -125 -125
           <S.LoginWrapper>
             {!accessToken ? (
               <S.NoMemberWrapper>
-                <S.SignIn onClick={onClickSignIn}>로그인</S.SignIn>
-                <S.Join onClick={onClickRegister}>회원가입</S.Join>
+                <S.SignIn onClick={onClickMoveToPage("/users/signIn")}>
+                  로그인
+                </S.SignIn>
+                <S.Join onClick={onClickMoveToPage("/users/new")}>
+                  회원가입
+                </S.Join>
               </S.NoMemberWrapper>
             ) : null}
             {accessToken ? (
               <S.MemberWrapper>
-                <S.MemberBtn onClick={onClickMyPage}>
+                <S.MemberBtn onClick={onClickMoveToPage("/users/mypage")}>
                   <svg
                     viewBox="0 0 1026 1024"
                     version="1.1"
@@ -121,7 +121,9 @@ l127 -3 17 -55z m-528 -28 c-4 -16 -13 -22 -34 -22 l-29 0 0 -125 0 -125 -125
                     </g>
                   </svg>
                 </S.MemberBtn>
-                <S.MemberBtn>
+                <S.MemberBtn
+                  onClick={onClickMoveToPage("/users/mypage/basket")}
+                >
                   <svg
                     viewBox="0 0 1024 1024"
                     version="1.1"

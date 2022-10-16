@@ -15,7 +15,7 @@ export const Container = styled.section`
 export const SectionTitle = styled.h2`
   padding-bottom: 24px;
   font-size: ${StyleSet.fontSize.h1};
-  font-family: ${StyleSet.fontFamily.b};
+  font-weight: 500;
   text-align: center;
 `;
 
@@ -106,13 +106,13 @@ export const Textarea = styled.textarea`
 
 export const Label01 = styled.label`
   width: 110px;
-  font-family: ${StyleSet.fontFamily.b};
+  font-weight: 500;
 `;
 
 export const Label02 = styled.label`
   margin-bottom: 16px;
   width: 100%;
-  font-family: ${StyleSet.fontFamily.b};
+  font-weight: 500;
 
   display: block;
 `;

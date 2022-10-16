@@ -50,7 +50,7 @@ export const BoardWrapper = styled.div`
 export const BoardTopWrapper = styled.div`
   width: 100%;
   height: 40px;
-  font-weight: 900;
+  font-weight: 500;
 
   border-top: 1px solid ${StyleSet.colors.lightGray02};
   border-bottom: 1px solid ${StyleSet.colors.lightGray02};
@@ -110,6 +110,7 @@ export const ContentNumber = styled.span`
   padding: 0 5px;
   width: 70px;
   line-height: 50px;
+  font-weight: 300;
   text-align: center;
 
   text-overflow: ellipsis;
@@ -120,6 +121,7 @@ export const ContentTitle = styled.span`
   padding: 0 5px;
   width: 50%;
   line-height: 50px;
+  font-weight: 300;
   text-align: center;
 
   text-overflow: ellipsis;
@@ -141,10 +143,16 @@ export const ContentPrice = styled.span`
   line-height: 50px;
   text-align: center;
 `;
+
 export const ContentDate = styled.span`
   padding: 0 5px;
   width: 120px;
-  min-width: 90px;
+  min-width: 100px;
   line-height: 50px;
+  font-weight: 300;
   text-align: center;
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 `;

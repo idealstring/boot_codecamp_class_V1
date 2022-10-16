@@ -6,9 +6,9 @@ export const GlobalStyle = css`
   body {
     padding: 0;
     margin: 0 auto;
-    font-family: NanumSquare_acR, -apple-system, BlinkMacSystemFont, Segoe UI,
-      Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-      sans-serif;
+    font-family: NanumSquareNeo, NanumSquare_acR, -apple-system,
+      BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
+      Droid Sans, Helvetica Neue, sans-serif;
   }
 
   a {
@@ -187,5 +187,10 @@ export const GlobalStyle = css`
   @font-face {
     font-family: "NanumSquare_acEB";
     src: url("/fonts/NanumSquare_acEB.ttf");
+  }
+
+  @font-face {
+    font-family: "NanumSquareNeo";
+    src: url("/fonts/NanumSquareNeo-Variable.woff2");
   }
 `;

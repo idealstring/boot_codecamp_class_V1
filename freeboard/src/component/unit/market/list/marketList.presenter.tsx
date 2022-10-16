@@ -32,6 +32,7 @@ export default function MarketListPresenter(P: IMarketListPresenterProps) {
                         <S.Subtext>
                           등록일 {dateFormatter(el.createdAt)}
                         </S.Subtext>
+                        장바구니담은사람수
                       </div>
                     </S.ItemLeftMiddle>
                   </S.ItemLeft>

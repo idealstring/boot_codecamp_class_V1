@@ -16,7 +16,7 @@ export const Hgroup = styled.hgroup`
   h1 {
     margin: 0;
     font-size: ${StyleSet.fontSize.h3};
-    font-family: ${StyleSet.fontFamily.eb};
+    font-weight: 600;
   }
 `;
 
@@ -70,7 +70,7 @@ export const InputPassword = styled.input`
 export const Label = styled.label`
   margin: 25px 0 10px 0;
   font-size: ${StyleSet.fontSize.b2};
-  font-family: ${StyleSet.fontFamily.b};
+  font-weight: 500;
 `;
 
 export const SignInBtn = styled.button`
@@ -78,7 +78,7 @@ export const SignInBtn = styled.button`
   width: 100%;
   padding: 11px 10px;
   font-size: ${StyleSet.fontSize.b2};
-  font-family: ${StyleSet.fontFamily.b};
+
   color: ${StyleSet.colors.white};
   background-color: ${StyleSet.colors.point01};
   border: none;
@@ -101,7 +101,7 @@ export const LoginBtn = styled.button`
   text-align: center;
   font-size: ${StyleSet.fontSize.b4};
   border: none;
-  background-color: #fff;
+  background-color: transparent;
 
   cursor: pointer;
 `;
