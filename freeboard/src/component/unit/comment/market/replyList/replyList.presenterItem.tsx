@@ -4,6 +4,8 @@ import {
   dateFormatter,
   dateTimeFormatter,
 } from "../../../../../commons/utils/utils";
+import MarketReplyDeleteModal from "../../../../commons/modal/marketReplayDelete";
+import ReplayWriteContainer from "../replyWrite/replyWrite.container";
 import * as S from "./replyList.styles";
 import { IReplayListPresenterItemProps } from "./replyList.tpyes";
 
@@ -12,22 +14,35 @@ export default function ReplayListPresenterItem(
 ) {
   const { Answers, fetchUserLoggedIn } = P;
   const [isEdit, setIsEdit] = useState(false);
-  //  const onClickIsEditToggle = () => {
-  //     setIsEdit((isEdit) => !isEdit);
-  //   };
-  //   const onClickUpdateBtn = () => {
-  //     onClickIsEditToggle();
-  //   };
-
+  const onClickIsEditToggle = () => {
+    setIsEdit((isEdit) => !isEdit);
+  };
+  const onClickUpdateBtn = () => {
+    onClickIsEditToggle();
+  };
+  console.log(Answers.user);
   return (
     <>
-      {/* {isEdit && (
-        <MarketCommentWriteContainer
-          isEdit={isEdit}
-          onClickIsEditToggle={onClickIsEditToggle}
-          questions={questions}
-        />
-      )} */}
+      {isEdit && (
+        <S.CommentViewWrapper>
+          <svg
+            width="15"
+            height="17"
+            viewBox="0 0 15 17"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M15 11L9 17L7.58 15.58L11.17 12H0V0H2V10H11.17L7.58 6.42L9 5L15 11Z"
+              fill={StyleSet.colors.gray}
+            />
+          </svg>
+          <ReplayWriteContainer
+            isEdit={isEdit}
+            onClickIsEditToggle={onClickIsEditToggle}
+            Answers={Answers}
+          />
+        </S.CommentViewWrapper>
+      )}
       {!isEdit && (
         <S.CommentViewWrapper key={Answers._id}>
           <svg
@@ -75,10 +90,10 @@ export default function ReplayListPresenterItem(
                     ? `${dateTimeFormatter(Answers.updatedAt)}(수정됨)`
                     : `${dateFormatter(Answers.createdAt)}`}
                 </S.CommentViewContentDate>
-                {/* <S.CommentUpdateBtn onClick={onClickUpdateBtn}>
+                <S.CommentUpdateBtn onClick={onClickUpdateBtn}>
                   수정
                 </S.CommentUpdateBtn>
-                <MarketInquiryDeleteModal id={Answers?._id} /> */}
+                <MarketReplyDeleteModal id={Answers?._id} />
               </S.CommentViewBtnWrapper>
             </S.CommentViewContentWrapper>
           </S.CommentViewInner>

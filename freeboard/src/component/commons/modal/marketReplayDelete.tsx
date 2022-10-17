@@ -1,16 +1,25 @@
 import { Modal } from "antd";
-import React, { ChangeEvent, useState } from "react";
-import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { useMutation } from "@apollo/client";
-import * as S from "../../unit/modal/commentDelete/deleteModal.styles";
-import { ICommentDeleteModalProps } from "../../unit/modal/commentDelete/deleteModal.types";
+import React, { useState } from "react";
+import { gql, useMutation } from "@apollo/client";
 import { CommentFail } from "./commentSuccessFail";
-import { DELETE_USEDITEM_QUESTION } from "../../unit/comment/market/inquiryList/inquiryList.queries";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import * as S from "../../unit/modal/replyDelete/replyModal.styles";
+import { ICommentDeleteModalProps } from "../../unit/modal/replyDelete/replyModal.types";
+
+export const DELETE_USEDITEM_QUESTION_ANSWER = gql`
+  mutation deleteUseditemQuestionAnswer($useditemQuestionAnswerId: ID!) {
+    deleteUseditemQuestionAnswer(
+      useditemQuestionAnswerId: $useditemQuestionAnswerId
+    )
+  }
+`;
 
 export default function MarketReplyDeleteModal(P: ICommentDeleteModalProps) {
   const { id } = P;
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [deleteUseditemQuestion] = useMutation(DELETE_USEDITEM_QUESTION);
+  const [deleteUseditemQuestionAnswer] = useMutation(
+    DELETE_USEDITEM_QUESTION_ANSWER
+  );
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -27,29 +36,23 @@ export default function MarketReplyDeleteModal(P: ICommentDeleteModalProps) {
 
   const deleteMarketCommentFunc = async () => {
     try {
-      await deleteUseditemQuestion({
+      await deleteUseditemQuestionAnswer({
         variables: {
-          useditemQuestionId: id,
+          useditemQuestionAnswerId: id,
         },
         update(chche, { data }) {
           chche.modify({
             fields: {
-              fetchUseditemQuestions: (prev, { readField }) => {
-                const deletedId = data.deleteUseditemQuestion;
+              fetchUseditemQuestionAnswers: (prev, { readField }) => {
+                const deletedId = data.deleteUseditemQuestionAnswer;
                 const filterdPrev = prev.filter(
-                  (el) => readField("_id", el) !== deletedId
+                  (el: any) => readField("_id", el) !== deletedId
                 );
                 return [...filterdPrev];
               },
             },
           });
         },
-        // refetchQueries: [
-        //   {
-        //     query: FETCH_BOARD_COMMENTS,
-        //     variables: { boardId: router.query.detail, page: 1 },
-        //   },
-        // ],
       });
     } catch (error) {
       if (error instanceof Error) CommentFail(error.message);

@@ -24,7 +24,6 @@ export default function ReplayListContainer(P: IReplayListContainerProps) {
   });
   const { data: fetchUserLoggedIn } =
     useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
-
   const onLoadMore = () => {
     if (!fetchQuestionAnswers) return;
     fetchMore({

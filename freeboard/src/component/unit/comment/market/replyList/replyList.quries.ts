@@ -8,9 +8,9 @@ export const FETCH_USEDITEM_QUESTION_ANSWERS = gql`
     ) {
       _id
       contents
-      #   useditemQuestion
       user {
         name
+        _id
       }
       createdAt
       updatedAt

@@ -4,25 +4,36 @@ import { useForm } from "react-hook-form";
 import {
   IMutation,
   IMutationCreateUseditemQuestionAnswerArgs,
+  IMutationUpdateUseditemQuestionAnswerArgs,
 } from "../../../../../commons/types/generated/types";
-import { CREATE_USEDITEM_QUESTION_ANSWER } from "./replyWrite.quries";
+import {
+  CREATE_USEDITEM_QUESTION_ANSWER,
+  UPDATE_USEDITEM_QUESTION_ANSWER,
+} from "./replyWrite.quries";
 import { IReplayWriteContainerProps } from "./replyWrite.types";
 import ReplayWritePresenter from "./replyWrite.presenter";
 
 export default function ReplayWriteContainer(P: IReplayWriteContainerProps) {
-  const { questionsId } = P;
+  const { questionsId, Answers, isEdit, onClickIsEditToggle } = P;
   const [createQuestionAnswer] = useMutation<
     Pick<IMutation, "createUseditemQuestionAnswer">,
     IMutationCreateUseditemQuestionAnswerArgs
   >(CREATE_USEDITEM_QUESTION_ANSWER);
+  const [updateQuestionAnswer] = useMutation<
+    Pick<IMutation, "updateUseditemQuestionAnswer">,
+    IMutationUpdateUseditemQuestionAnswerArgs
+  >(UPDATE_USEDITEM_QUESTION_ANSWER);
   const { register, handleSubmit, formState, setValue } = useForm();
 
+  const onClickCancelBtn = () => {
+    if (onClickIsEditToggle) onClickIsEditToggle();
+  };
+
   const onClickCreateAnswer = async (data: any) => {
-    console.log(data, questionsId);
     try {
-      const result = await createQuestionAnswer({
+      await createQuestionAnswer({
         variables: {
-          useditemQuestionId: questionsId,
+          useditemQuestionId: String(questionsId),
           createUseditemQuestionAnswerInput: {
             ...data,
           },
@@ -42,6 +53,32 @@ export default function ReplayWriteContainer(P: IReplayWriteContainerProps) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
   };
+
+  const onClickUpdateAnswer = async (data: any) => {
+    try {
+      await updateQuestionAnswer({
+        variables: {
+          useditemQuestionAnswerId: String(Answers?._id),
+          updateUseditemQuestionAnswerInput: {
+            ...data,
+          },
+        },
+        update(cache) {
+          cache.modify({
+            fields: {
+              fetchUseditemQuestionAnswers: (prev) => {
+                return [...prev];
+              },
+            },
+          });
+        },
+      });
+      if (onClickIsEditToggle) onClickIsEditToggle();
+    } catch (error) {
+      if (error instanceof Error) Modal.error({ content: error.message });
+    }
+  };
+
   return (
     <>
       <ReplayWritePresenter
@@ -49,6 +86,10 @@ export default function ReplayWriteContainer(P: IReplayWriteContainerProps) {
         register={register}
         handleSubmit={handleSubmit}
         formState={formState}
+        Answers={Answers}
+        isEdit={isEdit}
+        onClickCancelBtn={onClickCancelBtn}
+        onClickUpdateAnswer={onClickUpdateAnswer}
       />
     </>
   );

@@ -7,9 +7,13 @@ import {
   UseFormHandleSubmit,
   UseFormRegister,
 } from "react-hook-form";
+import { IUseditemQuestionAnswer } from "../../../../../commons/types/generated/types";
 
 export type IReplayWriteContainerProps = {
-  questionsId: string;
+  questionsId?: string;
+  Answers?: IUseditemQuestionAnswer;
+  isEdit?: boolean;
+  onClickIsEditToggle?: () => void;
 };
 
 // presenter
@@ -19,6 +23,10 @@ export type IReplayWritePresenterProps = {
   register: UseFormRegister<FieldValues>;
   handleSubmit: UseFormHandleSubmit<FieldValues>;
   formState: FormState<FieldValues>;
+  Answers?: IUseditemQuestionAnswer;
+  isEdit?: boolean;
+  onClickCancelBtn?: () => void;
+  onClickUpdateAnswer: (data: any) => void;
 };
 
 // styles
@@ -30,4 +38,5 @@ export type IReplyWriteStyleProps = {
     | FieldError
     | Merge<FieldError, FieldErrorsImpl<any>>
     | undefined;
+  isEdit?: boolean;
 };

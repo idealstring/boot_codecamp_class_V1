@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CommentFail } from "./commentSuccessFail";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import * as S from "../../unit/modal/inquiryDelet/inquiryModal.styles";
+import * as S from "../../unit/modal/inquiryDelete/inquiryModal.styles";
 import { DELETE_USEDITEM_QUESTION } from "../../unit/comment/market/inquiryList/inquiryList.queries";
-import { ICommentDeleteModalProps } from "../../unit/modal/inquiryDelet/inquiryModal.types";
+import { ICommentDeleteModalProps } from "../../unit/modal/inquiryDelete/inquiryModal.types";
 
 export default function MarketInquiryDeleteModal(P: ICommentDeleteModalProps) {
   const { id } = P;

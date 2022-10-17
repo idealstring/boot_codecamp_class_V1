@@ -7,8 +7,8 @@ import {
 import { IInquiryListPresenterItemProps } from "./inquiryList.types";
 import MarketCommentWriteContainer from "../inquiryWrite/inquiryWrite.container";
 import MarketInquiryDeleteModal from "../../../../commons/modal/marketReplayDelete";
-import ReplayWriteContainer from "../replyWrite/replyWrite.container";
 import ReplayListContainer from "../replyList/replyList.container";
+import MarektReplyWrite from "../../../../commons/comment/market/replyWrite";
 
 export default function MarketCommentListPresenterItem(
   P: IInquiryListPresenterItemProps
@@ -87,7 +87,7 @@ export default function MarketCommentListPresenterItem(
           {isReply && (
             <S.ReplyWrapper>
               <ReplayListContainer questionsId={questions._id} />
-              <ReplayWriteContainer questionsId={questions._id} />
+              <MarektReplyWrite questionsId={questions._id} />
             </S.ReplyWrapper>
           )}
         </S.CommentViewWrapper>
