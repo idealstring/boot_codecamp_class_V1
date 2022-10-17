@@ -9,6 +9,11 @@ import { IMarketDetailPresenterProps } from "./marketDetail.types";
 import MarketDeleteModal from "../../../commons/modal/marketDelete";
 import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import MarketProductPurchase from "../../../commons/modal/marketPurchaseBtn";
+import dynamic from "next/dynamic";
+
+// const Viewer = dynamic(() => import("@toast-ui/react-editor"), {
+//   ssr: false,
+// });
 
 export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
   const { data, fetchUserData, onClickBasket, IPicked } = P;
