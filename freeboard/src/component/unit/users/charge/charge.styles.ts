@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { StyleSet } from "../../../../commons/style/styleSet";
+import { IStylesProps } from "./charge.types";
 
 export const TitleWrapper = styled.div`
   //   margin: 0 0 20px 0;
@@ -29,21 +30,35 @@ export const ChargeForm = styled.form`
   flex-direction: column;
 `;
 
-export const LabelWrapper = styled.div`
-  margin: 20px 0;
+export const Input = styled.input`
+  border: ${(props: IStylesProps) =>
+    props.error ? `1px solid ${StyleSet.colors.inputError}` : "default"};
 `;
 
-export const ChargeLabel = styled.label`
-  margin: 0 20px 0 0;
+export const PriceBtnWrapper = styled.div`
+  margin: 20px 0;
+  padding: 0;
+
+  border: 1px solid ${StyleSet.colors.lightGray02};
+  border-radius: 4px;
+  overflow: hidden;
 
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
+`;
 
-  span {
-    margin: 0 10px;
-  }
+export const PriceBtn = styled.button`
+  margin: 0;
+  width: 100%;
+  height: 41px;
+
+  border: none;
+  border-right: 1px solid ${StyleSet.colors.lightGray02};
+  background-color: transparent;
+
+  cursor: pointer;
 `;
 
 export const ChargeButton = styled.button`

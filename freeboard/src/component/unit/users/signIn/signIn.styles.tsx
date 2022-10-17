@@ -27,7 +27,7 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  algin-items: flex-start;
+  align-items: flex-start;
 `;
 
 export const Inner = styled.label`
@@ -35,7 +35,7 @@ export const Inner = styled.label`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  algin-items: flex-start;
+  align-items: flex-start;
 `;
 
 export const InputEmail = styled.input`
@@ -93,7 +93,7 @@ export const LoginWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  algin-items: center;
+  align-items: center;
 `;
 
 export const LoginBtn = styled.button`

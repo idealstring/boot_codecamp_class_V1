@@ -10,11 +10,15 @@ import {
 import ChargePresenter from "./charge.presenter";
 import { Modal } from "antd";
 import { useRouter } from "next/router";
+import { ChangeEvent, MouseEvent, useState } from "react";
 
 const schema = yup.object({
-  chargePoint: yup.number().required(),
+  chargePoint: yup
+    .number()
+    .integer("true")
+    .max(5000000, "true")
+    .required("true"),
 });
-
 declare const window: typeof globalThis & {
   IMP: any;
 };
@@ -28,7 +32,6 @@ const FETCH_USER_LOGGED_IN = gql`
     }
   }
 `;
-
 const CREATE_POINT_TRANSACTION_OF_LOADING = gql`
   mutation createPointTransactionOfLoading($impUid: ID!) {
     createPointTransactionOfLoading(impUid: $impUid) {
@@ -52,8 +55,9 @@ const CREATE_POINT_TRANSACTION_OF_LOADING = gql`
 
 export default function ChargeContainer() {
   const router = useRouter();
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit, getValues, setValue, formState } = useForm({
     resolver: yupResolver(schema),
+    mode: "onChange",
   });
   const { data: fetchUser } =
     useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
@@ -61,6 +65,20 @@ export default function ChargeContainer() {
     Pick<IMutation, "createPointTransactionOfLoading">,
     IMutationCreatePointTransactionOfLoadingArgs
   >(CREATE_POINT_TRANSACTION_OF_LOADING);
+  const [veiwPrice, setViewPrice] = useState(0);
+  console.log(formState.errors.chargePoint?.message);
+
+  const onClickPrice = (e: MouseEvent<HTMLButtonElement>) => {
+    setValue(
+      "chargePoint",
+      Number(getValues("chargePoint")) + Number(e.currentTarget.value)
+    );
+    setViewPrice(Number(getValues("chargePoint")));
+  };
+
+  const onChagePrice = (e: ChangeEvent<HTMLInputElement>) => {
+    setViewPrice(Number(e.currentTarget.value));
+  };
 
   const onSubmitCharge = (data: any) => {
     const IMP = window.IMP;
@@ -110,6 +128,12 @@ export default function ChargeContainer() {
         register={register}
         handleSubmit={handleSubmit}
         onSubmitCharge={onSubmitCharge}
+        getValues={getValues}
+        setValue={setValue}
+        onClickPrice={onClickPrice}
+        onChagePrice={onChagePrice}
+        veiwPrice={veiwPrice}
+        formState={formState}
       />
     </>
   );

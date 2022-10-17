@@ -1,9 +1,19 @@
 import * as S from "./charge.styles";
 import Head from "next/head";
 import { IChargePresenterProps } from "./charge.types";
+import { PriceFormatter } from "../../../../commons/utils/utils";
 
 export default function ChargePresenter(P: IChargePresenterProps) {
-  const { register, handleSubmit, onSubmitCharge } = P;
+  const {
+    register,
+    handleSubmit,
+    onSubmitCharge,
+    onClickPrice,
+    onChagePrice,
+    veiwPrice,
+    formState,
+  } = P;
+
   return (
     <>
       <Head>
@@ -20,47 +30,33 @@ export default function ChargePresenter(P: IChargePresenterProps) {
         <S.Title>포인트 충전</S.Title>
       </S.TitleWrapper>
       <S.BodyWrapper>
-        <span>충전 금액을 선택하세요.</span>
+        <span>충전 금액을 입력해 주세요.(최대 500만 원)</span>
         <S.ChargeForm onSubmit={handleSubmit(onSubmitCharge)}>
-          <S.LabelWrapper>
-            <S.ChargeLabel>
-              <input type="radio" value={100} {...register("chargePoint")} />{" "}
-              <span>₩ 100</span>
-            </S.ChargeLabel>
-            <S.ChargeLabel>
-              <input type="radio" value={1000} {...register("chargePoint")} />{" "}
-              <span>₩ 1,000</span>
-            </S.ChargeLabel>
-            <S.ChargeLabel>
-              <input type="radio" value={5000} {...register("chargePoint")} />{" "}
-              <span>₩ 5,000</span>
-            </S.ChargeLabel>
-            <S.ChargeLabel>
-              <input type="radio" value={10000} {...register("chargePoint")} />{" "}
-              <span>₩ 10,000</span>
-            </S.ChargeLabel>
-            <S.ChargeLabel>
-              <input type="radio" value={100000} {...register("chargePoint")} />{" "}
-              <span>₩ 100,000</span>
-            </S.ChargeLabel>
-            <S.ChargeLabel>
-              <input
-                type="radio"
-                value={1000000}
-                {...register("chargePoint")}
-              />{" "}
-              <span>₩ 1,000,000</span>
-            </S.ChargeLabel>
-            <S.ChargeLabel>
-              <input
-                type="radio"
-                value={5000000}
-                {...register("chargePoint")}
-              />{" "}
-              <span>₩ 5,000,000</span>
-            </S.ChargeLabel>
-          </S.LabelWrapper>
-          <S.ChargeButton>충전하기</S.ChargeButton>
+          <S.Input
+            type="text"
+            {...register("chargePoint")}
+            onChange={onChagePrice}
+            error={formState.errors.chargePoint?.message}
+          />
+          <div>{PriceFormatter(veiwPrice)}</div>
+          <S.PriceBtnWrapper>
+            <S.PriceBtn type="button" onClick={onClickPrice} value={1000}>
+              +1천
+            </S.PriceBtn>
+            <S.PriceBtn type="button" onClick={onClickPrice} value={10000}>
+              +1만
+            </S.PriceBtn>
+            <S.PriceBtn type="button" onClick={onClickPrice} value={20000}>
+              +2만
+            </S.PriceBtn>
+            <S.PriceBtn type="button" onClick={onClickPrice} value={100000}>
+              +10만
+            </S.PriceBtn>
+            <S.PriceBtn type="button" onClick={onClickPrice} value={1000000}>
+              +100만
+            </S.PriceBtn>
+          </S.PriceBtnWrapper>
+          <S.ChargeButton type="submit">충전하기</S.ChargeButton>
         </S.ChargeForm>
       </S.BodyWrapper>
     </>
