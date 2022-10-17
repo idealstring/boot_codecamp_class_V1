@@ -84,6 +84,8 @@ export const Item = styled.div`
 `;
 
 export const ItemLeft = styled.div`
+  width: 100%;
+
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -95,6 +97,7 @@ export const ItemRight = styled.div`
   width: 20%;
   max-width: 200px;
   height: 80%;
+  color: ${StyleSet.colors.gray};
 
   border-left: 1px solid ${StyleSet.colors.lightGray02};
 `;
@@ -103,10 +106,12 @@ export const Image = styled.img`
   margin-bottom: 10px;
   width: 180px;
   height: 180px;
+  aspect-ratio: 1/1;
 `;
 
 export const ItemLeftMiddle = styled.div`
   margin: 10px 20px;
+  width: 100%;
 
   display: flex;
   flex-direction: column;
@@ -123,6 +128,28 @@ export const Price = styled.span`
   margin-bottom: 5px;
   font-weight: 600;
   font-size: ${StyleSet.fontSize.h2};
+`;
+
+export const ItemBottomWrapper = styled.div`
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const BasketNumber = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+export const PickedCount = styled.span`
+  margin: 0 0 0 5px;
+  font-weight: 200;
+
+  color: ${StyleSet.colors.black};
 `;
 
 export const Subtext = styled.span`

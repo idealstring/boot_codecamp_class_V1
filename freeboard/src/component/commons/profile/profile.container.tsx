@@ -4,8 +4,9 @@ import { useMutation, useQuery } from "@apollo/client";
 import { IQuery } from "../../../commons/types/generated/types";
 import { FETCH_USER_LOGGED_IN, LOGOUT_USER } from "./profile.quries";
 import useAuth from "../hooks/useAuth";
+import { memo } from "react";
 
-export default function ProfileContainer() {
+function ProfileContainer() {
   useAuth();
   const { data: fetchLoggedData } =
     useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
@@ -26,3 +27,5 @@ export default function ProfileContainer() {
     </>
   );
 }
+
+export default memo(ProfileContainer);
