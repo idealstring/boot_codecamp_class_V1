@@ -5,40 +5,12 @@ export type ISalesStylesProps = {
   isNormalScreen?: boolean;
 };
 
-export const Container = styled.div`
-  margin: 0 auto;
-  padding: 0 30px;
+export const ContentsWrapper = styled.section`
   width: 100%;
-  max-width: 1060px;
-  min-width: 500px;
-
-  display: flex;
-  flex-direction: ${(props: ISalesStylesProps) =>
-    props.isNormalScreen ? "row" : "column"};
-  justify-content: space-between;
-  align-items: flex-start;
 `;
-
-export const contentsWrapper = styled.section`
-  padding: ${(props: ISalesStylesProps) =>
-    props.isNormalScreen ? "30px" : "30px 0"};
-  width: ${(props: ISalesStylesProps) =>
-    props.isNormalScreen ? "80%" : "100%"};
-  max-width: 1000px;
-  min-width: 200px;
-`;
-
 export const PageTitle = styled.h1`
   font-size: ${StyleSet.fontSize.h3};
   font-weight: 500;
-`;
-
-export const contentsButton = styled.button`
-  margin: 0 10px 0 0;
-  border: none;
-  background-color: transparent;
-
-  cursor: pointer;
 `;
 
 export const BoardWrapper = styled.div`
@@ -58,7 +30,7 @@ export const BoardTopWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  algin-items: center;
+  align-items: center;
 `;
 
 export const BoardThNumber = styled.span`
@@ -103,7 +75,7 @@ export const BoardBodyWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  algin-items: center;
+  align-items: center;
 `;
 
 export const ContentNumber = styled.span`

@@ -1,18 +1,16 @@
-import {
-  dateFormatter,
-  PointFormatter,
-  PriceFormatter,
-} from "../../../../commons/utils/utils";
+import { dateFormatter, PointFormatter } from "../../../../commons/utils/utils";
 import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
+import PageNation02 from "../../../commons/pagination/02/pagination02.container";
 import * as S from "./myPage.styles";
 import { IMyPagePresenterProps } from "./myPage.types";
 
 function MyPagePresenter(P: IMyPagePresenterProps) {
-  const { fetchPointTransactions, fetchUserLoggedIn } = P;
+  const { fetchPointTransactions, fetchUserLoggedIn, allCount, setPageCount } =
+    P;
   const { onClickMoveToPage } = useMoveToPage();
 
   return (
-    <div>
+    <S.Container>
       <S.PointWrapper>
         <S.PointInnerWrapper>
           <S.PointTitle>사용 가능 포인트</S.PointTitle>
@@ -49,7 +47,8 @@ function MyPagePresenter(P: IMyPagePresenterProps) {
           <S.Balance>{PointFormatter(el.balance)} P</S.Balance>
         </S.HistoryWrapper>
       ))}
-    </div>
+      <PageNation02 allCount={allCount} setPageCount={setPageCount} />
+    </S.Container>
   );
 }
 

@@ -7,6 +7,7 @@ import {
 } from "../../../../commons/types/generated/types";
 import { dateFormatter, PriceFormatter } from "../../../../commons/utils/utils";
 import PageNation02 from "../../../commons/pagination/02/pagination02.container";
+import MyPageMarketBtnWrapper from "../../../commons/mypageMarketBtn";
 
 const FETCH_USEDITEMS_ISOLD = gql`
   query fetchUseditemsISold($search: String, $page: Int) {
@@ -23,19 +24,26 @@ const FETCH_USEDITEMS_ISOLD = gql`
   }
 `;
 
+const FETCH_USEDITEMS_COUNT_ISOLD = gql`
+  query fetchUseditemsCountISold {
+    fetchUseditemsCountISold
+  }
+`;
+
 export default function SalesContainer() {
-  const { data } = useQuery<
+  const { data: itemsData } = useQuery<
     Pick<IQuery, "fetchUseditemsISold">,
     IQueryFetchUseditemsISoldArgs
   >(FETCH_USEDITEMS_ISOLD, { variables: { search: "", page: 1 } });
+  const { data: countData } = useQuery<
+    Pick<IQuery, "fetchUseditemsCountISold">
+  >(FETCH_USEDITEMS_COUNT_ISOLD);
+  console.log(countData?.fetchUseditemsCountISold);
 
   return (
-    <div>
-      <S.PageTitle>판매 내역</S.PageTitle>
-      <div>
-        <S.contentsButton>장바구니</S.contentsButton>
-        <S.contentsButton>판매내역</S.contentsButton>
-      </div>
+    <S.ContentsWrapper>
+      <S.PageTitle>판매내역</S.PageTitle>
+      <MyPageMarketBtnWrapper />
       <S.BoardWrapper>
         <S.BoardTopWrapper>
           <S.BoardThNumber>상품ID</S.BoardThNumber>
@@ -44,11 +52,11 @@ export default function SalesContainer() {
           <S.BoardThPrice>가격</S.BoardThPrice>
           <S.BoardThDate>날짜</S.BoardThDate>
         </S.BoardTopWrapper>
-        {data?.fetchUseditemsISold.map((soldItem, i) => (
+        {itemsData?.fetchUseditemsISold.map((soldItem, i) => (
           <Link href={`/market/${soldItem._id}`}>
             <a>
               <S.BoardBodyWrapper key={i}>
-                <S.ContentNumber>{soldItem._id}</S.ContentNumber>
+                <S.ContentNumber>{soldItem._id.slice(-4)}</S.ContentNumber>
                 <S.ContentTitle>{soldItem.name}</S.ContentTitle>
                 <S.ContentSell>
                   {soldItem.soldAt ? "판매완료" : null}
@@ -63,8 +71,8 @@ export default function SalesContainer() {
             </a>
           </Link>
         ))}
-        <PageNation02 />
+        <PageNation02 allCount={countData?.fetchUseditemsCountISold} />
       </S.BoardWrapper>
-    </div>
+    </S.ContentsWrapper>
   );
 }

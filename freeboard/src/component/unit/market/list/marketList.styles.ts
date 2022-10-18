@@ -28,7 +28,7 @@ export const Wrapper02 = styled.div`
   display: block;
 
   position: absolute;
-  top: 100px;
+  top: 50px;
   right: 0;
 `;
 
@@ -49,7 +49,7 @@ export const SideSticky = styled.div`
   padding: 5px 20px;
 
   position: sticky;
-  top: 150px;
+  top: 10%;
   transition: top 0.1s ease 0s;
 
   display: flex;
@@ -156,6 +156,14 @@ export const Subtext = styled.span`
   margin-bottom: 5px;
   color: ${StyleSet.colors.gray};
   font-weight: 200;
+  display: block;
+`;
+
+export const RecentViewText = styled.span`
+  margin-bottom: 5px;
+  color: ${StyleSet.colors.gray};
+  font-weight: 200;
+  letter-spacing: -1px;
   display: block;
 `;
 

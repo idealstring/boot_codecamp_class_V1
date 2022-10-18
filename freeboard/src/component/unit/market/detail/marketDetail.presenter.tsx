@@ -1,8 +1,6 @@
 import { useContext } from "react";
 import { useRouter } from "next/router";
 import * as S from "./marketDetail.styles";
-import { Viewer } from "@toast-ui/react-editor";
-import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 import { WindowSizeContext } from "../../../commons/responsive";
 import { PriceFormatter } from "../../../../commons/utils/utils";
 import { IMarketDetailPresenterProps } from "./marketDetail.types";
@@ -11,9 +9,9 @@ import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import MarketProductPurchase from "../../../commons/modal/marketPurchaseBtn";
 import dynamic from "next/dynamic";
 
-// const Viewer = dynamic(() => import("@toast-ui/react-editor"), {
-//   ssr: false,
-// });
+const ViewerPage = dynamic(() => import("./Viewer"), {
+  ssr: false,
+});
 
 export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
   const { data, fetchUserData, onClickBasket, IPicked } = P;
@@ -67,6 +65,10 @@ export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
                   {data?.fetchUseditem.soldAt ? "판매완료" : "판매중"}
                 </S.DealInfo>
               </S.DealInfoWrapper>
+              <S.DealInfoWrapper>
+                <S.DealInfoTitle>관심</S.DealInfoTitle>
+                <S.DealInfo>{data?.fetchUseditem.pickedCount}</S.DealInfo>
+              </S.DealInfoWrapper>
             </div>
             <S.InfoBtnRrapper>
               <S.BasketBtn onClick={onClickBasket} IPicked={IPicked}>
@@ -98,15 +100,10 @@ export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
           </div> */}
           <S.MiddleContents>
             {data?.fetchUseditem.contents ? (
-              <Viewer initialValue={data?.fetchUseditem.contents} />
+              <ViewerPage initialValue={data?.fetchUseditem.contents} />
             ) : (
               <div>loadding...</div>
             )}
-            {/* <div
-            dangerouslySetInnerHTML={{
-              __html: String(data?.fetchUseditem.contents),
-            }}
-          /> */}
           </S.MiddleContents>
         </S.BodyWrapper>
         <S.BodyWrapper>

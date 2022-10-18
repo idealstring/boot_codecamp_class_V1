@@ -58,7 +58,7 @@ export default function MarketListPresenter(P: IMarketListPresenterProps) {
         <S.Wrapper02>
           <S.SideSticky>
             <S.Wrapper03>
-              <S.Subtext>최근 본 상품</S.Subtext>
+              <S.RecentViewText>최근 본 상품</S.RecentViewText>
               {typeof window !== "undefined" &&
                 recentItems?.map((el: any, i: number) => (
                   <Link href={`/market/${el.id}`} key={i}>

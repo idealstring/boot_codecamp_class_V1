@@ -2,6 +2,12 @@ import styled from "@emotion/styled";
 import { StyleSet } from "../../../../commons/style/styleSet";
 import { IMyPageStylesProps } from "./myPage.types";
 
+export const Container = styled.section`
+  min-width: 500px;
+  margin: 16px 0;
+  text-align: center;
+`;
+
 export const PointWrapper = styled.div`
   padding: 0 0 30px 0;
   width: 100%;

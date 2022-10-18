@@ -7,6 +7,9 @@ import {
 } from "../../../../commons/types/generated/types";
 import { dateFormatter, PriceFormatter } from "../../../../commons/utils/utils";
 import PageNation02 from "../../../commons/pagination/02/pagination02.container";
+import MyPageMarketBtnWrapper from "../../../commons/mypageMarketBtn";
+import { useState } from "react";
+import { slice } from "lodash";
 
 const FETCH_USEDITEMS_IPICKED = gql`
   query fetchUseditemsIPicked($search: String, $page: Int) {
@@ -23,37 +26,42 @@ const FETCH_USEDITEMS_IPICKED = gql`
   }
 `;
 
+const FETCH_USEDITEMS_COUNT_IPICKED = gql`
+  query fetchUseditemsCountIPicked {
+    fetchUseditemsCountIPicked
+  }
+`;
+
 export default function BasketContainer() {
-  const { data } = useQuery<
+  const [pageCount, setPageCount] = useState(0);
+  const { data: pickedData } = useQuery<
     Pick<IQuery, "fetchUseditemsIPicked">,
     IQueryFetchUseditemsIPickedArgs
-  >(FETCH_USEDITEMS_IPICKED, { variables: { search: "", page: 1 } });
-  console.log(data);
+  >(FETCH_USEDITEMS_IPICKED, { variables: { search: "", page: pageCount } });
+  const { data: countData } = useQuery<
+    Pick<IQuery, "fetchUseditemsCountIPicked">
+  >(FETCH_USEDITEMS_COUNT_IPICKED);
+  console.log(countData?.fetchUseditemsCountIPicked);
 
   return (
-    <div>
+    <S.ContentsWrapper>
       <S.PageTitle>장바구니</S.PageTitle>
-      <div>
-        <S.contentsButton>장바구니</S.contentsButton>
-        <S.contentsButton>판매내역</S.contentsButton>
-      </div>
+      <MyPageMarketBtnWrapper />
       <S.BoardWrapper>
         <S.BoardTopWrapper>
           <S.BoardThNumber>상품ID</S.BoardThNumber>
           <S.BoardThTitle>상품명</S.BoardThTitle>
-          <S.BoardThSell>판매여부</S.BoardThSell>
+          <S.BoardThSell>품절여부</S.BoardThSell>
           <S.BoardThPrice>가격</S.BoardThPrice>
           <S.BoardThDate>날짜</S.BoardThDate>
         </S.BoardTopWrapper>
-        {data?.fetchUseditemsIPicked.map((pickItem, i) => (
+        {pickedData?.fetchUseditemsIPicked.map((pickItem, i) => (
           <Link href={`/market/${pickItem._id}`}>
             <a>
               <S.BoardBodyWrapper key={i}>
-                <S.ContentNumber>{pickItem._id}</S.ContentNumber>
+                <S.ContentNumber>{pickItem._id.slice(-4)}</S.ContentNumber>
                 <S.ContentTitle>{pickItem.name}</S.ContentTitle>
-                <S.ContentSell>
-                  {pickItem.soldAt ? "판매완료" : null}
-                </S.ContentSell>
+                <S.ContentSell>{pickItem.soldAt ? "품절" : null}</S.ContentSell>
                 <S.ContentPrice>
                   {PriceFormatter(pickItem.price)}
                 </S.ContentPrice>
@@ -64,8 +72,11 @@ export default function BasketContainer() {
             </a>
           </Link>
         ))}
-        <PageNation02 />
+        <PageNation02
+          allCount={countData?.fetchUseditemsCountIPicked}
+          setPageCount={setPageCount}
+        />
       </S.BoardWrapper>
-    </div>
+    </S.ContentsWrapper>
   );
 }

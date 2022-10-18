@@ -1,19 +1,26 @@
 import { Pagination } from "antd";
-import React from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 
-const PageNation02: React.FC = (P) => {
+type IPageNation02Props = {
+  allCount: number | undefined;
+  setPageCount: Dispatch<SetStateAction<number>> | undefined;
+};
+
+const PageNation02 = (P: IPageNation02Props) => {
+  const { allCount, setPageCount } = P;
+  const [currentPage, setCurrentPage] = useState(1);
   const onChangePage = (page: number, pageSize: number) => {
-    // console.log(page, pageSize);
+    setCurrentPage(page);
+    if (setPageCount) setPageCount(page);
   };
 
-  const {} = P;
   return (
     <>
       <Pagination
         size="small"
         defaultCurrent={1}
-        current={2}
-        total={30}
+        current={currentPage}
+        total={allCount}
         style={{ margin: "24px 0" }}
         onChange={onChangePage}
       />

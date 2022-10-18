@@ -1,4 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
+import { useState } from "react";
 import {
   IQuery,
   IQueryFetchPointTransactionsArgs,
@@ -38,18 +39,53 @@ const FETCH_POINT_TRANSACTIONS = gql`
   }
 `;
 
+const FETCH_POINT_TRANSACTIONS_LOADING_COUNT = gql`
+  query fetchPointTransactionsCountOfLoading {
+    fetchPointTransactionsCountOfLoading
+  }
+`;
+const FETCH_POINT_TRANSACTIONS_BUYING_COUNT = gql`
+  query fetchPointTransactionsCountOfBuying {
+    fetchPointTransactionsCountOfBuying
+  }
+`;
+const FETCH_POINT_TRANSACTIONS_SELLING_COUNT = gql`
+  query fetchPointTransactionsCountOfSelling {
+    fetchPointTransactionsCountOfSelling
+  }
+`;
+
 function MyPageContainer() {
+  const [pageCount, setPageCount] = useState(1);
   const { data: fetchPointTransactions } = useQuery<
     Pick<IQuery, "fetchPointTransactions">,
     IQueryFetchPointTransactionsArgs
-  >(FETCH_POINT_TRANSACTIONS, { variables: { search: "", page: 1 } });
+  >(FETCH_POINT_TRANSACTIONS, { variables: { search: "", page: pageCount } });
+  const { data: PointLoadingCount } = useQuery<
+    Pick<IQuery, "fetchPointTransactionsCountOfLoading">
+  >(FETCH_POINT_TRANSACTIONS_LOADING_COUNT);
+  const { data: PointBuyingCount } = useQuery<
+    Pick<IQuery, "fetchPointTransactionsCountOfBuying">
+  >(FETCH_POINT_TRANSACTIONS_BUYING_COUNT);
+  const { data: PointSellingCount } = useQuery<
+    Pick<IQuery, "fetchPointTransactionsCountOfSelling">
+  >(FETCH_POINT_TRANSACTIONS_SELLING_COUNT);
   const { data: fetchUserLoggedIn } =
     useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
+
+  if (!PointLoadingCount || !PointBuyingCount || !PointSellingCount) return;
+  const allCount =
+    PointLoadingCount?.fetchPointTransactionsCountOfLoading +
+    PointBuyingCount?.fetchPointTransactionsCountOfBuying +
+    PointSellingCount?.fetchPointTransactionsCountOfSelling;
+
   return (
     <>
       <MyPagePresenter
         fetchUserLoggedIn={fetchUserLoggedIn}
         fetchPointTransactions={fetchPointTransactions}
+        allCount={allCount}
+        setPageCount={setPageCount}
       />
     </>
   );

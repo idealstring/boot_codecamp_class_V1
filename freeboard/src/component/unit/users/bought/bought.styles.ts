@@ -34,9 +34,10 @@ export const BoardTopWrapper = styled.div`
   align-items: center;
 `;
 
-export const BoardThNumber = styled.span`
+export const BoardThDate = styled.span`
   padding: 0 5px;
-  width: 70px;
+  width: 120px;
+  min-width: 90px;
   line-height: 40px;
   text-align: center;
 `;
@@ -46,20 +47,14 @@ export const BoardThTitle = styled.span`
   line-height: 40px;
   text-align: center;
 `;
-export const BoardThSell = styled.span`
+export const BoardThHistory = styled.span`
   padding: 0 5px;
   width: 110px;
   line-height: 40px;
   text-align: center;
 `;
-export const BoardThPrice = styled.span`
-  padding: 0 5px;
-  width: 100px;
-  line-height: 40px;
-  text-align: center;
-`;
 
-export const BoardThDate = styled.span`
+export const BoardThSeller = styled.span`
   padding: 0 5px;
   width: 120px;
   min-width: 90px;
@@ -79,9 +74,10 @@ export const BoardBodyWrapper = styled.div`
   align-items: center;
 `;
 
-export const ContentNumber = styled.span`
+export const ContentDate = styled.span`
   padding: 0 5px;
-  width: 70px;
+  width: 120px;
+  min-width: 100px;
   line-height: 50px;
   font-weight: 300;
   text-align: center;
@@ -102,7 +98,7 @@ export const ContentTitle = styled.span`
   white-space: nowrap;
 `;
 
-export const ContentSell = styled.span`
+export const ContentHistory = styled.span`
   padding: 0 5px;
   width: 110px;
   line-height: 50px;
@@ -110,14 +106,7 @@ export const ContentSell = styled.span`
   color: ${StyleSet.colors.point03};
 `;
 
-export const ContentPrice = styled.span`
-  padding: 0 5px;
-  width: 100px;
-  line-height: 50px;
-  text-align: center;
-`;
-
-export const ContentDate = styled.span`
+export const ContentSeller = styled.span`
   padding: 0 5px;
   width: 120px;
   min-width: 100px;

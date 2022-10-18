@@ -39,6 +39,7 @@ export default function MarketDetailContainer() {
 
   const [toggleUseditemPick] = useMutation(TOGGLE_USEDITEM_PICK);
   const imageUrl = data?.fetchUseditem?.images?.[0];
+
   const IPicked = IPickItemData?.fetchUseditemsIPicked.filter((el) => {
     return el._id === router.query.detail;
   });
