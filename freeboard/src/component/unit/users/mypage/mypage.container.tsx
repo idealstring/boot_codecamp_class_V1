@@ -73,11 +73,13 @@ function MyPageContainer() {
   const { data: fetchUserLoggedIn } =
     useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
 
-  if (!PointLoadingCount || !PointBuyingCount || !PointSellingCount) return;
-  const allCount =
-    PointLoadingCount?.fetchPointTransactionsCountOfLoading +
-    PointBuyingCount?.fetchPointTransactionsCountOfBuying +
-    PointSellingCount?.fetchPointTransactionsCountOfSelling;
+  let allCount;
+  if (PointLoadingCount && PointBuyingCount && PointSellingCount) {
+    allCount =
+      PointLoadingCount?.fetchPointTransactionsCountOfLoading +
+      PointBuyingCount?.fetchPointTransactionsCountOfBuying +
+      PointSellingCount?.fetchPointTransactionsCountOfSelling;
+  }
 
   return (
     <>

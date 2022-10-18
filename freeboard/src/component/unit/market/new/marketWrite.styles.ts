@@ -40,15 +40,13 @@ export const Wrapper03 = styled.div`
 `;
 
 export const Wrapper04 = styled.div`
-  //   margin-bottom: 28px;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 `;
 
 export const Wrapper05 = styled.div`
-  margin-bottom: 28px;
+  margin: 50px 0 28px 0;
 
   display: flex;
   flex-direction: column;
@@ -64,7 +62,7 @@ export const Wrapper06 = styled.div`
   flex-direction: ${(props: IMarketWriteStylesProps) =>
     props.isNormalScreen ? "row" : "column"};
   justify-content: space-between;
-  algin-items: flex-start;
+  align-items: flex-start;
 `;
 
 export const Wrapper07 = styled.div`
@@ -117,10 +115,6 @@ export const Label02 = styled.label`
   display: block;
 `;
 
-export const Label03 = styled.label`
-  margin: 0 20px 0 4px;
-`;
-
 export const KakaoMap = styled.div`
   width: 100%;
   min-width: 384px;
@@ -131,13 +125,11 @@ export const CreateBtn = styled.button`
   padding: 0 16px;
   width: 179px;
   height: 52px;
-  border-radius: 52px;
+  border-radius: 4px;
   border: none;
   font-weight: 500;
-  color: ${(props: IMarketWriteStylesProps) =>
-    props.isActive ? "#fff" : "#000"};
-  background-color: ${(props: IMarketWriteStylesProps) =>
-    props.isActive ? `${StyleSet.colors.point01}` : "default"};
+  color: ${StyleSet.colors.white};
+  background-color: ${StyleSet.colors.point01};
   cursor: pointer;
 `;
 
@@ -149,4 +141,7 @@ export const CancelBtn = styled.button`
   color: #bdbdbd;
   background-color: transparent;
   cursor: pointer;
+  &:hover {
+    color: ${StyleSet.colors.gray};
+  }
 `;

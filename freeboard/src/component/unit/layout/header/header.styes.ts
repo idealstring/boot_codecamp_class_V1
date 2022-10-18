@@ -47,7 +47,7 @@ export const LogoBtn = styled.button`
 export const LoginWrapper = styled.div``;
 
 export const NoMemberWrapper = styled.div`
-  width: 120px;
+  width: 130px;
 
   display: flex;
   flex-direction: row;

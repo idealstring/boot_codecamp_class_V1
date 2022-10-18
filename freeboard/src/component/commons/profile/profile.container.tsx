@@ -28,4 +28,4 @@ function ProfileContainer() {
   );
 }
 
-export default memo(ProfileContainer);
+export default ProfileContainer;

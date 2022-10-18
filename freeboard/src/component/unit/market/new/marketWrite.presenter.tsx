@@ -1,16 +1,17 @@
-import { useContext, useEffect } from "react";
+import dynamic from "next/dynamic";
+import { useContext } from "react";
+import * as S from "./marketWrite.styles";
 import Input02 from "../../../commons/inputs/02/input02";
 import Input03 from "../../../commons/inputs/03/input03";
 import Input04 from "../../../commons/inputs/04/input04";
 import Input05 from "../../../commons/inputs/05/input05";
+import { IMarketPresenterProps } from "./marketWrite.types";
 import { WindowSizeContext } from "../../../commons/responsive";
 import Uploads02 from "../../../commons/uploads/02/uploads02.container";
-import * as S from "./marketWrite.styles";
-import { IMarketPresenterProps } from "./marketWrite.types";
-import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import ZipcodeModalMarket from "../../../commons/modal/zipcodeModal_market";
-import { useRouter } from "next/router";
-import "@toast-ui/editor/dist/i18n/ko-kr";
+const EditorPage = dynamic(() => import("./editor"), {
+  ssr: false,
+});
 
 export default function MarketPresenter(P: IMarketPresenterProps) {
   const {
@@ -26,11 +27,9 @@ export default function MarketPresenter(P: IMarketPresenterProps) {
     onChangeContents,
     isEdit,
     existingData,
-    Editor,
     contentsRef,
   } = P;
   const { isNormalScreen } = useContext(WindowSizeContext);
-  const { onClickMoveToPage } = useMoveToPage();
 
   return (
     <>
@@ -64,29 +63,18 @@ export default function MarketPresenter(P: IMarketPresenterProps) {
           </S.Wrapper01>
           <S.Wrapper01>
             {existingData?.fetchUseditem.contents ? (
-              <Editor
-                ref={contentsRef}
-                height="auto"
-                max-height="1000px"
-                initialEditType="wysiwyg"
-                placeholder="내용을 입력해 주세요."
-                hideModeSwitch="true"
-                onChange={onChangeContents}
-                language="ko-KR"
+              <EditorPage
+                contentsRef={contentsRef}
+                onChangeContents={onChangeContents}
                 initialValue={existingData?.fetchUseditem.contents}
               />
             ) : isEdit ? (
               <div>loadding...</div>
             ) : (
-              <Editor
-                ref={contentsRef}
-                height="auto"
-                max-height="1000px"
-                initialEditType="wysiwyg"
-                placeholder="내용을 입력해 주세요."
-                hideModeSwitch="true"
-                onChange={onChangeContents}
-                language="ko-KR"
+              <EditorPage
+                contentsRef={contentsRef}
+                onChangeContents={onChangeContents}
+                initialValue={existingData?.fetchUseditem.contents}
               />
             )}
           </S.Wrapper01>
@@ -169,30 +157,11 @@ export default function MarketPresenter(P: IMarketPresenterProps) {
               ))}
             </S.Wrapper07>
           </S.Wrapper01>
-          <S.Wrapper01>
-            <S.Label02>메인사진 설정</S.Label02>
-            <div>
-              <input
-                type="radio"
-                id="img1"
-                value="0"
-                // {...register("pickedCount")}
-              />
-              <S.Label03 htmlFor="img1">사진1</S.Label03>
-              <input
-                type="radio"
-                id="img2"
-                value="1"
-                // {...register("pickedCount")}
-              />
-              <S.Label03 htmlFor="img2">사진2</S.Label03>
-            </div>
-          </S.Wrapper01>
           <S.Wrapper05>
             {isEdit ? (
-              <S.CreateBtn>수정하기</S.CreateBtn>
+              <S.CreateBtn>수정</S.CreateBtn>
             ) : (
-              <S.CreateBtn>등록하기</S.CreateBtn>
+              <S.CreateBtn>등록</S.CreateBtn>
             )}
             <S.CancelBtn type="button" onClick={onClickCancel}>
               취소

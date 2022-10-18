@@ -63,15 +63,15 @@ export default function ReplayWriteContainer(P: IReplayWriteContainerProps) {
             ...data,
           },
         },
-        update(cache) {
-          cache.modify({
-            fields: {
-              fetchUseditemQuestionAnswers: (prev) => {
-                return [...prev];
-              },
-            },
-          });
-        },
+        // update(cache) {
+        //   cache.modify({
+        //     fields: {
+        //       fetchUseditemQuestionAnswers: (prev) => {
+        //         return [...prev];
+        //       },
+        //     },
+        //   });
+        // },
       });
       if (onClickIsEditToggle) onClickIsEditToggle();
     } catch (error) {

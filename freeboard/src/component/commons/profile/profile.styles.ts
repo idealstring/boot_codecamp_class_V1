@@ -100,7 +100,7 @@ export const BottomButton = styled.button`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  algin-items: center;
+  /* align-items: center; */
   text-align: center;
 
   background-color: transparent;

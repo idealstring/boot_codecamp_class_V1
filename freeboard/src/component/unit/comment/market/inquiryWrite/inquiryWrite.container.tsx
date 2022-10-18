@@ -79,15 +79,15 @@ export default function MarketInquiryWriteContainer(
       try {
         await updateQuestion({
           variables: myVariables,
-          update(cache) {
-            cache.modify({
-              fields: {
-                fetchUseditemQuestions: (prev) => {
-                  return [...prev];
-                },
-              },
-            });
-          },
+          // update(cache) {
+          //   cache.modify({
+          //     fields: {
+          //       fetchUseditemQuestions: (prev) => {
+          //         return [...prev];
+          //       },
+          //     },
+          //   });
+          // },
         });
         onClickIsEditToggle();
       } catch (error) {

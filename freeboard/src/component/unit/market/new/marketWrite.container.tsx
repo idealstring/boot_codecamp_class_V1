@@ -14,8 +14,6 @@ import { useForm, useWatch } from "react-hook-form";
 import { useEffect, useRef, useState } from "react";
 import useAuth from "../../../commons/hooks/useAuth";
 import { IMarketContainerProps } from "./marketWrite.types";
-import "@toast-ui/editor/dist/toastui-editor.css";
-import { Editor } from "@toast-ui/react-editor";
 
 declare const window: Window &
   typeof globalThis & {
@@ -74,15 +72,33 @@ export default function MarketContainer(P: IMarketContainerProps) {
 
   useEffect(() => {
     if (!loading) {
-      if (!existingData) return;
-      delete existingData?.fetchUseditem?.useditemAddress?.__typename;
-      delete existingData?.fetchUseditem?.useditemAddress?._id;
+      if (!existingData?.fetchUseditem) return;
+
       setValue("name", existingData?.fetchUseditem.name);
       setValue("remarks", existingData?.fetchUseditem.remarks);
       setValue("contents", existingData?.fetchUseditem.contents);
       setValue("price", existingData?.fetchUseditem.price);
       setValue("tags", existingData?.fetchUseditem.tags);
-      setValue("useditemAddress", existingData?.fetchUseditem.useditemAddress);
+      setValue(
+        "useditemAddress.address",
+        existingData?.fetchUseditem.useditemAddress?.address
+      );
+      setValue(
+        "useditemAddress.addressDetail",
+        existingData?.fetchUseditem.useditemAddress?.addressDetail
+      );
+      setValue(
+        "useditemAddress.lat",
+        existingData?.fetchUseditem.useditemAddress?.lat
+      );
+      setValue(
+        "useditemAddress.lng",
+        existingData?.fetchUseditem.useditemAddress?.lng
+      );
+      setValue(
+        "useditemAddress.zipcode",
+        existingData?.fetchUseditem.useditemAddress?.zipcode
+      );
 
       existingData?.fetchUseditem.images
         ? setFileUrls(existingData?.fetchUseditem.images)
@@ -205,7 +221,6 @@ export default function MarketContainer(P: IMarketContainerProps) {
         onChangeFileUrls={onChangeFileUrls}
         isEdit={isEdit}
         existingData={existingData}
-        Editor={Editor}
         onChangeContents={onChangeContents}
         contentsRef={contentsRef}
       />

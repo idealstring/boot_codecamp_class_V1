@@ -47,7 +47,6 @@ export type IMarketPresenterProps = {
   onChangeContents: (text: any) => void;
   isEdit: boolean;
   existingData?: Pick<IQuery, "fetchUseditem"> | undefined;
-  Editor: any;
   contentsRef: MutableRefObject<undefined>;
 };
 
