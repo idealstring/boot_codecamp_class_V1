@@ -3,11 +3,16 @@ import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { useMutation } from "@apollo/client";
 import MarketPresenter from "./marketWrite.presenter";
-import { CREATE_USED_ITEM, UPDATE_USED_ITEM } from "./marketWrite.queries";
+import {
+  CREATE_USED_ITEM,
+  UPDATE_USED_ITEM,
+  UPLOAD_FILE,
+} from "./marketWrite.queries";
 import {
   IMutation,
   IMutationCreateUseditemArgs,
   IMutationUpdateUseditemArgs,
+  IMutationUploadFileArgs,
 } from "../../../../commons/types/generated/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, useWatch } from "react-hook-form";
@@ -23,7 +28,12 @@ declare const window: Window &
 export default function MarketContainer(P: IMarketContainerProps) {
   useAuth();
   const { isEdit, existingData, loading } = P;
-  const [fileUrls, setFileUrls] = useState(["", ""]);
+  // const [fileUrls, setFileUrls] = useState(["", ""]);
+
+  const [previewUrls, setPreviewUrls] = useState<string[]>(["", "", ""]);
+  const [uploadFiles, setUploadFiles] = useState<File[]>(["", "", ""]);
+  const [fetchUrls, setFetchUrls] = useState<string[]>([]);
+
   const contentsRef = useRef();
   const router = useRouter();
   const schema = yup.object({
@@ -69,6 +79,10 @@ export default function MarketContainer(P: IMarketContainerProps) {
     Pick<IMutation, "updateUseditem">,
     IMutationUpdateUseditemArgs
   >(UPDATE_USED_ITEM);
+  const [uploadFile] = useMutation<
+    Pick<IMutation, "uploadFile">,
+    IMutationUploadFileArgs
+  >(UPLOAD_FILE);
 
   useEffect(() => {
     if (!loading) {
@@ -101,8 +115,8 @@ export default function MarketContainer(P: IMarketContainerProps) {
       );
 
       existingData?.fetchUseditem.images
-        ? setFileUrls(existingData?.fetchUseditem.images)
-        : ["", ""];
+        ? setFetchUrls(existingData?.fetchUseditem.images)
+        : [];
     }
   }, [loading]);
 
@@ -156,10 +170,20 @@ export default function MarketContainer(P: IMarketContainerProps) {
     };
   }, [address]);
 
-  const onChangeFileUrls = async (fileUrl: string, index: number) => {
-    const newFileUrls = [...fileUrls];
-    newFileUrls[index] = fileUrl;
-    setFileUrls(newFileUrls);
+  // const onChangeFileUrls = async (fileUrl: string, index: number) => {
+  //   const newFileUrls = [...fileUrls];
+  //   newFileUrls[index] = fileUrl;
+  //   setFileUrls(newFileUrls);
+  // };
+
+  const onChangeUrlsFiles = (url: string, file: File, index: number) => {
+    const tempPreviewUrls = [...previewUrls];
+    tempPreviewUrls[index] = url;
+    setPreviewUrls(tempPreviewUrls);
+
+    const tempUploadFiles = [...uploadFiles];
+    tempUploadFiles[index] = file;
+    setUploadFiles(tempUploadFiles);
   };
 
   const onChangeContents = () => {
@@ -169,12 +193,18 @@ export default function MarketContainer(P: IMarketContainerProps) {
 
   const onClickSubmit = async (data: any) => {
     try {
-      // console.log(data);
+      const uploadResults = await Promise.all(
+        uploadFiles.map((el) => el && uploadFile({ variables: { file: el } }))
+      );
+      const resultUrls = uploadResults.map((el) =>
+        el ? el.data?.uploadFile.url : ""
+      );
+
       const result = await createUseditem({
         variables: {
           createUseditemInput: {
             ...data,
-            images: fileUrls,
+            images: resultUrls,
           },
         },
       });
@@ -186,12 +216,23 @@ export default function MarketContainer(P: IMarketContainerProps) {
 
   const onClickUpdate = async (data: any) => {
     try {
+      const uploadResults = await Promise.all(
+        uploadFiles.map((el) => el && uploadFile({ variables: { file: el } }))
+      );
+      const resultUrls = uploadResults.map((el, i) =>
+        el
+          ? el.data?.uploadFile.url
+          : existingData?.fetchUseditem.images?.[i]
+          ? existingData?.fetchUseditem.images?.[i]
+          : ""
+      );
+
       const result = await updateUseditem({
         variables: {
           useditemId: String(router.query.detail),
           updateUseditemInput: {
             ...data,
-            images: fileUrls,
+            images: resultUrls,
           },
         },
       });
@@ -217,12 +258,15 @@ export default function MarketContainer(P: IMarketContainerProps) {
         setValue={setValue}
         handleSubmit={handleSubmit}
         formState={formState}
-        fileUrls={fileUrls}
-        onChangeFileUrls={onChangeFileUrls}
+        // fileUrls={fileUrls}
+        // onChangeFileUrls={onChangeFileUrls}
         isEdit={isEdit}
         existingData={existingData}
         onChangeContents={onChangeContents}
         contentsRef={contentsRef}
+        previewUrls={previewUrls}
+        onChangeUrlsFiles={onChangeUrlsFiles}
+        fetchUrls={fetchUrls}
       />
     </>
   );

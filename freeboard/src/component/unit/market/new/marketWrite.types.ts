@@ -42,12 +42,15 @@ export type IMarketPresenterProps = {
   register: UseFormRegister<IValueProps>;
   handleSubmit: UseFormHandleSubmit<FieldValues>;
   formState: FormState<FieldValues>;
-  fileUrls: string[];
-  onChangeFileUrls: (fileUrl: string, index: number) => Promise<void>;
+  // fileUrls: string[];
+  // onChangeFileUrls: (fileUrl: string, index: number) => Promise<void>;
   onChangeContents: (text: any) => void;
   isEdit: boolean;
   existingData?: Pick<IQuery, "fetchUseditem"> | undefined;
   contentsRef: MutableRefObject<undefined>;
+  previewUrls: string[];
+  onChangeUrlsFiles: (url: string, file: File, index: number) => void;
+  fetchUrls: string[];
 };
 
 // styles

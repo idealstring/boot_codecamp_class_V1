@@ -7,8 +7,9 @@ import Input04 from "../../../commons/inputs/04/input04";
 import Input05 from "../../../commons/inputs/05/input05";
 import { IMarketPresenterProps } from "./marketWrite.types";
 import { WindowSizeContext } from "../../../commons/responsive";
-import Uploads02 from "../../../commons/uploads/02/uploads02.container";
+// import Uploads02 from "../../../commons/uploads/02/uploads02.container";
 import ZipcodeModalMarket from "../../../commons/modal/zipcodeModal_market";
+import Upload03 from "../../../commons/uploads/03/upload03";
 const EditorPage = dynamic(() => import("./editor"), {
   ssr: false,
 });
@@ -22,12 +23,15 @@ export default function MarketPresenter(P: IMarketPresenterProps) {
     register,
     handleSubmit,
     formState,
-    fileUrls,
-    onChangeFileUrls,
+    // fileUrls,
+    // onChangeFileUrls,
     onChangeContents,
     isEdit,
     existingData,
     contentsRef,
+    previewUrls,
+    onChangeUrlsFiles,
+    fetchUrls,
   } = P;
   const { isNormalScreen } = useContext(WindowSizeContext);
 
@@ -147,12 +151,21 @@ export default function MarketPresenter(P: IMarketPresenterProps) {
           <S.Wrapper01>
             <S.Label02>사진</S.Label02>
             <S.Wrapper07>
-              {fileUrls.map((el, index) => (
+              {/* {fileUrls.map((el, index) => (
                 <Uploads02
                   key={index}
                   index={index}
                   fileUrl={el}
                   onChangeFileUrls={onChangeFileUrls}
+                />
+              ))} */}
+              {previewUrls.map((el: string, index: number) => (
+                <Upload03
+                  key={index}
+                  preview={el}
+                  fetchUrls={fetchUrls}
+                  index={index}
+                  onChangeUrlsFiles={onChangeUrlsFiles}
                 />
               ))}
             </S.Wrapper07>

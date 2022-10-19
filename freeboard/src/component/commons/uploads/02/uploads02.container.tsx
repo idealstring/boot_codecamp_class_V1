@@ -1,6 +1,6 @@
-import { useMutation } from "@apollo/client";
 import { Modal } from "antd";
 import { ChangeEvent, useRef } from "react";
+import { useMutation } from "@apollo/client";
 import {
   IMutation,
   IMutationUploadFileArgs,
@@ -25,7 +25,6 @@ export default function Uploads02(P: IUploads02Props) {
   const onChangeFile = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = checkValidationImage(e.target.files?.[0]);
     if (!file) return;
-    // console.log(file);
 
     try {
       const result = await uploadFile({
@@ -33,7 +32,7 @@ export default function Uploads02(P: IUploads02Props) {
           file,
         },
       });
-      console.log(result);
+
       if (!result.data) {
         Modal.error({ content: "업로드 실패. 다시 시도해주세요." });
         return;
