@@ -9,7 +9,7 @@ import {
 import { onError } from "@apollo/client/link/error"; // 아폴로 에러 잡을 땐 임폴트 필수.
 import { createUploadLink } from "apollo-upload-client";
 // import { GraphQLClient } from "graphql-request";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { getAccessToken } from "../../../commons/libraries/getAccesToken";
@@ -24,7 +24,7 @@ const GLOBAL_STATE = new InMemoryCache();
 
 export default function ApolloSetting(props: IApolloSettingProps) {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
-  const router = useRouter();
+  // const router = useRouter();
 
   // 1. 프리렌더링 예제 - process.browser
   // if (process.browser) {
