@@ -1,5 +1,4 @@
 import { useMutation } from "@apollo/client";
-import { Modal } from "antd";
 import { useForm } from "react-hook-form";
 import {
   IMutation,
@@ -12,6 +11,7 @@ import {
 } from "./replyWrite.quries";
 import { IReplayWriteContainerProps } from "./replyWrite.types";
 import ReplayWritePresenter from "./replyWrite.presenter";
+import { FailModal } from "../../../../commons/modal/commonsModal";
 
 export default function ReplayWriteContainer(P: IReplayWriteContainerProps) {
   const { questionsId, Answers, isEdit, onClickIsEditToggle } = P;
@@ -50,7 +50,7 @@ export default function ReplayWriteContainer(P: IReplayWriteContainerProps) {
       });
       setValue("contents", "");
     } catch (error) {
-      if (error instanceof Error) Modal.error({ content: error.message });
+      if (error instanceof Error) FailModal(error.message);
     }
   };
 
@@ -75,7 +75,7 @@ export default function ReplayWriteContainer(P: IReplayWriteContainerProps) {
       });
       if (onClickIsEditToggle) onClickIsEditToggle();
     } catch (error) {
-      if (error instanceof Error) Modal.error({ content: error.message });
+      if (error instanceof Error) FailModal(error.message);
     }
   };
 

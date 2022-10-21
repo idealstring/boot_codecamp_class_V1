@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import { useMutation } from "@apollo/client";
 import * as S from "../../unit/modal/commentDelete/deleteModal.styles";
 import { ICommentDeleteModalProps } from "../../unit/modal/commentDelete/deleteModal.types";
-import { CommentFail } from "./commentSuccessFail";
+import { FailModal } from "./commonsModal";
 
 export default function CommentDeleteModal(P: ICommentDeleteModalProps) {
   const { id } = P;
@@ -50,7 +50,7 @@ export default function CommentDeleteModal(P: ICommentDeleteModalProps) {
         ],
       });
     } catch (error) {
-      if (error instanceof Error) CommentFail(error.message);
+      if (error instanceof Error) FailModal(error.message);
     }
   };
 

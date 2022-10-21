@@ -8,9 +8,9 @@ import {
   IQuery,
 } from "../../../../commons/types/generated/types";
 import ChargePresenter from "./charge.presenter";
-import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { ChangeEvent, MouseEvent, useState } from "react";
+import { FailModal, SuccessModal } from "../../../commons/modal/commonsModal";
 
 const schema = yup.object({
   chargePoint: yup
@@ -109,14 +109,14 @@ export default function ChargeContainer() {
               impUid: rsp.imp_uid,
             },
           });
-          Modal.success({
-            content: `${fetchUser?.fetchUserLoggedIn.name}님, ${rsp.paid_amount}원 충전완료 되었습니다.`,
-          });
+          SuccessModal(
+            `${fetchUser?.fetchUserLoggedIn.name}님, ${rsp.paid_amount}원 충전완료 되었습니다.`
+          );
           router.push("/users/mypage");
         } else {
-          Modal.error({
-            content: `${fetchUser?.fetchUserLoggedIn.name}님, 충전을 실패했습니다. 다시 시도 바랍니다.`,
-          });
+          FailModal(
+            `${fetchUser?.fetchUserLoggedIn.name}님, 충전을 실패했습니다. 다시 시도 바랍니다.`
+          );
         }
       }
     );

@@ -14,6 +14,12 @@ import {
   FETCH_USER_LOGGED_IN,
   TOGGLE_USEDITEM_PICK,
 } from "./marketDetail.queries";
+import {
+  FailModal,
+  InfoModal,
+  SuccessModal,
+  WarnModal,
+} from "../../../commons/modal/commonsModal";
 
 export default function MarketDetailContainer() {
   const router = useRouter();
@@ -104,13 +110,13 @@ export default function MarketDetailContainer() {
 
   const onClickBasket = async () => {
     if (!localStorage.getItem("accessToken")) {
-      Modal.error({ content: "로그인 후 이용할 수 있습니다." });
+      FailModal("로그인 후 이용할 수 있습니다.");
       return;
     }
     if (
       fetchUserData?.fetchUserLoggedIn._id === data?.fetchUseditem.seller?._id
     ) {
-      Modal.warn({ content: "본인 상품은 담을 수 없습니다." });
+      WarnModal("본인 상품은 담을 수 없습니다.");
       return;
     }
 
@@ -130,9 +136,9 @@ export default function MarketDetailContainer() {
     });
 
     if (IPicked?.length === 1) {
-      Modal.info({ content: "장바구니에서 뺐습니다." });
+      InfoModal("장바구니에서 뺐습니다.");
     } else {
-      Modal.success({ content: "장바구니에 넣었습니다." });
+      SuccessModal("장바구니에 넣었습니다.");
     }
   };
 

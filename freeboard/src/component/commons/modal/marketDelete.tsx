@@ -2,7 +2,7 @@ import { Modal } from "antd";
 import { useContext } from "react";
 import { useRouter } from "next/router";
 import { useMutation } from "@apollo/client";
-import { PostFail } from "./boardSuccessFail";
+import { PostFail } from "./commonsModal";
 import { WindowSizeContext } from "../responsive";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import {

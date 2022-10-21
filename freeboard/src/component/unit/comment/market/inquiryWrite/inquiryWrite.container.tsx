@@ -2,7 +2,6 @@ import MarketInquiryWritePresenter from "./inquiryWrite.presenter";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { IInquirytWriteContainerProps } from "./inquiryWrite.types";
-import { CommentFail } from "../../../../commons/modal/commentSuccessFail";
 import {
   CREATE_USEDITEM_QUESTION,
   UPDATE_USEDITEM_QUESTION,
@@ -15,6 +14,7 @@ import {
   IMutationCreateUseditemQuestionArgs,
   IMutationUpdateUseditemQuestionArgs,
 } from "../../../../../commons/types/generated/types";
+import { FailModal } from "../../../../commons/modal/commonsModal";
 
 export default function MarketInquiryWriteContainer(
   P: IInquirytWriteContainerProps
@@ -61,7 +61,7 @@ export default function MarketInquiryWriteContainer(
       });
       setValue("contents", "");
     } catch (error: any) {
-      if (error instanceof Error) CommentFail(error.message);
+      if (error instanceof Error) FailModal(error.message);
     }
   };
 
@@ -91,7 +91,7 @@ export default function MarketInquiryWriteContainer(
         });
         onClickIsEditToggle();
       } catch (error) {
-        if (error instanceof Error) CommentFail(error.message);
+        if (error instanceof Error) FailModal(error.message);
       }
     }
   };

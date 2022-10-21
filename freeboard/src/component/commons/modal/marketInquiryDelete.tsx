@@ -1,7 +1,7 @@
 import { Modal } from "antd";
 import React, { useState } from "react";
+import { FailModal } from "./commonsModal";
 import { useMutation } from "@apollo/client";
-import { CommentFail } from "./commentSuccessFail";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import * as S from "../../unit/modal/inquiryDelete/inquiryModal.styles";
 import { DELETE_USEDITEM_QUESTION } from "../../unit/comment/market/inquiryList/inquiryList.queries";
@@ -52,7 +52,7 @@ export default function MarketInquiryDeleteModal(P: ICommentDeleteModalProps) {
         // ],
       });
     } catch (error) {
-      if (error instanceof Error) CommentFail(error.message);
+      if (error instanceof Error) FailModal(error.message);
     }
   };
 

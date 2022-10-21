@@ -1,4 +1,5 @@
 import { ChangeEvent, useRef, useState } from "react";
+import { checkValidationImage } from "../validation";
 import * as S from "./upload03.styles";
 
 type IUpload03Props = {
@@ -17,7 +18,7 @@ export default function Upload03(P: IUpload03Props) {
   };
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.currentTarget.files?.[0];
+    const file = checkValidationImage(e.currentTarget.files?.[0]);
     if (!file) return;
 
     const fileReader = new FileReader();

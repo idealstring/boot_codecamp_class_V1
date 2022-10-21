@@ -17,7 +17,7 @@ import {
   IMyVariables,
   IUpdateBoardCommentInput,
 } from "./commentWrite.types";
-import { CommentFail } from "../../../../commons/modal/commentSuccessFail";
+import { FailModal } from "../../../../commons/modal/commonsModal";
 
 export default function CommentWriteContainer(P: ICommentWriteContainerProps) {
   const { isEdit, onClickIsEditToggle, comment } = P;
@@ -103,7 +103,7 @@ export default function CommentWriteContainer(P: ICommentWriteContainerProps) {
           ],
         });
       } catch (error: any) {
-        if (error instanceof Error) CommentFail(error.message);
+        if (error instanceof Error) FailModal(error.message);
       }
       setInputData({ writer: "", password: "", contents: "", rating: 0 });
     }
@@ -130,7 +130,7 @@ export default function CommentWriteContainer(P: ICommentWriteContainerProps) {
 
     if (!inputData.password) {
       setErrorOutput({ ...errorOutput, password: true });
-      CommentFail("비밀번호를 입력하세요.");
+      FailModal("비밀번호를 입력하세요.");
     } else {
       try {
         await updateComment({
@@ -144,7 +144,7 @@ export default function CommentWriteContainer(P: ICommentWriteContainerProps) {
         });
         onClickIsEditToggle();
       } catch (error) {
-        if (error instanceof Error) CommentFail(error.message);
+        if (error instanceof Error) FailModal(error.message);
       }
     }
   };

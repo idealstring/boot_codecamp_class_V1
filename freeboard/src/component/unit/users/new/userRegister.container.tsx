@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
-import { Modal } from "antd";
 import { useRouter } from "next/router";
+import { FailModal, InfoModal } from "../../../commons/modal/commonsModal";
 import UserRegisterPresenter from "./userRegister.presenter";
 import { CREATE_USER } from "./userRegister.queries";
 import { IOnClickRegisterProps } from "./userRegister.types";
@@ -19,10 +19,10 @@ export default function UserRegisterContainer() {
           },
         },
       });
-      Modal.info({ content: "회원가입을 축하합니다!" });
+      InfoModal("회원가입을 축하합니다!");
       router.push("/users/signIn");
     } catch (error) {
-      if (error instanceof Error) Modal.error({ content: error.message });
+      if (error instanceof Error) FailModal(error.message);
     }
   };
 

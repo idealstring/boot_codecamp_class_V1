@@ -1,7 +1,7 @@
 import { Modal } from "antd";
 import React, { useState } from "react";
+import { FailModal } from "./commonsModal";
 import { gql, useMutation } from "@apollo/client";
-import { CommentFail } from "./commentSuccessFail";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import * as S from "../../unit/modal/replyDelete/replyModal.styles";
 import { ICommentDeleteModalProps } from "../../unit/modal/replyDelete/replyModal.types";
@@ -55,7 +55,7 @@ export default function MarketReplyDeleteModal(P: ICommentDeleteModalProps) {
         },
       });
     } catch (error) {
-      if (error instanceof Error) CommentFail(error.message);
+      if (error instanceof Error) FailModal(error.message);
     }
   };
 

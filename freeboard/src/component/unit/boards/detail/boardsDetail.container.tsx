@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { FETCH_BOARD, LIKE_BOARD, DISLIKE_BOARD } from "./boardsDetail.queries";
 import { useState } from "react";
 import { IMutation } from "../../../../commons/types/generated/types";
-import { PostFail } from "../../../commons/modal/boardSuccessFail";
+import { FailModal } from "../../../commons/modal/commonsModal";
 
 export default function BoardDetailContainer() {
   const router = useRouter();
@@ -60,7 +60,7 @@ export default function BoardDetailContainer() {
         ],
       });
     } catch (error) {
-      if (error instanceof Error) PostFail(error.message);
+      if (error instanceof Error) FailModal(error.message);
     }
   };
 

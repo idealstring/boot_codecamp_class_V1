@@ -1,5 +1,6 @@
 import { Maybe } from "graphql/jsutils/Maybe";
 import { ChangeEvent, useRef, useState } from "react";
+import { checkValidationImage } from "../validation";
 import * as S from "./upload04.styles";
 
 type IUpload04Props = {
@@ -17,7 +18,7 @@ export default function Upload04(P: IUpload04Props) {
   };
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.currentTarget.files?.[0];
+    const file = checkValidationImage(e.currentTarget.files?.[0]);
     if (!file) return;
 
     const fileReader = new FileReader();

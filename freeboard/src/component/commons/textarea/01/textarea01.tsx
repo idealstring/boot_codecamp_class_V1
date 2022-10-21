@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import { StyleSet } from "../../../../commons/style/styleSet";
 import { UseFormRegisterReturn } from "react-hook-form";
-import { ClassAttributes, ElementType } from "react";
 
 const Textarea = styled.textarea`
   width: 100%;

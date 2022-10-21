@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { Modal } from "antd";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../../commons/store";
@@ -11,6 +10,7 @@ import SignInPresenter from "./signIn.presenter";
 import { LOGIN_USER } from "./signIn.queries";
 import * as yup from "yup";
 import { IOnClickSignInProps } from "./signIn.types";
+import { FailModal, InfoModal } from "../../../commons/modal/commonsModal";
 
 export default function SignInContainer() {
   const [loginUser] = useMutation<
@@ -35,7 +35,7 @@ export default function SignInContainer() {
 
       const accessToken = result.data?.loginUser.accessToken;
       if (!accessToken) {
-        Modal.error({ content: "로그인 실패. 다시 시도 바랍니다." });
+        FailModal("로그인 실패. 다시 시도 바랍니다.");
         return;
       }
 
@@ -43,12 +43,12 @@ export default function SignInContainer() {
       localStorage.setItem("accessToken", accessToken);
       router.push(`/users/mypage`);
     } catch (error) {
-      if (error instanceof Error) Modal.error({ content: error.message });
+      if (error instanceof Error) FailModal(error.message);
     }
   };
 
   const onClickRePassword = () => {
-    Modal.info({ content: "미완성 기능입니다." });
+    InfoModal("이메일 인증 기능 곧 구현할게요. 조금만 기다려 주세요:)");
   };
 
   const onClickRegister = () => {

@@ -19,6 +19,7 @@ import { useForm, useWatch } from "react-hook-form";
 import { useEffect, useRef, useState } from "react";
 import useAuth from "../../../commons/hooks/useAuth";
 import { IMarketContainerProps } from "./marketWrite.types";
+import { FailModal } from "../../../commons/modal/commonsModal";
 
 declare const window: Window &
   typeof globalThis & {
@@ -210,7 +211,7 @@ export default function MarketContainer(P: IMarketContainerProps) {
       });
       router.push(`/market/${result.data?.createUseditem._id}`);
     } catch (error) {
-      if (error instanceof Error) Modal.error({ content: error.message });
+      if (error instanceof Error) FailModal(error.message);
     }
   };
 
@@ -240,7 +241,7 @@ export default function MarketContainer(P: IMarketContainerProps) {
         shallow: true,
       });
     } catch (error) {
-      if (error instanceof Error) Modal.error({ content: error.message });
+      if (error instanceof Error) FailModal(error.message);
     }
   };
 

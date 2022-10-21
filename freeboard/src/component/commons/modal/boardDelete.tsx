@@ -7,7 +7,7 @@ import { IMutation } from "../../../commons/types/generated/types";
 import { DELETE_BOARD } from "../../unit/modal/boardDelete/boardDelete.queries";
 import { ContentBtn } from "../../unit/modal/boardDelete/boardDelete.styles";
 import { WindowSizeContext } from "../responsive";
-import { PostFail } from "./boardSuccessFail";
+import { FailModal } from "./commonsModal";
 const { confirm } = Modal;
 
 const BoardDeleteModal = () => {
@@ -25,7 +25,7 @@ const BoardDeleteModal = () => {
       });
       router.push("/boards");
     } catch (error) {
-      if (error instanceof Error) PostFail(error.message);
+      if (error instanceof Error) FailModal(error.message);
     }
   };
 

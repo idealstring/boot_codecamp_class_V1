@@ -1,7 +1,7 @@
 import { ChangeEvent, RefObject } from "react";
 
 export type IUploads01Props = {
-  key: number;
+  key?: number;
   index: number;
   fileUrl: string;
   onChangeFileUrls: (fileUrl: string, index: number) => void;

@@ -7,7 +7,6 @@ import {
   IMutation,
   IMutationCreateBoardArgs,
   IMutationUpdateBoardArgs,
-  IMutationUploadFileArgs,
 } from "../../../../commons/types/generated/types";
 import {
   IMyVrivables,
@@ -16,11 +15,7 @@ import {
   IInnerUpdateBoardInput,
   IBoardWriteContainerProps,
 } from "./boardsWrite.types";
-import {
-  PostFail,
-  CreateBoardSuccess,
-  UpdateBoardSuccess,
-} from "../../../commons/modal/boardSuccessFail";
+import { FailModal, SuccessModal } from "../../../commons/modal/commonsModal";
 
 export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
   const { isEdit, data: existingData } = P;
@@ -140,10 +135,10 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
           },
         });
 
-        CreateBoardSuccess();
+        SuccessModal("게시물 등록했습니다.");
         await router.push(`/boards/${result?.data?.createBoard._id || ""}`);
       } catch (error) {
-        if (error instanceof Error) PostFail(error.message);
+        if (error instanceof Error) FailModal(error.message);
       }
     }
   };
@@ -203,14 +198,14 @@ export default function BoardWriteContainer(P: IBoardWriteContainerProps) {
         const result = await UpdateInputData({
           variables: myVariables,
         });
-        UpdateBoardSuccess();
+        SuccessModal("게시물 수정했습니다.");
         await router.push(`/boards/${result?.data?.updateBoard._id || ""}`);
       } catch (error) {
-        if (error instanceof Error) PostFail(error.message);
+        if (error instanceof Error) FailModal(error.message);
       }
     } else {
       setErrorOutput({ ...errorOutput, password: true });
-      PostFail("비밀번호를 입력하세요.");
+      FailModal("비밀번호를 입력하세요.");
     }
   };
 

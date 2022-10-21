@@ -7,7 +7,7 @@ import {
 } from "../../../../commons/types/generated/types";
 import { dateFormatter, PriceFormatter } from "../../../../commons/utils/utils";
 import PageNation02 from "../../../commons/pagination/02/pagination02.container";
-import MyPageMarketBtnWrapper from "../../../commons/mypageMarketBtn";
+import MyPageMarketBtnWrapper from "../mypageMarketBtn";
 import { useState } from "react";
 
 const FETCH_USEDITEMS_IBOUGHT = gql`

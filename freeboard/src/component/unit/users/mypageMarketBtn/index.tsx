@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import { StyleSet } from "../../../commons/style/styleSet";
-import { useMoveToPage } from "../hooks/useMoveToPage";
+import { StyleSet } from "../../../../commons/style/styleSet";
+import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 
 const ContentsButton = styled.button`
   margin: 0 10px 0 0;

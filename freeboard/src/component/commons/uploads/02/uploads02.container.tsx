@@ -1,14 +1,14 @@
-import { Modal } from "antd";
 import { ChangeEvent, useRef } from "react";
 import { useMutation } from "@apollo/client";
 import {
   IMutation,
   IMutationUploadFileArgs,
 } from "../../../../commons/types/generated/types";
-import { checkValidationImage } from "./uploads02.validation";
+import { checkValidationImage } from "../validation";
 import Uploads02Presenter from "./uploads02.presenter";
 import { UPLOAD_FILE } from "./uploads02.queries";
 import { IUploads02Props } from "./uploads02.types";
+import { FailModal } from "../../modal/commonsModal";
 
 export default function Uploads02(P: IUploads02Props) {
   const { index, fileUrl, onChangeFileUrls } = P;
@@ -34,12 +34,12 @@ export default function Uploads02(P: IUploads02Props) {
       });
 
       if (!result.data) {
-        Modal.error({ content: "업로드 실패. 다시 시도해주세요." });
+        FailModal("업로드 실패. 다시 시도해주세요.");
         return;
       }
       onChangeFileUrls(result.data?.uploadFile.url, index);
     } catch (error) {
-      if (error instanceof Error) Modal.error({ content: error.message });
+      if (error instanceof Error) FailModal(error.message);
     }
   };
 
