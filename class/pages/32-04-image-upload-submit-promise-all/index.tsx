@@ -56,11 +56,12 @@ export default function ImageUploadPage() {
     // 3. promise.all썼을 때 (리팩토링)
     // files - [File0, File1, File2]
     // files.map(el=> uploadFile({ variables: { file: el } })) //[uploadFile({... : File0}),uploadFile({... : File1}),uploadFile({... : File2})]
-    const results = await Promise.all([
-      files.map((el) => el && uploadFile({ variables: { file: el } })),
-    ]);
+    const results = await Promise.all(
+      files.map((el) => el && uploadFile({ variables: { file: el } }))
+    );
     console.log(results); // [resultFile0, resultFile1, resultFile2]
     const resultUrls = results.map((el) => (el ? el.data?.uploadFile.url : "")); // [dog.jpg, dog.jpg, dog.jpg]
+    console.log(resultUrls);
 
     const result = await 나의함수({
       variables: {
