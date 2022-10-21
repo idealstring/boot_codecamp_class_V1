@@ -10,7 +10,7 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["react"],
+  plugins: ["react", "jest/globals"],
   rules: {
     "react/react-in-jsx-scope": "off", // 상단에 import React 선언하는 거 off
     "@typescript-eslint/explicit-function-return-type": "off", // 함수 반환값 끌지 말지, 컴포넌트는 대부분 JSX.Element일테니까. 다만, 필요한 부분이 있을 수 있다.
