@@ -1,7 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { Modal } from "antd";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "../../../../commons/store";
 import {

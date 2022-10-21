@@ -9,8 +9,9 @@ export const FETCH_USEDITEM_QUESTION_ANSWERS = gql`
       _id
       contents
       user {
-        name
         _id
+        name
+        picture
       }
       createdAt
       updatedAt

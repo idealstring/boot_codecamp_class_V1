@@ -26,6 +26,8 @@ export default function Layout(props: ILayoutP) {
     "/users/mypage/charge",
     "/users/mypage/sales",
     "/users/mypage/bought",
+    "/users/mypage/edit",
+    "/users/mypage/edit/password",
   ];
 
   const isShowMyPage = SHOW_NAVIGATIONS.includes(router.asPath);

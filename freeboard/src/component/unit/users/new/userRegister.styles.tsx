@@ -26,7 +26,6 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  algin-items: flex-start;
 `;
 
 export const Inner = styled.label`
@@ -34,7 +33,6 @@ export const Inner = styled.label`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  algin-items: center;
 `;
 
 export const Label = styled.label`
@@ -52,7 +50,6 @@ export const ConditionsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  algin-items: flex-start;
 `;
 
 export const AllCheck = styled.span`

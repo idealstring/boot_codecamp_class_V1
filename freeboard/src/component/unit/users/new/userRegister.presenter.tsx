@@ -7,7 +7,7 @@ import * as yup from "yup";
 
 const schema = yup.object({
   email: yup.string().email().required("false"),
-  password: yup.string().required("false"),
+  password: yup.string().min(8, "false").required("false"),
   name: yup.string().required("false").min(2, "false").max(6, "false"),
 });
 
@@ -35,14 +35,14 @@ export default function UserRegisterPresenter(P: IUserRegisterPresenterProps) {
             <Input01
               type="text"
               register={register("email")}
-              placeholder="이메일"
+              placeholder="leesanghyeon@sanghyeon.shop"
               error={formState.errors.email?.message}
             />
             <S.Label>비밀번호</S.Label>
             <Input01
               type="password"
               register={register("password")}
-              placeholder="비밀번호"
+              placeholder="영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요."
               error={formState.errors.password?.message}
             />
             <S.Label>닉네임</S.Label>

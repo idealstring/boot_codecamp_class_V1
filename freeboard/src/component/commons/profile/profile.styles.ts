@@ -32,6 +32,11 @@ export const ProfileTop = styled.section`
   align-items: center;
 `;
 
+export const ProfileImg = styled.img`
+  width: 120px;
+  height: 120px;
+`;
+
 export const NicknameWrapper = styled.div`
   margin: ${(props: IProfileStylesProps) =>
     props.isNormalScreen ? "0" : "0 0 0 24px"};

@@ -7,12 +7,13 @@ type IStylesProps = {
 };
 
 const Input = styled.input`
+  width: 100%;
   padding: 9px 15px 9px 15px;
   border: 1px solid ${StyleSet.colors.lightGray02};
   border: ${(props: IStylesProps) =>
     props.error
       ? `1px solid ${StyleSet.colors.inputError};`
-      : `1px solid ${StyleSet.colors.lightGray02};`}
+      : `1px solid ${StyleSet.colors.lightGray02};`};
   border-radius: 5px;
   ::placeholder {
     color: ${StyleSet.colors.lightGray02};
@@ -22,12 +23,13 @@ const Input = styled.input`
 type IInput01Props = {
   type: "text" | "password";
   register: UseFormRegisterReturn;
-  placeholder: string;
+  placeholder?: string;
   error?: any;
 };
 
 export default function Input01(P: IInput01Props) {
   const { type, register, placeholder, error } = P;
+
   return (
     <Input type={type} placeholder={placeholder} {...register} error={error} />
   );

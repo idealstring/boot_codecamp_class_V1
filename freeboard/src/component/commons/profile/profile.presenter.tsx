@@ -12,11 +12,19 @@ export default function ProfilePresenter(P: IProfilePresenterProps) {
   return (
     <S.ProfileWrapper isNormalScreen={isNormalScreen}>
       <S.ProfileTop isNormalScreen={isNormalScreen}>
-        <img src="/" style={{ width: "120px", height: "120px" }} />
+        {fetchLoggedData?.fetchUserLoggedIn.picture ? (
+          <S.ProfileImg
+            src={`https://storage.googleapis.com/${fetchLoggedData?.fetchUserLoggedIn.picture}`}
+          />
+        ) : (
+          <S.ProfileImg src={`/logo/logo.svg`} />
+        )}
         <S.NicknameWrapper isNormalScreen={isNormalScreen}>
           <span>{fetchLoggedData?.fetchUserLoggedIn.name}</span>
           <S.BtnWrapper isNormalScreen={isNormalScreen}>
-            <S.EditButton>설정</S.EditButton>
+            <S.EditButton onClick={onClickMoveToPage("/users/mypage/edit")}>
+              설정
+            </S.EditButton>
             <S.LogoutBtn onClick={onClickLogOut}>로그아웃</S.LogoutBtn>
           </S.BtnWrapper>
         </S.NicknameWrapper>
