@@ -53,6 +53,16 @@ export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
                   </S.DealInfo>
                 </div>
               </S.DealInfoWrapper>
+              <S.DealInfoWrapper>
+                <S.DealInfoTitle>판매</S.DealInfoTitle>
+                <S.DealInfo>
+                  {data?.fetchUseditem.soldAt ? "판매완료" : "판매중"}
+                </S.DealInfo>
+              </S.DealInfoWrapper>
+              <S.DealInfoWrapper>
+                <S.DealInfoTitle>관심</S.DealInfoTitle>
+                <S.DealInfo>{data?.fetchUseditem.pickedCount}</S.DealInfo>
+              </S.DealInfoWrapper>
               {data?.fetchUseditem.tags ? (
                 <S.DealInfoWrapper>
                   <S.DealInfoTitle>태그</S.DealInfoTitle>
@@ -67,16 +77,6 @@ export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
                     : null}
                 </S.DealInfoWrapper>
               ) : null}
-              <S.DealInfoWrapper>
-                <S.DealInfoTitle>판매</S.DealInfoTitle>
-                <S.DealInfo>
-                  {data?.fetchUseditem.soldAt ? "판매완료" : "판매중"}
-                </S.DealInfo>
-              </S.DealInfoWrapper>
-              <S.DealInfoWrapper>
-                <S.DealInfoTitle>관심</S.DealInfoTitle>
-                <S.DealInfo>{data?.fetchUseditem.pickedCount}</S.DealInfo>
-              </S.DealInfoWrapper>
             </div>
             <S.InfoBtnRrapper>
               <S.BasketBtn onClick={onClickBasket} IPicked={IPicked}>

@@ -19,9 +19,13 @@ export default function MarketListPresenter(P: IMarketListPresenterProps) {
               <a>
                 <S.Item>
                   <S.ItemLeft>
-                    <S.Image
-                      src={`https://storage.googleapis.com/${el.images?.[0]}`}
-                    />
+                    {el.images?.[0] ? (
+                      <S.Image
+                        src={`https://storage.googleapis.com/${el.images?.[0]}`}
+                      />
+                    ) : (
+                      <S.Image src={`/temp_bg.png`} />
+                    )}
                     <S.ItemLeftMiddle>
                       <div>
                         <S.Name>{el.name}</S.Name>
@@ -63,13 +67,23 @@ export default function MarketListPresenter(P: IMarketListPresenterProps) {
                 recentItems?.map((el: any, i: number) => (
                   <Link href={`/market/${el.id}`} key={i}>
                     <a>
-                      <S.RecentItem>
-                        <img
-                          width="100%"
-                          height="100%"
-                          src={`https://storage.googleapis.com/${el.imageUrl}`}
-                        />
-                      </S.RecentItem>
+                      {el.imageUrl ? (
+                        <S.RecentItem>
+                          <img
+                            width="100%"
+                            height="100%"
+                            src={`https://storage.googleapis.com/${el.imageUrl}`}
+                          />
+                        </S.RecentItem>
+                      ) : (
+                        <S.RecentItem>
+                          <img
+                            width="100%"
+                            height="100%"
+                            src={`/temp_bg.png`}
+                          />
+                        </S.RecentItem>
+                      )}
                     </a>
                   </Link>
                 ))}
