@@ -128,6 +128,7 @@ export const Price = styled.span`
   margin-bottom: 5px;
   font-weight: 600;
   font-size: ${StyleSet.fontSize.h2};
+  font-variation-settings: "wght" 600;
 `;
 
 export const ItemBottomWrapper = styled.div`
