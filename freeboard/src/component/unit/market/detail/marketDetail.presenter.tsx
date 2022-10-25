@@ -68,15 +68,17 @@ export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
               {data?.fetchUseditem.tags ? (
                 <S.DealInfoWrapper>
                   <S.DealInfoTitle>태그</S.DealInfoTitle>
-                  {data?.fetchUseditem.tags
-                    ? data?.fetchUseditem.tags[0]
-                        .split(" ")
-                        .map((el, i) => (
-                          <S.DealInfo key={i}>
-                            {el.includes("#") ? el : `#${el}`}
-                          </S.DealInfo>
-                        ))
-                    : null}
+                  <S.TagsWrapper>
+                    {data?.fetchUseditem.tags
+                      ? data?.fetchUseditem.tags[0]
+                          .split(" ")
+                          .map((el, i) => (
+                            <S.DealInfo key={i}>
+                              {el.includes("#") ? el : `#${el}`}
+                            </S.DealInfo>
+                          ))
+                      : null}
+                  </S.TagsWrapper>
                 </S.DealInfoWrapper>
               ) : null}
             </div>

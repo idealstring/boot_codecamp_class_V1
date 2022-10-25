@@ -105,8 +105,16 @@ export const DealInfoWrapper = styled.div`
   align-items: center;
 `;
 
+export const TagsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+`;
+
 export const DealInfoTitle = styled.span`
-  min-width: 25px;
+  min-width: 30px;
   font-size: ${StyleSet.fontSize.b4};
   font-weight: 500;
   color: ${StyleSet.colors.gray};
