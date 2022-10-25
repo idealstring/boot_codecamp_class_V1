@@ -1,10 +1,10 @@
 import Link from "next/link";
+import * as S from "./marketList.styles";
 import InfiniteScroll from "react-infinite-scroller";
+import { IMarketListPresenterProps } from "./marketList.types";
+import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import { IUseditem } from "../../../../commons/types/generated/types";
 import { dateFormatter, PriceFormatter } from "../../../../commons/utils/utils";
-import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
-import * as S from "./marketList.styles";
-import { IMarketListPresenterProps } from "./marketList.types";
 
 export default function MarketListPresenter(P: IMarketListPresenterProps) {
   const { data, onLoadMore, recentItems } = P;
@@ -30,7 +30,7 @@ export default function MarketListPresenter(P: IMarketListPresenterProps) {
                       <div>
                         <S.Name>{el.name}</S.Name>
                         <S.Price>{PriceFormatter(el.price)}</S.Price>
-                        <S.Subtext>{el.tags}</S.Subtext>
+                        <S.Subtext>{el.remarks}</S.Subtext>
                       </div>
                       <S.ItemBottomWrapper>
                         <S.BasketNumber>

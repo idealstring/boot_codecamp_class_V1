@@ -1,4 +1,3 @@
-import { Modal } from "antd";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useMutation, useQuery } from "@apollo/client";

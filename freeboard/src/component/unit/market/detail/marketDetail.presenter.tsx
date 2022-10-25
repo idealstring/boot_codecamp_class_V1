@@ -9,7 +9,7 @@ import { useMoveToPage } from "../../../commons/hooks/useMoveToPage";
 import MarketProductPurchase from "../../../commons/modal/marketPurchaseBtn";
 import dynamic from "next/dynamic";
 
-const ViewerPage = dynamic(() => import("./Viewer"), {
+const ViewerPage = dynamic(() => import("./viewer"), {
   ssr: false,
 });
 
@@ -23,11 +23,13 @@ export default function MarketDetailPresenter(P: IMarketDetailPresenterProps) {
       <S.Container>
         <S.TopWrapper isMobile={isMobile}>
           <S.ImageWrapper isMobile={isMobile}>
-            {data?.fetchUseditem ? (
+            {data?.fetchUseditem.images?.[0] ? (
               <img
                 src={`https://storage.googleapis.com/${data?.fetchUseditem?.images?.[0]}`}
               />
-            ) : null}
+            ) : (
+              <img src={`/temp_bg.png`} />
+            )}
           </S.ImageWrapper>
           <S.InfoWrapper isMobile={isMobile}>
             <div>

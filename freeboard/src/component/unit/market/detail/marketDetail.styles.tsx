@@ -211,7 +211,5 @@ export const ToListBtn = styled.button`
 
   border: none;
   border-radius: 4px;
-  background-color: default
-  color: #fff;
   cursor: pointer;
 `;

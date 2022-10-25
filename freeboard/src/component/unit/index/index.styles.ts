@@ -25,11 +25,12 @@ export const RowWrapper = styled.div`
   align-items: flex-start;
   flex-wrap: wrap;
   flex: auto;
+  gap: 20px;
 `;
 
 export const Item = styled.div`
   margin: 0 0 30px 0;
-  min-width: 235px;
+  width: 235px;
 
   display: flex;
   flex-direction: column;
@@ -48,8 +49,8 @@ export const Image = styled.div`
   align-items: center;
 
   img {
-    width: auto;
-    max-height: 100%;
+    width: 100%;
+    height: 100%;
   }
 `;
 
@@ -86,6 +87,7 @@ export const Rating = styled.span`
   margin-right: 5px;
   padding: 0;
   font-size: ${StyleSet.fontSize.b5};
+  color: ${StyleSet.colors.black};
 
   display: flex;
   flex-direction: row;
@@ -96,4 +98,20 @@ export const Rating = styled.span`
     margin: 0 2px 2px 0;
     padding: 0;
   }
+`;
+
+export const BtnWrapper = styled.div`
+  display: flex;
+  flex: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const FetchMoreBtn = styled.button`
+  width: 122px;
+  height: 46px;
+  border: 1px solid #999999;
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
 `;
