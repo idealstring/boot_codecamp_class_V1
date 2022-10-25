@@ -16,7 +16,7 @@ export default function ImagePreloadPage() {
 
   const router = useRouter();
   const onClickMove = () => {
-    void router.push("/32-06-image-preloa-moved");
+    void router.push("/32-06-image-preload-moved");
   };
   return (
     <div>
